@@ -1,5 +1,9 @@
 ﻿namespace Round42
 {
+    /// <summary>
+    /// Main form.
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     partial class Main
     {
         /// <summary>
@@ -28,20 +32,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.MainTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // MainTimer
+            // 
+            this.MainTimer.Tick += new System.EventHandler(this.MainTimer_Tick);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 312);
+            this.BackColor = System.Drawing.Color.Black;
+            this.ClientSize = new System.Drawing.Size(1009, 610);
             this.Name = "Main";
-            this.Text = "Form1";
+            this.Text = "Round 42";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+        private System.Windows.Forms.Timer MainTimer;
     }
 }
 
