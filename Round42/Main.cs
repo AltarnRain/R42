@@ -1,11 +1,12 @@
-﻿// <copyright file="Main.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="Main.cs" company="OI">
+// Copyright (c) OI. All rights reserved.
 // </copyright>
 
 namespace Round42
 {
     using System;
     using System.Windows.Forms;
+    using Round42.Classes.Ship;
 
     /// <summary>
     /// Main form
@@ -28,6 +29,17 @@ namespace Round42
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void MainTimer_Tick(object sender, EventArgs e)
         {
+        }
+
+        /// <summary>
+        /// Handles the MouseClick event of the panel1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        private void Canvas_MouseClick(object sender, MouseEventArgs e)
+        {
+            var ps = new PlayerShip(e.Location.X, e.Location.Y, this.canvas);
+            ps.Draw();
         }
     }
 }

@@ -1,19 +1,13 @@
-﻿// <copyright file="GameObject.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="IGameObject.cs" company="OI">
+// Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.GameObjects
+namespace Round42.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// Basic game object
     /// </summary>
-    internal abstract class GameObject
+    internal interface IGameObject
     {
         /// <summary>
         /// Gets or sets the screen y position.
@@ -21,7 +15,7 @@ namespace Round42.GameObjects
         /// <value>
         /// The screen y position.
         /// </value>
-        public long ScreenYPos { get; set; }
+        int ScreenYPos { get; set; }
 
         /// <summary>
         /// Gets or sets the s creen x position.
@@ -29,14 +23,19 @@ namespace Round42.GameObjects
         /// <value>
         /// The s creen x position.
         /// </value>
-        public long SCreenXPos { get; set; }
+        int ScreenXPos { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="GameObject"/> is invulnerable.
+        /// Gets or sets a value indicating whether this <see cref="IGameObject"/> is invulnerable.
         /// </summary>
         /// <value>
         ///   <c>true</c> if invulnerable; otherwise, <c>false</c>.
         /// </value>
-        public bool Invulnerable { get; set; }
+        bool Invulnerable { get; set; }
+
+        /// <summary>
+        /// Draws this instance.
+        /// </summary>
+        void Draw();
     }
 }
