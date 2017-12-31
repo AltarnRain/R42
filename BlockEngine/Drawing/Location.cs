@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Drawing
+namespace BlockEngine.Drawing
 {
     /// <summary>
     /// Used to define the location of a block within a shape.

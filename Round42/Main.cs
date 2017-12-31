@@ -2,11 +2,11 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42
+namespace BlockEngine
 {
     using System;
     using System.Windows.Forms;
-    using Round42.Classes.Ship;
+    using BlockEngine.Classes.Ship;
 
     /// <summary>
     /// Main form

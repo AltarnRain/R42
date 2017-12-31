@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Round42.Properties
+namespace BlockEngine.Properties
 {
 
 

@@ -2,16 +2,16 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Classes.Ship
+namespace BlockEngine.Classes.Ship
 {
     using System.Drawing;
     using System.Windows.Forms;
-    using Round42.Interfaces;
+    using BlockEngine.Interfaces;
 
     /// <summary>
     /// The player ship class
     /// </summary>
-    /// <seealso cref="Round42.Interfaces.IGameObject" />
+    /// <seealso cref="BlockEngine.Interfaces.IGameObject" />
     public class PlayerShip : IGameObject
     {
         private Panel canvas;

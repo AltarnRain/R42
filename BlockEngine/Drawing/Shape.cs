@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Drawing
+namespace BlockEngine.Drawing
 {
     using System.Collections.Generic;
 
@@ -21,8 +21,7 @@ namespace Round42.Drawing
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Shape"/> class.
-        /// </summary>
-        /// <param name="blocks">The blocks.</param>
+        /// </summary>        
         public Shape()
         {
             

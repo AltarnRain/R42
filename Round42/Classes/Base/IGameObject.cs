@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Interfaces
+namespace BlockEngine.Interfaces
 {
     /// <summary>
     /// Basic game object
