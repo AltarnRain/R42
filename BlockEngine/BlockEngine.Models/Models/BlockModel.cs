@@ -34,5 +34,13 @@ namespace BlockEngine.Models
         /// The y.
         /// </value>
         public int Y { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the color.
+        /// </summary>
+        /// <value>
+        /// The name of the color.
+        /// </value>
+        public string ColorName { get; set; }
     }
 }

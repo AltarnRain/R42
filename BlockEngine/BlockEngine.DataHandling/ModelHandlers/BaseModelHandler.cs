@@ -1,8 +1,8 @@
-﻿// <copyright file="ModelHandler.cs" company="OI">
+﻿// <copyright file="BaseModelHandler.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace BlockEngine.DataHandling.Providers
+namespace BlockEngine.DataHandling.ModelHandlers
 {
     using System;
     using System.IO;
@@ -13,17 +13,8 @@ namespace BlockEngine.DataHandling.Providers
     /// Providers animation models
     /// </summary>
     /// <seealso cref="BlockEngine.DataHandling.Interfaces.IModelProvider" />
-    public class ModelHandler
+    public abstract class BaseModelHandler
     {
-        /// <summary>
-        /// Creates this instance.
-        /// </summary>
-        /// <returns>An instance of ModelHandler</returns>
-        public static ModelHandler Create()
-        {
-            return new ModelHandler();
-        }
-
         /// <summary>
         /// Gets a model of type T based on the XML string
         /// </summary>
@@ -32,7 +23,7 @@ namespace BlockEngine.DataHandling.Providers
         /// <returns>
         /// An instance of T
         /// </returns>
-        public T GetModel<T>(string xmlString)
+        public virtual T GetModel<T>(string xmlString)
             where T : class
         {
             if (xmlString == null)
@@ -72,7 +63,7 @@ namespace BlockEngine.DataHandling.Providers
         /// <param name="model">The model.</param>
         /// <returns>XML string</returns>
         /// <exception cref="System.Exception">An error occurred</exception>
-        public string GenerateXml<T>(T model)
+        public virtual string GenerateXml<T>(T model)
         {
             if (model == null)
             {
