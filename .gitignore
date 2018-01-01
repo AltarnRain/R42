@@ -1,8 +1,4 @@
 .vs
-/Round42/obj
-/Round42/bin
-/packages
-/BlockEngine/obj
-/BlockEngine/bin
-/BlockEngine.Test/obj
-/BlockEngine.Test/bin
+packages
+obj
+bin

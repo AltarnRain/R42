@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockEngine", "BlockEngine\BlockEngine.csproj", "{452FACF3-A324-42FD-8A4C-FA0207CC26BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockEngine.Models", "BlockEngine\BlockEngine.Models\BlockEngine.Models.csproj", "{452FACF3-A324-42FD-8A4C-FA0207CC26BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockEngine.Test", "BlockEngine.Test\BlockEngine.Test.csproj", "{588062CA-50F2-419F-B5F1-CD133368AF35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockEngine.Test", "BlockEngine\BlockEngine.Test\BlockEngine.Test.csproj", "{588062CA-50F2-419F-B5F1-CD133368AF35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

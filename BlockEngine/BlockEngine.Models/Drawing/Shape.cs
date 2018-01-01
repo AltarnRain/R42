@@ -2,14 +2,14 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace BlockEngine.Drawing
+namespace BlockEngine.Models
 {
     using System.Collections.Generic;
 
     /// <summary>
     /// A basic shape.
     /// </summary>
-    internal class Shape
+    public class Shape
     {
         /// <summary>
         /// Gets or sets the blocks.
@@ -17,14 +17,6 @@ namespace BlockEngine.Drawing
         /// <value>
         /// The blocks.
         /// </value>
-        private readonly Dictionary<Location, Block> blocks;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Shape"/> class.
-        /// </summary>        
-        public Shape()
-        {
-            
-        }
+        public List<Block> Blocks { get; set; }
     }
 }
