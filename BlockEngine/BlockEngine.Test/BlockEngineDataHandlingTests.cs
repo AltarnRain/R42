@@ -18,10 +18,10 @@ namespace BlockEngine.Test
     public class BlockEngineDataHandlingTests
     {
         /// <summary>
-        /// Tests the method1.
+        /// Tests the Animation model provider
         /// </summary>
         [TestMethod]
-        public void GetModelXml()
+        public void TestAnimationModelProvider()
         {
             // Arrange
             var model = GenerateAnimationmodel();

@@ -10,9 +10,8 @@ namespace BlockEngine.DataHandling.ModelHandlers
     using System.Xml.Serialization;
 
     /// <summary>
-    /// Providers animation models
+    /// Base model handler. Override methods for specific models.
     /// </summary>
-    /// <seealso cref="BlockEngine.DataHandling.Interfaces.IModelProvider" />
     public abstract class BaseModelHandler
     {
         /// <summary>
