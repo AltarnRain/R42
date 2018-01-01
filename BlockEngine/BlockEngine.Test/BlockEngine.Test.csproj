@@ -47,18 +47,29 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlockEngineTests.cs" />
+    <Compile Include="BlockEngineDataHandlingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <AdditionalFiles Include="stylecop.json" />
+    <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlockEngine.DataHandling\BlockEngine.DataHandling.csproj">
+      <Project>{CF27F952-8C06-4F24-A596-62C8CE3CF0E0}</Project>
+      <Name>BlockEngine.DataHandling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlockEngine.Models\BlockEngine.Models.csproj">
+      <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
+      <Name>BlockEngine.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

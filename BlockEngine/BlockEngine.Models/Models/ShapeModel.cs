@@ -1,4 +1,4 @@
-﻿// <copyright file="Shape.cs" company="OI">
+﻿// <copyright file="ShapeModel.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
@@ -9,7 +9,7 @@ namespace BlockEngine.Models
     /// <summary>
     /// A basic shape.
     /// </summary>
-    public class Shape
+    public class ShapeModel
     {
         /// <summary>
         /// Gets or sets the blocks.
@@ -17,6 +17,6 @@ namespace BlockEngine.Models
         /// <value>
         /// The blocks.
         /// </value>
-        public List<Block> Blocks { get; set; }
+        public List<BlockModel> Blocks { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="Block.cs" company="OI">
+﻿// <copyright file="BlockModel.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
@@ -9,7 +9,7 @@ namespace BlockEngine.Models
     /// <summary>
     /// Defines the basic block of a shape.
     /// </summary>
-    public class Block
+    public class BlockModel
     {
         /// <summary>
         /// Gets or sets the color.
