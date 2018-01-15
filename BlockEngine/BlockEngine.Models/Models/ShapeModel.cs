@@ -10,7 +10,7 @@ namespace BlockEngine.Models
     /// <summary>
     /// A basic shape.
     /// </summary>
-    public class ShapeModel: BaseModel
+    public class ShapeModel : BaseModel
     {
         /// <summary>
         /// Gets or sets the blocks.

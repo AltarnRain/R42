@@ -9,7 +9,7 @@ namespace BlockEngine.Models
     /// <summary>
     /// Defines the basic block of a shape.
     /// </summary>
-    public class BlockModel
+    public class BlockModel : BaseModel
     {
         /// <summary>
         /// Gets or sets the color.
