@@ -9,7 +9,7 @@ namespace BlockEngine.Models
     /// <summary>
     /// An Animaltion. Wrapper for a list of shapes.
     /// </summary>
-    public class AnimationModel
+    public class AnimationModel : BaseModel
     {
         /// <summary>
         /// Gets or sets the shapes.
