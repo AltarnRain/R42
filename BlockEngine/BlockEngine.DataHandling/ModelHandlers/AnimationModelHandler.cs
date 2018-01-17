@@ -5,47 +5,14 @@
 namespace BlockEngine.DataHandling.ModelHandlers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using BlockEngine.DataHandling.Extentions;
-    using BlockEngine.DataHandling.ModelHandlers;
     using BlockEngine.Models;
 
     /// <summary>
     /// Animation model handlers
     /// </summary>
-    /// <seealso cref="BlockEngine.DataHandling.ModelHandlers.BaseModelHandler" />
-    public class AnimationModelHandler : BaseModelHandler
+    public class AnimationModelHandler
     {
-        /// <summary>
-        /// The animation model handle
-        /// </summary>
-        private static AnimationModelHandler animationModelHandler = null;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AnimationModelHandler"/> class.
-        /// </summary>
-        private AnimationModelHandler()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// Creates this instance.
-        /// </summary>
-        /// <returns>An instance of AnimationModelHandler</returns>
-        public static AnimationModelHandler Create()
-        {
-            if (animationModelHandler == null)
-            {
-                animationModelHandler = new AnimationModelHandler();
-            }
-
-            return animationModelHandler;
-        }
-
         /// <summary>
         /// Gets the model.
         /// </summary>
@@ -55,7 +22,7 @@ namespace BlockEngine.DataHandling.ModelHandlers
         public AnimationModel GetModel(string xmlString)
         {
             // Get the basic model.
-            var returnValue = base.GetModel<AnimationModel>(xmlString);
+            var returnValue = xmlString.Deserialize<AnimationModel>();
 
             if (returnValue == null)
             {

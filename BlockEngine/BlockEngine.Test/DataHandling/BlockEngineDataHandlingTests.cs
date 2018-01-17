@@ -7,15 +7,17 @@ namespace BlockEngine.Test
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
+    using BlockEngine.DataHandling.Extentions;
     using BlockEngine.DataHandling.ModelHandlers;
     using BlockEngine.Models;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Ninject;
 
     /// <summary>
     /// Tests for the block engine
     /// </summary>
     [TestClass]
-    public class BlockEngineDataHandlingTests
+    public class BlockEngineDataHandlingTests : TestBase
     {
         /// <summary>
         /// Tests the Animation model provider
@@ -28,10 +30,10 @@ namespace BlockEngine.Test
             var block1 = model.Shapes.First().Blocks[0];
             var block2 = model.Shapes.First().Blocks[1];
 
-            var animationModelHandler = AnimationModelHandler.Create();
+            var animationModelHandler = this.Get<AnimationModelHandler>();
 
             // Act
-            var xmlString = animationModelHandler.GenerateXml(model);
+            var xmlString = model.Serialize<AnimationModel>();
             var generatedModel = animationModelHandler.GetModel(xmlString);
 
             Assert.IsNotNull(generatedModel);
@@ -51,6 +53,23 @@ namespace BlockEngine.Test
         }
 
         /// <summary>
+        /// Tests the Animation model provider
+        /// </summary>
+        [TestMethod]
+        public void TestCloneMethod()
+        {
+            // Arrange
+            var model = GenerateAnimationmodel();
+
+            // Act
+            var clonedModel = model.Clone<AnimationModel>();
+            model.Shapes.First().Blocks.First().ColorName = "Changed";
+
+            // Asset
+            Assert.AreNotEqual(model.Shapes.First().Blocks.First().ColorName, clonedModel.Shapes.First().Blocks.First().ColorName);
+        }
+
+        /// <summary>
         /// Generates am animationmodel.
         /// </summary>
         /// <returns>AnimationModel</returns>
@@ -61,26 +80,7 @@ namespace BlockEngine.Test
             {
                 Shapes = new List<ShapeModel>
                 {
-                    new ShapeModel
-                    {
-                        Blocks = new List<BlockModel>
-                        {
-                            new BlockModel
-                            {
-                                ColorName = Constants.ColorNames.Red,
-                                Color = Color.Red,
-                                X = 1,
-                                Y = 1,
-                            },
-                            new BlockModel
-                            {
-                                ColorName = Constants.ColorNames.Blue,
-                                Color = Color.Blue,
-                                X = 1,
-                                Y = 2,
-                            }
-                        }
-                    }
+                    ShapeModel.Create(2, 2)
                 }
             };
         }

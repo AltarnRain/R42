@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorNames.cs" />
+    <Compile Include="enum\AssetTypes.cs" />
     <Compile Include="Models\AnimationModel.cs" />
+    <Compile Include="Models\AssetModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\BlockModel.cs" />
     <Compile Include="Models\ShapeModel.cs" />
@@ -50,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />

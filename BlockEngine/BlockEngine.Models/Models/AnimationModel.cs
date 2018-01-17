@@ -4,6 +4,7 @@
 
 namespace BlockEngine.Models
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -18,5 +19,36 @@ namespace BlockEngine.Models
         /// The shapes.
         /// </value>
         public List<ShapeModel> Shapes { get; set; }
+
+        /// <summary>
+        /// Creates the specified width.
+        /// </summary>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="shapes">The shapes.</param>
+        /// <returns>AnimationModel</returns>
+        public static AnimationModel Create(int width, int height, int shapes)
+        {
+            var returnValue = new AnimationModel();
+
+            returnValue.Shapes = new List<ShapeModel>();
+
+            for (var i = 0; i < shapes; i++)
+            {
+                returnValue.Shapes.Add(ShapeModel.Create(width, height));
+            }
+
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Gets the specified frame.
+        /// </summary>
+        /// <param name="frame">The frame.</param>
+        /// <returns>A shape model</returns>
+        public ShapeModel Get(int frame)
+        {
+            return this.Shapes[frame];
+        }
     }
 }

@@ -18,5 +18,10 @@ namespace BlockEngine.Constants
         /// The blue
         /// </summary>
         public const string Blue = "Blue";
+
+        /// <summary>
+        /// The black
+        /// </summary>
+        public const string Black = "Black";
     }
 }

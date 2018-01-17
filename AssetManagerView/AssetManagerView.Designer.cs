@@ -1,4 +1,4 @@
-﻿namespace AssetManager
+﻿namespace BlockEngine
 {
     partial class AssetManagerView
     {

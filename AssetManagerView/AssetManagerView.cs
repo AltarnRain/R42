@@ -1,8 +1,8 @@
-﻿// <copyright file="AssetManager.cs" company="OI">
+﻿// <copyright file="AssetManagerView.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace AssetManager
+namespace BlockEngine
 {
     using System.Windows.Forms;
     using Ninject;

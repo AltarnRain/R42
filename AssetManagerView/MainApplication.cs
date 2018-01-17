@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace AssetManager
+namespace BlockEngine
 {
     using Ninject;
 
@@ -14,7 +14,6 @@ namespace AssetManager
         /// <summary>
         /// Initializes a new instance of the <see cref="MainApplication" /> class.
         /// </summary>
-        /// <param name="kernel">The kernel.</param>
         public MainApplication()
         {
             this.Kernel = new StandardKernel();

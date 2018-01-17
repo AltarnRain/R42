@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace AssetManager
+namespace BlockEngine
 {
     using System;
     using System.Windows.Forms;
