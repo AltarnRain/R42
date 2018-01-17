@@ -12,12 +12,13 @@ namespace AssetManager
     public class MainApplication
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainApplication"/> class.
+        /// Initializes a new instance of the <see cref="MainApplication" /> class.
         /// </summary>
+        /// <param name="kernel">The kernel.</param>
         public MainApplication()
         {
             this.Kernel = new StandardKernel();
-            var view = this.Kernel.Get<AssetManager>();
+            var view = this.Kernel.Get<AssetManagerView>();
             view.ShowDialog();
         }
 
@@ -27,6 +28,6 @@ namespace AssetManager
         /// <value>
         /// The kernel.
         /// </value>
-        public StandardKernel Kernel { get; set; }
+        public IKernel Kernel { get; set; }
     }
 }
