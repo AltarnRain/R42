@@ -17,7 +17,6 @@ namespace AssetManager
         public MainApplication()
         {
             this.Kernel = new StandardKernel();
-
             var view = this.Kernel.Get<AssetManager>();
             view.ShowDialog();
         }
