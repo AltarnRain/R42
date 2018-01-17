@@ -1,20 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// <copyright file="AssetManager.cs" company="OI">
+// Copyright (c) OI. All rights reserved.
+// </copyright>
 
 namespace AssetManager
 {
+    using Ninject;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// AssetManager vew
+    /// </summary>
+    /// <seealso cref="System.Windows.Forms.Form" />
     public partial class AssetManager : Form
     {
-        public AssetManager()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssetManager" /> class.
+        /// </summary>
+        /// <param name="kernel">The kernel.</param>
+        public AssetManager(StandardKernel kernel)
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.Kernel = kernel;
         }
+
+        /// <summary>
+        /// Gets the kernel.
+        /// </summary>
+        /// <value>
+        /// The kernel.
+        /// </value>
+        public StandardKernel Kernel { get; }
     }
 }

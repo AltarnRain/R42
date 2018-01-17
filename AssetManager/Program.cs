@@ -1,28 +1,27 @@
-﻿using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// <copyright file="Program.cs" company="OI">
+// Copyright (c) OI. All rights reserved.
+// </copyright>
 
 namespace AssetManager
 {
-    static class Program
+    using System;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// Main program.
+    /// </summary>
+    public static class Program
     {
-        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var kernel = new StandardKernel();
-
-            var view = kernel.Get<AssetManager>();
-            Application.Run(view);
+            var mainApplication = new MainApplication();
         }
     }
 }
