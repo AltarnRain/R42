@@ -2,9 +2,10 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace BlockEngine
+namespace AssetManagerView
 {
     using System.Windows.Forms;
+    using BlockEngine.Models;
     using Ninject;
 
     /// <summary>
@@ -30,5 +31,13 @@ namespace BlockEngine
         /// The kernel.
         /// </value>
         public IKernel Kernel { get; }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            var shapeModel = ShapeModel.Create(5, 6);
+            var pc = new PaletConstructor(this.palet, shapeModel);
+
+            pc.DrawButtons();
+        }
     }
 }

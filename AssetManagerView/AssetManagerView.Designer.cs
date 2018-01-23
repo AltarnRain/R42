@@ -1,4 +1,4 @@
-﻿namespace BlockEngine
+﻿namespace AssetManagerView
 {
     partial class AssetManagerView
     {
@@ -36,12 +36,15 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.pnlBlocks = new System.Windows.Forms.Panel();
             this.tspButtonBar = new System.Windows.Forms.ToolStrip();
             this.btnIncreaseBlocks = new System.Windows.Forms.ToolStripButton();
             this.btnDecreaseBlocks = new System.Windows.Forms.ToolStripButton();
-            this.pnlBlocks = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.palet = new System.Windows.Forms.Panel();
             this.mnuMain.SuspendLayout();
             this.pnlMain.SuspendLayout();
+            this.pnlBlocks.SuspendLayout();
             this.tspButtonBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +79,7 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // helpToolStripMenuItem
@@ -90,7 +93,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // pnlMain
@@ -102,6 +105,18 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(581, 511);
             this.pnlMain.TabIndex = 2;
+            // 
+            // pnlBlocks
+            // 
+            this.pnlBlocks.BackColor = System.Drawing.Color.White;
+            this.pnlBlocks.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnlBlocks.Controls.Add(this.palet);
+            this.pnlBlocks.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.pnlBlocks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBlocks.Location = new System.Drawing.Point(0, 25);
+            this.pnlBlocks.Name = "pnlBlocks";
+            this.pnlBlocks.Size = new System.Drawing.Size(581, 486);
+            this.pnlBlocks.TabIndex = 1;
             // 
             // tspButtonBar
             // 
@@ -132,31 +147,39 @@
             this.btnDecreaseBlocks.Size = new System.Drawing.Size(23, 22);
             this.btnDecreaseBlocks.Text = "-";
             // 
-            // pnlBlocks
+            // button1
             // 
-            this.pnlBlocks.BackColor = System.Drawing.Color.Black;
-            this.pnlBlocks.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlBlocks.Cursor = System.Windows.Forms.Cursors.No;
-            this.pnlBlocks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBlocks.Location = new System.Drawing.Point(0, 25);
-            this.pnlBlocks.Name = "pnlBlocks";
-            this.pnlBlocks.Size = new System.Drawing.Size(581, 486);
-            this.pnlBlocks.TabIndex = 1;
+            this.button1.Location = new System.Drawing.Point(12, 91);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // AssetManager
+            // palet
+            // 
+            this.palet.Location = new System.Drawing.Point(4, 3);
+            this.palet.Name = "palet";
+            this.palet.Size = new System.Drawing.Size(109, 94);
+            this.palet.TabIndex = 0;
+            // 
+            // AssetManagerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 535);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.lbAssets);
             this.Controls.Add(this.mnuMain);
-            this.Name = "AssetManager";
+            this.Name = "AssetManagerView";
             this.Text = "Asset Manager";
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
+            this.pnlBlocks.ResumeLayout(false);
             this.tspButtonBar.ResumeLayout(false);
             this.tspButtonBar.PerformLayout();
             this.ResumeLayout(false);
@@ -177,6 +200,8 @@
         private System.Windows.Forms.ToolStripButton btnIncreaseBlocks;
         private System.Windows.Forms.ToolStripButton btnDecreaseBlocks;
         private System.Windows.Forms.Panel pnlBlocks;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel palet;
     }
 }
 

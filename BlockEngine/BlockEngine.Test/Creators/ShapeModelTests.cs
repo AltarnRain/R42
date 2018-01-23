@@ -46,7 +46,6 @@ namespace BlockEngine.Test.Providers
             Assert.AreEqual(x, block.X);
             Assert.AreEqual(y, block.Y);
             Assert.AreEqual("Black", block.ColorName);
-
         }
     }
 }

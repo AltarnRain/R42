@@ -18,7 +18,7 @@ namespace BlockEngine
         /// <value>
         /// The assets.
         /// </value>
-        private List<AssetModel> assets;
+        private List<AssetModel> assets = new List<AssetModel>();
 
         /// <summary>
         /// Adds the asset.

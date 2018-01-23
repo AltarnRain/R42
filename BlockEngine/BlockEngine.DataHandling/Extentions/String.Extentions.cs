@@ -5,39 +5,15 @@
 namespace BlockEngine.DataHandling.Extentions
 {
     using System;
-    using System.Drawing;
     using System.IO;
     using System.Xml;
     using System.Xml.Serialization;
-    using BlockEngine.Models;
 
     /// <summary>
     /// The extention class
     /// </summary>
     public static partial class ExtentionClass
     {
-        /// <summary>
-        /// Convert a string value to a Color if the value matches a predefined color
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>A color</returns>
-        public static Color ToColor(this string value)
-        {
-            switch (value)
-            {
-                case Constants.ColorNames.Red:
-                    return Color.Red;
-
-                case Constants.ColorNames.Blue:
-                    return Color.Blue;
-
-                case Constants.ColorNames.Black:
-                    return Color.Black;
-                default:
-                    throw new NotImplementedException(string.Format("Color {0} is not supported", value));
-            }
-        }
-
         /// <summary>
         /// Gets a model of type T based on the XML string
         /// </summary>

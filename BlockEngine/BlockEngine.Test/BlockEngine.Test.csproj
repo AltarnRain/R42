@@ -53,10 +53,12 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssetManagerTests.cs" />
     <Compile Include="Creators\AnimationModelTests.cs" />
+    <Compile Include="Creators\AssetModelTests.cs" />
+    <Compile Include="Creators\ShapeModelTests.cs" />
     <Compile Include="DataHandling\BlockEngineDataHandlingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Creators\ShapeModelTests.cs" />
     <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +70,10 @@
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AssetManager\AssetManager.csproj">
+      <Project>{15C8A6DD-991E-4642-8247-93B7C1C60A77}</Project>
+      <Name>AssetManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlockEngine.DataHandling\BlockEngine.DataHandling.csproj">
       <Project>{CF27F952-8C06-4F24-A596-62C8CE3CF0E0}</Project>
       <Name>BlockEngine.DataHandling</Name>

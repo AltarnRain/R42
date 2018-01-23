@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorNames.cs" />
     <Compile Include="enum\AssetTypes.cs" />
     <Compile Include="Models\AnimationModel.cs" />
     <Compile Include="Models\AssetModel.cs" />

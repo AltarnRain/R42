@@ -58,13 +58,16 @@ namespace BlockEngine.Models
             {
                 for (var x = 0; x < width; x++)
                 {
-                    returnValue.Blocks.Add(new BlockModel
+                    var block = new BlockModel
                     {
-                        Color = Color.Black,
                         ColorName = Color.Black.Name,
                         X = x,
                         Y = y
-                    });
+                    };
+                    block.SetColor(Color.Black.Name);
+
+                    block.SetColor(Color.Black.Name);
+                    returnValue.Blocks.Add(block);
                 }
             }
 

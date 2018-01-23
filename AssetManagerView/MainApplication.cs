@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace BlockEngine
+namespace AssetManagerView
 {
     using Ninject;
 
