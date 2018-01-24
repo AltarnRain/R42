@@ -36,15 +36,16 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.pnlBlocks = new System.Windows.Forms.Panel();
+            this.containerPanel = new System.Windows.Forms.Panel();
+            this.palet = new System.Windows.Forms.Panel();
+            this.panelColor = new System.Windows.Forms.Panel();
             this.tspButtonBar = new System.Windows.Forms.ToolStrip();
             this.btnIncreaseBlocks = new System.Windows.Forms.ToolStripButton();
             this.btnDecreaseBlocks = new System.Windows.Forms.ToolStripButton();
             this.button1 = new System.Windows.Forms.Button();
-            this.palet = new System.Windows.Forms.Panel();
             this.mnuMain.SuspendLayout();
             this.pnlMain.SuspendLayout();
-            this.pnlBlocks.SuspendLayout();
+            this.containerPanel.SuspendLayout();
             this.tspButtonBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,7 +99,7 @@
             // 
             // pnlMain
             // 
-            this.pnlMain.Controls.Add(this.pnlBlocks);
+            this.pnlMain.Controls.Add(this.containerPanel);
             this.pnlMain.Controls.Add(this.tspButtonBar);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(186, 24);
@@ -106,17 +107,34 @@
             this.pnlMain.Size = new System.Drawing.Size(581, 511);
             this.pnlMain.TabIndex = 2;
             // 
-            // pnlBlocks
+            // containerPanel
             // 
-            this.pnlBlocks.BackColor = System.Drawing.Color.White;
-            this.pnlBlocks.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlBlocks.Controls.Add(this.palet);
-            this.pnlBlocks.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.pnlBlocks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBlocks.Location = new System.Drawing.Point(0, 25);
-            this.pnlBlocks.Name = "pnlBlocks";
-            this.pnlBlocks.Size = new System.Drawing.Size(581, 486);
-            this.pnlBlocks.TabIndex = 1;
+            this.containerPanel.BackColor = System.Drawing.Color.White;
+            this.containerPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.containerPanel.Controls.Add(this.palet);
+            this.containerPanel.Controls.Add(this.panelColor);
+            this.containerPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.containerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.containerPanel.Location = new System.Drawing.Point(0, 25);
+            this.containerPanel.Name = "containerPanel";
+            this.containerPanel.Size = new System.Drawing.Size(581, 486);
+            this.containerPanel.TabIndex = 1;
+            // 
+            // palet
+            // 
+            this.palet.Location = new System.Drawing.Point(43, 3);
+            this.palet.Name = "palet";
+            this.palet.Size = new System.Drawing.Size(64, 65);
+            this.palet.TabIndex = 0;
+            // 
+            // panelColor
+            // 
+            this.panelColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelColor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelColor.Location = new System.Drawing.Point(0, 0);
+            this.panelColor.Name = "panelColor";
+            this.panelColor.Size = new System.Drawing.Size(37, 482);
+            this.panelColor.TabIndex = 1;
             // 
             // tspButtonBar
             // 
@@ -149,20 +167,13 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 91);
+            this.button1.Location = new System.Drawing.Point(109, 95);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(50, 62);
             this.button1.TabIndex = 3;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // palet
-            // 
-            this.palet.Location = new System.Drawing.Point(4, 3);
-            this.palet.Name = "palet";
-            this.palet.Size = new System.Drawing.Size(109, 94);
-            this.palet.TabIndex = 0;
+            this.button1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // AssetManagerView
             // 
@@ -179,7 +190,7 @@
             this.mnuMain.PerformLayout();
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
-            this.pnlBlocks.ResumeLayout(false);
+            this.containerPanel.ResumeLayout(false);
             this.tspButtonBar.ResumeLayout(false);
             this.tspButtonBar.PerformLayout();
             this.ResumeLayout(false);
@@ -199,9 +210,10 @@
         private System.Windows.Forms.ToolStrip tspButtonBar;
         private System.Windows.Forms.ToolStripButton btnIncreaseBlocks;
         private System.Windows.Forms.ToolStripButton btnDecreaseBlocks;
-        private System.Windows.Forms.Panel pnlBlocks;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel containerPanel;
         private System.Windows.Forms.Panel palet;
+        private System.Windows.Forms.Panel panelColor;
+        private System.Windows.Forms.Button button1;
     }
 }
 

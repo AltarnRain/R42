@@ -15,6 +15,16 @@ namespace AssetManagerView
     public partial class AssetManagerView : Form
     {
         /// <summary>
+        /// The active color
+        /// </summary>
+        private string activeColor;
+
+        /// <summary>
+        /// The drawer
+        /// </summary>
+        private Drawer drawer;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AssetManagerView" /> class.
         /// </summary>
         /// <param name="kernel">The kernel.</param>
@@ -32,12 +42,21 @@ namespace AssetManagerView
         /// </value>
         public IKernel Kernel { get; }
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void ButtonClick(object sender, System.EventArgs e)
         {
             var shapeModel = ShapeModel.Create(5, 6);
-            var pc = new PaletConstructor(this.palet, shapeModel);
+            this.drawer = new Drawer(this.palet, shapeModel);
 
-            pc.DrawButtons();
+            this.drawer.DrawButtons();
+
+            var bc = new ColorButtonConstructor(this.panelColor);
+            bc.DrawButtons();
+            bc.OnColorSelected += this.SetActiveColor;
+        }
+
+        private void SetActiveColor(string colorName)
+        {
+            this.drawer.SetColor(colorName);
         }
     }
 }
