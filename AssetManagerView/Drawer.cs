@@ -84,7 +84,8 @@ namespace AssetManagerView
             var button = sender as Panel;
             button.ForeColor = Color.FromName(this.activeColor);
             button.BackColor = Color.FromName(this.activeColor);
-            button.Tag = Color.FromName(this.activeColor);
+            var block = button.Tag as BlockModel;
+            block.SetColor(this.activeColor);
         }
 
         /// <summary>
