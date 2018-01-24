@@ -5,7 +5,9 @@
 namespace BlockEngine
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using BlockEngine.Models;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Manages assets
@@ -18,7 +20,16 @@ namespace BlockEngine
         /// <value>
         /// The assets.
         /// </value>
-        private List<AssetModel> assets = new List<AssetModel>();
+        private BindingList<AssetModel> assets = new BindingList<AssetModel>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssetManager" /> class.
+        /// </summary>
+        /// <param name="assets">The assets.</param>
+        public AssetManager(string assets)
+        {
+            this.assets = JsonConvert.DeserializeObject<BindingList<AssetModel>>(assets);
+        }
 
         /// <summary>
         /// Adds the asset.

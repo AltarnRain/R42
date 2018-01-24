@@ -5,6 +5,7 @@
 namespace AssetManagerView
 {
     using System.Windows.Forms;
+    using BlockEngine;
     using BlockEngine.Models;
     using Ninject;
 
@@ -25,6 +26,11 @@ namespace AssetManagerView
         private Drawer drawer;
 
         /// <summary>
+        /// The asset manager
+        /// </summary>
+        private readonly AssetManager assetManager;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AssetManagerView" /> class.
         /// </summary>
         /// <param name="kernel">The kernel.</param>
@@ -32,6 +38,7 @@ namespace AssetManagerView
         {
             this.InitializeComponent();
             this.Kernel = kernel;
+            this.assetManager = this.Kernel.Get<AssetManager>();
         }
 
         /// <summary>
@@ -57,6 +64,11 @@ namespace AssetManagerView
         private void SetActiveColor(string colorName)
         {
             this.drawer.SetColor(colorName);
+        }
+
+        private void addToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+     
         }
     }
 }
