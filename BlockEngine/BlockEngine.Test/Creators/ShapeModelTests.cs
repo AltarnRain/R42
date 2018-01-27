@@ -11,9 +11,8 @@ namespace BlockEngine.Test.Providers
     /// <summary>
     /// Tests for ShapeModel extentions
     /// </summary>
-    /// <seealso cref="BlockEngine.Test.TestBase" />
     [TestClass]
-    public class ShapeModelTests : TestBase
+    public class ShapeModelTests
     {
         /// <summary>
         /// Test the generation of a new shape

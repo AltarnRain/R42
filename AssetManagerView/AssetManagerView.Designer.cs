@@ -28,109 +28,115 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mnuMain = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlMain = new System.Windows.Forms.Panel();
-            this.containerPanel = new System.Windows.Forms.Panel();
-            this.mnuMain.SuspendLayout();
-            this.pnlMain.SuspendLayout();
+            this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.AddToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MainPanel = new System.Windows.Forms.Panel();
+            this.ContainerPanel = new System.Windows.Forms.Panel();
+            this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.NewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PaletPanel = new System.Windows.Forms.Panel();
+            this.DrawerPanel = new System.Windows.Forms.Panel();
+            this.MainMenu.SuspendLayout();
+            this.MainPanel.SuspendLayout();
+            this.ContainerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // mnuMain
+            // MainMenu
             // 
-            this.mnuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.mnuMain.Location = new System.Drawing.Point(0, 0);
-            this.mnuMain.Name = "mnuMain";
-            this.mnuMain.Size = new System.Drawing.Size(767, 24);
-            this.mnuMain.TabIndex = 1;
-            this.mnuMain.Text = "menuStrip1";
+            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem1});
+            this.MainMenu.Location = new System.Drawing.Point(0, 0);
+            this.MainMenu.Name = "MainMenu";
+            this.MainMenu.Size = new System.Drawing.Size(767, 24);
+            this.MainMenu.TabIndex = 1;
+            this.MainMenu.Text = "MainMenu";
             // 
-            // fileToolStripMenuItem
+            // AddToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.saveToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.AddToolStripMenuItem.Name = "AddToolStripMenuItem";
+            this.AddToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // addToolStripMenuItem
+            // MainPanel
             // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.MainPanel.Controls.Add(this.ContainerPanel);
+            this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainPanel.Location = new System.Drawing.Point(0, 24);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(767, 511);
+            this.MainPanel.TabIndex = 2;
             // 
-            // saveToolStripMenuItem
+            // ContainerPanel
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.ContainerPanel.BackColor = System.Drawing.Color.White;
+            this.ContainerPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ContainerPanel.Controls.Add(this.DrawerPanel);
+            this.ContainerPanel.Controls.Add(this.PaletPanel);
+            this.ContainerPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.ContainerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ContainerPanel.Location = new System.Drawing.Point(0, 0);
+            this.ContainerPanel.Name = "ContainerPanel";
+            this.ContainerPanel.Size = new System.Drawing.Size(767, 511);
+            this.ContainerPanel.TabIndex = 1;
             // 
-            // helpToolStripMenuItem
+            // fileToolStripMenuItem1
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NewMenuItem});
+            this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem1.Text = "File";
             // 
-            // aboutToolStripMenuItem
+            // NewMenuItem
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.NewMenuItem.Name = "NewMenuItem";
+            this.NewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.NewMenuItem.Text = "New";
+            this.NewMenuItem.Click += new System.EventHandler(this.NewMenuItem_Click);
             // 
-            // pnlMain
+            // PaletPanel
             // 
-            this.pnlMain.Controls.Add(this.containerPanel);
-            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(0, 24);
-            this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(767, 511);
-            this.pnlMain.TabIndex = 2;
+            this.PaletPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PaletPanel.Location = new System.Drawing.Point(0, 0);
+            this.PaletPanel.Name = "PaletPanel";
+            this.PaletPanel.Size = new System.Drawing.Size(200, 507);
+            this.PaletPanel.TabIndex = 0;
             // 
-            // containerPanel
+            // DrawerPanel
             // 
-            this.containerPanel.BackColor = System.Drawing.Color.White;
-            this.containerPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.containerPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.containerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.containerPanel.Location = new System.Drawing.Point(0, 0);
-            this.containerPanel.Name = "containerPanel";
-            this.containerPanel.Size = new System.Drawing.Size(767, 511);
-            this.containerPanel.TabIndex = 1;
+            this.DrawerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DrawerPanel.Location = new System.Drawing.Point(200, 0);
+            this.DrawerPanel.Name = "DrawerPanel";
+            this.DrawerPanel.Size = new System.Drawing.Size(563, 507);
+            this.DrawerPanel.TabIndex = 1;
             // 
             // AssetManagerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 535);
-            this.Controls.Add(this.pnlMain);
-            this.Controls.Add(this.mnuMain);
+            this.Controls.Add(this.MainPanel);
+            this.Controls.Add(this.MainMenu);
             this.Name = "AssetManagerView";
             this.Text = "Asset Manager";
-            this.mnuMain.ResumeLayout(false);
-            this.mnuMain.PerformLayout();
-            this.pnlMain.ResumeLayout(false);
+            this.MainMenu.ResumeLayout(false);
+            this.MainMenu.PerformLayout();
+            this.MainPanel.ResumeLayout(false);
+            this.ContainerPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip mnuMain;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip MainMenu;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Panel pnlMain;
-        private System.Windows.Forms.Panel containerPanel;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+        private System.Windows.Forms.Panel MainPanel;
+        private System.Windows.Forms.Panel ContainerPanel;
+        private System.Windows.Forms.ToolStripMenuItem AddToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem NewMenuItem;
+        private System.Windows.Forms.Panel DrawerPanel;
+        private System.Windows.Forms.Panel PaletPanel;
     }
 }
 

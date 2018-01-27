@@ -22,14 +22,23 @@ namespace AssetManagerView
         private readonly ShapeModel shapeModel;
 
         /// <summary>
+        /// The block size
+        /// </summary>
+        private readonly int buttonSize;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Drawer" /> class.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        private Drawer(ShapeModel shapeModel)
+        /// <param name="buttonSize">Size of the button.</param>
+        /// <exception cref="System.ArgumentNullException">shapeModel</exception>
+        private Drawer(ShapeModel shapeModel, int buttonSize = 20)
         {
             this.shapeModel = shapeModel ?? throw new System.ArgumentNullException(nameof(shapeModel));
+            this.buttonSize = buttonSize;
 
             this.DrawButtons();
+            this.Dock = DockStyle.Fill;
         }
 
         /// <summary>
@@ -50,10 +59,13 @@ namespace AssetManagerView
         /// Creates the specified shape model.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        /// <returns>An instance of Drawer</returns>
-        public static Drawer Create(ShapeModel shapeModel)
+        /// <param name="buttonSize">Size of the button.</param>
+        /// <returns>
+        /// An instance of Drawer
+        /// </returns>
+        public static Drawer Create(ShapeModel shapeModel, int buttonSize = 20)
         {
-            return new Drawer(shapeModel);
+            return new Drawer(shapeModel, buttonSize);
         }
 
         /// <summary>
@@ -78,15 +90,13 @@ namespace AssetManagerView
                 var blockButton = BlockButton.Create(block, Color.Black);
                 this.Controls.Add(blockButton);
 
-                blockButton.Left = block.X * blockButton.Width;
-                blockButton.Top = block.Y * blockButton.Height;
+                // Recude height & with by two pixels so we have borders around the buttons.
+                blockButton.Height = blockButton.Width = this.buttonSize - 2;
+
+                // leave one pixel of spave between blocks
+                blockButton.Left = (block.X * this.buttonSize) + 1;
+                blockButton.Top = (block.Y * this.buttonSize) + 1;
             }
-
-            var maxHeight = this.BlockButtons.Max(bb => bb.Width);
-            var maxWidth = this.BlockButtons.Max(bb => bb.Height);
-
-            this.Width = this.shapeModel.Blocks.Select(b => b.X + 1).Max() * maxWidth;
-            this.Height = this.shapeModel.Blocks.Select(b => b.Y + 1).Max() * maxWidth;
         }
     }
 }

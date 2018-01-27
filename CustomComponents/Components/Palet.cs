@@ -34,6 +34,7 @@ namespace AssetManagerView
         {
             this.colors = colors;
             this.buttonHeight = buttonHeight;
+            this.Dock = DockStyle.Fill;
             this.DrawButtons();
         }
 

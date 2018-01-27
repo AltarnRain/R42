@@ -5,19 +5,17 @@
 namespace BlockEngine.Test
 {
     using System.Collections.Generic;
-    using System.Drawing;
     using System.Linq;
     using BlockEngine.DataHandling.Extentions;
     using BlockEngine.DataHandling.ModelHandlers;
     using BlockEngine.Models;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Ninject;
 
     /// <summary>
     /// Tests for the block engine
     /// </summary>
     [TestClass]
-    public class BlockEngineDataHandlingTests : TestBase
+    public class BlockEngineDataHandlingTests
     {
         /// <summary>
         /// Tests the Animation model provider
@@ -30,7 +28,7 @@ namespace BlockEngine.Test
             var block1 = model.Shapes.First().Blocks[0];
             var block2 = model.Shapes.First().Blocks[1];
 
-            var animationModelHandler = this.Get<AnimationModelHandler>();
+            var animationModelHandler = new AnimationModelHandler();
 
             // Act
             var xmlString = model.Serialize<AnimationModel>();

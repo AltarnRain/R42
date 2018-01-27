@@ -82,9 +82,8 @@ namespace CustomComponents.Components
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-
-            // Update color in model.
-            this.BlockModel.ColorName = this.BackColor.Name;
+            this.BlockModel.Color = this.activeColor;
+            this.ForeColor = this.BackColor = this.activeColor;
         }
     }
 }
