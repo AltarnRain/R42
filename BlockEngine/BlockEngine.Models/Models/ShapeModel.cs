@@ -60,13 +60,11 @@ namespace BlockEngine.Models
                 {
                     var block = new BlockModel
                     {
-                        ColorName = Color.Black.Name,
+                        Color = Color.Black,
                         X = x,
                         Y = y
                     };
-                    block.SetColor(Color.Black.Name);
 
-                    block.SetColor(Color.Black.Name);
                     returnValue.Blocks.Add(block);
                 }
             }

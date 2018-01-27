@@ -166,23 +166,7 @@
             this.btnDecreaseBlocks.Name = "btnDecreaseBlocks";
             this.btnDecreaseBlocks.Size = new System.Drawing.Size(23, 22);
             this.btnDecreaseBlocks.Text = "-";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(109, 95);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 62);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ButtonClick);
-            // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.addToolStripMenuItem.Text = "Add";
-            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
+
             // 
             // AssetManagerView
             // 

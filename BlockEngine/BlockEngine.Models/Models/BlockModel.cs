@@ -12,9 +12,9 @@ namespace BlockEngine.Models
     public class BlockModel : BaseModel
     {
         /// <summary>
-        /// The color name
+        /// The color
         /// </summary>
-        private string colorName;
+        private Color color;
 
         /// <summary>
         /// Gets or sets the color.
@@ -22,7 +22,22 @@ namespace BlockEngine.Models
         /// <value>
         /// The color.
         /// </value>
-        public Color Color { get; set; }
+        public Color Color
+        {
+            get
+            {
+                return this.color;
+            }
+
+            set
+            {
+                if (this.Color != value)
+                {
+                    this.color = value;
+                    this.ColorName = value.Name;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the x.
@@ -46,23 +61,6 @@ namespace BlockEngine.Models
         /// <value>
         /// The name of the color.
         /// </value>
-        public string ColorName
-        {
-            get => this.colorName;
-            set
-            {
-                this.colorName = value;
-                this.Color = Color.FromName(value);
-            }
-        }
-
-        /// <summary>
-        /// Sets the specified color name.
-        /// </summary>
-        /// <param name="colorName">Name of the color.</param>
-        public void SetColor(string colorName)
-        {
-            this.ColorName = colorName;
-        }
+        public string ColorName { get; set; }
     }
 }

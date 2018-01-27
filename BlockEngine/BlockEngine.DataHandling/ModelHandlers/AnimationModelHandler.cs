@@ -35,7 +35,7 @@ namespace BlockEngine.DataHandling.ModelHandlers
             {
                 foreach (var block in shape.Blocks)
                 {
-                    block.ColorName = Color.Black.Name;
+                    block.Color = Color.FromName(block.ColorName);
                 }
             }
 

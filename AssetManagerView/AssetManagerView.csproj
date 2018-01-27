@@ -50,8 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetManager.cs" />
-    <Compile Include="ColorButtonConstructor.cs" />
-    <Compile Include="Drawer.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="AssetManagerView.cs">
       <SubType>Form</SubType>
@@ -100,6 +98,10 @@
     <ProjectReference Include="..\BlockEngine\BlockEngine.Models\BlockEngine.Models.csproj">
       <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
       <Name>BlockEngine.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomComponents\CustomComponents.csproj">
+      <Project>{47EFD6A0-35D4-44FE-BDD0-7789CEA56CB1}</Project>
+      <Name>CustomComponents</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
