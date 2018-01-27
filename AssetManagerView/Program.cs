@@ -20,8 +20,7 @@ namespace AssetManagerView
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            var mainApplication = new MainApplication();
+            Application.Run(new AssetManagerView());
         }
     }
 }

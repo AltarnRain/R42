@@ -5,9 +5,6 @@
 namespace AssetManagerView
 {
     using System.Windows.Forms;
-    using BlockEngine;
-    using BlockEngine.Models;
-    using Ninject;
 
     /// <summary>
     /// AssetManager vew
@@ -18,8 +15,7 @@ namespace AssetManagerView
         /// <summary>
         /// Initializes a new instance of the <see cref="AssetManagerView" /> class.
         /// </summary>
-        /// <param name="kernel">The kernel.</param>
-        public AssetManagerView(IKernel kernel)
+        public AssetManagerView()
         {
             this.InitializeComponent();
         }
