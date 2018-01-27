@@ -15,25 +15,10 @@ namespace Round42.Test.Providers
     public class ShapeModelTests
     {
         /// <summary>
-        /// Test the generation of a new shape
-        /// </summary>
-        [TestMethod]
-        public void NewShape()
-        {
-            // Arrange
-            // Assert
-            var width = 10;
-            var height = 5;
-            var model = ShapeModel.Create(width, height);
-
-            Assert.AreEqual(height * width, model.Blocks.Count());
-        }
-
-        /// <summary>
         /// Gets the block.
         /// </summary>
         [TestMethod]
-        public void GetBlock()
+        public void ShapeModelCreateTest()
         {
             var x = 10;
             var y = 5;

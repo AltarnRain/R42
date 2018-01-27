@@ -34,14 +34,6 @@ namespace Round42.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the file.
-        /// </summary>
-        /// <value>
-        /// The name of the file.
-        /// </value>
-        public string FileName { get; set; }
-
-        /// <summary>
         /// Creates the specified width.
         /// </summary>
         /// <param name="width">The width.</param>
@@ -49,17 +41,17 @@ namespace Round42.Models
         /// <param name="shapes">The shapes.</param>
         /// <param name="name">The name.</param>
         /// <param name="assetType">Type of the asset.</param>
-        /// <param name="fileName">Name of the file.</param>
         /// <returns>
         /// An asset model
         /// </returns>
-        public static AssetModel Create(int width, int height, int shapes, string name, AssetTypes assetType, string fileName)
+        public static AssetModel Create(int width, int height, int shapes, string name, AssetTypes assetType)
         {
-            var returnValue = new AssetModel();
-            returnValue.AssetType = assetType;
-            returnValue.Name = name;
-            returnValue.AnimationModel = AnimationModel.Create(width, height, shapes);
-            returnValue.FileName = fileName;
+            var returnValue = new AssetModel
+            {
+                AssetType = assetType,
+                Name = name,
+                AnimationModel = AnimationModel.Create(width, height, shapes)
+            };
 
             return returnValue;
         }

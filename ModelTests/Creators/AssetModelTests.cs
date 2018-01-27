@@ -20,7 +20,7 @@ namespace Round42.Test.Creators
         [TestMethod]
         public void AssetModelCreateTest()
         {
-            var model = AssetModel.Create(5, 6, 3, "PlayerShip", AssetTypes.Player, string.Empty);
+            var model = AssetModel.Create(5, 6, 3, "PlayerShip", AssetTypes.Player);
 
             Assert.AreEqual(5 * 6, model.AnimationModel.Shapes.First().Blocks.Count());
             Assert.AreEqual(3, model.AnimationModel.Shapes.Count());

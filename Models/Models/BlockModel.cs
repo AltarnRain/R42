@@ -17,6 +17,11 @@ namespace Round42.Models
         private Color color;
 
         /// <summary>
+        /// The color name
+        /// </summary>
+        private string colorName;
+
+        /// <summary>
         /// Gets or sets the color.
         /// </summary>
         /// <value>
@@ -61,6 +66,21 @@ namespace Round42.Models
         /// <value>
         /// The name of the color.
         /// </value>
-        public string ColorName { get; set; }
+        public string ColorName
+        {
+            get
+            {
+                return this.colorName;
+            }
+
+            set
+            {
+                if (this.colorName != value)
+                {
+                    this.color = Color.FromName(value);
+                    this.colorName = value;
+                }
+            }
+        }
     }
 }
