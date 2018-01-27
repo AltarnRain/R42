@@ -129,7 +129,6 @@
 
         #endregion
         private System.Windows.Forms.MenuStrip MainMenu;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.Panel ContainerPanel;
         private System.Windows.Forms.ToolStripMenuItem AddToolStripMenuItem;

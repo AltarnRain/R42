@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace AssetManagerView
+namespace Round42.CustomComponents
 {
     using System;
     using System.Collections.Generic;

@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace AssetManagerView.Tests
+namespace Round42.CustomComponents.Tests
 {
     using System.Drawing;
     using System.Linq;
@@ -20,7 +20,7 @@ namespace AssetManagerView.Tests
         /// Creates the test.
         /// </summary>
         [TestMethod]
-        public void CreateTest()
+        public void PaletCreateTest()
         {
             // Arrange
             var colors = new Color[] { Color.Red, Color.Black, Color.Blue, Color.Green };

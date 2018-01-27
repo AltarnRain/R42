@@ -2,11 +2,11 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace CustomComponents.Components.Tests
+namespace Round42.CustomComponents.Tests
 {
     using System.Drawing;
-    using BlockEngine.Models;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Round42.Models;
 
     /// <summary>
     /// Tests the block button.
@@ -18,7 +18,7 @@ namespace CustomComponents.Components.Tests
         /// Tests the creation of a block button.
         /// </summary>
         [TestMethod]
-        public void CreateTest()
+        public void BlockButtonCreateTest()
         {
             var block = new BlockModel();
             block.Color = Color.Red;

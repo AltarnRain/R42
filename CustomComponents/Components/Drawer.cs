@@ -2,14 +2,13 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace AssetManagerView
+namespace Round42.CustomComponents
 {
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
-    using BlockEngine.Models;
-    using CustomComponents.Components;
+    using Round42.Models;
 
     /// <summary>
     /// Daws buttons on a panel to set the color.

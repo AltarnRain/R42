@@ -2,12 +2,12 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace CustomComponents.Components
+namespace Round42.CustomComponents
 {
     using System;
     using System.Drawing;
     using System.Windows.Forms;
-    using BlockEngine.Models;
+    using Round42.Models;
 
     /// <summary>
     /// Custum button control that handles updating the color of a block model

@@ -2,12 +2,11 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace BlockEngine
+namespace Round42
 {
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using BlockEngine.Models;
     using Newtonsoft.Json;
+    using Round42.Models;
 
     /// <summary>
     /// Manages assets

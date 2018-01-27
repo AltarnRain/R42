@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace BlockEngine
+namespace Round42
 {
     /// <summary>
     /// Manages assets.

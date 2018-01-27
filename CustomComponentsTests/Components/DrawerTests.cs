@@ -2,12 +2,12 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace AssetManagerView.Tests
+namespace Round42.CustomComponents.Tests
 {
     using System.Drawing;
     using System.Linq;
-    using BlockEngine.Models;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Round42.Models;
 
     /// <summary>
     /// Tests the Drawer component
@@ -19,7 +19,7 @@ namespace AssetManagerView.Tests
         /// Tests the creation of the drawer component.
         /// </summary>
         [TestMethod]
-        public void CreateTest()
+        public void DrawerCreateTest()
         {
             // Arrange
             var shapeModel = ShapeModel.Create(3, 5);
