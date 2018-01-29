@@ -72,4 +72,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>copy $(SolutionDir)..\Output\Extentions.dll $(SolutionDir)\Libraries</PreBuildEvent>
+  </PropertyGroup>
 </Project>
