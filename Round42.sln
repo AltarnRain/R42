@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomComponents", "CustomC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomComponentsTests", "CustomComponentsTests\CustomComponentsTests.csproj", "{A1903732-F4F9-4553-962C-927DC10109E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extentions", "..\Extentions\Extentions\Extentions.csproj", "{6DC160D3-241B-475B-9991-8BAF5198D654}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{452FACF3-A324-42FD-8A4C-FA0207CC26BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelsTest", "ModelTests\ModelsTest.csproj", "{588062CA-50F2-419F-B5F1-CD133368AF35}"
@@ -46,10 +44,6 @@ Global
 		{A1903732-F4F9-4553-962C-927DC10109E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1903732-F4F9-4553-962C-927DC10109E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1903732-F4F9-4553-962C-927DC10109E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6DC160D3-241B-475B-9991-8BAF5198D654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6DC160D3-241B-475B-9991-8BAF5198D654}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6DC160D3-241B-475B-9991-8BAF5198D654}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6DC160D3-241B-475B-9991-8BAF5198D654}.Release|Any CPU.Build.0 = Release|Any CPU
 		{452FACF3-A324-42FD-8A4C-FA0207CC26BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{452FACF3-A324-42FD-8A4C-FA0207CC26BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{452FACF3-A324-42FD-8A4C-FA0207CC26BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
