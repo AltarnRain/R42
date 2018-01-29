@@ -30,10 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Extentions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\Extentions.dll</HintPath>
+    <Reference Include="Extentions">
+      <HintPath>..\Libraries\Extentions\Extentions.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -73,6 +75,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>copy $(SolutionDir)..\Output\Extentions.dll $(SolutionDir)\Libraries</PreBuildEvent>
+    <PreBuildEvent>copy $(SolutionDir)..\Output\Extentions\ $(SolutionDir)\Libraries\Extentions\</PreBuildEvent>
   </PropertyGroup>
 </Project>
