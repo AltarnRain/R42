@@ -5,6 +5,7 @@
 namespace Round42.Models
 {
     using System.Drawing;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// Defines the basic block of a shape.
@@ -27,6 +28,7 @@ namespace Round42.Models
         /// <value>
         /// The color.
         /// </value>
+        [XmlIgnore]
         public Color Color
         {
             get

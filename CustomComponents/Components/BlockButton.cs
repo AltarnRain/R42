@@ -24,7 +24,8 @@ namespace Round42.CustomComponents
         /// Initializes a new instance of the <see cref="BlockButton"/> class.
         /// </summary>
         /// <param name="blockModel">The block model.</param>
-        private BlockButton(BlockModel blockModel)
+        public BlockButton(BlockModel blockModel)
+            : base()
         {
             this.BlockModel = blockModel;
         }

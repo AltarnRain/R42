@@ -31,7 +31,8 @@ namespace Round42.CustomComponents
         /// <param name="shapeModel">The shape model.</param>
         /// <param name="buttonSize">Size of the button.</param>
         /// <exception cref="System.ArgumentNullException">shapeModel</exception>
-        private Drawer(ShapeModel shapeModel, int buttonSize = 20)
+        public Drawer(ShapeModel shapeModel, int buttonSize = 20)
+            : base()
         {
             this.shapeModel = shapeModel ?? throw new System.ArgumentNullException(nameof(shapeModel));
             this.buttonSize = buttonSize;

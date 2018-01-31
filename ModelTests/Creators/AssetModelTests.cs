@@ -22,8 +22,8 @@ namespace Round42.Test.Creators
         {
             var model = AssetModel.Create(5, 6, 3, "PlayerShip", AssetTypes.Player);
 
-            Assert.AreEqual(5 * 6, model.AnimationModel.Shapes.First().Blocks.Count());
-            Assert.AreEqual(3, model.AnimationModel.Shapes.Count());
+            Assert.AreEqual(5 * 6, model.Animation.Shapes.First().Blocks.Count());
+            Assert.AreEqual(3, model.Animation.Shapes.Count());
             Assert.AreEqual("PlayerShip", model.Name);
             Assert.AreEqual(AssetTypes.Player, model.AssetType);
         }

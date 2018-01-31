@@ -31,6 +31,7 @@ namespace Round42.CustomComponents
         /// <param name="colors">The colors.</param>
         /// <param name="buttonHeight">The button height</param>
         private Palet(Color[] colors, int buttonHeight)
+            : base()
         {
             this.colors = colors;
             this.buttonHeight = buttonHeight;

@@ -4,18 +4,19 @@
 
 namespace Round42.Tests
 {
-    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using Exceptions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Models;
+    using TestBase;
 
     /// <summary>
     /// Tests for the asset manager
     /// </summary>
     [TestClass]
-    public class AssetManagerTests
+    public class AssetManagerTests : TestBase
     {
         /// <summary>
         /// Assets the manager create test.
@@ -24,7 +25,7 @@ namespace Round42.Tests
         public void AssetManagerCreateTest()
         {
             // Arrange / Act
-            var assetManager = AssetManager.Create();
+            var assetManager = AssetManager.Create(string.Empty);
 
             // Assert
             Assert.IsNotNull(assetManager);
@@ -37,10 +38,10 @@ namespace Round42.Tests
         public void AssetManagerAdd()
         {
             // Arrange
-            var assetManager = AssetManager.Create();
+            var assetManager = AssetManager.Create(string.Empty);
 
             // Act
-            assetManager.Add(10, 15, 2, "Test", Models.AssetTypes.Enemy);
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             // Assert
             var asset = assetManager.Assets.SingleOrDefault(a => a.Name == "Test");
@@ -54,14 +55,14 @@ namespace Round42.Tests
         public void AssetManagerAddDuplicate()
         {
             // Arrange
-            var assetManager = AssetManager.Create();
+            var assetManager = AssetManager.Create(string.Empty);
 
             // Act
-            assetManager.Add(10, 15, 2, "Test", Models.AssetTypes.Enemy);
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             try
             {
-                assetManager.Add(10, 15, 2, "Test", Models.AssetTypes.Enemy);
+                assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
             }
             catch (DuplicateEntryException ex)
             {
@@ -76,13 +77,13 @@ namespace Round42.Tests
         public void AssetManagerAddTwoAssets()
         {
             // Arrange
-            var assetManager = AssetManager.Create();
+            var assetManager = AssetManager.Create(string.Empty);
 
             // Act
             try
             {
-                assetManager.Add(10, 15, 2, "Test", Models.AssetTypes.Enemy);
-                assetManager.Add(10, 15, 2, "Test2", Models.AssetTypes.Enemy);
+                assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+                assetManager.Add("Test2", AssetTypes.Enemy, 10, 15, 2);
             }
             catch (DuplicateEntryException ex)
             {
@@ -97,10 +98,10 @@ namespace Round42.Tests
         public void AssetManagerOnNewTest()
         {
             // Arrange
-            var assetManager = AssetManager.Create();
+            var assetManager = AssetManager.Create(string.Empty);
 
             // Act
-            assetManager.Add(10, 15, 2, "Test", Models.AssetTypes.Enemy);
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             assetManager.OnNewAsset += (AssetModel assetModel) =>
             {
@@ -110,16 +111,40 @@ namespace Round42.Tests
         }
 
         /// <summary>
+        /// Fixates the new event comes after the change event.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerOnNewAfterChangeTest()
+        {
+            // Arrange
+            var assetManager = AssetManager.Create(string.Empty);
+            var changeEventTriggered = false;
+
+            assetManager.OnAssetsChanged += (List<AssetModel> assetModels) =>
+            {
+                changeEventTriggered = true;
+            };
+
+            assetManager.OnNewAsset += (AssetModel assetModel) =>
+            {
+                Assert.IsTrue(changeEventTriggered);
+            };
+
+            // Act
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+        }
+
+        /// <summary>
         /// Assets the manager add.
         /// </summary>
         [TestMethod]
         public void AssetManagerOnAssetChanged()
         {
             // Arrange
-            var assetManager = AssetManager.Create();
+            var assetManager = AssetManager.Create(string.Empty);
 
             // Act
-            assetManager.Add(10, 15, 2, "Test", Models.AssetTypes.Enemy);
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             assetManager.OnAssetsChanged += (List<AssetModel> assetModels) =>
             {
@@ -135,14 +160,48 @@ namespace Round42.Tests
         public void AssetManagerFindByNameTest()
         {
             // Arrange
-            var assetManager = AssetManager.Create();
-            assetManager.Add(10, 15, 2, "Test", Models.AssetTypes.Enemy);
+            var assetManager = AssetManager.Create(string.Empty);
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             // Act
             var asset = assetManager.FindByName("Test");
 
             // Assert
             Assert.AreEqual("Test", asset.Name);
+        }
+
+        /// <summary>
+        /// Assets the manager save.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerSaveAndLoad()
+        {
+            // Arrange
+            var assetFile = this.GetOutFolder() + "Assets.xml";
+            var assetManager = AssetManager.Create(assetFile);
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+
+            // Act
+            assetManager.Save();
+
+            // Assert
+            Assert.IsTrue(File.Exists(assetFile));
+
+            // Act
+            var assetManager2 = AssetManager.Create(assetFile);
+
+            // Assert
+            Assert.AreEqual(1, assetManager2.Assets.Count());
+            Assert.AreEqual(10, assetManager2.Assets.First().Animation.Shapes.Count());
+            Assert.AreEqual(30, assetManager2.Assets.First().Animation.Shapes.First().Blocks.Count());
+        }
+
+        /// <summary>
+        /// Assets the manager get asset list.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerGetAssetList()
+        {
         }
     }
 }

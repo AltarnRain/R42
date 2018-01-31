@@ -15,7 +15,7 @@ namespace Round42.Models
         /// <value>
         /// The animation model.
         /// </value>
-        public AnimationModel AnimationModel { get; set; }
+        public AnimationModel Animation { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the asset.
@@ -50,7 +50,7 @@ namespace Round42.Models
             {
                 AssetType = assetType,
                 Name = name,
-                AnimationModel = AnimationModel.Create(width, height, shapes)
+                Animation = AnimationModel.Create(width, height, shapes)
             };
 
             return returnValue;

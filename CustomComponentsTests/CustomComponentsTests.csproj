@@ -43,10 +43,6 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Extentions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\Extentions.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.2.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
@@ -75,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Extentions\Extentions\Extentions.csproj">
+      <Project>{6dc160d3-241b-475b-9991-8baf5198d654}</Project>
+      <Name>Extentions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CustomComponents\CustomComponents.csproj">
       <Project>{47EFD6A0-35D4-44FE-BDD0-7789CEA56CB1}</Project>
       <Name>CustomComponents</Name>
