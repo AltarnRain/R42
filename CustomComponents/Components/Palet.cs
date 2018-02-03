@@ -9,16 +9,14 @@ namespace Round42.CustomComponents
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
+    using Round42.Providers;
 
     /// <summary>
     /// Created buttons for setting color
     /// </summary>
     public class Palet : Panel
     {
-        /// <summary>
-        /// The colors
-        /// </summary>
-        private readonly Color[] colors;
+        private readonly ColorProvider colorProvider;
 
         /// <summary>
         /// The button height
@@ -28,12 +26,12 @@ namespace Round42.CustomComponents
         /// <summary>
         /// Initializes a new instance of the <see cref="Palet" /> class.
         /// </summary>
-        /// <param name="colors">The colors.</param>
+        /// <param name="colorProvider">The color provider.</param>
         /// <param name="buttonHeight">The button height</param>
-        private Palet(Color[] colors, int buttonHeight)
+        public Palet(ColorProvider colorProvider, int buttonHeight)
             : base()
         {
-            this.colors = colors;
+            this.colorProvider = colorProvider;
             this.buttonHeight = buttonHeight;
             this.Dock = DockStyle.Fill;
             this.DrawButtons();
@@ -65,22 +63,11 @@ namespace Round42.CustomComponents
         }
 
         /// <summary>
-        /// Creates the specified colors.
-        /// </summary>
-        /// <param name="colors">The colors.</param>
-        /// <param name="buttonHeight">Height of the button.</param>
-        /// <returns>A palet with the desired colors</returns>
-        public static Palet Create(Color[] colors, int buttonHeight = 30)
-        {
-            return new Palet(colors, buttonHeight);
-        }
-
-        /// <summary>
         /// Draws the buttons.
         /// </summary>
         public void DrawButtons()
         {
-            foreach (var color in this.colors)
+            foreach (var color in this.colorProvider.GetColors())
             {
                 var button = new Button();
                 button.ForeColor = button.BackColor = color;

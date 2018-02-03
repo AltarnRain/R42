@@ -45,9 +45,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetManagerFactoryTests.cs" />
+    <Compile Include="PaletFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +76,10 @@
     <ProjectReference Include="..\AssetManager\AssetManager.csproj">
       <Project>{15c8a6dd-991e-4642-8247-93b7c1c60a77}</Project>
       <Name>AssetManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomComponents\CustomComponents.csproj">
+      <Project>{47EFD6A0-35D4-44FE-BDD0-7789CEA56CB1}</Project>
+      <Name>CustomComponents</Name>
     </ProjectReference>
     <ProjectReference Include="..\Factories\Factories.csproj">
       <Project>{E949ED38-310C-47F8-8A60-63A08B24F3EF}</Project>

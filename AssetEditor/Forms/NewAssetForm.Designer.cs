@@ -50,38 +50,40 @@ namespace Round42.AssetEditor.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // AssetName
+            // AssetNameTextBox
             // 
             this.AssetNameTextBox.Location = new System.Drawing.Point(63, 12);
-            this.AssetNameTextBox.Name = "AssetName";
+            this.AssetNameTextBox.Name = "AssetNameTextBox";
             this.AssetNameTextBox.Size = new System.Drawing.Size(235, 20);
-            this.AssetNameTextBox.TabIndex = 2;
+            this.AssetNameTextBox.TabIndex = 10;
             // 
-            // Frames
+            // FramesTextBox
             // 
             this.FramesTextBox.Location = new System.Drawing.Point(63, 64);
-            this.FramesTextBox.Name = "Frames";
+            this.FramesTextBox.Name = "FramesTextBox";
             this.FramesTextBox.Size = new System.Drawing.Size(57, 20);
-            this.FramesTextBox.TabIndex = 4;
+            this.FramesTextBox.TabIndex = 30;
             // 
             // OK
             // 
             this.OK.Location = new System.Drawing.Point(146, 143);
             this.OK.Name = "OK";
             this.OK.Size = new System.Drawing.Size(75, 23);
-            this.OK.TabIndex = 5;
+            this.OK.TabIndex = 60;
             this.OK.Text = "OK";
             this.OK.UseVisualStyleBackColor = true;
+            this.OK.Click += new System.EventHandler(this.OK_Click);
             // 
             // Cancel
             // 
             this.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancel.Location = new System.Drawing.Point(227, 143);
+            this.Cancel.Location = new System.Drawing.Point(223, 143);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(75, 23);
-            this.Cancel.TabIndex = 6;
+            this.Cancel.TabIndex = 999;
             this.Cancel.Text = "Cancel";
             this.Cancel.UseVisualStyleBackColor = true;
+            this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
             // label1
             // 
@@ -123,27 +125,28 @@ namespace Round42.AssetEditor.Forms
             this.label4.Text = "X blocks";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // AssetType
+            // AssetTypeCombobox
             // 
+            this.AssetTypeCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AssetTypeCombobox.FormattingEnabled = true;
             this.AssetTypeCombobox.Location = new System.Drawing.Point(63, 37);
-            this.AssetTypeCombobox.Name = "AssetType";
+            this.AssetTypeCombobox.Name = "AssetTypeCombobox";
             this.AssetTypeCombobox.Size = new System.Drawing.Size(235, 21);
-            this.AssetTypeCombobox.TabIndex = 11;
+            this.AssetTypeCombobox.TabIndex = 20;
             // 
-            // XBlocks
+            // XBlocksTextBox
             // 
             this.XBlocksTextBox.Location = new System.Drawing.Point(63, 90);
-            this.XBlocksTextBox.Name = "XBlocks";
+            this.XBlocksTextBox.Name = "XBlocksTextBox";
             this.XBlocksTextBox.Size = new System.Drawing.Size(57, 20);
-            this.XBlocksTextBox.TabIndex = 12;
+            this.XBlocksTextBox.TabIndex = 40;
             // 
-            // YBlocks
+            // YBlocksTextBox
             // 
             this.YBlocksTextBox.Location = new System.Drawing.Point(63, 116);
-            this.YBlocksTextBox.Name = "YBlocks";
+            this.YBlocksTextBox.Name = "YBlocksTextBox";
             this.YBlocksTextBox.Size = new System.Drawing.Size(57, 20);
-            this.YBlocksTextBox.TabIndex = 14;
+            this.YBlocksTextBox.TabIndex = 50;
             // 
             // label5
             // 

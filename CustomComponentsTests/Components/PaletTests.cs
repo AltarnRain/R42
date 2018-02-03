@@ -10,12 +10,14 @@ namespace Round42.Tests
     using Extentions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.CustomComponents;
+    using Round42.Factories.Factories;
+    using Round42.Providers;
 
     /// <summary>
     /// Tests the palet component
     /// </summary>
     [TestClass]
-    public class PaletTests
+    public class PaletTests : TestBase
     {
         /// <summary>
         /// Creates the test.
@@ -24,10 +26,10 @@ namespace Round42.Tests
         public void PaletCreateTest()
         {
             // Arrange
-            var colors = new Color[] { Color.Red, Color.Black, Color.Blue, Color.Green };
+            var colors = this.Get<ColorProvider>().GetColors();
 
             // Act
-            var palet = Palet.Create(colors);
+            var palet = this.Get<PaletFactory>().Get();
 
             // Assert
             var numberOfControls = palet.ColorButtons.Count();
@@ -42,8 +44,10 @@ namespace Round42.Tests
         public void SetColorTest()
         {
             // Arrange
-            var colors = new Color[] { Color.Red, Color.Black, Color.Blue, Color.Green };
-            var palet = Palet.Create(colors);
+            var colors = this.Get<ColorProvider>().GetColors();
+
+            // Act
+            var palet = this.Get<PaletFactory>().Get();
 
             // Act
             foreach (var c in palet.Controls)

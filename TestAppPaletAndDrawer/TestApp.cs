@@ -9,6 +9,7 @@ namespace Round42.TestAppPaletAndDrawer
     using Ninject;
     using Providers;
     using Round42.CustomComponents;
+    using Round42.Factories.Factories;
     using Round42.Models;
     using Round42.TestAppPaletAndDrawer.Properties;
 
@@ -18,35 +19,74 @@ namespace Round42.TestAppPaletAndDrawer
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class TestApp : Form
     {
+        /// <summary>
+        /// The kernel
+        /// </summary>
         private readonly IKernel kernel;
+
+        /// <summary>
+        /// The drawer
+        /// </summary>
+        private readonly Drawer drawer;
+
+        /// <summary>
+        /// The color provider
+        /// </summary>
+        private readonly ColorProvider colorProvider;
+        private readonly PaletFactory paletFactory;
+
+        /// <summary>
+        /// The color provider
+        /// </summary>
+        private ShapeModel shapeModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestApp" /> class.
         /// </summary>
         /// <param name="kernel">The kernel.</param>
-        public TestApp(IKernel kernel)
+        /// <param name="colorProvider">The color provider.</param>
+        /// <param name="paletFactory">The palet factory.</param>
+        public TestApp(IKernel kernel, ColorProvider colorProvider, PaletFactory paletFactory)
         {
             this.InitializeComponent();
 
-            var palet = Palet.Create(new Color[] { Color.Red, Color.Blue, Color.Yellow, Color.Cyan, Color.Purple, Color.Green });
+            this.kernel = kernel;
+            this.colorProvider = colorProvider;
+            this.paletFactory = paletFactory;
+            var palet = this.paletFactory.Get();
             this.PaletPanel.Controls.Add(palet);
 
-            var shapeModel = this.kernel.Get<ShapeProvider>().Create(30, 20);
+            this.shapeModel = this.kernel.Get<ShapeProvider>().Create(25, 15);
 
-            var drawer = Drawer.Create(shapeModel);
-            this.DrawerPanel.Controls.Add(drawer);
-            palet.OnColorSelected += drawer.SetAciveColor;
+            this.drawer = new Drawer();
+            this.DrawerPanel.Controls.Add(this.drawer);
+            palet.OnColorSelected += this.drawer.SetAciveColor;
 
             this.Width = Settings.Default.Width;
             this.Height = Settings.Default.Height;
             this.kernel = kernel;
         }
 
+        /// <summary>
+        /// Handles the FormClosed event of the TestApp control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosedEventArgs"/> instance containing the event data.</param>
         private void TestApp_FormClosed(object sender, FormClosedEventArgs e)
         {
             Settings.Default.Height = this.Height;
             Settings.Default.Width = this.Width;
             Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Handles the SizeChanged event of the DrawerPanel control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void DrawerPanel_SizeChanged(object sender, System.EventArgs e)
+        {
+            this.drawer.DrawButtons(this.shapeModel);
         }
     }
 }

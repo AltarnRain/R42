@@ -9,13 +9,13 @@ namespace Round42.Providers
     /// <summary>
     /// Providers Color
     /// </summary>
-    public static class ColorProvider
+    public class ColorProvider
     {
         /// <summary>
         /// Gets the colors of the CGA 16 palet.
         /// </summary>
         /// <returns>An array of colors</returns>
-        public static Color[] GetColors()
+        public Color[] GetColors()
         {
             return new Color[]
             {

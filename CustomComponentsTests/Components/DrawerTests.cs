@@ -27,7 +27,8 @@ namespace Round42.Tests
             var shapeModel = this.Get<ShapeProvider>().Create(3, 5);
 
             // Act
-            var drawer = Drawer.Create(shapeModel);
+            var drawer = new Drawer();
+            drawer.DrawButtons(shapeModel);
 
             // Assert
             var numberOfButtons = drawer.BlockButtons.Count();
@@ -46,7 +47,7 @@ namespace Round42.Tests
             var shapeModel = this.Get<ShapeProvider>().Create(3, 5);
 
             // Act
-            var drawer = Drawer.Create(shapeModel);
+            var drawer = new Drawer();
 
             drawer.SetAciveColor(Color.BlueViolet);
 

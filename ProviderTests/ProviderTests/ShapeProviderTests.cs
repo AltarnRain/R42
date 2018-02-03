@@ -18,18 +18,42 @@ namespace Round42.Tests
         /// Gets the block.
         /// </summary>
         [TestMethod]
-        public void ShapeModelCreateTest()
+        public void ShapeProviderCreate()
         {
+            // Arrange
             var x = 10;
             var y = 5;
 
-            var shapeModel = this.Get<ShapeProvider>().Create(15, 55);
+            // Act
+            var shapeModel = this.Get<ShapeProvider>().Create(x, y);
 
+            // Assert
             var block = shapeModel.Blocks.Single(b => b.X == x && b.Y == y);
 
             Assert.AreEqual(x, block.X);
             Assert.AreEqual(y, block.Y);
             Assert.AreEqual("Black", block.ColorName);
+        }
+
+        /// <summary>
+        /// Checks the shape dimensions.
+        /// </summary>
+        [TestMethod]
+        public void ShapeProviderCheckShapeDimensions()
+        {
+            // Arrange
+            var x = 10;
+            var y = 5;
+
+            // Act
+            var shapeModel = this.Get<ShapeProvider>().Create(x, y);
+
+            // Assert
+            var maxX = shapeModel.Blocks.Max(b => b.X);
+            var maxY = shapeModel.Blocks.Max(b => b.Y);
+
+            Assert.AreEqual(x, maxX);
+            Assert.AreEqual(y, maxY);
         }
     }
 }

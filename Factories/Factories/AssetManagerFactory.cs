@@ -34,10 +34,13 @@ namespace Round42.Factories
         /// Gets the specified asset file.
         /// </summary>
         /// <param name="assetFile">The asset file.</param>
-        /// <returns>An asset manager</returns>
-        public AssetManager Get(string assetFile)
+        /// <param name="loadOnCreate">if set to <c>true</c> [load on create].</param>
+        /// <returns>
+        /// An asset manager
+        /// </returns>
+        public AssetManager Get(string assetFile, bool loadOnCreate = true)
         {
-            return this.Kernel.Get<AssetManager>(new ConstructorArgument("assetFile", assetFile));
+            return this.Kernel.Get<AssetManager>(new ConstructorArgument("assetFile", assetFile), new ConstructorArgument("loadOnCreate", loadOnCreate));
         }
     }
 }

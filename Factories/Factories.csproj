@@ -46,12 +46,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factories\AssetManagerFactory.cs" />
+    <Compile Include="Factories\PaletFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AssetManager\AssetManager.csproj">
       <Project>{15C8A6DD-991E-4642-8247-93B7C1C60A77}</Project>
       <Name>AssetManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomComponents\CustomComponents.csproj">
+      <Project>{47EFD6A0-35D4-44FE-BDD0-7789CEA56CB1}</Project>
+      <Name>CustomComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Providers\Providers.csproj">
+      <Project>{32BC0D8A-D607-43BE-B6CF-01798B93DBDB}</Project>
+      <Name>Providers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

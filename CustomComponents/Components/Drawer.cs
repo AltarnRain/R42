@@ -4,6 +4,7 @@
 
 namespace Round42.CustomComponents
 {
+    using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
@@ -15,29 +16,13 @@ namespace Round42.CustomComponents
     /// </summary>
     public class Drawer : Panel
     {
-        /// <summary>
-        /// The shape model
-        /// </summary>
-        private readonly ShapeModel shapeModel;
-
-        /// <summary>
-        /// The block size
-        /// </summary>
-        private readonly int buttonSize;
-
-        /// <summary>
+         /// <summary>
         /// Initializes a new instance of the <see cref="Drawer" /> class.
         /// </summary>
-        /// <param name="shapeModel">The shape model.</param>
-        /// <param name="buttonSize">Size of the button.</param>
         /// <exception cref="System.ArgumentNullException">shapeModel</exception>
-        public Drawer(ShapeModel shapeModel, int buttonSize = 20)
+        public Drawer()
             : base()
         {
-            this.shapeModel = shapeModel ?? throw new System.ArgumentNullException(nameof(shapeModel));
-            this.buttonSize = buttonSize;
-
-            this.DrawButtons();
             this.Dock = DockStyle.Fill;
         }
 
@@ -56,19 +41,6 @@ namespace Round42.CustomComponents
         }
 
         /// <summary>
-        /// Creates the specified shape model.
-        /// </summary>
-        /// <param name="shapeModel">The shape model.</param>
-        /// <param name="buttonSize">Size of the button.</param>
-        /// <returns>
-        /// An instance of Drawer
-        /// </returns>
-        public static Drawer Create(ShapeModel shapeModel, int buttonSize = 20)
-        {
-            return new Drawer(shapeModel, buttonSize);
-        }
-
-        /// <summary>
         /// Passed down the active color to all the BlockButtons contained in the Drawer
         /// </summary>
         /// <param name="color">The color.</param>
@@ -83,20 +55,31 @@ namespace Round42.CustomComponents
         /// <summary>
         /// Draws the buttons.
         /// </summary>
-        private void DrawButtons()
+        /// <param name="shapeModel">The shape model.</param>
+        public void DrawButtons(ShapeModel shapeModel)
         {
-            foreach (var block in this.shapeModel.Blocks)
-            {
-                var blockButton = BlockButton.Create(block, Color.Black);
-                this.Controls.Add(blockButton);
+            var numberOfButtonsOnXAxis = shapeModel.Blocks.Max(b => b.X);
+            var buttonSize = this.Width / (numberOfButtonsOnXAxis + 1);
+            var buttonBorder = (int)Math.Floor(buttonSize * 0.15);
+            this.Controls.Clear();
 
-                // Recude height & with by two pixels so we have borders around the buttons.
-                blockButton.Height = blockButton.Width = this.buttonSize - 2;
+            var bbList = new List<BlockButton>();
+            foreach (var block in shapeModel.Blocks)
+            {
+                var blockModel = block;
+                var blockButton = BlockButton.Create(block, Color.Black);
+
+                // Reduce height & with by two pixels so we have borders around the buttons.
+                blockButton.Height = blockButton.Width = buttonSize - buttonBorder;
 
                 // leave one pixel of spave between blocks
-                blockButton.Left = (block.X * this.buttonSize) + 1;
-                blockButton.Top = (block.Y * this.buttonSize) + 1;
+                blockButton.Top = ((block.Y - 1) * buttonSize) + buttonBorder;
+                blockButton.Left = ((block.X - 1) * buttonSize) + buttonBorder;
+
+                bbList.Add(blockButton);
             }
+
+            this.Controls.AddRange(bbList.ToArray());
         }
     }
 }

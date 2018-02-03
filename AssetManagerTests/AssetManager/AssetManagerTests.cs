@@ -25,10 +25,11 @@ namespace Round42.Tests
         public void AssetManagerCreateTest()
         {
             // Arrange / Act
-            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Assert
             Assert.IsNotNull(assetManager);
+            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace Round42.Tests
         public void AssetManagerAdd()
         {
             // Arrange
-            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
@@ -46,6 +47,8 @@ namespace Round42.Tests
             // Assert
             var asset = assetManager.Assets.SingleOrDefault(a => a.Name == "Test");
             Assert.IsNotNull(asset);
+
+            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -54,8 +57,7 @@ namespace Round42.Tests
         [TestMethod]
         public void AssetManagerAddDuplicate()
         {
-            // Arrange
-            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
@@ -68,6 +70,8 @@ namespace Round42.Tests
             {
                 Assert.IsNotNull(ex.Message);
             }
+
+            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -77,7 +81,7 @@ namespace Round42.Tests
         public void AssetManagerAddTwoAssets()
         {
             // Arrange
-            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
             try
@@ -89,6 +93,8 @@ namespace Round42.Tests
             {
                 Assert.Fail(ex.Message);
             }
+
+            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -98,7 +104,7 @@ namespace Round42.Tests
         public void AssetManagerOnNewTest()
         {
             // Arrange
-            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
@@ -108,6 +114,8 @@ namespace Round42.Tests
                 Assert.IsNotNull(assetModel);
                 Assert.AreEqual("Test", assetModel.Name);
             };
+
+            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -117,7 +125,7 @@ namespace Round42.Tests
         public void AssetManagerOnNewAfterChangeTest()
         {
             // Arrange
-            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             var changeEventTriggered = false;
 
             assetManager.OnAssetsChanged += (IEnumerable<AssetModel> assetModels) =>
@@ -132,6 +140,8 @@ namespace Round42.Tests
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+
+            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -141,7 +151,7 @@ namespace Round42.Tests
         public void AssetManagerOnAssetChanged()
         {
             // Arrange
-            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
@@ -151,6 +161,8 @@ namespace Round42.Tests
                 Assert.IsNotNull(assetModels);
                 Assert.IsTrue(assetModels.Any(a => a.Name == "Test"));
             };
+
+            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -160,7 +172,7 @@ namespace Round42.Tests
         public void AssetManagerFindByNameTest()
         {
             // Arrange
-            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             // Act
@@ -168,6 +180,8 @@ namespace Round42.Tests
 
             // Assert
             Assert.AreEqual("Test", asset.Name);
+
+            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -177,31 +191,39 @@ namespace Round42.Tests
         public void AssetManagerSaveAndLoad()
         {
             // Arrange
-            var assetFile = this.GetOutFolder() + "Assets.json";
-            var assetManager = this.Get<AssetManagerFactory>().Get(assetFile);
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             // Act
             assetManager.Save();
 
             // Assert
-            Assert.IsTrue(File.Exists(assetFile));
+            Assert.IsTrue(File.Exists(this.GetAssetFile()));
 
             // Act
-            var assetManager2 = this.Get<AssetManagerFactory>().Get(assetFile);
+            var assetManager2 = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Assert
             Assert.AreEqual(1, assetManager2.Assets.Count());
             Assert.AreEqual(10, assetManager2.Assets.First().Shapes.Count());
             Assert.AreEqual(30, assetManager2.Assets.First().Shapes.First().Blocks.Count());
+
+            this.DeleteAssetFile();
         }
 
         /// <summary>
-        /// Assets the manager get asset list.
+        /// Gets the asset file.
         /// </summary>
-        [TestMethod]
-        public void AssetManagerGetAssetList()
+        /// <returns>A string with a temporary asset file</returns>
+        private string GetAssetFile()
         {
+            // Arrange
+            return this.GetOutFolder() + "Assets.json";
+        }
+
+        private void DeleteAssetFile()
+        {
+            File.Delete(this.GetAssetFile());
         }
     }
 }

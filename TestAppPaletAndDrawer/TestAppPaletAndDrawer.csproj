@@ -96,6 +96,10 @@
       <Project>{47EFD6A0-35D4-44FE-BDD0-7789CEA56CB1}</Project>
       <Name>CustomComponents</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Factories\Factories.csproj">
+      <Project>{E949ED38-310C-47F8-8A60-63A08B24F3EF}</Project>
+      <Name>Factories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
       <Name>Models</Name>

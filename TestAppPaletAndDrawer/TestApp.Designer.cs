@@ -71,6 +71,7 @@
             this.DrawerPanel.Name = "DrawerPanel";
             this.DrawerPanel.Size = new System.Drawing.Size(555, 344);
             this.DrawerPanel.TabIndex = 1;
+            this.DrawerPanel.SizeChanged += new System.EventHandler(this.DrawerPanel_SizeChanged);
             // 
             // PaletPanel
             // 

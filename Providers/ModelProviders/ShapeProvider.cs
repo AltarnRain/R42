@@ -36,8 +36,8 @@ namespace Round42.Providers
                     var block = new BlockModel
                     {
                         Color = Color.Black,
-                        X = x,
-                        Y = y
+                        X = x + 1,
+                        Y = y + 1
                     };
 
                     returnValue.Blocks.Add(block);

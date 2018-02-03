@@ -31,20 +31,21 @@ namespace Round42.Managers
         /// <summary>
         /// Initializes a new instance of the <see cref="AssetManager" /> class.
         /// </summary>
-        /// <param name="assetProvider">The asset provider.</param>
         /// <param name="assetFile">The asset file.</param>
-        public AssetManager(string assetFile, AssetProvider assetProvider)
+        /// <param name="loadOnCreate">if set to <c>true</c> [load on create].</param>
+        /// <param name="assetProvider">The asset provider.</param>
+        public AssetManager(string assetFile, AssetProvider assetProvider, bool loadOnCreate = false)
         {
             this.assetProvider = assetProvider;
             this.assetFile = assetFile;
-            this.SetupAssets(assetFile);
+            this.SetupAssets(this.assetFile);
         }
 
         /// <summary>
         /// Raised when the asset collection changes
         /// </summary>
         /// <param name="asset">The asset.</param>
-        public delegate void NewAsset(AssetModel asset);
+        public delegate void AssedLoaded(AssetModel asset);
 
         /// <summary>
         /// Raised when the asset collection changes
@@ -55,12 +56,17 @@ namespace Round42.Managers
         /// <summary>
         /// Occurs when [on new asset].
         /// </summary>
-        public event NewAsset OnNewAsset;
+        public event AssedLoaded OnNewAsset;
 
         /// <summary>
         /// Occurs when Assets are changed
         /// </summary>
         public event AssetsChanged OnAssetsChanged;
+
+        /// <summary>
+        /// Occurs when [on loaded asset].
+        /// </summary>
+        public event AssedLoaded OnAssetLoaded;
 
         /// <summary>
         /// Gets or sets the assets.
@@ -69,6 +75,27 @@ namespace Round42.Managers
         /// The assets.
         /// </value>
         public List<AssetModel> Assets { get; set; }
+
+        /// <summary>
+        /// Loads this instance.
+        /// </summary>
+        public void LoadAssets()
+        {
+            this.SetupAssets(this.assetFile);
+        }
+
+        /// <summary>
+        /// Gets the frame.
+        /// </summary>
+        /// <param name="assetName">Name of the asset.</param>
+        /// <param name="frame">The frame.</param>
+        /// <returns>
+        /// The asset model specified in the frame
+        /// </returns>
+        public ShapeModel GetFrameFromAsset(string assetName, int frame)
+        {
+            return this.Assets.Single(a => a.Name == assetName).Shapes[frame];
+        }
 
         /// <summary>
         /// Adds the specified width.
@@ -88,6 +115,7 @@ namespace Round42.Managers
 
             var newAsset = this.assetProvider.Create(assetName, assetType, numberOfShapes, width, height);
             this.Add(newAsset);
+            this.Save();
         }
 
         /// <summary>
@@ -97,7 +125,7 @@ namespace Round42.Managers
         public void Add(AssetModel newAsset)
         {
             this.Assets.Add(newAsset);
-            this.OnAssetsChanged?.Invoke(this.GetAssets());
+            this.TriggerChangeEvent();
             this.OnNewAsset?.Invoke(newAsset);
         }
 
@@ -130,6 +158,21 @@ namespace Round42.Managers
         }
 
         /// <summary>
+        /// Loads the name of the by.
+        /// </summary>
+        /// <param name="assetName">Name of the asset.</param>
+        public void LoadByName(string assetName)
+        {
+            if (string.IsNullOrEmpty(assetName))
+            {
+                return;
+            }
+
+            var asset = this.Assets.Single(a => a.Name == assetName);
+            this.OnAssetLoaded?.Invoke(asset);
+        }
+
+        /// <summary>
         /// Sets up assets. If there are none, we'll create a new list we can add too.
         /// </summary>
         /// <param name="assetFile">The asset file.</param>
@@ -144,6 +187,16 @@ namespace Round42.Managers
             {
                 this.Assets = new List<AssetModel>();
             }
+
+            this.TriggerChangeEvent();
+        }
+
+        /// <summary>
+        /// Triggers the change event.
+        /// </summary>
+        private void TriggerChangeEvent()
+        {
+            this.OnAssetsChanged?.Invoke(this.GetAssets());
         }
     }
 }
