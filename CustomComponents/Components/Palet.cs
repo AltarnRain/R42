@@ -10,11 +10,12 @@ namespace Round42.CustomComponents
     using System.Linq;
     using System.Windows.Forms;
     using Round42.Providers;
+    using static System.Windows.Forms.Control;
 
     /// <summary>
     /// Created buttons for setting color
     /// </summary>
-    public class Palet : Panel
+    public class Palet
     {
         private readonly ColorProvider colorProvider;
 
@@ -24,16 +25,22 @@ namespace Round42.CustomComponents
         private readonly int buttonHeight;
 
         /// <summary>
+        /// The panel
+        /// </summary>
+        private readonly Panel panel;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Palet" /> class.
         /// </summary>
         /// <param name="colorProvider">The color provider.</param>
         /// <param name="buttonHeight">The button height</param>
-        public Palet(ColorProvider colorProvider, int buttonHeight)
+        /// <param name="panel">The panel.</param>
+        public Palet(ColorProvider colorProvider, int buttonHeight, Panel panel)
             : base()
         {
             this.colorProvider = colorProvider;
             this.buttonHeight = buttonHeight;
-            this.Dock = DockStyle.Fill;
+            this.panel = panel;
             this.DrawButtons();
         }
 
@@ -49,6 +56,20 @@ namespace Round42.CustomComponents
         public event ColorSelected OnColorSelected;
 
         /// <summary>
+        /// Gets the controls.
+        /// </summary>
+        /// <value>
+        /// The controls.
+        /// </value>
+        public ControlCollection Controls
+        {
+            get
+            {
+                return this.panel.Controls;
+            }
+        }
+
+        /// <summary>
         /// Gets the color buttons.
         /// </summary>
         /// <value>
@@ -58,7 +79,7 @@ namespace Round42.CustomComponents
         {
             get
             {
-                return this.Controls.Cast<Button>();
+                return this.panel.Controls.Cast<Button>();
             }
         }
 
@@ -75,7 +96,7 @@ namespace Round42.CustomComponents
                 button.Height = 30;
                 button.Click += this.ButtonClick;
 
-                this.Controls.Add(button);
+                this.panel.Controls.Add(button);
             }
         }
 

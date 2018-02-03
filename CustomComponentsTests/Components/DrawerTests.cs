@@ -6,9 +6,11 @@ namespace Round42.Tests
 {
     using System.Drawing;
     using System.Linq;
+    using System.Windows.Forms;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Providers;
     using Round42.CustomComponents;
+    using Round42.Factories.Factories;
     using Round42.Tests;
 
     /// <summary>
@@ -25,9 +27,10 @@ namespace Round42.Tests
         {
             // Arrange
             var shapeModel = this.Get<ShapeProvider>().Create(3, 5);
+            var panel = new Panel();
 
             // Act
-            var drawer = new Drawer();
+            var drawer = this.Get<DrawerFactory>().Get(panel);
             drawer.DrawButtons(shapeModel);
 
             // Assert
@@ -45,9 +48,10 @@ namespace Round42.Tests
         {
             // Arrange
             var shapeModel = this.Get<ShapeProvider>().Create(3, 5);
+            var panel = new Panel();
 
             // Act
-            var drawer = new Drawer();
+            var drawer = this.Get<DrawerFactory>().Get(panel);
 
             drawer.SetAciveColor(Color.BlueViolet);
 

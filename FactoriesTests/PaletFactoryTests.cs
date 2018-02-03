@@ -5,6 +5,7 @@
 namespace Round42.Tests
 {
     using System.Linq;
+    using System.Windows.Forms;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories.Factories;
 
@@ -32,8 +33,9 @@ namespace Round42.Tests
         public void CreatePalet()
         {
             var factory = this.Get<PaletFactory>();
+            var panel = new Panel();
 
-            var palet = factory.Get(50);
+            var palet = factory.Get(panel, 50);
 
             Assert.IsNotNull(palet);
             Assert.AreEqual(50, palet.ColorButtons.First().Height);

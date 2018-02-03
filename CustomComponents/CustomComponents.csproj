@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Round42.CustomComponents</RootNamespace>
-    <AssemblyName>Round42.CustomComponents</AssemblyName>
+    <AssemblyName>CustomComponents</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Round42.CustomComponents.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\CustomComponents.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,12 +46,8 @@
     <Compile Include="Components\BlockButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Drawer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Palet.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Components\Drawer.cs" />
+    <Compile Include="Components\Palet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

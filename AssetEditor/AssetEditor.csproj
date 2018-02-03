@@ -7,7 +7,7 @@
     <ProjectGuid>{A1093F38-2F54-44EF-AB57-807F4C00424E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Round42.AssetEditor</RootNamespace>
-    <AssemblyName>Round42.AssetEditor</AssemblyName>
+    <AssemblyName>AssetEditor</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Round42.AssetEditor.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\AssetEditor.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

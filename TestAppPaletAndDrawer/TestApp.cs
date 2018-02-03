@@ -34,6 +34,7 @@ namespace Round42.TestAppPaletAndDrawer
         /// </summary>
         private readonly ColorProvider colorProvider;
         private readonly PaletFactory paletFactory;
+        private readonly DrawerFactory drawerFactory;
 
         /// <summary>
         /// The color provider
@@ -46,20 +47,20 @@ namespace Round42.TestAppPaletAndDrawer
         /// <param name="kernel">The kernel.</param>
         /// <param name="colorProvider">The color provider.</param>
         /// <param name="paletFactory">The palet factory.</param>
-        public TestApp(IKernel kernel, ColorProvider colorProvider, PaletFactory paletFactory)
+        /// <param name="drawerFactory">The drawer factory.</param>
+        public TestApp(IKernel kernel, ColorProvider colorProvider, PaletFactory paletFactory, DrawerFactory drawerFactory)
         {
             this.InitializeComponent();
 
             this.kernel = kernel;
             this.colorProvider = colorProvider;
             this.paletFactory = paletFactory;
-            var palet = this.paletFactory.Get();
-            this.PaletPanel.Controls.Add(palet);
+            this.drawerFactory = drawerFactory;
+            var palet = this.paletFactory.Get(this.PaletPanel);
 
             this.shapeModel = this.kernel.Get<ShapeProvider>().Create(25, 15);
 
-            this.drawer = new Drawer();
-            this.DrawerPanel.Controls.Add(this.drawer);
+            this.drawer = this.drawerFactory.Get(this.DrawerPanel);
             palet.OnColorSelected += this.drawer.SetAciveColor;
 
             this.Width = Settings.Default.Width;

@@ -4,6 +4,7 @@
 
 namespace Round42.Factories.Factories
 {
+    using System.Windows.Forms;
     using Ninject;
     using Ninject.Parameters;
     using Round42.CustomComponents;
@@ -15,7 +16,7 @@ namespace Round42.Factories.Factories
     public class PaletFactory
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="PaletFactory"/> class.
+        /// Initializes a new instance of the <see cref="PaletFactory" /> class.
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         /// <param name="colorProvider">The color provider.</param>
@@ -35,13 +36,14 @@ namespace Round42.Factories.Factories
         /// <summary>
         /// Gets the specified button size.
         /// </summary>
+        /// <param name="panel">The panel.</param>
         /// <param name="buttonHeight">Height of the button.</param>
         /// <returns>
         /// A palet control
         /// </returns>
-        public Palet Get(int buttonHeight = 20)
+        public Palet Get(Panel panel, int buttonHeight = 20)
         {
-            return this.Kernel.Get<Palet>(new ConstructorArgument("buttonHeight", buttonHeight));
+            return this.Kernel.Get<Palet>(new ConstructorArgument("panel", panel), new ConstructorArgument("buttonHeight", buttonHeight));
         }
     }
 }

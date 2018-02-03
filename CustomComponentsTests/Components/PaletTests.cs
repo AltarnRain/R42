@@ -27,9 +27,10 @@ namespace Round42.Tests
         {
             // Arrange
             var colors = this.Get<ColorProvider>().GetColors();
+            var panel = new Panel();
 
             // Act
-            var palet = this.Get<PaletFactory>().Get();
+            var palet = this.Get<PaletFactory>().Get(panel);
 
             // Assert
             var numberOfControls = palet.ColorButtons.Count();
@@ -45,9 +46,10 @@ namespace Round42.Tests
         {
             // Arrange
             var colors = this.Get<ColorProvider>().GetColors();
+            var panel = new Panel();
 
             // Act
-            var palet = this.Get<PaletFactory>().Get();
+            var palet = this.Get<PaletFactory>().Get(panel);
 
             // Act
             foreach (var c in palet.Controls)

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factories\AssetManagerFactory.cs" />
+    <Compile Include="Factories\DrawerFactory.cs" />
     <Compile Include="Factories\PaletFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

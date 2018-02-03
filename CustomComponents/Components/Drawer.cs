@@ -14,16 +14,22 @@ namespace Round42.CustomComponents
     /// <summary>
     /// Daws buttons on a panel to set the color.
     /// </summary>
-    public class Drawer : Panel
+    public class Drawer
     {
-         /// <summary>
+        /// <summary>
+        /// The panel
+        /// </summary>
+        private readonly Panel panel;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Drawer" /> class.
         /// </summary>
+        /// <param name="panel">The panel.</param>
         /// <exception cref="System.ArgumentNullException">shapeModel</exception>
-        public Drawer()
+        public Drawer(Panel panel)
             : base()
         {
-            this.Dock = DockStyle.Fill;
+            this.panel = panel;
         }
 
         /// <summary>
@@ -36,7 +42,7 @@ namespace Round42.CustomComponents
         {
             get
             {
-                return this.Controls.Cast<BlockButton>();
+                return this.panel.Controls.Cast<BlockButton>();
             }
         }
 
@@ -46,7 +52,7 @@ namespace Round42.CustomComponents
         /// <param name="color">The color.</param>
         public void SetAciveColor(Color color)
         {
-            foreach (BlockButton b in this.Controls)
+            foreach (BlockButton b in this.panel.Controls)
             {
                 b.SetActiveColor(color);
             }
@@ -59,9 +65,9 @@ namespace Round42.CustomComponents
         public void DrawButtons(ShapeModel shapeModel)
         {
             var numberOfButtonsOnXAxis = shapeModel.Blocks.Max(b => b.X);
-            var buttonSize = this.Width / (numberOfButtonsOnXAxis + 1);
+            var buttonSize = this.panel.Width / (numberOfButtonsOnXAxis + 1);
             var buttonBorder = (int)Math.Floor(buttonSize * 0.15);
-            this.Controls.Clear();
+            this.panel.Controls.Clear();
 
             var bbList = new List<BlockButton>();
             foreach (var block in shapeModel.Blocks)
@@ -79,7 +85,7 @@ namespace Round42.CustomComponents
                 bbList.Add(blockButton);
             }
 
-            this.Controls.AddRange(bbList.ToArray());
+            this.panel.Controls.AddRange(bbList.ToArray());
         }
     }
 }

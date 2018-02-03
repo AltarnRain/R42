@@ -38,9 +38,13 @@ namespace Round42.AssetEditor.Forms
         private readonly ViewFactory viewFactory;
 
         /// <summary>
+        /// The drawer factory
+        /// </summary>
+        private readonly DrawerFactory drawerFactory;
+
+        /// <summary>
         /// The drawer
         /// </summary>
-        private readonly Drawer drawer;
         private readonly PaletFactory paletFactory;
 
         /// <summary>
@@ -50,6 +54,14 @@ namespace Round42.AssetEditor.Forms
         /// The asset provider.
         /// </value>
         private readonly AssetProvider assetProvider;
+
+        /// <summary>
+        /// Gets the drawer.
+        /// </summary>
+        /// <value>
+        /// The drawer.
+        /// </value>
+        private readonly Drawer drawer;
 
         /// <summary>
         /// The palet
@@ -75,21 +87,20 @@ namespace Round42.AssetEditor.Forms
         /// <param name="assetManagerFactory">The asset manager factory.</param>
         /// <param name="assetProvider">The asset provider.</param>
         /// <param name="viewFactory">The view factory.</param>
-        /// <param name="drawer">The drawer.</param>
+        /// <param name="drawerFactory">The drawer factory.</param>
         /// <param name="paletFactory">The palet factory.</param>
-        public MainForm(AssetManagerFactory assetManagerFactory, AssetProvider assetProvider, ViewFactory viewFactory, Drawer drawer, PaletFactory paletFactory)
+        public MainForm(AssetManagerFactory assetManagerFactory, AssetProvider assetProvider, ViewFactory viewFactory, DrawerFactory drawerFactory, PaletFactory paletFactory)
         {
             this.InitializeComponent();
             this.assetProvider = assetProvider;
             this.viewFactory = viewFactory;
-            this.drawer = drawer;
+            this.drawerFactory = drawerFactory;
             this.paletFactory = paletFactory;
 
             var mainAssetFile = Path.Combine(Directory.GetCurrentDirectory(), AssetFile);
             this.assetManager = assetManagerFactory.Get(mainAssetFile, false);
-            this.palet = this.paletFactory.Get();
-            this.PaletPanel.Controls.Add(this.palet);
-            this.DrawerPanel.Controls.Add(drawer);
+            this.palet = this.paletFactory.Get(this.PaletPanel);
+            this.drawer = this.drawerFactory.Get(this.DrawerPanel);
 
             // Event handler setup must precede loading assets but happen after the asset manager is created
             this.SetupEventHandlers();
