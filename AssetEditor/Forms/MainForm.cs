@@ -23,14 +23,21 @@ namespace Round42.AssetEditor.Forms
         private readonly AssetManager assetManager;
 
         /// <summary>
+        /// The view factory
+        /// </summary>
+        private readonly ViewFactory viewFactory;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MainForm" /> class.
         /// </summary>
         /// <param name="assetManagerFactory">The asset manager factory.</param>
         /// <param name="assetProvider">The asset provider.</param>
-        public MainForm(AssetManagerFactory assetManagerFactory,  AssetProvider assetProvider)
+        /// <param name="viewFactory">The view factory.</param>
+        public MainForm(AssetManagerFactory assetManagerFactory,  AssetProvider assetProvider, ViewFactory viewFactory)
         {
             this.InitializeComponent();
             this.AssetProvider = assetProvider;
+            this.viewFactory = viewFactory;
             this.assetManager = assetManagerFactory.Get(Settings.Default.AssetFile);
         }
 
@@ -49,10 +56,9 @@ namespace Round42.AssetEditor.Forms
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void AddAsset_Click(object sender, EventArgs e)
         {
-            var newAsset = NewAssetForm.AddAsset();
-            if (newAsset != null)
+            var newAsset = this.viewFactory.Get<NewAssetForm>();
+            if (newAsset.ShowDialog() == DialogResult.OK)
             {
-                this.assetManager.Add(newAsset);
             }
         }
     }

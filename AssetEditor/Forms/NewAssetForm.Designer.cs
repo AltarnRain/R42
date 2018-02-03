@@ -1,4 +1,4 @@
-﻿// <copyright file="MainForm.cs" company="OI">
+﻿// <copyright file="NewAssetForm.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
@@ -36,33 +36,33 @@ namespace Round42.AssetEditor.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.AssetName = new System.Windows.Forms.TextBox();
-            this.Frames = new System.Windows.Forms.TextBox();
+            this.AssetNameTextBox = new System.Windows.Forms.TextBox();
+            this.FramesTextBox = new System.Windows.Forms.TextBox();
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.Type = new System.Windows.Forms.ComboBox();
-            this.XBlocks = new System.Windows.Forms.TextBox();
-            this.YBlocks = new System.Windows.Forms.TextBox();
+            this.AssetTypeCombobox = new System.Windows.Forms.ComboBox();
+            this.XBlocksTextBox = new System.Windows.Forms.TextBox();
+            this.YBlocksTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // AssetName
             // 
-            this.AssetName.Location = new System.Drawing.Point(63, 12);
-            this.AssetName.Name = "AssetName";
-            this.AssetName.Size = new System.Drawing.Size(235, 20);
-            this.AssetName.TabIndex = 2;
+            this.AssetNameTextBox.Location = new System.Drawing.Point(63, 12);
+            this.AssetNameTextBox.Name = "AssetName";
+            this.AssetNameTextBox.Size = new System.Drawing.Size(235, 20);
+            this.AssetNameTextBox.TabIndex = 2;
             // 
             // Frames
             // 
-            this.Frames.Location = new System.Drawing.Point(63, 64);
-            this.Frames.Name = "Frames";
-            this.Frames.Size = new System.Drawing.Size(57, 20);
-            this.Frames.TabIndex = 4;
+            this.FramesTextBox.Location = new System.Drawing.Point(63, 64);
+            this.FramesTextBox.Name = "Frames";
+            this.FramesTextBox.Size = new System.Drawing.Size(57, 20);
+            this.FramesTextBox.TabIndex = 4;
             // 
             // OK
             // 
@@ -123,27 +123,27 @@ namespace Round42.AssetEditor.Forms
             this.label4.Text = "X blocks";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // Type
+            // AssetType
             // 
-            this.Type.FormattingEnabled = true;
-            this.Type.Location = new System.Drawing.Point(63, 37);
-            this.Type.Name = "Type";
-            this.Type.Size = new System.Drawing.Size(235, 21);
-            this.Type.TabIndex = 11;
+            this.AssetTypeCombobox.FormattingEnabled = true;
+            this.AssetTypeCombobox.Location = new System.Drawing.Point(63, 37);
+            this.AssetTypeCombobox.Name = "AssetType";
+            this.AssetTypeCombobox.Size = new System.Drawing.Size(235, 21);
+            this.AssetTypeCombobox.TabIndex = 11;
             // 
             // XBlocks
             // 
-            this.XBlocks.Location = new System.Drawing.Point(63, 90);
-            this.XBlocks.Name = "XBlocks";
-            this.XBlocks.Size = new System.Drawing.Size(57, 20);
-            this.XBlocks.TabIndex = 12;
+            this.XBlocksTextBox.Location = new System.Drawing.Point(63, 90);
+            this.XBlocksTextBox.Name = "XBlocks";
+            this.XBlocksTextBox.Size = new System.Drawing.Size(57, 20);
+            this.XBlocksTextBox.TabIndex = 12;
             // 
             // YBlocks
             // 
-            this.YBlocks.Location = new System.Drawing.Point(63, 116);
-            this.YBlocks.Name = "YBlocks";
-            this.YBlocks.Size = new System.Drawing.Size(57, 20);
-            this.YBlocks.TabIndex = 14;
+            this.YBlocksTextBox.Location = new System.Drawing.Point(63, 116);
+            this.YBlocksTextBox.Name = "YBlocks";
+            this.YBlocksTextBox.Size = new System.Drawing.Size(57, 20);
+            this.YBlocksTextBox.TabIndex = 14;
             // 
             // label5
             // 
@@ -163,18 +163,18 @@ namespace Round42.AssetEditor.Forms
             this.CancelButton = this.Cancel;
             this.ClientSize = new System.Drawing.Size(310, 178);
             this.ControlBox = false;
-            this.Controls.Add(this.YBlocks);
+            this.Controls.Add(this.YBlocksTextBox);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.XBlocks);
-            this.Controls.Add(this.Type);
+            this.Controls.Add(this.XBlocksTextBox);
+            this.Controls.Add(this.AssetTypeCombobox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.OK);
-            this.Controls.Add(this.Frames);
-            this.Controls.Add(this.AssetName);
+            this.Controls.Add(this.FramesTextBox);
+            this.Controls.Add(this.AssetNameTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "NewAssetForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -185,17 +185,17 @@ namespace Round42.AssetEditor.Forms
         }
 
         #endregion
-        private System.Windows.Forms.TextBox AssetName;
-        private System.Windows.Forms.TextBox Frames;
+        private System.Windows.Forms.TextBox AssetNameTextBox;
+        private System.Windows.Forms.TextBox FramesTextBox;
         private System.Windows.Forms.Button OK;
         private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox Type;
-        private System.Windows.Forms.TextBox XBlocks;
-        private System.Windows.Forms.TextBox YBlocks;
+        private System.Windows.Forms.ComboBox AssetTypeCombobox;
+        private System.Windows.Forms.TextBox XBlocksTextBox;
+        private System.Windows.Forms.TextBox YBlocksTextBox;
         private System.Windows.Forms.Label label5;
     }
 }

@@ -8,6 +8,7 @@ namespace AssetEditor
     using System.Windows.Forms;
     using Ninject;
     using Round42.AssetEditor.Forms;
+    using Round42.Factories;
 
     /// <summary>
     /// Main program for editor
@@ -25,7 +26,7 @@ namespace AssetEditor
 
             using (var kernel = new StandardKernel())
             {
-                var form = kernel.Get<MainForm>();
+                var form = kernel.Get<ViewFactory>().Get<MainForm>();
                 Application.Run(form);
             }
         }
