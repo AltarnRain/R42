@@ -7,8 +7,8 @@
     <ProjectGuid>{A1903732-F4F9-4553-962C-927DC10109E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Round42.CustomComponents.Tests</RootNamespace>
-    <AssemblyName>Round42.CustomComponents.Tests</AssemblyName>
+    <RootNamespace>Round42.Tests</RootNamespace>
+    <AssemblyName>CustomComponents</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -29,7 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Round42.CustomComponents.Tests.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\CustomComponents.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -83,6 +83,14 @@
       <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
       <Name>Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Providers\Providers.csproj">
+      <Project>{32BC0D8A-D607-43BE-B6CF-01798B93DBDB}</Project>
+      <Name>Providers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestBase\TestBase.csproj">
+      <Project>{BC169972-683C-4C64-B7F0-788769540EA0}</Project>
+      <Name>TestBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
@@ -121,7 +129,7 @@
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.1.2.0\build\net45\MSTest.TestAdapter.targets')" />
   <PropertyGroup>
-    <PreBuildEvent>copy $(SolutionDir)..\Output\Extentions\ $(SolutionDir)\Libraries\Extentions\</PreBuildEvent>
+    <PreBuildEvent>	</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

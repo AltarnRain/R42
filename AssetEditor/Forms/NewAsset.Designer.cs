@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace AssetEditor.Forms
+namespace Round42.AssetEditor.Forms
 {
     /// <summary>
     /// NewAssetForms
@@ -63,7 +63,6 @@ namespace AssetEditor.Forms
             this.Frames.Name = "Frames";
             this.Frames.Size = new System.Drawing.Size(57, 20);
             this.Frames.TabIndex = 4;
-            this.Frames.TextChanged += new System.EventHandler(this.Frames_TextChanged);
             // 
             // OK
             // 

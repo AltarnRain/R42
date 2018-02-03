@@ -9,8 +9,8 @@ namespace Round42.Tests
     using System.Linq;
     using Exceptions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Round42.Factories;
     using Round42.Models;
-    using TestBase;
 
     /// <summary>
     /// Tests for the asset manager
@@ -25,7 +25,7 @@ namespace Round42.Tests
         public void AssetManagerCreateTest()
         {
             // Arrange / Act
-            var assetManager = AssetManager.Create(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
 
             // Assert
             Assert.IsNotNull(assetManager);
@@ -38,7 +38,7 @@ namespace Round42.Tests
         public void AssetManagerAdd()
         {
             // Arrange
-            var assetManager = AssetManager.Create(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
@@ -55,7 +55,7 @@ namespace Round42.Tests
         public void AssetManagerAddDuplicate()
         {
             // Arrange
-            var assetManager = AssetManager.Create(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
@@ -77,7 +77,7 @@ namespace Round42.Tests
         public void AssetManagerAddTwoAssets()
         {
             // Arrange
-            var assetManager = AssetManager.Create(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
 
             // Act
             try
@@ -98,7 +98,7 @@ namespace Round42.Tests
         public void AssetManagerOnNewTest()
         {
             // Arrange
-            var assetManager = AssetManager.Create(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
@@ -117,10 +117,10 @@ namespace Round42.Tests
         public void AssetManagerOnNewAfterChangeTest()
         {
             // Arrange
-            var assetManager = AssetManager.Create(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
             var changeEventTriggered = false;
 
-            assetManager.OnAssetsChanged += (List<AssetModel> assetModels) =>
+            assetManager.OnAssetsChanged += (IEnumerable<AssetModel> assetModels) =>
             {
                 changeEventTriggered = true;
             };
@@ -141,12 +141,12 @@ namespace Round42.Tests
         public void AssetManagerOnAssetChanged()
         {
             // Arrange
-            var assetManager = AssetManager.Create(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
-            assetManager.OnAssetsChanged += (List<AssetModel> assetModels) =>
+            assetManager.OnAssetsChanged += (IEnumerable<AssetModel> assetModels) =>
             {
                 Assert.IsNotNull(assetModels);
                 Assert.IsTrue(assetModels.Any(a => a.Name == "Test"));
@@ -160,7 +160,7 @@ namespace Round42.Tests
         public void AssetManagerFindByNameTest()
         {
             // Arrange
-            var assetManager = AssetManager.Create(string.Empty);
+            var assetManager = this.Get<AssetManagerFactory>().Get(string.Empty);
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             // Act
@@ -177,8 +177,8 @@ namespace Round42.Tests
         public void AssetManagerSaveAndLoad()
         {
             // Arrange
-            var assetFile = this.GetOutFolder() + "Assets.xml";
-            var assetManager = AssetManager.Create(assetFile);
+            var assetFile = this.GetOutFolder() + "Assets.json";
+            var assetManager = this.Get<AssetManagerFactory>().Get(assetFile);
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             // Act
@@ -188,12 +188,12 @@ namespace Round42.Tests
             Assert.IsTrue(File.Exists(assetFile));
 
             // Act
-            var assetManager2 = AssetManager.Create(assetFile);
+            var assetManager2 = this.Get<AssetManagerFactory>().Get(assetFile);
 
             // Assert
             Assert.AreEqual(1, assetManager2.Assets.Count());
-            Assert.AreEqual(10, assetManager2.Assets.First().Animation.Shapes.Count());
-            Assert.AreEqual(30, assetManager2.Assets.First().Animation.Shapes.First().Blocks.Count());
+            Assert.AreEqual(10, assetManager2.Assets.First().Shapes.Count());
+            Assert.AreEqual(30, assetManager2.Assets.First().Shapes.First().Blocks.Count());
         }
 
         /// <summary>

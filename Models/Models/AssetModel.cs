@@ -4,18 +4,20 @@
 
 namespace Round42.Models
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// A model for game assets.
     /// </summary>
     public class AssetModel
     {
         /// <summary>
-        /// Gets or sets the animation model.
+        /// Gets or sets the animation.
         /// </summary>
         /// <value>
-        /// The animation model.
+        /// The animation.
         /// </value>
-        public AnimationModel Animation { get; set; }
+        public List<ShapeModel> Shapes { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the asset.
@@ -32,28 +34,5 @@ namespace Round42.Models
         /// The name.
         /// </value>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Creates the specified width.
-        /// </summary>
-        /// <param name="width">The width.</param>
-        /// <param name="height">The height.</param>
-        /// <param name="shapes">The shapes.</param>
-        /// <param name="name">The name.</param>
-        /// <param name="assetType">Type of the asset.</param>
-        /// <returns>
-        /// An asset model
-        /// </returns>
-        public static AssetModel Create(int width, int height, int shapes, string name, AssetTypes assetType)
-        {
-            var returnValue = new AssetModel
-            {
-                AssetType = assetType,
-                Name = name,
-                Animation = AnimationModel.Create(width, height, shapes)
-            };
-
-            return returnValue;
-        }
     }
 }

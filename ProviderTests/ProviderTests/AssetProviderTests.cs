@@ -1,18 +1,19 @@
-﻿// <copyright file="AssetModelTests.cs" company="OI">
+﻿// <copyright file="AssetProviderTests.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Test.Creators
+namespace Round42.Tests
 {
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Models;
+    using Round42.Providers;
 
     /// <summary>
     /// Tests creating the asset model
     /// </summary>
     [TestClass]
-    public class AssetModelTests
+    public class AssetProviderTests : TestBase
     {
         /// <summary>
         /// Assets the model create test.
@@ -20,10 +21,10 @@ namespace Round42.Test.Creators
         [TestMethod]
         public void AssetModelCreateTest()
         {
-            var model = AssetModel.Create(5, 6, 3, "PlayerShip", AssetTypes.Player);
+            var model = this.Get<AssetProvider>().Create("PlayerShip", AssetTypes.Player, 3, 5, 6);
 
-            Assert.AreEqual(5 * 6, model.Animation.Shapes.First().Blocks.Count());
-            Assert.AreEqual(3, model.Animation.Shapes.Count());
+            Assert.AreEqual(5 * 6, model.Shapes.First().Blocks.Count());
+            Assert.AreEqual(3, model.Shapes.Count());
             Assert.AreEqual("PlayerShip", model.Name);
             Assert.AreEqual(AssetTypes.Player, model.AssetType);
         }

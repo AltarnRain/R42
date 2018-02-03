@@ -6,6 +6,8 @@ namespace Round42.TestAppPaletAndDrawer
 {
     using System.Drawing;
     using System.Windows.Forms;
+    using Ninject;
+    using Providers;
     using Round42.CustomComponents;
     using Round42.Models;
     using Round42.TestAppPaletAndDrawer.Properties;
@@ -16,17 +18,20 @@ namespace Round42.TestAppPaletAndDrawer
     /// <seealso cref="System.Windows.Forms.Form" />
     public partial class TestApp : Form
     {
+        private readonly IKernel kernel;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TestApp" /> class.
         /// </summary>
-        public TestApp()
+        /// <param name="kernel">The kernel.</param>
+        public TestApp(IKernel kernel)
         {
             this.InitializeComponent();
 
             var palet = Palet.Create(new Color[] { Color.Red, Color.Blue, Color.Yellow, Color.Cyan, Color.Purple, Color.Green });
             this.PaletPanel.Controls.Add(palet);
 
-            var shapeModel = ShapeModel.Create(30, 20);
+            var shapeModel = this.kernel.Get<ShapeProvider>().Create(30, 20);
 
             var drawer = Drawer.Create(shapeModel);
             this.DrawerPanel.Controls.Add(drawer);
@@ -34,6 +39,7 @@ namespace Round42.TestAppPaletAndDrawer
 
             this.Width = Settings.Default.Width;
             this.Height = Settings.Default.Height;
+            this.kernel = kernel;
         }
 
         private void TestApp_FormClosed(object sender, FormClosedEventArgs e)

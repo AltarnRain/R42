@@ -2,10 +2,10 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace AssetEditor.Forms
+namespace Round42.AssetEditor.Forms
 {
-    using System;
     using System.Windows.Forms;
+    using Round42.Models;
 
     /// <summary>
     /// Used to create a new asset
@@ -16,13 +16,35 @@ namespace AssetEditor.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="NewAssetForm"/> class.
         /// </summary>
-        public NewAssetForm()
+        private NewAssetForm()
         {
             this.InitializeComponent();
         }
 
-        private void Frames_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Gets the asset model.
+        /// </summary>
+        /// <value>
+        /// The asset model.
+        /// </value>
+        public AssetModel AssetModel { get; private set; }
+
+        /// <summary>
+        /// Adds the asset.
+        /// </summary>
+        /// <returns>An asset model</returns>
+        public static AssetModel AddAsset()
         {
+            var form = new NewAssetForm();
+            form.ShowDialog();
+            if (form.DialogResult == DialogResult.OK)
+            {
+                return form.AssetModel;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

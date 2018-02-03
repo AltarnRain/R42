@@ -6,6 +6,7 @@ namespace Round42.TestAppPaletAndDrawer
 {
     using System;
     using System.Windows.Forms;
+    using Ninject;
 
     /// <summary>
     /// Main program.
@@ -20,7 +21,12 @@ namespace Round42.TestAppPaletAndDrawer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TestApp());
+
+            using (var kernel = new StandardKernel())
+            {
+                var form = kernel.Get<TestApp>();
+                Application.Run(form);
+            }
         }
     }
 }

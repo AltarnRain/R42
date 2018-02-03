@@ -2,10 +2,11 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.CustomComponents.Tests
+namespace Round42.Tests
 {
     using System.Drawing;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Round42.CustomComponents;
     using Round42.Models;
 
     /// <summary>

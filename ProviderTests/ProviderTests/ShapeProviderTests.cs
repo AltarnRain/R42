@@ -1,18 +1,18 @@
-﻿// <copyright file="ShapeModelTests.cs" company="OI">
+﻿// <copyright file="ShapeProviderTests.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Test.Providers
+namespace Round42.Tests
 {
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Round42.Models;
+    using Round42.Providers;
 
     /// <summary>
     /// Tests for ShapeModel extentions
     /// </summary>
     [TestClass]
-    public class ShapeModelTests
+    public class ShapeProviderTests : TestBase
     {
         /// <summary>
         /// Gets the block.
@@ -23,9 +23,9 @@ namespace Round42.Test.Providers
             var x = 10;
             var y = 5;
 
-            var shapeModel = ShapeModel.Create(15, 55);
+            var shapeModel = this.Get<ShapeProvider>().Create(15, 55);
 
-            var block = shapeModel.Get(x, y);
+            var block = shapeModel.Blocks.Single(b => b.X == x && b.Y == y);
 
             Assert.AreEqual(x, block.X);
             Assert.AreEqual(y, block.Y);

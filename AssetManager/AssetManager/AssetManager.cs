@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42
+namespace Round42.Managers
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +10,7 @@ namespace Round42
     using System.Linq;
     using Exceptions;
     using Extentions;
+    using Providers;
     using Round42.Models;
 
     /// <summary>
@@ -18,12 +19,9 @@ namespace Round42
     public class AssetManager
     {
         /// <summary>
-        /// Gets or sets the assets.
+        /// The asset provider
         /// </summary>
-        /// <value>
-        /// The assets.
-        /// </value>
-        private GameAssets gameAssets = new GameAssets();
+        private readonly AssetProvider assetProvider;
 
         /// <summary>
         /// The asset file
@@ -31,11 +29,13 @@ namespace Round42
         private string assetFile;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AssetManager"/> class.
+        /// Initializes a new instance of the <see cref="AssetManager" /> class.
         /// </summary>
+        /// <param name="assetProvider">The asset provider.</param>
         /// <param name="assetFile">The asset file.</param>
-        public AssetManager(string assetFile)
+        public AssetManager(string assetFile, AssetProvider assetProvider)
         {
+            this.assetProvider = assetProvider;
             this.assetFile = assetFile;
             this.SetupAssets(assetFile);
         }
@@ -50,7 +50,7 @@ namespace Round42
         /// Raised when the asset collection changes
         /// </summary>
         /// <param name="assets">The assets.</param>
-        public delegate void AssetsChanged(List<AssetModel> assets);
+        public delegate void AssetsChanged(IEnumerable<AssetModel> assets);
 
         /// <summary>
         /// Occurs when [on new asset].
@@ -63,30 +63,12 @@ namespace Round42
         public event AssetsChanged OnAssetsChanged;
 
         /// <summary>
-        /// Gets the assets.
+        /// Gets or sets the assets.
         /// </summary>
         /// <value>
         /// The assets.
         /// </value>
-        public IEnumerable<AssetModel> Assets
-        {
-            get
-            {
-                return this.gameAssets.Assets.AsEnumerable();
-            }
-        }
-
-        /// <summary>
-        /// Creates this instance.
-        /// </summary>
-        /// <param name="assetFile">The asset file.</param>
-        /// <returns>
-        /// An AssetManager
-        /// </returns>
-        public static AssetManager Create(string assetFile)
-        {
-            return new AssetManager(assetFile);
-        }
+        public List<AssetModel> Assets { get; set; }
 
         /// <summary>
         /// Adds the specified width.
@@ -99,15 +81,33 @@ namespace Round42
         /// <exception cref="DuplicateEntryException">Asset {0} already exists".FormatString(assetName)</exception>
         public void Add(string assetName, AssetTypes assetType, int numberOfShapes, int width, int height)
         {
-            if (this.gameAssets.Assets.Any(a => a.Name == assetName))
+            if (this.Assets.Any(a => a.Name == assetName))
             {
                 throw new DuplicateEntryException("Asset {0} already exists".FormatString(assetName));
             }
 
-            var newAsset = AssetModel.Create(width, height, numberOfShapes, assetName, assetType);
-            this.gameAssets.Assets.Add(newAsset);
-            this.OnAssetsChanged?.Invoke(this.gameAssets.Assets);
+            var newAsset = this.assetProvider.Create(assetName, assetType, numberOfShapes, width, height);
+            this.Add(newAsset);
+        }
+
+        /// <summary>
+        /// Adds the specified new asset.
+        /// </summary>
+        /// <param name="newAsset">The new asset.</param>
+        public void Add(AssetModel newAsset)
+        {
+            this.Assets.Add(newAsset);
+            this.OnAssetsChanged?.Invoke(this.GetAssets());
             this.OnNewAsset?.Invoke(newAsset);
+        }
+
+        /// <summary>
+        /// Gets the assets.
+        /// </summary>
+        /// <returns><see cref="IEnumerable{AssetModel}"/></returns>
+        public IEnumerable<AssetModel> GetAssets()
+        {
+            return this.Assets.AsEnumerable();
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Round42
         /// <returns>An asset model</returns>
         public AssetModel FindByName(string assetName)
         {
-            return this.gameAssets.Assets.SingleOrDefault(a => a.Name == assetName);
+            return this.Assets.SingleOrDefault(a => a.Name == assetName);
         }
 
         /// <summary>
@@ -125,8 +125,8 @@ namespace Round42
         /// </summary>
         public void Save()
         {
-            var xml = this.gameAssets.Serialize<GameAssets>();
-            xml.SaveToFile(this.assetFile);
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(this.Assets);
+            json.SaveToFile(this.assetFile);
         }
 
         /// <summary>
@@ -137,11 +137,12 @@ namespace Round42
         {
             if (File.Exists(assetFile))
             {
-                this.gameAssets = assetFile.DeserializeFile<GameAssets>();
+                var fileContent = File.ReadAllText(assetFile);
+                this.Assets = Newtonsoft.Json.JsonConvert.DeserializeObject<List<AssetModel>>(fileContent);
             }
             else
             {
-                this.gameAssets = new GameAssets();
+                this.Assets = new List<AssetModel>();
             }
         }
     }

@@ -6,7 +6,8 @@ namespace AssetEditor
 {
     using System;
     using System.Windows.Forms;
-    using AssetEditor.Forms;
+    using Ninject;
+    using Round42.AssetEditor.Forms;
 
     /// <summary>
     /// Main program for editor
@@ -21,9 +22,12 @@ namespace AssetEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NewAssetForm());
 
-            // Application.Run(new MainForm());
+            using (var kernel = new StandardKernel())
+            {
+                var form = kernel.Get<MainForm>();
+                Application.Run(form);
+            }
         }
     }
 }

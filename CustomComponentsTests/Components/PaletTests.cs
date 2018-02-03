@@ -2,13 +2,14 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.CustomComponents.Tests
+namespace Round42.Tests
 {
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using Extentions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Round42.CustomComponents;
 
     /// <summary>
     /// Tests the palet component

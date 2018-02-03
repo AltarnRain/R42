@@ -2,18 +2,20 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.CustomComponents.Tests
+namespace Round42.Tests
 {
     using System.Drawing;
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Round42.Models;
+    using Providers;
+    using Round42.CustomComponents;
+    using Round42.Tests;
 
     /// <summary>
     /// Tests the Drawer component
     /// </summary>
     [TestClass]
-    public class DrawerTests
+    public class DrawerTests : TestBase
     {
         /// <summary>
         /// Tests the creation of the drawer component.
@@ -22,7 +24,7 @@ namespace Round42.CustomComponents.Tests
         public void DrawerCreateTest()
         {
             // Arrange
-            var shapeModel = ShapeModel.Create(3, 5);
+            var shapeModel = this.Get<ShapeProvider>().Create(3, 5);
 
             // Act
             var drawer = Drawer.Create(shapeModel);
@@ -41,7 +43,7 @@ namespace Round42.CustomComponents.Tests
         public void SetAciveColorTest()
         {
             // Arrange
-            var shapeModel = ShapeModel.Create(3, 5);
+            var shapeModel = this.Get<ShapeProvider>().Create(3, 5);
 
             // Act
             var drawer = Drawer.Create(shapeModel);
