@@ -10,6 +10,7 @@ namespace Round42.CustomComponents
     using System.Linq;
     using System.Windows.Forms;
     using Round42.Models;
+    using Round42.Models.Extentions;
 
     /// <summary>
     /// Daws buttons on a panel to set the color.
@@ -20,6 +21,7 @@ namespace Round42.CustomComponents
         /// The panel
         /// </summary>
         private readonly Panel panel;
+        private ShapeModel currentShape;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Drawer" /> class.
@@ -64,23 +66,38 @@ namespace Round42.CustomComponents
         /// <param name="shapeModel">The shape model.</param>
         public void DrawButtons(ShapeModel shapeModel)
         {
-            var numberOfButtonsOnXAxis = shapeModel.Blocks.Max(b => b.X);
-            var buttonSize = this.panel.Width / numberOfButtonsOnXAxis;
+            this.currentShape = shapeModel;
+            var buttonSizeX = this.panel.Width / shapeModel.LastColumn();
+            var buttonSizeY = this.panel.Height / shapeModel.LastRow();
+
             this.panel.Controls.Clear();
 
             var bbList = new List<BlockButton>();
             foreach (var block in shapeModel.Blocks)
             {
-                var blockButton = new BlockButton(block, Color.Black, buttonSize)
+                var blockButton = new BlockButton(block, Color.Black)
                 {
-                    Top = (block.Y - 1) * buttonSize,
-                    Left = (block.X - 1) * buttonSize
+                    Left = (block.Column - 1) * buttonSizeX,
+                    Top = (block.Row - 1) * buttonSizeY,
+                    Width = buttonSizeX,
+                    Height = buttonSizeY,
                 };
 
                 bbList.Add(blockButton);
             }
 
             this.panel.Controls.AddRange(bbList.ToArray());
+        }
+
+        /// <summary>
+        /// Redraws the buttons.
+        /// </summary>
+        public void RedrawButtons()
+        {
+            if (this.currentShape != null)
+            {
+                this.DrawButtons(this.currentShape);
+            }
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿// <copyright file="BlockButton2.cs" company="OI">
+﻿// <copyright file="BlockButton.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
 namespace Round42.CustomComponents
 {
     using System;
-    using System.ComponentModel;
     using System.Drawing;
     using System.Windows.Forms;
     using Round42.Models;
@@ -27,38 +26,15 @@ namespace Round42.CustomComponents
         private Color activeColor;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BlockButton"/> class.
-        /// </summary>
-        public BlockButton()
-        {
-            this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BlockButton"/> class.
-        /// </summary>
-        /// <param name="container">The container.</param>
-        public BlockButton(IContainer container)
-        {
-            container.Add(this);
-            this.InitializeComponent();
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BlockButton" /> class.
         /// </summary>
         /// <param name="blockModel">The block model.</param>
         /// <param name="activeColor">Color of the active.</param>
-        /// <param name="buttonSize">Size of the button.</param>
-        public BlockButton(BlockModel blockModel, Color activeColor, int buttonSize)
+        public BlockButton(BlockModel blockModel, Color activeColor)
             : base()
         {
-            this.InitializeComponent();
             this.blockModel = blockModel;
             this.activeColor = activeColor;
-
-            this.Width = this.Height = buttonSize;
-            this.ForeColor = blockModel.Color;
         }
 
         /// <summary>
@@ -113,9 +89,14 @@ namespace Round42.CustomComponents
             var rc = this.ClientRectangle;
             var setColor = this.blockModel.Color;
 
-            var border = rc.Height * 0.10f;
+            var tonAndBottomBorder = rc.Height * 0.10f;
+            var leftAndRightBorder = rc.Width * 0.10f;
 
-            var innerRectangle = new RectangleF((float)rc.Left + border, (float)rc.Top + border, (float)rc.Width - (border * 2), (float)rc.Height - (border * 2));
+            var innerRectangle = new RectangleF(
+                rc.Left + leftAndRightBorder,
+                rc.Top + tonAndBottomBorder,
+                rc.Width - (leftAndRightBorder * 2),
+                rc.Height - (tonAndBottomBorder * 2));
 
             if (setColor == Color.Black)
             {

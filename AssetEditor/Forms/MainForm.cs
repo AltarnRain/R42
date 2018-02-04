@@ -70,11 +70,6 @@ namespace Round42.AssetEditor.Forms
         private readonly Palet palet;
 
         /// <summary>
-        /// The current asset
-        /// </summary>
-        private AssetModel currentAsset;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MainForm" /> class.
         /// </summary>
         /// <param name="assetManagerFactory">The asset manager factory.</param>
@@ -107,34 +102,33 @@ namespace Round42.AssetEditor.Forms
         /// </summary>
         private void SetupEventHandlers()
         {
-            this.assetManager.OnAssetsChanged += this.AssetManager_OnAssetsChanged;
-            this.assetManager.OnNewAsset += this.AssetManager_OnNewAsset;
-            this.assetManager.OnAssetLoaded += this.AssetManager_OnAssetLoaded;
+            this.assetManager.OnAssetsChanged += (IEnumerable<AssetModel> assets) =>
+            {
+                this.UpdateAssetList(assets);
+            };
 
-            this.palet.OnColorSelected += this.Palet_OnColorSelected;
-        }
+            this.assetManager.OnNewAsset += (AssetModel asset) =>
+            {
+                this.AssetListBox.SetSelected(this.AssetListBox.FindString(asset.Name), true);
+            };
 
-        /// <summary>
-        /// Palets the on color selected.
-        /// </summary>
-        /// <param name="color">The color.</param>
-        private void Palet_OnColorSelected(System.Drawing.Color color)
-        {
-            this.drawer.SetAciveColor(color);
-        }
+            this.assetManager.OnAssetLoaded += (AssetModel asset) =>
+            {
+                var frames = Enumerable.Range(1, asset.Shapes.Count()).Select(e => e.ToString()).ToArray();
+                this.SelectFrameCombobox.Items.Clear();
+                this.SelectFrameCombobox.Items.AddRange(frames);
+                this.SelectFrameCombobox.SelectedIndex = 0;
+            };
 
-        /// <summary>
-        /// Assets the manager on asset loaded.
-        /// </summary>
-        /// <param name="asset">The asset.</param>
-        private void AssetManager_OnAssetLoaded(AssetModel asset)
-        {
-            this.currentAsset = asset;
+            this.assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
+            {
+                this.LoadFrame(this.SelectFrameCombobox.SelectedIndex);
+            };
 
-            var frames = Enumerable.Range(1, this.currentAsset.Shapes.Count()).Select(e => e.ToString()).ToArray();
-            this.SelectFrameCombobox.Items.Clear();
-            this.SelectFrameCombobox.Items.AddRange(frames);
-            this.SelectFrameCombobox.SelectedIndex = 0;
+            this.palet.OnColorSelected += (System.Drawing.Color color) =>
+            {
+                this.drawer.SetAciveColor(color);
+            };
         }
 
         /// <summary>
@@ -143,26 +137,8 @@ namespace Round42.AssetEditor.Forms
         /// <param name="frame">The frame.</param>
         private void LoadFrame(int frame)
         {
-            var shape = this.currentAsset.Shapes[frame];
+            var shape = this.assetManager.GetFrame(frame);
             this.drawer.DrawButtons(shape);
-        }
-
-        /// <summary>
-        /// Assets the manager on new asset.
-        /// </summary>
-        /// <param name="asset">The asset.</param>
-        private void AssetManager_OnNewAsset(Models.AssetModel asset)
-        {
-            this.AssetListBox.SetSelected(this.AssetListBox.FindString(asset.Name), true);
-        }
-
-        /// <summary>
-        /// Assets the manager on assets changed.
-        /// </summary>
-        /// <param name="assets">The assets.</param>
-        private void AssetManager_OnAssetsChanged(IEnumerable<AssetModel> assets)
-        {
-            this.UpdateAssetList(assets);
         }
 
         /// <summary>
@@ -177,6 +153,7 @@ namespace Round42.AssetEditor.Forms
             {
                 this.AssetListBox.Items.Clear();
                 this.AssetListBox.Items.AddRange(assetNames);
+                this.AssetListBox.SelectedIndex = 0;
             }
         }
 
@@ -227,9 +204,37 @@ namespace Round42.AssetEditor.Forms
 
         private void AddFrameButton_Click(object sender, EventArgs e)
         {
-            var selectedAsset = this.AssetListBox.SelectedIndex;
-            this.assetManager.AddShapeToAsset(this.currentAsset);
-            this.AssetListBox.SelectedIndex = selectedAsset;
+            this.assetManager.AddShapeToAsset();
+        }
+
+        private void DrawerPanel_Resize(object sender, EventArgs e)
+        {
+            this.drawer.RedrawButtons();
+        }
+
+        private void RemoveFrameButton_Click(object sender, EventArgs e)
+        {
+            this.assetManager.RemoveShapeFromAsset(this.SelectFrameCombobox.SelectedIndex);
+        }
+
+        private void AddColumnButton_Click(object sender, EventArgs e)
+        {
+            this.assetManager.AddColumn();
+        }
+
+        private void AddRowButton_Click(object sender, EventArgs e)
+        {
+            this.assetManager.AddRow();
+        }
+
+        private void RemoveLastColumnButton_Click(object sender, EventArgs e)
+        {
+            this.assetManager.RemoveLastColumn();
+        }
+
+        private void RemoveLastRowButton_Click(object sender, EventArgs e)
+        {
+            this.assetManager.RemoveLastRow();
         }
     }
 }

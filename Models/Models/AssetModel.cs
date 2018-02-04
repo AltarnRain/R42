@@ -41,7 +41,7 @@ namespace Round42.Models
         /// <value>
         /// The x blocks.
         /// </value>
-        public int XBlocks { get; set; }
+        public int Columns { get; set; }
 
         /// <summary>
         /// Gets or sets the y blocks.
@@ -49,6 +49,6 @@ namespace Round42.Models
         /// <value>
         /// The y blocks.
         /// </value>
-        public int YBlocks { get; set; }
+        public int Rows { get; set; }
     }
 }

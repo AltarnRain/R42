@@ -21,14 +21,13 @@ namespace Round42.Tests
         [TestMethod]
         public void BlockButtonCreateTest()
         {
-            var block = new BlockModel();
-            block.Color = Color.Red;
+            var block = BlockModel.Create(0, 0);
 
             // Act
-            var button = new BlockButton(block, Color.Black, 20);
+            var button = new BlockButton(block, Color.Black);
 
             // Assert
-            Assert.AreEqual(Color.Red, button.ForeColor);
+            Assert.AreEqual(Color.Black, button.ActiveColor);
         }
 
         /// <summary>
@@ -37,9 +36,9 @@ namespace Round42.Tests
         [TestMethod]
         public void SetActiveColor()
         {
-            var block = new BlockModel();
+            var block = BlockModel.Create(0, 0);
             block.ColorName = Color.Red.Name;
-            var button = new BlockButton(block, Color.Black, 20);
+            var button = new BlockButton(block, Color.Black);
 
             // Act
             button.SetActiveColor(Color.Red);

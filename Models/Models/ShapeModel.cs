@@ -21,21 +21,5 @@ namespace Round42.Models
         /// The blocks.
         /// </value>
         public List<BlockModel> Blocks { get; set; }
-
-        /// <summary>
-        /// Gets or sets the width.
-        /// </summary>
-        /// <value>
-        /// The width.
-        /// </value>
-        public int XBlocks { get; set; }
-
-        /// <summary>
-        /// Gets or sets the height.
-        /// </summary>
-        /// <value>
-        /// The height.
-        /// </value>
-        public int Height { get; set; }
     }
 }

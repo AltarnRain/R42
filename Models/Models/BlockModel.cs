@@ -52,7 +52,7 @@ namespace Round42.Models
         /// <value>
         /// The x.
         /// </value>
-        public int X { get; set; }
+        public int Column { get; set; }
 
         /// <summary>
         /// Gets or sets the y.
@@ -60,7 +60,7 @@ namespace Round42.Models
         /// <value>
         /// The y.
         /// </value>
-        public int Y { get; set; }
+        public int Row { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the color.
@@ -83,6 +83,22 @@ namespace Round42.Models
                     this.colorName = value;
                 }
             }
+        }
+
+        /// <summary>
+        /// Creates a block model
+        /// </summary>
+        /// <param name="column">The column.</param>
+        /// <param name="row">The row.</param>
+        /// <returns>a block model</returns>
+        public static BlockModel Create(int column, int row)
+        {
+            return new BlockModel
+            {
+                Color = Color.Black,
+                Column = column,
+                Row = row
+            };
         }
     }
 }

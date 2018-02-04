@@ -92,8 +92,8 @@ namespace Round42.CustomComponents
             {
                 var button = new Button();
                 button.ForeColor = button.BackColor = color;
-                button.Dock = DockStyle.Top;
-                button.Height = 30;
+                button.Dock = DockStyle.Left;
+                button.Width = 30;
                 button.Click += this.ButtonClick;
 
                 this.panel.Controls.Add(button);

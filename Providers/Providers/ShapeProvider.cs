@@ -16,32 +16,24 @@ namespace Round42.Providers
         /// <summary>
         /// News the specified height.
         /// </summary>
-        /// <param name="xBlocks">The width.</param>
-        /// <param name="yBlocks">The height.</param>
+        /// <param name="numberOfColumns">The width.</param>
+        /// <param name="numberOfRows">The height.</param>
         /// <returns>
         /// Empty Shape
         /// </returns>
-        public ShapeModel Create(int xBlocks, int yBlocks)
+        public ShapeModel Create(int numberOfColumns, int numberOfRows)
         {
             var returnValue = new ShapeModel()
             {
                 Blocks = new List<BlockModel>()
             };
 
-            returnValue.XBlocks = xBlocks;
-            returnValue.Height = yBlocks;
-
-            for (var y = 0; y < yBlocks; y++)
+            for (var row = 0; row < numberOfRows; row++)
             {
-                for (var x = 0; x < xBlocks; x++)
+                for (var column = 0; column < numberOfColumns; column++)
                 {
-                    var block = new BlockModel
-                    {
-                        Color = Color.Black,
-                        X = x + 1,
-                        Y = y + 1
-                    };
-
+                    // Columns and rows are 1 base
+                    var block = BlockModel.Create(column + 1, row + 1);
                     returnValue.Blocks.Add(block);
                 }
             }

@@ -12,6 +12,7 @@ namespace Round42.Managers
     using Extentions;
     using Providers;
     using Round42.Models;
+    using Round42.Models.Extentions;
 
     /// <summary>
     /// Manages assets
@@ -34,6 +35,11 @@ namespace Round42.Managers
         private string assetFile;
 
         /// <summary>
+        /// The current asset
+        /// </summary>
+        private AssetModel currentAsset;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AssetManager" /> class.
         /// </summary>
         /// <param name="assetFile">The asset file.</param>
@@ -52,7 +58,19 @@ namespace Round42.Managers
         /// Raised when the asset collection changes
         /// </summary>
         /// <param name="asset">The asset.</param>
-        public delegate void AssedLoaded(AssetModel asset);
+        public delegate void NewAsset(AssetModel asset);
+
+        /// <summary>
+        /// Raised when the current asset changes
+        /// /// </summary>
+        /// <param name="asset">The asset.</param>
+        public delegate void CurrentAssetChanged(AssetModel asset);
+
+        /// <summary>
+        /// Raised when the current asset changes
+        /// /// </summary>
+        /// <param name="asset">The asset.</param>
+        public delegate void AssetLoaded(AssetModel asset);
 
         /// <summary>
         /// Raised when the asset collection changes
@@ -63,7 +81,7 @@ namespace Round42.Managers
         /// <summary>
         /// Occurs when [on new asset].
         /// </summary>
-        public event AssedLoaded OnNewAsset;
+        public event NewAsset OnNewAsset;
 
         /// <summary>
         /// Occurs when Assets are changed
@@ -73,7 +91,12 @@ namespace Round42.Managers
         /// <summary>
         /// Occurs when [on loaded asset].
         /// </summary>
-        public event AssedLoaded OnAssetLoaded;
+        public event AssetLoaded OnAssetLoaded;
+
+        /// <summary>
+        /// Occurs when [on loaded asset].
+        /// </summary>
+        public event CurrentAssetChanged OnCurrentAssetChanged;
 
         /// <summary>
         /// Gets or sets the assets.
@@ -94,14 +117,13 @@ namespace Round42.Managers
         /// <summary>
         /// Gets the frame.
         /// </summary>
-        /// <param name="assetName">Name of the asset.</param>
         /// <param name="frame">The frame.</param>
         /// <returns>
         /// The asset model specified in the frame
         /// </returns>
-        public ShapeModel GetFrameFromAsset(string assetName, int frame)
+        public ShapeModel GetFrame(int frame)
         {
-            return this.Assets.Single(a => a.Name == assetName).Shapes[frame];
+            return this.currentAsset.Shapes[frame];
         }
 
         /// <summary>
@@ -109,18 +131,18 @@ namespace Round42.Managers
         /// </summary>
         /// <param name="assetName">Name of the asset.</param>
         /// <param name="assetType">Type of the asset.</param>
-        /// <param name="numberOfShapes">The number of shapes.</param>
-        /// <param name="width">The width.</param>
-        /// <param name="height">The height.</param>
+        /// <param name="frames">The number of shapes.</param>
+        /// <param name="columns">The width.</param>
+        /// <param name="rows">The height.</param>
         /// <exception cref="DuplicateEntryException">Asset {0} already exists".FormatString(assetName)</exception>
-        public void Add(string assetName, AssetTypes assetType, int numberOfShapes, int width, int height)
+        public void Add(string assetName, AssetTypes assetType, int frames, int columns, int rows)
         {
             if (this.Assets.Any(a => a.Name == assetName))
             {
                 throw new DuplicateEntryException("Asset {0} already exists".FormatString(assetName));
             }
 
-            var newAsset = this.assetProvider.Create(assetName, assetType, numberOfShapes, width, height);
+            var newAsset = this.assetProvider.Create(assetName, assetType, frames, columns, rows);
             this.Add(newAsset);
             this.Save();
         }
@@ -132,19 +154,87 @@ namespace Round42.Managers
         public void Add(AssetModel newAsset)
         {
             this.Assets.Add(newAsset);
-            this.TriggerChangeEvent();
+            this.TriggerOnAssetsChanged();
             this.OnNewAsset?.Invoke(newAsset);
+        }
+
+        /// <summary>
+        /// Removes the specified current asset.
+        /// </summary>
+        /// <param name="shapeIndex">Index of the shape.</param>
+        public void RemoveShapeFromAsset(int shapeIndex)
+        {
+            this.currentAsset.Shapes.RemoveAt(shapeIndex);
+            this.TriggerOnAssetsChanged();
+        }
+
+        /// <summary>
+        /// Removes the shape from asset.
+        /// </summary>
+        /// <param name="assetName">Name of the asset.</param>
+        /// <param name="shapeIndex">Index of the shape.</param>
+        public void RemoveShapeFromAsset(string assetName, int shapeIndex)
+        {
+            this.LoadByName(assetName);
+            this.RemoveShapeFromAsset(shapeIndex);
         }
 
         /// <summary>
         /// Adds the shape.
         /// </summary>
-        /// <param name="assetModel">The asset model.</param>
-        public void AddShapeToAsset(AssetModel assetModel)
+        public void AddShapeToAsset()
         {
-            var newShape = this.shapeProvider.Create(assetModel.XBlocks, assetModel.YBlocks);
-            assetModel.Shapes.Add(newShape);
-            this.TriggerChangeEvent();
+            var newShape = this.shapeProvider.Create(this.currentAsset.Columns, this.currentAsset.Rows);
+            this.currentAsset.Shapes.Add(newShape);
+            this.TriggerOnCurrentAssetChanged();
+        }
+
+        /// <summary>
+        /// Adds the shape to asset.
+        /// </summary>
+        /// <param name="assetName">Name of the asset.</param>
+        public void AddShapeToAsset(string assetName)
+        {
+            this.LoadByName(assetName);
+            this.AddShapeToAsset();
+        }
+
+        /// <summary>
+        /// Adds the column.
+        /// </summary>
+        public void AddColumn()
+        {
+            foreach (var shape in this.currentAsset.Shapes)
+            {
+                shape.AddColumn();
+            }
+
+            this.currentAsset.Columns++;
+            this.TriggerOnCurrentAssetChanged();
+        }
+
+        /// <summary>
+        /// Adds the column.
+        /// </summary>
+        /// <param name="assetName">Name of the asset.</param>
+        public void AddColumn(string assetName)
+        {
+            this.LoadByName(assetName);
+            this.AddColumn();
+        }
+
+        /// <summary>
+        /// Adds the row.
+        /// </summary>
+        public void AddRow()
+        {
+            foreach (var shape in this.currentAsset.Shapes)
+            {
+                shape.AddRow();
+            }
+
+            this.currentAsset.Rows++;
+            this.TriggerOnCurrentAssetChanged();
         }
 
         /// <summary>
@@ -157,22 +247,59 @@ namespace Round42.Managers
         }
 
         /// <summary>
-        /// Finds the name of the by.
-        /// </summary>
-        /// <param name="assetName">Name of the asset.</param>
-        /// <returns>An asset model</returns>
-        public AssetModel FindByName(string assetName)
-        {
-            return this.Assets.SingleOrDefault(a => a.Name == assetName);
-        }
-
-        /// <summary>
         /// Saves this instance.
         /// </summary>
         public void Save()
         {
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(this.Assets);
             json.SaveToFile(this.assetFile);
+        }
+
+        /// <summary>
+        /// Removes the last column.
+        /// </summary>
+        public void RemoveLastColumn()
+        {
+            if (this.currentAsset.Columns > 1)
+            {
+                this.currentAsset.Shapes.ForEach(s => s.RemoveLastColumn());
+                this.currentAsset.Columns--;
+            }
+
+            this.TriggerOnCurrentAssetChanged();
+        }
+
+        /// <summary>
+        /// Removes the last column.
+        /// </summary>
+        /// <param name="assetName">Name of the asset.</param>
+        public void RemoveLastColumn(string assetName)
+        {
+            this.LoadByName(assetName);
+            this.RemoveLastColumn();
+        }
+
+        /// <summary>
+        /// Removes the last row.
+        /// </summary>
+        public void RemoveLastRow()
+        {
+            if (this.currentAsset.Rows > 1)
+            {
+                this.currentAsset.Shapes.ForEach(s => s.RemoveLastRow());
+                this.currentAsset.Rows--;
+                this.TriggerOnCurrentAssetChanged();
+            }
+        }
+
+        /// <summary>
+        /// Removes the last row.
+        /// </summary>
+        /// <param name="assetName">Name of the asset.</param>
+        public void RemoveLastRow(string assetName)
+        {
+            this.LoadByName(assetName);
+            this.RemoveLastRow();
         }
 
         /// <summary>
@@ -187,6 +314,7 @@ namespace Round42.Managers
             }
 
             var asset = this.Assets.Single(a => a.Name == assetName);
+            this.currentAsset = asset;
             this.OnAssetLoaded?.Invoke(asset);
         }
 
@@ -206,15 +334,23 @@ namespace Round42.Managers
                 this.Assets = new List<AssetModel>();
             }
 
-            this.TriggerChangeEvent();
+            this.TriggerOnAssetsChanged();
         }
 
         /// <summary>
         /// Triggers the change event.
         /// </summary>
-        private void TriggerChangeEvent()
+        private void TriggerOnAssetsChanged()
         {
             this.OnAssetsChanged?.Invoke(this.GetAssets());
+        }
+
+        /// <summary>
+        /// Triggers the change event.
+        /// </summary>
+        private void TriggerOnCurrentAssetChanged()
+        {
+            this.OnCurrentAssetChanged?.Invoke(this.currentAsset);
         }
     }
 }

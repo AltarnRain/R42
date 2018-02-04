@@ -11,6 +11,7 @@ namespace Round42.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories;
     using Round42.Models;
+    using Round42.Models.Extentions;
 
     /// <summary>
     /// Tests for the asset manager
@@ -25,11 +26,11 @@ namespace Round42.Tests
         public void AssetManagerCreateTest()
         {
             // Arrange / Act
+            this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Assert
             Assert.IsNotNull(assetManager);
-            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -39,6 +40,7 @@ namespace Round42.Tests
         public void AssetManagerAdd()
         {
             // Arrange
+            this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
@@ -47,8 +49,6 @@ namespace Round42.Tests
             // Assert
             var asset = assetManager.Assets.SingleOrDefault(a => a.Name == "Test");
             Assert.IsNotNull(asset);
-
-            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -57,9 +57,9 @@ namespace Round42.Tests
         [TestMethod]
         public void AssetManagerAddDuplicate()
         {
-            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-
             // Act
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             try
@@ -70,8 +70,6 @@ namespace Round42.Tests
             {
                 Assert.IsNotNull(ex.Message);
             }
-
-            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -81,6 +79,7 @@ namespace Round42.Tests
         public void AssetManagerAddTwoAssets()
         {
             // Arrange
+            this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
@@ -93,8 +92,6 @@ namespace Round42.Tests
             {
                 Assert.Fail(ex.Message);
             }
-
-            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -104,6 +101,7 @@ namespace Round42.Tests
         public void AssetManagerOnNewTest()
         {
             // Arrange
+            this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
@@ -114,8 +112,6 @@ namespace Round42.Tests
                 Assert.IsNotNull(assetModel);
                 Assert.AreEqual("Test", assetModel.Name);
             };
-
-            this.DeleteAssetFile();
         }
 
         /// <summary>
@@ -125,6 +121,7 @@ namespace Round42.Tests
         public void AssetManagerOnNewAfterChangeTest()
         {
             // Arrange
+            this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             var changeEventTriggered = false;
 
@@ -140,17 +137,16 @@ namespace Round42.Tests
 
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
-
-            this.DeleteAssetFile();
         }
 
         /// <summary>
-        /// Assets the manager add.
+        /// Assetsmanager add test.
         /// </summary>
         [TestMethod]
         public void AssetManagerOnAssetChanged()
         {
             // Arrange
+            this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
@@ -161,36 +157,16 @@ namespace Round42.Tests
                 Assert.IsNotNull(assetModels);
                 Assert.IsTrue(assetModels.Any(a => a.Name == "Test"));
             };
-
-            this.DeleteAssetFile();
         }
 
         /// <summary>
-        /// Assets the manager find by name test.
-        /// </summary>
-        [TestMethod]
-        public void AssetManagerFindByNameTest()
-        {
-            // Arrange
-            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
-
-            // Act
-            var asset = assetManager.FindByName("Test");
-
-            // Assert
-            Assert.AreEqual("Test", asset.Name);
-
-            this.DeleteAssetFile();
-        }
-
-        /// <summary>
-        /// Assets the manager save.
+        /// Tests saving and loading.
         /// </summary>
         [TestMethod]
         public void AssetManagerSaveAndLoad()
         {
             // Arrange
+            this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
@@ -207,31 +183,115 @@ namespace Round42.Tests
             Assert.AreEqual(1, assetManager2.Assets.Count());
             Assert.AreEqual(10, assetManager2.Assets.First().Shapes.Count());
             Assert.AreEqual(30, assetManager2.Assets.First().Shapes.First().Blocks.Count());
-
-            this.DeleteAssetFile();
         }
 
         /// <summary>
-        /// Assets the manager add shape.
+        /// Tests adding a shape
         /// </summary>
         [TestMethod]
         public void AssetManagerAddShape()
         {
             // Arrange
+            this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
-            var asset = assetManager.FindByName("Test");
+            assetManager.AddShapeToAsset("Test");
+
+            assetManager.OnAssetLoaded += (AssetModel asset) =>
+            {
+                // Assert
+                Assert.AreEqual(11, asset.Shapes.Count());
+
+                var addedShape = asset.Shapes.Last();
+                Assert.AreEqual(15, addedShape.LastColumn());
+                Assert.AreEqual(2, addedShape.LastRow());
+            };
 
             // Act
-            assetManager.AddShapeToAsset(asset);
+            assetManager.AddShapeToAsset();
+        }
 
-            // Assert
-            Assert.AreEqual(11, asset.Shapes.Count());
+        /// <summary>
+        /// Tests removing a shape.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerRemoveShape()
+        {
+            // Arrange
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
-            var addedShape = asset.Shapes.Last();
-            Assert.AreEqual(15, addedShape.XBlocks);
-            Assert.AreEqual(2, addedShape.Height);
+            assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
+            {
+                // Assert
+                Assert.AreEqual(9, asset.Shapes.Count());
+            };
+
+            // Act
+            assetManager.RemoveShapeFromAsset("Test", 0);
+        }
+
+        /// <summary>
+        /// Tests the add column.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerAddColumn()
+        {
+            // Arrange
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+
+            assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
+            {
+                // Assert
+                Assert.AreEqual(16, asset.Columns);
+            };
+
+            // Act
+            assetManager.AddColumn("Test");
+        }
+
+        /// <summary>
+        /// Tests the add column.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerRemoveLastColumn()
+        {
+            // Arrange
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+
+            assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
+            {
+                Assert.AreEqual(14, asset.Columns);
+                Assert.AreEqual(14, asset.Shapes.First().Blocks.Count(b => b.Row == 1));
+            };
+
+            assetManager.RemoveLastColumn("Test");
+        }
+
+        /// <summary>
+        /// Tests the add column.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerRemoveLastRow()
+        {
+            // Arrange
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+
+            assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
+            {
+                Assert.AreEqual(1, asset.Rows);
+                Assert.AreEqual(1, asset.Shapes.First().Blocks.Count(b => b.Column == 1));
+            };
+
+            assetManager.RemoveLastRow("Test");
         }
 
         /// <summary>
