@@ -107,55 +107,10 @@ namespace Round42.Tests
             // Act
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
-            assetManager.OnNewAsset += (AssetModel assetModel) =>
+            assetManager.OnNewAsset += (IEnumerable<AssetModel> assets, AssetModel assetModel) =>
             {
                 Assert.IsNotNull(assetModel);
                 Assert.AreEqual("Test", assetModel.Name);
-            };
-        }
-
-        /// <summary>
-        /// Fixates the new event comes after the change event.
-        /// </summary>
-        [TestMethod]
-        public void AssetManagerOnNewAfterChangeTest()
-        {
-            // Arrange
-            this.DeleteAssetFile();
-            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            var changeEventTriggered = false;
-
-            assetManager.OnAssetsChanged += (IEnumerable<AssetModel> assetModels) =>
-            {
-                changeEventTriggered = true;
-            };
-
-            assetManager.OnNewAsset += (AssetModel assetModel) =>
-            {
-                Assert.IsTrue(changeEventTriggered);
-            };
-
-            // Act
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
-        }
-
-        /// <summary>
-        /// Assetsmanager add test.
-        /// </summary>
-        [TestMethod]
-        public void AssetManagerOnAssetChanged()
-        {
-            // Arrange
-            this.DeleteAssetFile();
-            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-
-            // Act
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
-
-            assetManager.OnAssetsChanged += (IEnumerable<AssetModel> assetModels) =>
-            {
-                Assert.IsNotNull(assetModels);
-                Assert.IsTrue(assetModels.Any(a => a.Name == "Test"));
             };
         }
 
@@ -198,12 +153,12 @@ namespace Round42.Tests
 
             assetManager.AddShapeToAsset("Test");
 
-            assetManager.OnAssetLoaded += (AssetModel asset) =>
+            assetManager.OnAssetsLoaded += (IEnumerable<AssetModel> assets) =>
             {
                 // Assert
-                Assert.AreEqual(11, asset.Shapes.Count());
+                Assert.AreEqual(11, assets.First().Shapes.Count());
 
-                var addedShape = asset.Shapes.Last();
+                var addedShape = assets.First().Shapes.Last();
                 Assert.AreEqual(15, addedShape.LastColumn());
                 Assert.AreEqual(2, addedShape.LastRow());
             };

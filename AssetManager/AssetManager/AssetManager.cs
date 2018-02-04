@@ -40,6 +40,11 @@ namespace Round42.Managers
         private AssetModel currentAsset;
 
         /// <summary>
+        /// The current frame
+        /// </summary>
+        private ShapeModel currentFrame;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="AssetManager" /> class.
         /// </summary>
         /// <param name="assetFile">The asset file.</param>
@@ -57,8 +62,9 @@ namespace Round42.Managers
         /// <summary>
         /// Raised when the asset collection changes
         /// </summary>
+        /// <param name="assets">The assets.</param>
         /// <param name="asset">The asset.</param>
-        public delegate void NewAsset(AssetModel asset);
+        public delegate void NewAsset(IEnumerable<AssetModel> assets, AssetModel asset);
 
         /// <summary>
         /// Raised when the current asset changes
@@ -68,15 +74,15 @@ namespace Round42.Managers
 
         /// <summary>
         /// Raised when the current asset changes
-        /// /// </summary>
-        /// <param name="asset">The asset.</param>
-        public delegate void AssetLoaded(AssetModel asset);
-
-        /// <summary>
-        /// Raised when the asset collection changes
         /// </summary>
         /// <param name="assets">The assets.</param>
-        public delegate void AssetsChanged(IEnumerable<AssetModel> assets);
+        public delegate void AssetsLoaded(IEnumerable<AssetModel> assets);
+
+        /// <summary>
+        /// Raised when a frame is selected.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        public delegate void FrameSelected(ShapeModel shapeModel);
 
         /// <summary>
         /// Occurs when [on new asset].
@@ -84,14 +90,9 @@ namespace Round42.Managers
         public event NewAsset OnNewAsset;
 
         /// <summary>
-        /// Occurs when Assets are changed
-        /// </summary>
-        public event AssetsChanged OnAssetsChanged;
-
-        /// <summary>
         /// Occurs when [on loaded asset].
         /// </summary>
-        public event AssetLoaded OnAssetLoaded;
+        public event AssetsLoaded OnAssetsLoaded;
 
         /// <summary>
         /// Occurs when [on loaded asset].
@@ -99,31 +100,26 @@ namespace Round42.Managers
         public event CurrentAssetChanged OnCurrentAssetChanged;
 
         /// <summary>
-        /// Gets or sets the assets.
+        /// Occurs when [on frame selected].
+        /// </summary>
+        public event FrameSelected OnFrameSelected;
+
+        /// <summary>
+        /// Gets the assets.
         /// </summary>
         /// <value>
         /// The assets.
         /// </value>
-        public List<AssetModel> Assets { get; set; }
-
-        /// <summary>
-        /// Loads this instance.
-        /// </summary>
-        public void LoadAssets()
-        {
-            this.SetupAssets(this.assetFile);
-        }
+        public List<AssetModel> Assets { get; private set; }
 
         /// <summary>
         /// Gets the frame.
         /// </summary>
         /// <param name="frame">The frame.</param>
-        /// <returns>
-        /// The asset model specified in the frame
-        /// </returns>
-        public ShapeModel GetFrame(int frame)
+        public void SelectFrame(int frame)
         {
-            return this.currentAsset.Shapes[frame];
+            this.currentFrame = this.currentAsset.Shapes[frame];
+            this.OnFrameSelected?.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -154,8 +150,7 @@ namespace Round42.Managers
         public void Add(AssetModel newAsset)
         {
             this.Assets.Add(newAsset);
-            this.TriggerOnAssetsChanged();
-            this.OnNewAsset?.Invoke(newAsset);
+            this.OnNewAsset?.Invoke(this.Assets, newAsset);
         }
 
         /// <summary>
@@ -164,8 +159,11 @@ namespace Round42.Managers
         /// <param name="shapeIndex">Index of the shape.</param>
         public void RemoveShapeFromAsset(int shapeIndex)
         {
-            this.currentAsset.Shapes.RemoveAt(shapeIndex);
-            this.TriggerOnAssetsChanged();
+            if (this.currentAsset.Shapes.Count() > 1)
+            {
+                this.currentAsset.Shapes.RemoveAt(shapeIndex);
+                this.OnCurrentAssetChanged?.Invoke(this.currentAsset);
+            }
         }
 
         /// <summary>
@@ -175,7 +173,7 @@ namespace Round42.Managers
         /// <param name="shapeIndex">Index of the shape.</param>
         public void RemoveShapeFromAsset(string assetName, int shapeIndex)
         {
-            this.LoadByName(assetName);
+            this.SetByName(assetName);
             this.RemoveShapeFromAsset(shapeIndex);
         }
 
@@ -195,7 +193,7 @@ namespace Round42.Managers
         /// <param name="assetName">Name of the asset.</param>
         public void AddShapeToAsset(string assetName)
         {
-            this.LoadByName(assetName);
+            this.SetByName(assetName);
             this.AddShapeToAsset();
         }
 
@@ -206,7 +204,7 @@ namespace Round42.Managers
         {
             foreach (var shape in this.currentAsset.Shapes)
             {
-                shape.AddColumn();
+                shape.AddColumnRight();
             }
 
             this.currentAsset.Columns++;
@@ -219,7 +217,7 @@ namespace Round42.Managers
         /// <param name="assetName">Name of the asset.</param>
         public void AddColumn(string assetName)
         {
-            this.LoadByName(assetName);
+            this.SetByName(assetName);
             this.AddColumn();
         }
 
@@ -230,7 +228,7 @@ namespace Round42.Managers
         {
             foreach (var shape in this.currentAsset.Shapes)
             {
-                shape.AddRow();
+                shape.AddRowToBottom();
             }
 
             this.currentAsset.Rows++;
@@ -275,7 +273,7 @@ namespace Round42.Managers
         /// <param name="assetName">Name of the asset.</param>
         public void RemoveLastColumn(string assetName)
         {
-            this.LoadByName(assetName);
+            this.SetByName(assetName);
             this.RemoveLastColumn();
         }
 
@@ -298,7 +296,7 @@ namespace Round42.Managers
         /// <param name="assetName">Name of the asset.</param>
         public void RemoveLastRow(string assetName)
         {
-            this.LoadByName(assetName);
+            this.SetByName(assetName);
             this.RemoveLastRow();
         }
 
@@ -308,14 +306,52 @@ namespace Round42.Managers
         /// <param name="assetName">Name of the asset.</param>
         public void LoadByName(string assetName)
         {
-            if (string.IsNullOrEmpty(assetName))
-            {
-                return;
-            }
+            this.SetByName(assetName);
+            this.OnCurrentAssetChanged?.Invoke(this.currentAsset);
+        }
 
-            var asset = this.Assets.Single(a => a.Name == assetName);
-            this.currentAsset = asset;
-            this.OnAssetLoaded?.Invoke(asset);
+        /// <summary>
+        /// Loads this instance.
+        /// </summary>
+        public void LoadAssets()
+        {
+            this.SetupAssets(this.assetFile);
+        }
+
+        /// <summary>
+        /// Move blocks in frame to the left.
+        /// </summary>
+        public void MoveLeft()
+        {
+            this.currentFrame.MoveLeft();
+            this.OnFrameSelected.Invoke(this.currentFrame);
+        }
+
+        /// <summary>
+        /// Move blocks in frame up
+        /// </summary>
+        public void MoveUp()
+        {
+            this.currentFrame.MoveUp();
+            this.OnFrameSelected.Invoke(this.currentFrame);
+        }
+
+        /// <summary>
+        /// Move blocks in frame right.
+        /// </summary>
+        public void MoveRight()
+        {
+            this.currentFrame.MoveRight();
+            this.OnFrameSelected.Invoke(this.currentFrame);
+        }
+
+        /// <summary>
+        /// Move blocks in frame down.
+        /// </summary>
+        public void MoveDown()
+        {
+            this.currentFrame.MoveDown();
+            this.OnFrameSelected.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -334,15 +370,7 @@ namespace Round42.Managers
                 this.Assets = new List<AssetModel>();
             }
 
-            this.TriggerOnAssetsChanged();
-        }
-
-        /// <summary>
-        /// Triggers the change event.
-        /// </summary>
-        private void TriggerOnAssetsChanged()
-        {
-            this.OnAssetsChanged?.Invoke(this.GetAssets());
+            this.OnAssetsLoaded?.Invoke(this.Assets);
         }
 
         /// <summary>
@@ -351,6 +379,21 @@ namespace Round42.Managers
         private void TriggerOnCurrentAssetChanged()
         {
             this.OnCurrentAssetChanged?.Invoke(this.currentAsset);
+        }
+
+        /// <summary>
+        /// Loads the name of the by.
+        /// </summary>
+        /// <param name="assetName">Name of the asset.</param>
+        private void SetByName(string assetName)
+        {
+            if (string.IsNullOrEmpty(assetName))
+            {
+                return;
+            }
+
+            var asset = this.Assets.Single(a => a.Name == assetName);
+            this.currentAsset = asset;
         }
     }
 }

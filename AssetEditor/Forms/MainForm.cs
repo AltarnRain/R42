@@ -102,27 +102,25 @@ namespace Round42.AssetEditor.Forms
         /// </summary>
         private void SetupEventHandlers()
         {
-            this.assetManager.OnAssetsChanged += (IEnumerable<AssetModel> assets) =>
+            this.assetManager.OnNewAsset += (IEnumerable<AssetModel> assets, AssetModel asset) =>
+            {
+                this.UpdateAssetList(assets);
+                this.AssetListBox.SetSelected(this.AssetListBox.FindString(asset.Name), true);
+            };
+
+            this.assetManager.OnAssetsLoaded += (IEnumerable<AssetModel> assets) =>
             {
                 this.UpdateAssetList(assets);
             };
 
-            this.assetManager.OnNewAsset += (AssetModel asset) =>
-            {
-                this.AssetListBox.SetSelected(this.AssetListBox.FindString(asset.Name), true);
-            };
-
-            this.assetManager.OnAssetLoaded += (AssetModel asset) =>
-            {
-                var frames = Enumerable.Range(1, asset.Shapes.Count()).Select(e => e.ToString()).ToArray();
-                this.SelectFrameCombobox.Items.Clear();
-                this.SelectFrameCombobox.Items.AddRange(frames);
-                this.SelectFrameCombobox.SelectedIndex = 0;
-            };
-
             this.assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
             {
-                this.LoadFrame(this.SelectFrameCombobox.SelectedIndex);
+                this.UpdateFrameComboBox(asset);
+            };
+
+            this.assetManager.OnFrameSelected += (ShapeModel shapeModel) =>
+            {
+                this.drawer.DrawButtons(shapeModel);
             };
 
             this.palet.OnColorSelected += (System.Drawing.Color color) =>
@@ -132,13 +130,25 @@ namespace Round42.AssetEditor.Forms
         }
 
         /// <summary>
+        /// Updates the frame ComboBox.
+        /// </summary>
+        /// <param name="asset">The asset.</param>
+        /// <param name="selectIndex">Index of the select.</param>
+        private void UpdateFrameComboBox(AssetModel asset, int selectIndex = 0)
+        {
+            var frames = Enumerable.Range(1, asset.Shapes.Count()).Select(e => e.ToString()).ToArray();
+            this.SelectFrameCombobox.Items.Clear();
+            this.SelectFrameCombobox.Items.AddRange(frames);
+            this.SelectFrameCombobox.SelectedIndex = selectIndex;
+        }
+
+        /// <summary>
         /// Loads the frame.
         /// </summary>
         /// <param name="frame">The frame.</param>
         private void LoadFrame(int frame)
         {
-            var shape = this.assetManager.GetFrame(frame);
-            this.drawer.DrawButtons(shape);
+             this.assetManager.SelectFrame(frame);
         }
 
         /// <summary>
@@ -185,56 +195,141 @@ namespace Round42.AssetEditor.Forms
         /// Handles the SelectedIndexChanged event of the AssetListBox control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void AssetListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var assetName = this.AssetListBox.SelectedItem as string;
             this.assetManager.LoadByName(assetName);
         }
 
+        /// <summary>
+        /// Handles the FormClosing event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.assetManager.Save();
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the SelectFrameCombobox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void SelectFrameCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.LoadFrame(sender.As<ComboBox>().SelectedIndex);
         }
 
+        /// <summary>
+        /// Handles the Click event of the AddFrameButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void AddFrameButton_Click(object sender, EventArgs e)
         {
             this.assetManager.AddShapeToAsset();
         }
 
+        /// <summary>
+        /// Handles the Resize event of the DrawerPanel control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void DrawerPanel_Resize(object sender, EventArgs e)
         {
             this.drawer.RedrawButtons();
         }
 
+        /// <summary>
+        /// Handles the Click event of the RemoveFrameButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void RemoveFrameButton_Click(object sender, EventArgs e)
         {
             this.assetManager.RemoveShapeFromAsset(this.SelectFrameCombobox.SelectedIndex);
         }
 
+        /// <summary>
+        /// Handles the Click event of the AddColumnButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void AddColumnButton_Click(object sender, EventArgs e)
         {
             this.assetManager.AddColumn();
         }
 
+        /// <summary>
+        /// Handles the Click event of the AddRowButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void AddRowButton_Click(object sender, EventArgs e)
         {
             this.assetManager.AddRow();
         }
 
+        /// <summary>
+        /// Handles the Click event of the RemoveLastColumnButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void RemoveLastColumnButton_Click(object sender, EventArgs e)
         {
             this.assetManager.RemoveLastColumn();
         }
 
+        /// <summary>
+        /// Handles the Click event of the RemoveLastRowButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void RemoveLastRowButton_Click(object sender, EventArgs e)
         {
             this.assetManager.RemoveLastRow();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the MoveUpButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void MoveUpButton_Click(object sender, EventArgs e)
+        {
+            this.assetManager.MoveUp();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the MoveRightButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void MoveRightButton_Click(object sender, EventArgs e)
+        {
+            this.assetManager.MoveRight();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the MoveDownButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void MoveDownButton_Click(object sender, EventArgs e)
+        {
+            this.assetManager.MoveDown();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the MoveLeftButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void MoveLeftButton_Click(object sender, EventArgs e)
+        {
+            this.assetManager.MoveLeft();
         }
     }
 }

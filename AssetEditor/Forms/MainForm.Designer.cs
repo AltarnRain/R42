@@ -42,15 +42,18 @@
             this.DrawerPanel = new System.Windows.Forms.Panel();
             this.PaletPanel = new System.Windows.Forms.Panel();
             this.Tools = new System.Windows.Forms.Panel();
+            this.RemoveLastRowButton = new System.Windows.Forms.Button();
+            this.RemoveLastColumnButton = new System.Windows.Forms.Button();
             this.AddRowButton = new System.Windows.Forms.Button();
             this.AddColumnButton = new System.Windows.Forms.Button();
             this.RemoveFrameButton = new System.Windows.Forms.Button();
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SelectFrameCombobox = new System.Windows.Forms.ComboBox();
-            this.PropertiesTab = new System.Windows.Forms.TabPage();
-            this.RemoveLastColumnButton = new System.Windows.Forms.Button();
-            this.RemoveLastRowButton = new System.Windows.Forms.Button();
+            this.MoveUpButton = new System.Windows.Forms.Button();
+            this.MoveLeftButton = new System.Windows.Forms.Button();
+            this.MoveRightButton = new System.Windows.Forms.Button();
+            this.MoveDownButton = new System.Windows.Forms.Button();
             this.ListPanel.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.AnimatorTab.SuspendLayout();
@@ -136,7 +139,6 @@
             // AnimatorTab
             // 
             this.AnimatorTab.Controls.Add(this.AnimationTab);
-            this.AnimatorTab.Controls.Add(this.PropertiesTab);
             this.AnimatorTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AnimatorTab.Location = new System.Drawing.Point(200, 24);
             this.AnimatorTab.Name = "AnimatorTab";
@@ -161,9 +163,9 @@
             // 
             this.DrawerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DrawerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrawerPanel.Location = new System.Drawing.Point(3, 69);
+            this.DrawerPanel.Location = new System.Drawing.Point(95, 31);
             this.DrawerPanel.Name = "DrawerPanel";
-            this.DrawerPanel.Size = new System.Drawing.Size(687, 277);
+            this.DrawerPanel.Size = new System.Drawing.Size(595, 315);
             this.DrawerPanel.TabIndex = 1;
             this.DrawerPanel.Resize += new System.EventHandler(this.DrawerPanel_Resize);
             // 
@@ -171,14 +173,18 @@
             // 
             this.PaletPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PaletPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PaletPanel.Location = new System.Drawing.Point(3, 41);
+            this.PaletPanel.Location = new System.Drawing.Point(95, 3);
             this.PaletPanel.Name = "PaletPanel";
-            this.PaletPanel.Size = new System.Drawing.Size(687, 28);
+            this.PaletPanel.Size = new System.Drawing.Size(595, 28);
             this.PaletPanel.TabIndex = 0;
             // 
             // Tools
             // 
             this.Tools.BackColor = System.Drawing.Color.Silver;
+            this.Tools.Controls.Add(this.MoveDownButton);
+            this.Tools.Controls.Add(this.MoveRightButton);
+            this.Tools.Controls.Add(this.MoveLeftButton);
+            this.Tools.Controls.Add(this.MoveUpButton);
             this.Tools.Controls.Add(this.RemoveLastRowButton);
             this.Tools.Controls.Add(this.RemoveLastColumnButton);
             this.Tools.Controls.Add(this.AddRowButton);
@@ -187,17 +193,37 @@
             this.Tools.Controls.Add(this.AddFrameButton);
             this.Tools.Controls.Add(this.label1);
             this.Tools.Controls.Add(this.SelectFrameCombobox);
-            this.Tools.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Tools.Dock = System.Windows.Forms.DockStyle.Left;
             this.Tools.Location = new System.Drawing.Point(3, 3);
             this.Tools.Name = "Tools";
-            this.Tools.Size = new System.Drawing.Size(687, 38);
+            this.Tools.Size = new System.Drawing.Size(92, 343);
             this.Tools.TabIndex = 0;
+            // 
+            // RemoveLastRowButton
+            // 
+            this.RemoveLastRowButton.Location = new System.Drawing.Point(5, 178);
+            this.RemoveLastRowButton.Name = "RemoveLastRowButton";
+            this.RemoveLastRowButton.Size = new System.Drawing.Size(74, 23);
+            this.RemoveLastRowButton.TabIndex = 7;
+            this.RemoveLastRowButton.Text = "Rem. row";
+            this.RemoveLastRowButton.UseVisualStyleBackColor = true;
+            this.RemoveLastRowButton.Click += new System.EventHandler(this.RemoveLastRowButton_Click);
+            // 
+            // RemoveLastColumnButton
+            // 
+            this.RemoveLastColumnButton.Location = new System.Drawing.Point(5, 149);
+            this.RemoveLastColumnButton.Name = "RemoveLastColumnButton";
+            this.RemoveLastColumnButton.Size = new System.Drawing.Size(74, 23);
+            this.RemoveLastColumnButton.TabIndex = 6;
+            this.RemoveLastColumnButton.Text = "Rem. col";
+            this.RemoveLastColumnButton.UseVisualStyleBackColor = true;
+            this.RemoveLastColumnButton.Click += new System.EventHandler(this.RemoveLastColumnButton_Click);
             // 
             // AddRowButton
             // 
-            this.AddRowButton.Location = new System.Drawing.Point(293, 6);
+            this.AddRowButton.Location = new System.Drawing.Point(5, 120);
             this.AddRowButton.Name = "AddRowButton";
-            this.AddRowButton.Size = new System.Drawing.Size(75, 23);
+            this.AddRowButton.Size = new System.Drawing.Size(74, 23);
             this.AddRowButton.TabIndex = 5;
             this.AddRowButton.Text = "Add row";
             this.AddRowButton.UseVisualStyleBackColor = true;
@@ -205,9 +231,9 @@
             // 
             // AddColumnButton
             // 
-            this.AddColumnButton.Location = new System.Drawing.Point(212, 6);
+            this.AddColumnButton.Location = new System.Drawing.Point(5, 91);
             this.AddColumnButton.Name = "AddColumnButton";
-            this.AddColumnButton.Size = new System.Drawing.Size(75, 23);
+            this.AddColumnButton.Size = new System.Drawing.Size(74, 23);
             this.AddColumnButton.TabIndex = 4;
             this.AddColumnButton.Text = "Add column";
             this.AddColumnButton.UseVisualStyleBackColor = true;
@@ -215,21 +241,21 @@
             // 
             // RemoveFrameButton
             // 
-            this.RemoveFrameButton.Location = new System.Drawing.Point(138, 6);
+            this.RemoveFrameButton.Location = new System.Drawing.Point(5, 62);
             this.RemoveFrameButton.Name = "RemoveFrameButton";
-            this.RemoveFrameButton.Size = new System.Drawing.Size(68, 23);
+            this.RemoveFrameButton.Size = new System.Drawing.Size(74, 23);
             this.RemoveFrameButton.TabIndex = 3;
-            this.RemoveFrameButton.Text = "Remove";
+            this.RemoveFrameButton.Text = "Rem. frame";
             this.RemoveFrameButton.UseVisualStyleBackColor = true;
             this.RemoveFrameButton.Click += new System.EventHandler(this.RemoveFrameButton_Click);
             // 
             // AddFrameButton
             // 
-            this.AddFrameButton.Location = new System.Drawing.Point(93, 6);
+            this.AddFrameButton.Location = new System.Drawing.Point(5, 33);
             this.AddFrameButton.Name = "AddFrameButton";
-            this.AddFrameButton.Size = new System.Drawing.Size(39, 23);
+            this.AddFrameButton.Size = new System.Drawing.Size(74, 23);
             this.AddFrameButton.TabIndex = 2;
-            this.AddFrameButton.Text = "Add";
+            this.AddFrameButton.Text = "Add frame";
             this.AddFrameButton.UseVisualStyleBackColor = true;
             this.AddFrameButton.Click += new System.EventHandler(this.AddFrameButton_Click);
             // 
@@ -248,39 +274,49 @@
             this.SelectFrameCombobox.FormattingEnabled = true;
             this.SelectFrameCombobox.Location = new System.Drawing.Point(43, 6);
             this.SelectFrameCombobox.Name = "SelectFrameCombobox";
-            this.SelectFrameCombobox.Size = new System.Drawing.Size(44, 21);
+            this.SelectFrameCombobox.Size = new System.Drawing.Size(36, 21);
             this.SelectFrameCombobox.TabIndex = 0;
             this.SelectFrameCombobox.SelectedIndexChanged += new System.EventHandler(this.SelectFrameCombobox_SelectedIndexChanged);
             // 
-            // PropertiesTab
+            // MoveUpButton
             // 
-            this.PropertiesTab.Location = new System.Drawing.Point(4, 22);
-            this.PropertiesTab.Name = "PropertiesTab";
-            this.PropertiesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.PropertiesTab.Size = new System.Drawing.Size(693, 349);
-            this.PropertiesTab.TabIndex = 0;
-            this.PropertiesTab.Text = "Properties";
-            this.PropertiesTab.UseVisualStyleBackColor = true;
+            this.MoveUpButton.Location = new System.Drawing.Point(28, 202);
+            this.MoveUpButton.Name = "MoveUpButton";
+            this.MoveUpButton.Size = new System.Drawing.Size(26, 26);
+            this.MoveUpButton.TabIndex = 8;
+            this.MoveUpButton.Text = "/\\";
+            this.MoveUpButton.UseVisualStyleBackColor = true;
+            this.MoveUpButton.Click += new System.EventHandler(this.MoveUpButton_Click);
             // 
-            // RemoveLastColumnButton
+            // MoveLeftButton
             // 
-            this.RemoveLastColumnButton.Location = new System.Drawing.Point(374, 6);
-            this.RemoveLastColumnButton.Name = "RemoveLastColumnButton";
-            this.RemoveLastColumnButton.Size = new System.Drawing.Size(75, 23);
-            this.RemoveLastColumnButton.TabIndex = 6;
-            this.RemoveLastColumnButton.Text = "Remove col";
-            this.RemoveLastColumnButton.UseVisualStyleBackColor = true;
-            this.RemoveLastColumnButton.Click += new System.EventHandler(this.RemoveLastColumnButton_Click);
+            this.MoveLeftButton.Location = new System.Drawing.Point(5, 226);
+            this.MoveLeftButton.Name = "MoveLeftButton";
+            this.MoveLeftButton.Size = new System.Drawing.Size(26, 26);
+            this.MoveLeftButton.TabIndex = 9;
+            this.MoveLeftButton.Text = "<";
+            this.MoveLeftButton.UseVisualStyleBackColor = true;
+            this.MoveLeftButton.Click += new System.EventHandler(this.MoveLeftButton_Click);
             // 
-            // RemoveLastRowButton
+            // MoveRightButton
             // 
-            this.RemoveLastRowButton.Location = new System.Drawing.Point(455, 6);
-            this.RemoveLastRowButton.Name = "RemoveLastRowButton";
-            this.RemoveLastRowButton.Size = new System.Drawing.Size(75, 23);
-            this.RemoveLastRowButton.TabIndex = 7;
-            this.RemoveLastRowButton.Text = "Remove row";
-            this.RemoveLastRowButton.UseVisualStyleBackColor = true;
-            this.RemoveLastRowButton.Click += new System.EventHandler(this.RemoveLastRowButton_Click);
+            this.MoveRightButton.Location = new System.Drawing.Point(51, 225);
+            this.MoveRightButton.Name = "MoveRightButton";
+            this.MoveRightButton.Size = new System.Drawing.Size(26, 26);
+            this.MoveRightButton.TabIndex = 10;
+            this.MoveRightButton.Text = ">";
+            this.MoveRightButton.UseVisualStyleBackColor = true;
+            this.MoveRightButton.Click += new System.EventHandler(this.MoveRightButton_Click);
+            // 
+            // MoveDownButton
+            // 
+            this.MoveDownButton.Location = new System.Drawing.Point(28, 249);
+            this.MoveDownButton.Name = "MoveDownButton";
+            this.MoveDownButton.Size = new System.Drawing.Size(26, 26);
+            this.MoveDownButton.TabIndex = 11;
+            this.MoveDownButton.Text = "\\/";
+            this.MoveDownButton.UseVisualStyleBackColor = true;
+            this.MoveDownButton.Click += new System.EventHandler(this.MoveDownButton_Click);
             // 
             // MainForm
             // 
@@ -316,7 +352,6 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem About;
         private System.Windows.Forms.TabControl AnimatorTab;
-        private System.Windows.Forms.TabPage PropertiesTab;
         private System.Windows.Forms.TabPage AnimationTab;
         private System.Windows.Forms.ListBox AssetListBox;
         private System.Windows.Forms.Panel DrawerPanel;
@@ -330,6 +365,10 @@
         private System.Windows.Forms.Button AddColumnButton;
         private System.Windows.Forms.Button RemoveLastRowButton;
         private System.Windows.Forms.Button RemoveLastColumnButton;
+        private System.Windows.Forms.Button MoveDownButton;
+        private System.Windows.Forms.Button MoveRightButton;
+        private System.Windows.Forms.Button MoveLeftButton;
+        private System.Windows.Forms.Button MoveUpButton;
     }
 }
 
