@@ -73,7 +73,7 @@ namespace Round42.CustomComponents
             foreach (var block in shapeModel.Blocks)
             {
                 var blockModel = block;
-                var blockButton = BlockButton.Create(block, Color.Black);
+                var blockButton = new BlockButton(block, Color.Black);
 
                 // Reduce height & with by two pixels so we have borders around the buttons.
                 blockButton.Height = blockButton.Width = buttonSize - buttonBorder;

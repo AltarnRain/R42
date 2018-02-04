@@ -1,26 +1,24 @@
-﻿// <copyright file="BlockButton.cs" company="OI">
+﻿// <copyright file="BlockButton2.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
 namespace Round42.CustomComponents
 {
     using System;
+    using System.ComponentModel;
     using System.Drawing;
     using System.Windows.Forms;
     using Round42.Models;
 
     /// <summary>
-    /// Custum button control that handles updating the color of a block model
+    /// The block button,
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Button" />
-    public class BlockButton : Panel
+    /// <seealso cref="System.Windows.Forms.Control" />
+    public partial class BlockButton : Control
     {
         /// <summary>
-        /// Gets the block model.
+        /// The block model
         /// </summary>
-        /// <value>
-        /// The block model.
-        /// </value>
         private readonly BlockModel blockModel;
 
         /// <summary>
@@ -31,11 +29,36 @@ namespace Round42.CustomComponents
         /// <summary>
         /// Initializes a new instance of the <see cref="BlockButton"/> class.
         /// </summary>
+        public BlockButton()
+        {
+            this.InitializeComponent();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlockButton"/> class.
+        /// </summary>
+        /// <param name="container">The container.</param>
+        public BlockButton(IContainer container)
+        {
+            container.Add(this);
+            this.InitializeComponent();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BlockButton" /> class.
+        /// </summary>
         /// <param name="blockModel">The block model.</param>
-        public BlockButton(BlockModel blockModel)
+        /// <param name="activeColor">Color of the active.</param>
+        /// <param name="buttonSize">Size of the button.</param>
+        public BlockButton(BlockModel blockModel, Color activeColor, int buttonSize = 20)
             : base()
         {
+            this.InitializeComponent();
             this.blockModel = blockModel;
+            this.activeColor = activeColor;
+
+            this.Width = this.Height = buttonSize;
+            this.ForeColor = this.BackColor = blockModel.Color;
         }
 
         /// <summary>
@@ -50,21 +73,23 @@ namespace Round42.CustomComponents
         }
 
         /// <summary>
-        /// Creates the specified block model.
+        /// Gets or sets the text associated with this control.
         /// </summary>
-        /// <param name="blockModel">The block model.</param>
-        /// <param name="activeColor">Color of the active.</param>
-        /// <param name="buttonSize">Size of the button.</param>
-        /// <returns>
-        /// An instance of a BlockButton
-        /// </returns>
-        public static BlockButton Create(BlockModel blockModel, Color activeColor, int buttonSize = 20)
+        public new string Text
         {
-            var button = new BlockButton(blockModel);
-            button.Width = button.Height = buttonSize;
-            button.ForeColor = button.BackColor = blockModel.Color;
+            get
+            {
+                return base.Text;
+            }
 
-            return button;
+            set
+            {
+                if (value != this.Text)
+                {
+                    base.Text = value;
+                    this.Invalidate();
+                }
+            }
         }
 
         /// <summary>
@@ -74,6 +99,33 @@ namespace Round42.CustomComponents
         public void SetActiveColor(Color color)
         {
             this.activeColor = color;
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:Paint" /> event.
+        /// </summary>
+        /// <param name="e">The <see cref="PaintEventArgs" /> instance containing the event data.</param>
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            var gfx = e.Graphics;
+            var rc = this.ClientRectangle;
+
+            var border = (float)rc.Height * 0.10f;
+
+            var innerRectangle = new RectangleF((float)rc.Left + border, (float)rc.Top + border, (float)rc.Width - (border * 2), (float)rc.Height - (border * 2));
+
+            gfx.FillRectangle(new SolidBrush(this.Parent.BackColor), rc);
+            gfx.FillRectangle(new SolidBrush(Color.Blue), innerRectangle);
+
+            var sf = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            gfx.DrawString(this.Text, this.Font, new SolidBrush(Color.Black), new RectangleF((float)rc.Left, (float)rc.Top, (float)rc.Height, (float)rc.Width), sf);
         }
 
         /// <summary>
