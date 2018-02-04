@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Round242.Tests</RootNamespace>
-    <AssemblyName>ProviderTests</AssemblyName>
+    <AssemblyName>Round42Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -28,7 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\ProviderTests.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Round42Tests.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,8 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ProviderTests\AssetProviderTests.cs" />
-    <Compile Include="ProviderTests\ShapeProviderTests.cs" />
+    <Compile Include="AssetManager\AssetManagerTests.cs" />
+    <Compile Include="Components\BlockButtonTests.cs" />
+    <Compile Include="Components\DrawerTests.cs" />
+    <Compile Include="Components\PaletTests.cs" />
+    <Compile Include="Extentions\ShapeModelExtentionsTests.cs" />
+    <Compile Include="Factories\AssetManagerFactoryTests.cs" />
+    <Compile Include="Providers\AssetProviderTests.cs" />
+    <Compile Include="Providers\ShapeProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,9 +58,25 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Extentions\Extentions\Extentions.csproj">
+      <Project>{6DC160D3-241B-475B-9991-8BAF5198D654}</Project>
+      <Name>Extentions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AssetManager\AssetManager.csproj">
       <Project>{15C8A6DD-991E-4642-8247-93B7C1C60A77}</Project>
       <Name>AssetManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomComponents\CustomComponents.csproj">
+      <Project>{47EFD6A0-35D4-44FE-BDD0-7789CEA56CB1}</Project>
+      <Name>CustomComponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Exceptions\Exceptions.csproj">
+      <Project>{63FBCBC0-F4FC-4861-BD5A-56EC81377108}</Project>
+      <Name>Exceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Factories\Factories.csproj">
+      <Project>{E949ED38-310C-47F8-8A60-63A08B24F3EF}</Project>
+      <Name>Factories</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
@@ -74,6 +96,9 @@
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
