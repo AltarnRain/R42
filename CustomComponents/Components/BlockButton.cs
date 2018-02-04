@@ -111,21 +111,21 @@ namespace Round42.CustomComponents
 
             var gfx = e.Graphics;
             var rc = this.ClientRectangle;
+            var setColor = this.blockModel.Color;
 
-            var border = (float)rc.Height * 0.10f;
+            var border = rc.Height * 0.10f;
 
             var innerRectangle = new RectangleF((float)rc.Left + border, (float)rc.Top + border, (float)rc.Width - (border * 2), (float)rc.Height - (border * 2));
 
-            gfx.FillRectangle(new SolidBrush(this.Parent.BackColor), rc);
-            gfx.FillRectangle(new SolidBrush(this.ForeColor), innerRectangle);
-
-            var sf = new StringFormat
+            if (setColor == Color.Black)
             {
-                Alignment = StringAlignment.Center,
-                LineAlignment = StringAlignment.Center
-            };
-
-            gfx.DrawString(this.Text, this.Font, new SolidBrush(Color.Black), new RectangleF((float)rc.Left, (float)rc.Top, (float)rc.Height, (float)rc.Width), sf);
+                gfx.FillRectangle(new SolidBrush(this.Parent.BackColor), rc);
+                gfx.FillRectangle(new SolidBrush(setColor), innerRectangle);
+            }
+            else
+            {
+                gfx.FillRectangle(new SolidBrush(setColor), rc);
+            }
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace Round42.CustomComponents
         {
             base.OnClick(e);
             this.blockModel.Color = this.activeColor;
-            this.ForeColor = this.activeColor;
+            this.Invalidate();
         }
     }
 }

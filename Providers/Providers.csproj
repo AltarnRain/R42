@@ -45,11 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModelProviders\AssetProvider.cs" />
-    <Compile Include="ModelProviders\AssetTypeNameProvider.cs" />
-    <Compile Include="ModelProviders\ColorProvider.cs" />
+    <Compile Include="Providers\AssetProvider.cs" />
+    <Compile Include="Providers\AssetTypeNameProvider.cs" />
+    <Compile Include="Providers\ColorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ModelProviders\ShapeProvider.cs" />
+    <Compile Include="Providers\ShapeProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
