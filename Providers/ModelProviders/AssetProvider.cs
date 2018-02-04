@@ -41,6 +41,8 @@ namespace Round42.Providers
             {
                 AssetType = assetType,
                 Name = name,
+                XBlocks = numberOfBlocksOnXAxis,
+                YBlocks = numberOfBlocksOnYAxis
             };
 
             returnValue.Shapes = new List<ShapeModel>();

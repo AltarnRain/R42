@@ -24,6 +24,11 @@ namespace Round42.Managers
         private readonly AssetProvider assetProvider;
 
         /// <summary>
+        /// The shape provider
+        /// </summary>
+        private readonly ShapeProvider shapeProvider;
+
+        /// <summary>
         /// The asset file
         /// </summary>
         private string assetFile;
@@ -32,11 +37,13 @@ namespace Round42.Managers
         /// Initializes a new instance of the <see cref="AssetManager" /> class.
         /// </summary>
         /// <param name="assetFile">The asset file.</param>
-        /// <param name="loadOnCreate">if set to <c>true</c> [load on create].</param>
         /// <param name="assetProvider">The asset provider.</param>
-        public AssetManager(string assetFile, AssetProvider assetProvider, bool loadOnCreate = false)
+        /// <param name="shapeProvider">The shape provider.</param>
+        /// <param name="loadOnCreate">if set to <c>true</c> [load on create].</param>
+        public AssetManager(string assetFile, AssetProvider assetProvider, ShapeProvider shapeProvider, bool loadOnCreate = false)
         {
             this.assetProvider = assetProvider;
+            this.shapeProvider = shapeProvider;
             this.assetFile = assetFile;
             this.SetupAssets(this.assetFile);
         }
@@ -127,6 +134,17 @@ namespace Round42.Managers
             this.Assets.Add(newAsset);
             this.TriggerChangeEvent();
             this.OnNewAsset?.Invoke(newAsset);
+        }
+
+        /// <summary>
+        /// Adds the shape.
+        /// </summary>
+        /// <param name="assetModel">The asset model.</param>
+        public void AddShapeToAsset(AssetModel assetModel)
+        {
+            var newShape = this.shapeProvider.Create(assetModel.XBlocks, assetModel.YBlocks);
+            assetModel.Shapes.Add(newShape);
+            this.TriggerChangeEvent();
         }
 
         /// <summary>

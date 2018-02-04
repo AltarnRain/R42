@@ -212,6 +212,29 @@ namespace Round42.Tests
         }
 
         /// <summary>
+        /// Assets the manager add shape.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerAddShape()
+        {
+            // Arrange
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+
+            var asset = assetManager.FindByName("Test");
+
+            // Act
+            assetManager.AddShapeToAsset(asset);
+
+            // Assert
+            Assert.AreEqual(11, asset.Shapes.Count());
+
+            var addedShape = asset.Shapes.Last();
+            Assert.AreEqual(15, addedShape.XBlocks);
+            Assert.AreEqual(2, addedShape.Height);
+        }
+
+        /// <summary>
         /// Gets the asset file.
         /// </summary>
         /// <returns>A string with a temporary asset file</returns>

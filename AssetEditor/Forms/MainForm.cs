@@ -9,6 +9,7 @@ namespace Round42.AssetEditor.Forms
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
+    using Extentions;
     using Providers;
     using Round42.CustomComponents;
     using Round42.Factories;
@@ -71,15 +72,7 @@ namespace Round42.AssetEditor.Forms
         /// <summary>
         /// The current asset
         /// </summary>
-        private string currentAsset;
-
-        /// <summary>
-        /// Gets or sets the current frame.
-        /// </summary>
-        /// <value>
-        /// The current frame.
-        /// </value>
-        private int currentFrame;
+        private AssetModel currentAsset;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainForm" /> class.
@@ -136,17 +129,21 @@ namespace Round42.AssetEditor.Forms
         /// <param name="asset">The asset.</param>
         private void AssetManager_OnAssetLoaded(AssetModel asset)
         {
-            this.currentFrame = 0;
-            this.currentAsset = asset.Name;
-            this.LoadCurrentFrame();
+            this.currentAsset = asset;
+
+            var frames = Enumerable.Range(1, this.currentAsset.Shapes.Count()).Select(e => e.ToString()).ToArray();
+            this.SelectFrameCombobox.Items.Clear();
+            this.SelectFrameCombobox.Items.AddRange(frames);
+            this.SelectFrameCombobox.SelectedIndex = 0;
         }
 
         /// <summary>
-        /// Loads the current frame.
+        /// Loads the frame.
         /// </summary>
-        private void LoadCurrentFrame()
+        /// <param name="frame">The frame.</param>
+        private void LoadFrame(int frame)
         {
-            var shape = this.assetManager.GetFrameFromAsset(this.currentAsset, this.currentFrame);
+            var shape = this.currentAsset.Shapes[frame];
             this.drawer.DrawButtons(shape);
         }
 
@@ -163,7 +160,7 @@ namespace Round42.AssetEditor.Forms
         /// Assets the manager on assets changed.
         /// </summary>
         /// <param name="assets">The assets.</param>
-        private void AssetManager_OnAssetsChanged(System.Collections.Generic.IEnumerable<Models.AssetModel> assets)
+        private void AssetManager_OnAssetsChanged(IEnumerable<AssetModel> assets)
         {
             this.UpdateAssetList(assets);
         }
@@ -215,13 +212,24 @@ namespace Round42.AssetEditor.Forms
         private void AssetListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             var assetName = this.AssetListBox.SelectedItem as string;
-            this.currentAsset = assetName;
             this.assetManager.LoadByName(assetName);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.assetManager.Save();
+        }
+
+        private void SelectFrameCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.LoadFrame(sender.As<ComboBox>().SelectedIndex);
+        }
+
+        private void AddFrameButton_Click(object sender, EventArgs e)
+        {
+            var selectedAsset = this.AssetListBox.SelectedIndex;
+            this.assetManager.AddShapeToAsset(this.currentAsset);
+            this.AssetListBox.SelectedIndex = selectedAsset;
         }
     }
 }

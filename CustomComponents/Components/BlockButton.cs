@@ -50,7 +50,7 @@ namespace Round42.CustomComponents
         /// <param name="blockModel">The block model.</param>
         /// <param name="activeColor">Color of the active.</param>
         /// <param name="buttonSize">Size of the button.</param>
-        public BlockButton(BlockModel blockModel, Color activeColor, int buttonSize = 20)
+        public BlockButton(BlockModel blockModel, Color activeColor, int buttonSize)
             : base()
         {
             this.InitializeComponent();
@@ -58,7 +58,7 @@ namespace Round42.CustomComponents
             this.activeColor = activeColor;
 
             this.Width = this.Height = buttonSize;
-            this.ForeColor = this.BackColor = blockModel.Color;
+            this.ForeColor = blockModel.Color;
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Round42.CustomComponents
             var innerRectangle = new RectangleF((float)rc.Left + border, (float)rc.Top + border, (float)rc.Width - (border * 2), (float)rc.Height - (border * 2));
 
             gfx.FillRectangle(new SolidBrush(this.Parent.BackColor), rc);
-            gfx.FillRectangle(new SolidBrush(Color.Blue), innerRectangle);
+            gfx.FillRectangle(new SolidBrush(this.ForeColor), innerRectangle);
 
             var sf = new StringFormat
             {
@@ -136,7 +136,7 @@ namespace Round42.CustomComponents
         {
             base.OnClick(e);
             this.blockModel.Color = this.activeColor;
-            this.ForeColor = this.BackColor = this.activeColor;
+            this.ForeColor = this.activeColor;
         }
     }
 }

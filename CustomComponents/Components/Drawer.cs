@@ -65,22 +65,17 @@ namespace Round42.CustomComponents
         public void DrawButtons(ShapeModel shapeModel)
         {
             var numberOfButtonsOnXAxis = shapeModel.Blocks.Max(b => b.X);
-            var buttonSize = this.panel.Width / (numberOfButtonsOnXAxis + 1);
-            var buttonBorder = (int)Math.Floor(buttonSize * 0.15);
+            var buttonSize = this.panel.Width / numberOfButtonsOnXAxis;
             this.panel.Controls.Clear();
 
             var bbList = new List<BlockButton>();
             foreach (var block in shapeModel.Blocks)
             {
-                var blockModel = block;
-                var blockButton = new BlockButton(block, Color.Black);
-
-                // Reduce height & with by two pixels so we have borders around the buttons.
-                blockButton.Height = blockButton.Width = buttonSize - buttonBorder;
-
-                // leave one pixel of spave between blocks
-                blockButton.Top = ((block.Y - 1) * buttonSize) + buttonBorder;
-                blockButton.Left = ((block.X - 1) * buttonSize) + buttonBorder;
+                var blockButton = new BlockButton(block, Color.Black, buttonSize)
+                {
+                    Top = (block.Y - 1) * buttonSize,
+                    Left = (block.X - 1) * buttonSize
+                };
 
                 bbList.Add(blockButton);
             }

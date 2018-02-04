@@ -28,7 +28,7 @@ namespace Round42.Models
         /// <value>
         /// The width.
         /// </value>
-        public int Width { get; set; }
+        public int XBlocks { get; set; }
 
         /// <summary>
         /// Gets or sets the height.
