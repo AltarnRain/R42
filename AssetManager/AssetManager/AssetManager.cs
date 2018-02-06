@@ -68,7 +68,7 @@ namespace Round42.Managers
 
         /// <summary>
         /// Raised when the current asset changes
-        /// /// </summary>
+        /// </summary>
         /// <param name="asset">The asset.</param>
         public delegate void CurrentAssetChanged(AssetModel asset);
 
@@ -113,6 +113,17 @@ namespace Round42.Managers
         public List<AssetModel> Assets { get; private set; }
 
         /// <summary>
+        /// Gets the assets.
+        /// </summary>
+        /// <returns>
+        ///   <see cref="IEnumerable{AssetModel}" />
+        /// </returns>
+        public IEnumerable<AssetModel> GetAssets()
+        {
+            return this.Assets.AsEnumerable();
+        }
+
+        /// <summary>
         /// Gets the frame.
         /// </summary>
         /// <param name="frame">The frame.</param>
@@ -144,6 +155,25 @@ namespace Round42.Managers
         }
 
         /// <summary>
+        /// Adds the shape.
+        /// </summary>
+        public void AddShapeToAsset()
+        {
+            var newShape = this.shapeProvider.Create(this.currentAsset.Columns, this.currentAsset.Rows);
+            this.currentAsset.Shapes.Add(newShape);
+            this.TriggerOnCurrentAssetChanged();
+        }
+
+        /// <summary>
+        /// Saves this instance.
+        /// </summary>
+        public void Save()
+        {
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(this.Assets);
+            json.SaveToFile(this.assetFile);
+        }
+
+        /// <summary>
         /// Adds the specified new asset.
         /// </summary>
         /// <param name="newAsset">The new asset.</param>
@@ -152,6 +182,19 @@ namespace Round42.Managers
             this.Assets.Add(newAsset);
             this.OnNewAsset?.Invoke(this.Assets, newAsset);
         }
+
+        /// <summary>
+        /// Removes this instance.
+        /// </summary>
+        public void Remove()
+        {
+            if (this.currentAsset != null)
+            {
+                this.Assets.Remove(this.currentAsset);
+                this.OnAssetsLoaded?.Invoke(this.Assets);
+            }
+        }
+
 
         /// <summary>
         /// Removes the specified current asset.
@@ -167,27 +210,6 @@ namespace Round42.Managers
         }
 
         /// <summary>
-        /// Removes the shape from asset.
-        /// </summary>
-        /// <param name="assetName">Name of the asset.</param>
-        /// <param name="shapeIndex">Index of the shape.</param>
-        public void RemoveShapeFromAsset(string assetName, int shapeIndex)
-        {
-            this.SetByName(assetName);
-            this.RemoveShapeFromAsset(shapeIndex);
-        }
-
-        /// <summary>
-        /// Adds the shape.
-        /// </summary>
-        public void AddShapeToAsset()
-        {
-            var newShape = this.shapeProvider.Create(this.currentAsset.Columns, this.currentAsset.Rows);
-            this.currentAsset.Shapes.Add(newShape);
-            this.TriggerOnCurrentAssetChanged();
-        }
-
-        /// <summary>
         /// Adds the shape to asset.
         /// </summary>
         /// <param name="assetName">Name of the asset.</param>
@@ -198,9 +220,23 @@ namespace Round42.Managers
         }
 
         /// <summary>
+        /// Adds the column left.
+        /// </summary>
+        public void AddColumnLeft()
+        {
+            foreach (var shape in this.currentAsset.Shapes)
+            {
+                shape.AddColumnLeft();
+            }
+
+            this.currentAsset.Columns++;
+            this.TriggerOnCurrentAssetChanged();
+        }
+
+        /// <summary>
         /// Adds the column.
         /// </summary>
-        public void AddColumn()
+        public void AddColumnRight()
         {
             foreach (var shape in this.currentAsset.Shapes)
             {
@@ -212,23 +248,13 @@ namespace Round42.Managers
         }
 
         /// <summary>
-        /// Adds the column.
+        /// Adds the row top.
         /// </summary>
-        /// <param name="assetName">Name of the asset.</param>
-        public void AddColumn(string assetName)
-        {
-            this.SetByName(assetName);
-            this.AddColumn();
-        }
-
-        /// <summary>
-        /// Adds the row.
-        /// </summary>
-        public void AddRow()
+        public void AddRowTop()
         {
             foreach (var shape in this.currentAsset.Shapes)
             {
-                shape.AddRowToBottom();
+                shape.AddRowTop();
             }
 
             this.currentAsset.Rows++;
@@ -236,68 +262,66 @@ namespace Round42.Managers
         }
 
         /// <summary>
-        /// Gets the assets.
+        /// Adds the row.
         /// </summary>
-        /// <returns><see cref="IEnumerable{AssetModel}"/></returns>
-        public IEnumerable<AssetModel> GetAssets()
+        public void AddRowBottom()
         {
-            return this.Assets.AsEnumerable();
-        }
-
-        /// <summary>
-        /// Saves this instance.
-        /// </summary>
-        public void Save()
-        {
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(this.Assets);
-            json.SaveToFile(this.assetFile);
-        }
-
-        /// <summary>
-        /// Removes the last column.
-        /// </summary>
-        public void RemoveLastColumn()
-        {
-            if (this.currentAsset.Columns > 1)
+            foreach (var shape in this.currentAsset.Shapes)
             {
-                this.currentAsset.Shapes.ForEach(s => s.RemoveLastColumn());
-                this.currentAsset.Columns--;
+                shape.AddRowBottom();
             }
 
+            this.currentAsset.Rows++;
             this.TriggerOnCurrentAssetChanged();
         }
 
         /// <summary>
-        /// Removes the last column.
+        /// Removes the row top.
         /// </summary>
-        /// <param name="assetName">Name of the asset.</param>
-        public void RemoveLastColumn(string assetName)
+        public void RemoveRowTop()
         {
-            this.SetByName(assetName);
-            this.RemoveLastColumn();
+            this.currentFrame.RemoveRowTop();
+            this.currentAsset.Rows--;
+            this.TriggerOnCurrentAssetChanged();
         }
 
         /// <summary>
         /// Removes the last row.
         /// </summary>
-        public void RemoveLastRow()
+        public void RemoveRowBottom()
         {
             if (this.currentAsset.Rows > 1)
             {
-                this.currentAsset.Shapes.ForEach(s => s.RemoveLastRow());
+                this.currentAsset.Shapes.ForEach(s => s.RemoveRowRight());
                 this.currentAsset.Rows--;
                 this.TriggerOnCurrentAssetChanged();
             }
         }
 
         /// <summary>
-        /// Removes the last row.
+        /// Removes the last column.
         /// </summary>
-        /// <param name="assetName">Name of the asset.</param>
-        public void RemoveLastRow(string assetName)
+        public void RemoveColumnLeft()
         {
-            this.SetByName(assetName);
-            this.RemoveLastRow();
+            if (this.currentAsset.Columns > 1)
+            {
+                this.currentAsset.Shapes.ForEach(s => s.RemoveColumnLeft());
+                this.currentAsset.Columns--;
+                this.TriggerOnCurrentAssetChanged();
+            }
+        }
+
+        /// <summary>
+        /// Removes the column right.
+        /// </summary>
+        public void RemoveColumnRight()
+        {
+            if (this.currentAsset.Columns > 1)
+            {
+                this.currentAsset.Shapes.ForEach(s => s.RemoveColumnLeft());
+                this.currentAsset.Columns--;
+                this.TriggerOnCurrentAssetChanged();
+            }
         }
 
         /// <summary>

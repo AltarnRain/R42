@@ -32,6 +32,7 @@ namespace Round42.CustomComponents
             : base()
         {
             this.panel = panel;
+            this.panel.AutoScroll = true;
         }
 
         /// <summary>
@@ -64,12 +65,10 @@ namespace Round42.CustomComponents
         /// Draws the buttons.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        public void DrawButtons(ShapeModel shapeModel)
+        /// <param name="buttonSize">Size of the button.</param>
+        public void DrawButtons(ShapeModel shapeModel, int buttonSize = 20)
         {
             this.currentShape = shapeModel;
-            var buttonSizeX = this.panel.Width / shapeModel.LastColumn();
-            var buttonSizeY = this.panel.Height / shapeModel.LastRow();
-
             this.panel.Controls.Clear();
 
             var bbList = new List<BlockButton>();
@@ -77,10 +76,10 @@ namespace Round42.CustomComponents
             {
                 var blockButton = new BlockButton(block, Color.Black)
                 {
-                    Left = (block.Column - 1) * buttonSizeX,
-                    Top = (block.Row - 1) * buttonSizeY,
-                    Width = buttonSizeX,
-                    Height = buttonSizeY,
+                    Left = (block.Column - 1) * buttonSize,
+                    Top = (block.Row - 1) * buttonSize,
+                    Width = buttonSize,
+                    Height = buttonSize,
                 };
 
                 bbList.Add(blockButton);

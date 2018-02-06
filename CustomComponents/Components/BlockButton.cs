@@ -16,11 +16,6 @@ namespace Round42.CustomComponents
     public partial class BlockButton : Control
     {
         /// <summary>
-        /// The block model
-        /// </summary>
-        private readonly BlockModel blockModel;
-
-        /// <summary>
         /// The active color
         /// </summary>
         private Color activeColor;
@@ -33,9 +28,17 @@ namespace Round42.CustomComponents
         public BlockButton(BlockModel blockModel, Color activeColor)
             : base()
         {
-            this.blockModel = blockModel;
+            this.BlockModel = blockModel;
             this.activeColor = activeColor;
         }
+
+        /// <summary>
+        /// Gets the block model
+        /// </summary>
+        /// <value>
+        /// The block model.
+        /// </value>
+        public BlockModel BlockModel { get; private set; }
 
         /// <summary>
         /// Gets the color of the active.
@@ -87,7 +90,7 @@ namespace Round42.CustomComponents
 
             var gfx = e.Graphics;
             var rc = this.ClientRectangle;
-            var setColor = this.blockModel.Color;
+            var setColor = this.BlockModel.Color;
 
             var tonAndBottomBorder = rc.Height * 0.10f;
             var leftAndRightBorder = rc.Width * 0.10f;
@@ -116,7 +119,7 @@ namespace Round42.CustomComponents
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            this.blockModel.Color = this.activeColor;
+            this.BlockModel.Color = this.activeColor;
             this.Invalidate();
         }
     }

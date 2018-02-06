@@ -79,7 +79,7 @@ namespace Round42.Models.Extentions
         /// Adds the row to the top
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        public static void AddRowToTop(this ShapeModel shapeModel)
+        public static void AddRowTop(this ShapeModel shapeModel)
         {
             var maxColumns = shapeModel.LastColumn();
             shapeModel.Blocks.ForEach(b => b.Row = b.Row + 1);
@@ -94,7 +94,7 @@ namespace Round42.Models.Extentions
         /// Adds the row at the bottom
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        public static void AddRowToBottom(this ShapeModel shapeModel)
+        public static void AddRowBottom(this ShapeModel shapeModel)
         {
             var maxRow = shapeModel.LastRow();
             var maxColumns = shapeModel.LastColumn();
@@ -146,7 +146,7 @@ namespace Round42.Models.Extentions
         /// Removes the last column.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        public static void RemoveFirstColumn(this ShapeModel shapeModel)
+        public static void RemoveColumnLeft(this ShapeModel shapeModel)
         {
             shapeModel.Blocks.RemoveAll(b => b.Column == shapeModel.FirstColumn());
             shapeModel.Blocks.ForEach(b => b.Column = b.Column - 1);
@@ -156,7 +156,7 @@ namespace Round42.Models.Extentions
         /// Removes the last column.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        public static void RemoveLastColumn(this ShapeModel shapeModel)
+        public static void RemoveColumnRight(this ShapeModel shapeModel)
         {
             shapeModel.Blocks.RemoveAll(b => b.Column == shapeModel.LastColumn());
         }
@@ -165,7 +165,7 @@ namespace Round42.Models.Extentions
         /// Removes the first row.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        public static void RemoveFirstRow(this ShapeModel shapeModel)
+        public static void RemoveRowTop(this ShapeModel shapeModel)
         {
             shapeModel.Blocks.RemoveAll(b => b.Row == shapeModel.FirstRow());
             shapeModel.Blocks.ForEach(b => b.Row = b.Row - 1);
@@ -175,7 +175,7 @@ namespace Round42.Models.Extentions
         /// Removes the last row.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        public static void RemoveLastRow(this ShapeModel shapeModel)
+        public static void RemoveRowRight(this ShapeModel shapeModel)
         {
             shapeModel.Blocks.RemoveAll(b => b.Row == shapeModel.LastRow());
         }
@@ -198,8 +198,8 @@ namespace Round42.Models.Extentions
         /// <param name="shapeModel">The shape model.</param>
         public static void MoveUp(this ShapeModel shapeModel)
         {
-            shapeModel.AddRowToBottom();
-            shapeModel.RemoveFirstRow();
+            shapeModel.AddRowBottom();
+            shapeModel.RemoveRowTop();
         }
 
         /// <summary>
@@ -208,8 +208,8 @@ namespace Round42.Models.Extentions
         /// <param name="shapeModel">The shape model.</param>
         public static void MoveDown(this ShapeModel shapeModel)
         {
-            shapeModel.AddRowToTop();
-            shapeModel.RemoveLastRow();
+            shapeModel.AddRowTop();
+            shapeModel.RemoveRowRight();
         }
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace Round42.Models.Extentions
         /// <param name="shapeModel">The shape model.</param>
         public static void MoveRight(this ShapeModel shapeModel)
         {
-            shapeModel.RemoveLastColumn();
+            shapeModel.RemoveColumnRight();
             shapeModel.AddColumnLeft();
         }
 
@@ -228,7 +228,7 @@ namespace Round42.Models.Extentions
         /// <param name="shapeModel">The shape model.</param>
         public static void MoveLeft(this ShapeModel shapeModel)
         {
-            shapeModel.RemoveFirstColumn();
+            shapeModel.RemoveColumnLeft();
             shapeModel.AddColumnRight();
         }
     }

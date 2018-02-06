@@ -177,6 +177,7 @@ namespace Round42.Tests
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.LoadByName("Test");
 
             assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
             {
@@ -185,20 +186,20 @@ namespace Round42.Tests
             };
 
             // Act
-            assetManager.RemoveShapeFromAsset("Test", 0);
+            assetManager.RemoveShapeFromAsset(0);
         }
 
         /// <summary>
         /// Tests the add column.
         /// </summary>
         [TestMethod]
-        public void AssetManagerAddColumn()
+        public void AssetManagerAddColumnLeft()
         {
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
-
+            assetManager.LoadByName("Test");
             assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
             {
                 // Assert
@@ -206,7 +207,7 @@ namespace Round42.Tests
             };
 
             // Act
-            assetManager.AddColumn("Test");
+            assetManager.AddColumnLeft();
         }
 
         /// <summary>
@@ -219,6 +220,7 @@ namespace Round42.Tests
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.LoadByName("Test");
 
             assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
             {
@@ -226,7 +228,7 @@ namespace Round42.Tests
                 Assert.AreEqual(14, asset.Shapes.First().Blocks.Count(b => b.Row == 1));
             };
 
-            assetManager.RemoveLastColumn("Test");
+            assetManager.RemoveColumnLeft();
         }
 
         /// <summary>
@@ -239,6 +241,7 @@ namespace Round42.Tests
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.LoadByName("Test");
 
             assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
             {
@@ -246,7 +249,7 @@ namespace Round42.Tests
                 Assert.AreEqual(1, asset.Shapes.First().Blocks.Count(b => b.Column == 1));
             };
 
-            assetManager.RemoveLastRow("Test");
+            assetManager.RemoveRowBottom();
         }
 
         /// <summary>

@@ -35,7 +35,7 @@ namespace Round242.Tests.Extentions
             var shape = shapeProvider.Create(columns, rows);
 
             // Act
-            shape.AddRowToBottom();
+            shape.AddRowBottom();
 
             // Assert
             var numberOfBlocks = shape.Blocks.Count();
@@ -191,6 +191,5 @@ namespace Round242.Tests.Extentions
             var isRed = shape.GetColumn(1).All(b => b.Color == Color.Red);
             Assert.IsTrue(isRed);
         }
-
     }
 }

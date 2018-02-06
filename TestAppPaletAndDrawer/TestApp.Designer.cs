@@ -66,6 +66,7 @@
             // 
             // DrawerPanel
             // 
+            this.DrawerPanel.AutoScroll = true;
             this.DrawerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DrawerPanel.Location = new System.Drawing.Point(200, 0);
             this.DrawerPanel.Name = "DrawerPanel";
