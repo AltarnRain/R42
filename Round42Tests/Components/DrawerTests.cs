@@ -31,7 +31,7 @@ namespace Round42.Tests
 
             // Act
             var drawer = this.Get<DrawerFactory>().Get(panel);
-            drawer.DrawButtons(shapeModel);
+            drawer.DrawButtons(shapeModel, 20);
 
             // Assert
             var numberOfButtons = drawer.BlockButtons.Count();

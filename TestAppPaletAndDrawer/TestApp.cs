@@ -87,7 +87,7 @@ namespace Round42.TestAppPaletAndDrawer
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void DrawerPanel_SizeChanged(object sender, System.EventArgs e)
         {
-            this.drawer.DrawButtons(this.shapeModel);
+            this.drawer.DrawButtons(this.shapeModel, 50);
         }
     }
 }

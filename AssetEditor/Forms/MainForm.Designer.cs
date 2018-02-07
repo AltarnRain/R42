@@ -64,6 +64,7 @@
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SelectFrameCombobox = new System.Windows.Forms.ComboBox();
+            this.Render = new System.Windows.Forms.Button();
             this.ListPanel.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.AnimatorTab.SuspendLayout();
@@ -186,7 +187,6 @@
             this.DrawerPanel.Name = "DrawerPanel";
             this.DrawerPanel.Size = new System.Drawing.Size(559, 347);
             this.DrawerPanel.TabIndex = 1;
-            this.DrawerPanel.Resize += new System.EventHandler(this.DrawerPanel_Resize);
             // 
             // PaletPanel
             // 
@@ -200,6 +200,7 @@
             // Tools
             // 
             this.Tools.BackColor = System.Drawing.Color.Silver;
+            this.Tools.Controls.Add(this.Render);
             this.Tools.Controls.Add(this.ButtonSize);
             this.Tools.Controls.Add(this.RemoveTopRowButton);
             this.Tools.Controls.Add(this.AddRowTopButton);
@@ -236,6 +237,8 @@
             this.ButtonSize.Size = new System.Drawing.Size(45, 311);
             this.ButtonSize.TabIndex = 20;
             this.ButtonSize.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.ButtonSize.Value = 20;
+            this.ButtonSize.Scroll += new System.EventHandler(this.ButtonSize_Scroll);
             // 
             // RemoveTopRowButton
             // 
@@ -436,6 +439,15 @@
             this.SelectFrameCombobox.TabIndex = 0;
             this.SelectFrameCombobox.SelectedIndexChanged += new System.EventHandler(this.SelectFrameCombobox_SelectedIndexChanged);
             // 
+            // Render
+            // 
+            this.Render.Location = new System.Drawing.Point(6, 328);
+            this.Render.Name = "Render";
+            this.Render.Size = new System.Drawing.Size(75, 23);
+            this.Render.TabIndex = 21;
+            this.Render.Text = "Render";
+            this.Render.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -498,6 +510,7 @@
         private System.Windows.Forms.Button AddColumnLeftButton;
         private System.Windows.Forms.ToolStripMenuItem removeAssetToolStripMenuItem;
         private System.Windows.Forms.TrackBar ButtonSize;
+        private System.Windows.Forms.Button Render;
     }
 }
 

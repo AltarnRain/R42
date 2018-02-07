@@ -8,9 +8,12 @@ namespace Round42.AssetEditor.Forms
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     using Extentions;
     using Providers;
+    using Round42.AssetEditor.Properties;
     using Round42.CustomComponents;
     using Round42.Factories;
     using Round42.Factories.Factories;
@@ -90,6 +93,8 @@ namespace Round42.AssetEditor.Forms
             this.palet = this.paletFactory.Get(this.PaletPanel);
             this.drawer = this.drawerFactory.Get(this.DrawerPanel);
 
+            this.ButtonSize.Value = Settings.Default.ZoomLevel;
+
             // Event handler setup must precede loading assets but happen after the asset manager is created
             this.SetupEventHandlers();
 
@@ -120,7 +125,7 @@ namespace Round42.AssetEditor.Forms
 
             this.assetManager.OnFrameSelected += (ShapeModel shapeModel) =>
             {
-                this.drawer.DrawButtons(shapeModel);
+                this.drawer.DrawButtons(shapeModel, this.ButtonSize.Value);
             };
 
             this.palet.OnColorSelected += (System.Drawing.Color color) =>
@@ -148,7 +153,7 @@ namespace Round42.AssetEditor.Forms
         /// <param name="frame">The frame.</param>
         private void LoadFrame(int frame)
         {
-             this.assetManager.SelectFrame(frame);
+            this.assetManager.SelectFrame(frame);
         }
 
         /// <summary>
@@ -220,6 +225,7 @@ namespace Round42.AssetEditor.Forms
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.assetManager.Save();
+            Settings.Default.Save();
         }
 
         /// <summary>
@@ -230,16 +236,6 @@ namespace Round42.AssetEditor.Forms
         private void SelectFrameCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.LoadFrame(sender.As<ComboBox>().SelectedIndex);
-        }
-
-        /// <summary>
-        /// Handles the Resize event of the DrawerPanel control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
-        private void DrawerPanel_Resize(object sender, EventArgs e)
-        {
-            this.drawer.RedrawButtons();
         }
 
         /// <summary>
@@ -390,6 +386,12 @@ namespace Round42.AssetEditor.Forms
         private void MoveLeftButton_Click(object sender, EventArgs e)
         {
             this.assetManager.MoveLeft();
+        }
+
+        private void ButtonSize_Scroll(object sender, EventArgs e)
+        {
+            this.drawer.RedrawButtons(this.ButtonSize.Value);
+            Settings.Default.ZoomLevel = this.ButtonSize.Value;
         }
     }
 }

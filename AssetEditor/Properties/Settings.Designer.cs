@@ -34,5 +34,17 @@ namespace Round42.AssetEditor.Properties {
                 this["AssetFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int ZoomLevel {
+            get {
+                return ((int)(this["ZoomLevel"]));
+            }
+            set {
+                this["ZoomLevel"] = value;
+            }
+        }
     }
 }

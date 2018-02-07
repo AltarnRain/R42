@@ -21,6 +21,10 @@ namespace Round42.CustomComponents
         /// The panel
         /// </summary>
         private readonly Panel panel;
+
+        /// <summary>
+        /// The current shape
+        /// </summary>
         private ShapeModel currentShape;
 
         /// <summary>
@@ -32,7 +36,6 @@ namespace Round42.CustomComponents
             : base()
         {
             this.panel = panel;
-            this.panel.AutoScroll = true;
         }
 
         /// <summary>
@@ -66,7 +69,7 @@ namespace Round42.CustomComponents
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
         /// <param name="buttonSize">Size of the button.</param>
-        public void DrawButtons(ShapeModel shapeModel, int buttonSize = 20)
+        public void DrawButtons(ShapeModel shapeModel, int buttonSize)
         {
             this.currentShape = shapeModel;
             this.panel.Controls.Clear();
@@ -91,11 +94,12 @@ namespace Round42.CustomComponents
         /// <summary>
         /// Redraws the buttons.
         /// </summary>
-        public void RedrawButtons()
+        /// <param name="buttonSize">Size of the button.</param>
+        public void RedrawButtons(int buttonSize)
         {
             if (this.currentShape != null)
             {
-                this.DrawButtons(this.currentShape);
+                this.DrawButtons(this.currentShape, buttonSize);
             }
         }
     }

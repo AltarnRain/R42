@@ -195,7 +195,6 @@ namespace Round42.Managers
             }
         }
 
-
         /// <summary>
         /// Removes the specified current asset.
         /// </summary>
