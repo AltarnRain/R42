@@ -43,6 +43,7 @@
             this.DrawerPanel = new System.Windows.Forms.Panel();
             this.PaletPanel = new System.Windows.Forms.Panel();
             this.Tools = new System.Windows.Forms.Panel();
+            this.Render = new System.Windows.Forms.Button();
             this.ButtonSize = new System.Windows.Forms.TrackBar();
             this.RemoveTopRowButton = new System.Windows.Forms.Button();
             this.AddRowTopButton = new System.Windows.Forms.Button();
@@ -64,7 +65,6 @@
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SelectFrameCombobox = new System.Windows.Forms.ComboBox();
-            this.Render = new System.Windows.Forms.Button();
             this.ListPanel.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.AnimatorTab.SuspendLayout();
@@ -228,6 +228,15 @@
             this.Tools.Size = new System.Drawing.Size(128, 375);
             this.Tools.TabIndex = 0;
             // 
+            // Render
+            // 
+            this.Render.Location = new System.Drawing.Point(6, 328);
+            this.Render.Name = "Render";
+            this.Render.Size = new System.Drawing.Size(75, 23);
+            this.Render.TabIndex = 21;
+            this.Render.Text = "Render";
+            this.Render.UseVisualStyleBackColor = true;
+            // 
             // ButtonSize
             // 
             this.ButtonSize.Location = new System.Drawing.Point(86, 26);
@@ -242,42 +251,46 @@
             // 
             // RemoveTopRowButton
             // 
+            this.RemoveTopRowButton.BackColor = System.Drawing.Color.Red;
             this.RemoveTopRowButton.Location = new System.Drawing.Point(11, 203);
             this.RemoveTopRowButton.Name = "RemoveTopRowButton";
             this.RemoveTopRowButton.Size = new System.Drawing.Size(31, 23);
             this.RemoveTopRowButton.TabIndex = 19;
             this.RemoveTopRowButton.Text = "/\\";
-            this.RemoveTopRowButton.UseVisualStyleBackColor = true;
+            this.RemoveTopRowButton.UseVisualStyleBackColor = false;
             this.RemoveTopRowButton.Click += new System.EventHandler(this.RemoveRowTopButton_Click);
             // 
             // AddRowTopButton
             // 
+            this.AddRowTopButton.BackColor = System.Drawing.Color.LightGreen;
             this.AddRowTopButton.Location = new System.Drawing.Point(11, 161);
             this.AddRowTopButton.Name = "AddRowTopButton";
             this.AddRowTopButton.Size = new System.Drawing.Size(31, 23);
             this.AddRowTopButton.TabIndex = 18;
             this.AddRowTopButton.Text = "/\\";
-            this.AddRowTopButton.UseVisualStyleBackColor = true;
+            this.AddRowTopButton.UseVisualStyleBackColor = false;
             this.AddRowTopButton.Click += new System.EventHandler(this.AddRowTopButton_Click);
             // 
             // RemoveLeftColumnButton
             // 
+            this.RemoveLeftColumnButton.BackColor = System.Drawing.Color.Red;
             this.RemoveLeftColumnButton.Location = new System.Drawing.Point(11, 119);
             this.RemoveLeftColumnButton.Name = "RemoveLeftColumnButton";
             this.RemoveLeftColumnButton.Size = new System.Drawing.Size(31, 23);
             this.RemoveLeftColumnButton.TabIndex = 17;
             this.RemoveLeftColumnButton.Text = "<";
-            this.RemoveLeftColumnButton.UseVisualStyleBackColor = true;
+            this.RemoveLeftColumnButton.UseVisualStyleBackColor = false;
             this.RemoveLeftColumnButton.Click += new System.EventHandler(this.RemoveColumnLeftButton_Click);
             // 
             // AddColumnLeftButton
             // 
+            this.AddColumnLeftButton.BackColor = System.Drawing.Color.LightGreen;
             this.AddColumnLeftButton.Location = new System.Drawing.Point(11, 77);
             this.AddColumnLeftButton.Name = "AddColumnLeftButton";
             this.AddColumnLeftButton.Size = new System.Drawing.Size(31, 23);
             this.AddColumnLeftButton.TabIndex = 16;
             this.AddColumnLeftButton.Text = "<";
-            this.AddColumnLeftButton.UseVisualStyleBackColor = true;
+            this.AddColumnLeftButton.UseVisualStyleBackColor = false;
             this.AddColumnLeftButton.Click += new System.EventHandler(this.AddColumnLeftButton_Click);
             // 
             // label5
@@ -362,42 +375,46 @@
             // 
             // RemoveBottomRowButton
             // 
+            this.RemoveBottomRowButton.BackColor = System.Drawing.Color.Red;
             this.RemoveBottomRowButton.Location = new System.Drawing.Point(43, 203);
             this.RemoveBottomRowButton.Name = "RemoveBottomRowButton";
             this.RemoveBottomRowButton.Size = new System.Drawing.Size(31, 23);
             this.RemoveBottomRowButton.TabIndex = 7;
             this.RemoveBottomRowButton.Text = "\\/";
-            this.RemoveBottomRowButton.UseVisualStyleBackColor = true;
+            this.RemoveBottomRowButton.UseVisualStyleBackColor = false;
             this.RemoveBottomRowButton.Click += new System.EventHandler(this.RemoveRowBottomButton_Click);
             // 
             // RemoveRightColumnButton
             // 
+            this.RemoveRightColumnButton.BackColor = System.Drawing.Color.Red;
             this.RemoveRightColumnButton.Location = new System.Drawing.Point(43, 119);
             this.RemoveRightColumnButton.Name = "RemoveRightColumnButton";
             this.RemoveRightColumnButton.Size = new System.Drawing.Size(31, 23);
             this.RemoveRightColumnButton.TabIndex = 6;
             this.RemoveRightColumnButton.Text = ">";
-            this.RemoveRightColumnButton.UseVisualStyleBackColor = true;
+            this.RemoveRightColumnButton.UseVisualStyleBackColor = false;
             this.RemoveRightColumnButton.Click += new System.EventHandler(this.RemoveColumnRightButton_Click);
             // 
             // AddRowBottomButton
             // 
+            this.AddRowBottomButton.BackColor = System.Drawing.Color.LightGreen;
             this.AddRowBottomButton.Location = new System.Drawing.Point(43, 161);
             this.AddRowBottomButton.Name = "AddRowBottomButton";
             this.AddRowBottomButton.Size = new System.Drawing.Size(31, 23);
             this.AddRowBottomButton.TabIndex = 5;
             this.AddRowBottomButton.Text = "\\/";
-            this.AddRowBottomButton.UseVisualStyleBackColor = true;
+            this.AddRowBottomButton.UseVisualStyleBackColor = false;
             this.AddRowBottomButton.Click += new System.EventHandler(this.AddRowBottomButtonButton_Click);
             // 
             // AddColumnRightButton
             // 
+            this.AddColumnRightButton.BackColor = System.Drawing.Color.LightGreen;
             this.AddColumnRightButton.Location = new System.Drawing.Point(43, 77);
             this.AddColumnRightButton.Name = "AddColumnRightButton";
             this.AddColumnRightButton.Size = new System.Drawing.Size(31, 23);
             this.AddColumnRightButton.TabIndex = 4;
             this.AddColumnRightButton.Text = ">";
-            this.AddColumnRightButton.UseVisualStyleBackColor = true;
+            this.AddColumnRightButton.UseVisualStyleBackColor = false;
             this.AddColumnRightButton.Click += new System.EventHandler(this.AddColumnRightButton_Click);
             // 
             // RemoveFrameButton
@@ -439,15 +456,6 @@
             this.SelectFrameCombobox.TabIndex = 0;
             this.SelectFrameCombobox.SelectedIndexChanged += new System.EventHandler(this.SelectFrameCombobox_SelectedIndexChanged);
             // 
-            // Render
-            // 
-            this.Render.Location = new System.Drawing.Point(6, 328);
-            this.Render.Name = "Render";
-            this.Render.Size = new System.Drawing.Size(75, 23);
-            this.Render.TabIndex = 21;
-            this.Render.Text = "Render";
-            this.Render.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,6 +467,7 @@
             this.Name = "MainForm";
             this.Text = "Asset Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.ListPanel.ResumeLayout(false);
             this.MainMenu.ResumeLayout(false);
             this.MainMenu.PerformLayout();

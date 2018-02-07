@@ -229,7 +229,7 @@ namespace Round42.Managers
             }
 
             this.currentAsset.Columns++;
-            this.TriggerOnCurrentAssetChanged();
+            this.OnFrameSelected.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace Round42.Managers
             }
 
             this.currentAsset.Columns++;
-            this.TriggerOnCurrentAssetChanged();
+            this.OnFrameSelected.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -257,7 +257,7 @@ namespace Round42.Managers
             }
 
             this.currentAsset.Rows++;
-            this.TriggerOnCurrentAssetChanged();
+            this.OnFrameSelected.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace Round42.Managers
             }
 
             this.currentAsset.Rows++;
-            this.TriggerOnCurrentAssetChanged();
+            this.OnFrameSelected.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -281,7 +281,7 @@ namespace Round42.Managers
         {
             this.currentFrame.RemoveRowTop();
             this.currentAsset.Rows--;
-            this.TriggerOnCurrentAssetChanged();
+            this.OnFrameSelected.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace Round42.Managers
             {
                 this.currentAsset.Shapes.ForEach(s => s.RemoveRowBottom());
                 this.currentAsset.Rows--;
-                this.TriggerOnCurrentAssetChanged();
+                this.OnFrameSelected.Invoke(this.currentFrame);
             }
         }
 
@@ -306,7 +306,7 @@ namespace Round42.Managers
             {
                 this.currentAsset.Shapes.ForEach(s => s.RemoveColumnLeft());
                 this.currentAsset.Columns--;
-                this.TriggerOnCurrentAssetChanged();
+                this.OnFrameSelected.Invoke(this.currentFrame);
             }
         }
 
@@ -319,7 +319,7 @@ namespace Round42.Managers
             {
                 this.currentAsset.Shapes.ForEach(s => s.RemoveColumnRight());
                 this.currentAsset.Columns--;
-                this.TriggerOnCurrentAssetChanged();
+                this.OnFrameSelected.Invoke(this.currentFrame);
             }
         }
 

@@ -218,17 +218,6 @@ namespace Round42.AssetEditor.Forms
         }
 
         /// <summary>
-        /// Handles the FormClosing event of the MainForm control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="FormClosingEventArgs" /> instance containing the event data.</param>
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.assetManager.Save();
-            Settings.Default.Save();
-        }
-
-        /// <summary>
         /// Handles the SelectedIndexChanged event of the SelectFrameCombobox control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -388,10 +377,77 @@ namespace Round42.AssetEditor.Forms
             this.assetManager.MoveLeft();
         }
 
+        /// <summary>
+        /// Handles the Scroll event of the ButtonSize control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ButtonSize_Scroll(object sender, EventArgs e)
         {
             this.drawer.RedrawButtons(this.ButtonSize.Value);
             Settings.Default.ZoomLevel = this.ButtonSize.Value;
+        }
+
+        /// <summary>
+        /// Handles the ShapeOrPositionChanged event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void MainForm_ShapeOrPositionChanged(object sender, EventArgs e)
+        {
+            Settings.Default.Top = this.Top;
+            Settings.Default.Left = this.Left;
+            Settings.Default.Height = this.Height;
+            Settings.Default.Width = this.Width;
+        }
+
+        /// <summary>
+        /// Handles the FormClosing event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="FormClosingEventArgs" /> instance containing the event data.</param>
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.assetManager.Save();
+            Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Determines whether [is form open] [the specified form type].
+        /// </summary>
+        /// <param name="formType">Type of the form.</param>
+        /// <returns>
+        ///   <c>true</c> if [is form open] [the specified form type]; otherwise, <c>false</c>.
+        /// </returns>
+        private bool IsFormOpen(Type formType)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType().Name == form.Name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Handles the Shown event of the MainForm control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            // Set stored position and size
+            this.Left = Settings.Default.Left;
+            this.Top = Settings.Default.Top;
+            this.Width = Settings.Default.Width;
+            this.Height = Settings.Default.Height;
+
+            // Bind event after form is shown so it is only triggered after initual values are set.
+            this.Resize += this.MainForm_ShapeOrPositionChanged;
+            this.Move += this.MainForm_ShapeOrPositionChanged;
         }
     }
 }
