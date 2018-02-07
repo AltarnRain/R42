@@ -43,6 +43,7 @@
             this.DrawerPanel = new System.Windows.Forms.Panel();
             this.PaletPanel = new System.Windows.Forms.Panel();
             this.Tools = new System.Windows.Forms.Panel();
+            this.ButtonSize = new System.Windows.Forms.TrackBar();
             this.RemoveTopRowButton = new System.Windows.Forms.Button();
             this.AddRowTopButton = new System.Windows.Forms.Button();
             this.RemoveLeftColumnButton = new System.Windows.Forms.Button();
@@ -68,6 +69,7 @@
             this.AnimatorTab.SuspendLayout();
             this.AnimationTab.SuspendLayout();
             this.Tools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ButtonSize)).BeginInit();
             this.SuspendLayout();
             // 
             // ListPanel
@@ -180,9 +182,9 @@
             // 
             this.DrawerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DrawerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DrawerPanel.Location = new System.Drawing.Point(96, 31);
+            this.DrawerPanel.Location = new System.Drawing.Point(131, 31);
             this.DrawerPanel.Name = "DrawerPanel";
-            this.DrawerPanel.Size = new System.Drawing.Size(594, 347);
+            this.DrawerPanel.Size = new System.Drawing.Size(559, 347);
             this.DrawerPanel.TabIndex = 1;
             this.DrawerPanel.Resize += new System.EventHandler(this.DrawerPanel_Resize);
             // 
@@ -190,14 +192,15 @@
             // 
             this.PaletPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PaletPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PaletPanel.Location = new System.Drawing.Point(96, 3);
+            this.PaletPanel.Location = new System.Drawing.Point(131, 3);
             this.PaletPanel.Name = "PaletPanel";
-            this.PaletPanel.Size = new System.Drawing.Size(594, 28);
+            this.PaletPanel.Size = new System.Drawing.Size(559, 28);
             this.PaletPanel.TabIndex = 0;
             // 
             // Tools
             // 
             this.Tools.BackColor = System.Drawing.Color.Silver;
+            this.Tools.Controls.Add(this.ButtonSize);
             this.Tools.Controls.Add(this.RemoveTopRowButton);
             this.Tools.Controls.Add(this.AddRowTopButton);
             this.Tools.Controls.Add(this.RemoveLeftColumnButton);
@@ -221,8 +224,18 @@
             this.Tools.Dock = System.Windows.Forms.DockStyle.Left;
             this.Tools.Location = new System.Drawing.Point(3, 3);
             this.Tools.Name = "Tools";
-            this.Tools.Size = new System.Drawing.Size(93, 375);
+            this.Tools.Size = new System.Drawing.Size(128, 375);
             this.Tools.TabIndex = 0;
+            // 
+            // ButtonSize
+            // 
+            this.ButtonSize.Location = new System.Drawing.Point(86, 26);
+            this.ButtonSize.Maximum = 100;
+            this.ButtonSize.Name = "ButtonSize";
+            this.ButtonSize.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.ButtonSize.Size = new System.Drawing.Size(45, 311);
+            this.ButtonSize.TabIndex = 20;
+            this.ButtonSize.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             // 
             // RemoveTopRowButton
             // 
@@ -441,6 +454,7 @@
             this.AnimationTab.ResumeLayout(false);
             this.Tools.ResumeLayout(false);
             this.Tools.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ButtonSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -483,6 +497,7 @@
         private System.Windows.Forms.Button RemoveLeftColumnButton;
         private System.Windows.Forms.Button AddColumnLeftButton;
         private System.Windows.Forms.ToolStripMenuItem removeAssetToolStripMenuItem;
+        private System.Windows.Forms.TrackBar ButtonSize;
     }
 }
 

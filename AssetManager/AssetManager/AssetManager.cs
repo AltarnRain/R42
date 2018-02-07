@@ -318,7 +318,7 @@ namespace Round42.Managers
         {
             if (this.currentAsset.Columns > 1)
             {
-                this.currentAsset.Shapes.ForEach(s => s.RemoveColumnLeft());
+                this.currentAsset.Shapes.ForEach(s => s.RemoveColumnRight());
                 this.currentAsset.Columns--;
                 this.TriggerOnCurrentAssetChanged();
             }
