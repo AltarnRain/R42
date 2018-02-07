@@ -26,13 +26,49 @@ namespace Round242.Tests.Extentions
         /// Tests the AddRow extention method
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsAddRow()
+        public void ShapeModelExtentionsAddRowTop()
         {
             // Arrange
             const int columns = 5;
             const int rows = 10;
             var shapeProvider = this.Get<ShapeProvider>();
             var shape = shapeProvider.Create(columns, rows);
+
+            this.MakeRowRed(shape, 10);
+
+            // Act
+            shape.AddRowTop();
+
+            // Assert
+            var numberOfBlocks = shape.Blocks.Count();
+            Assert.AreEqual(55, numberOfBlocks);
+
+            var newRow = shape.GetRow(rows + 1);
+            Assert.AreEqual(5, newRow.Count());
+
+            for (var col = 0; col < columns; col++)
+            {
+                var foundBlock = shape.Blocks.Any(b => b.Column == col + 1 && b.Row == rows + 1);
+                Assert.IsTrue(foundBlock);
+            }
+
+            var expectedRowIsRed = shape.GetRow(11).All(b => b.Color == Color.Red);
+            Assert.IsTrue(expectedRowIsRed);
+        }
+
+        /// <summary>
+        /// Tests the AddRow extention method
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsAddRowBottom()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            this.MakeRowRed(shape, 10);
 
             // Act
             shape.AddRowBottom();
@@ -49,19 +85,113 @@ namespace Round242.Tests.Extentions
                 var foundBlock = shape.Blocks.Any(b => b.Column == col + 1 && b.Row == rows + 1);
                 Assert.IsTrue(foundBlock);
             }
+
+            var expectedRowIsRed = shape.GetRow(10).All(b => b.Color == Color.Red);
+            Assert.IsTrue(expectedRowIsRed);
+
+            var bottomRowIsBlack = shape.GetRow(11).All(b => b.Color == Color.Black);
+            Assert.IsTrue(bottomRowIsBlack);
         }
 
         /// <summary>
-        /// Tests the AddColumn extention method.
+        /// Tests the AddRow extention method
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsAddColumn()
+        public void ShapeModelExtentionsRemoveRowTop()
         {
             // Arrange
             const int columns = 5;
             const int rows = 10;
             var shapeProvider = this.Get<ShapeProvider>();
             var shape = shapeProvider.Create(columns, rows);
+
+            this.MakeRowRed(shape, 10);
+
+            // Act
+            shape.RemoveRowTop();
+
+            // Assert
+            var numberOfBlocks = shape.Blocks.Count();
+            Assert.AreEqual(45, numberOfBlocks);
+
+            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color == Color.Red);
+            Assert.IsTrue(expectedRowIsRed);
+            Assert.AreEqual(9, shape.LastRow());
+        }
+
+        /// <summary>
+        /// Tests the AddRow extention method
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsRemoveRowBottom()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            this.MakeRowRed(shape, 9);
+
+            // Act
+            shape.RemoveRowBottom();
+
+            // Assert
+            var numberOfBlocks = shape.Blocks.Count();
+            Assert.AreEqual(45, numberOfBlocks);
+
+            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color == Color.Red);
+            Assert.IsTrue(expectedRowIsRed);
+            Assert.AreEqual(9, shape.LastRow());
+        }
+
+        /// <summary>
+        /// Tests the AddColumn extention method.
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsAddColumnLeft()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            this.MakeColumnRed(shape, 5);
+
+            // Act
+            shape.AddColumnLeft();
+
+            // Assert
+            var numberOfBlocks = shape.Blocks.Count();
+            Assert.AreEqual(60, numberOfBlocks);
+
+            var newColumn = shape.GetColumn(columns + 1);
+            Assert.AreEqual(rows, newColumn.Count());
+
+            for (var row = 0; row < rows; row++)
+            {
+                var foundBlock = shape.Blocks.Any(b => b.Row == row + 1 && b.Column == columns + 1);
+                Assert.IsTrue(foundBlock);
+            }
+
+            var expectedColumnIsRed = shape.GetColumn(6).All(b => b.Color == Color.Red);
+            Assert.IsTrue(expectedColumnIsRed);
+        }
+
+        /// <summary>
+        /// Tests the AddColumn extention method.
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsAddColumnRight()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            this.MakeColumnRed(shape, 5);
 
             // Act
             shape.AddColumnRight();
@@ -78,6 +208,61 @@ namespace Round242.Tests.Extentions
                 var foundBlock = shape.Blocks.Any(b => b.Row == row + 1 && b.Column == columns + 1);
                 Assert.IsTrue(foundBlock);
             }
+
+            var expectedColumnIsRed = shape.GetColumn(5).All(b => b.Color == Color.Red);
+            Assert.IsTrue(expectedColumnIsRed);
+        }
+
+        /// <summary>
+        /// Tests the AddColumn extention method.
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsRemoveColumnLeft()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            this.MakeColumnRed(shape, 5);
+
+            // Act
+            shape.RemoveColumnLeft();
+
+            // Assert
+            var numberOfBlocks = shape.Blocks.Count();
+            Assert.AreEqual(40, numberOfBlocks);
+
+            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color == Color.Red);
+            Assert.IsTrue(expectedColumnIsRed);
+            Assert.AreEqual(4, shape.LastColumn());
+        }
+
+        /// <summary>
+        /// Tests the AddColumn extention method.
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsRemoveColumnRight()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            this.MakeColumnRed(shape, 4);
+
+            // Act
+            shape.RemoveColumnRight();
+
+            // Assert
+            var numberOfBlocks = shape.Blocks.Count();
+            Assert.AreEqual(40, numberOfBlocks);
+
+            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color == Color.Red);
+            Assert.IsTrue(expectedColumnIsRed);
+            Assert.AreEqual(4, shape.LastColumn());
         }
 
         /// <summary>
@@ -190,6 +375,26 @@ namespace Round242.Tests.Extentions
             // Assert
             var isRed = shape.GetColumn(1).All(b => b.Color == Color.Red);
             Assert.IsTrue(isRed);
+        }
+
+        /// <summary>
+        /// Makes the column red.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        /// <param name="column">The column.</param>
+        private void MakeColumnRed(ShapeModel shapeModel, int column)
+        {
+            shapeModel.Blocks.Where(b => b.Column == column).ToList().ForEach(b => b.Color = Color.Red);
+        }
+
+        /// <summary>
+        /// Makes the row red.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        /// <param name="row">The row.</param>
+        private void MakeRowRed(ShapeModel shapeModel, int row)
+        {
+            shapeModel.Blocks.Where(b => b.Row == row).ToList().ForEach(b => b.Color = Color.Red);
         }
     }
 }

@@ -291,7 +291,7 @@ namespace Round42.Managers
         {
             if (this.currentAsset.Rows > 1)
             {
-                this.currentAsset.Shapes.ForEach(s => s.RemoveRowRight());
+                this.currentAsset.Shapes.ForEach(s => s.RemoveRowBottom());
                 this.currentAsset.Rows--;
                 this.TriggerOnCurrentAssetChanged();
             }

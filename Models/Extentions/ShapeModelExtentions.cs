@@ -175,7 +175,7 @@ namespace Round42.Models.Extentions
         /// Removes the last row.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        public static void RemoveRowRight(this ShapeModel shapeModel)
+        public static void RemoveRowBottom(this ShapeModel shapeModel)
         {
             shapeModel.Blocks.RemoveAll(b => b.Row == shapeModel.LastRow());
         }
@@ -209,7 +209,7 @@ namespace Round42.Models.Extentions
         public static void MoveDown(this ShapeModel shapeModel)
         {
             shapeModel.AddRowTop();
-            shapeModel.RemoveRowRight();
+            shapeModel.RemoveRowBottom();
         }
 
         /// <summary>
