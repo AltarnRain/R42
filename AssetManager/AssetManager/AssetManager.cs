@@ -159,7 +159,7 @@ namespace Round42.Managers
         /// </summary>
         public void AddShapeToAsset()
         {
-            var newShape = this.shapeProvider.Create(this.currentAsset.Columns, this.currentAsset.Rows);
+            var newShape = this.shapeProvider.Create(this.currentAsset.Shapes.First().LastColumn(), this.currentAsset.Shapes.First().LastRow());
             this.currentAsset.Shapes.Add(newShape);
             this.TriggerOnCurrentAssetChanged();
         }
@@ -228,8 +228,7 @@ namespace Round42.Managers
                 shape.AddColumnLeft();
             }
 
-            this.currentAsset.Columns++;
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnFrameSelected?.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -242,8 +241,7 @@ namespace Round42.Managers
                 shape.AddColumnRight();
             }
 
-            this.currentAsset.Columns++;
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnFrameSelected?.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -256,8 +254,7 @@ namespace Round42.Managers
                 shape.AddRowTop();
             }
 
-            this.currentAsset.Rows++;
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnFrameSelected?.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -270,7 +267,6 @@ namespace Round42.Managers
                 shape.AddRowBottom();
             }
 
-            this.currentAsset.Rows++;
             this.OnFrameSelected.Invoke(this.currentFrame);
         }
 
@@ -280,7 +276,6 @@ namespace Round42.Managers
         public void RemoveRowTop()
         {
             this.currentFrame.RemoveRowTop();
-            this.currentAsset.Rows--;
             this.OnFrameSelected.Invoke(this.currentFrame);
         }
 
@@ -289,10 +284,9 @@ namespace Round42.Managers
         /// </summary>
         public void RemoveRowBottom()
         {
-            if (this.currentAsset.Rows > 1)
+            if (this.currentAsset.Shapes.First().LastRow() > 1)
             {
                 this.currentAsset.Shapes.ForEach(s => s.RemoveRowBottom());
-                this.currentAsset.Rows--;
                 this.OnFrameSelected.Invoke(this.currentFrame);
             }
         }
@@ -302,10 +296,9 @@ namespace Round42.Managers
         /// </summary>
         public void RemoveColumnLeft()
         {
-            if (this.currentAsset.Columns > 1)
+            if (this.currentAsset.Shapes.First().LastColumn() > 1)
             {
                 this.currentAsset.Shapes.ForEach(s => s.RemoveColumnLeft());
-                this.currentAsset.Columns--;
                 this.OnFrameSelected.Invoke(this.currentFrame);
             }
         }
@@ -315,12 +308,27 @@ namespace Round42.Managers
         /// </summary>
         public void RemoveColumnRight()
         {
-            if (this.currentAsset.Columns > 1)
+            if (this.currentAsset.Shapes.First().LastColumn() > 1)
             {
                 this.currentAsset.Shapes.ForEach(s => s.RemoveColumnRight());
-                this.currentAsset.Columns--;
                 this.OnFrameSelected.Invoke(this.currentFrame);
             }
+        }
+
+        /// <summary>
+        /// Crops the images for the shapes in the current asset.
+        /// </summary>
+        public void CropImages()
+        {
+            if (this.currentAsset != null)
+            {
+                foreach (var shape in this.currentAsset.Shapes)
+                {
+                    shape.CropImage();
+                }
+            }
+
+            this.TriggerOnCurrentAssetChanged();
         }
 
         /// <summary>
@@ -417,6 +425,7 @@ namespace Round42.Managers
 
             var asset = this.Assets.Single(a => a.Name == assetName);
             this.currentAsset = asset;
+            this.currentFrame = asset.Shapes.First();
         }
     }
 }

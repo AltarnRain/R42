@@ -266,6 +266,37 @@ namespace Round242.Tests.Extentions
         }
 
         /// <summary>
+        /// Tests the AddColumn extention method.
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsCropImage()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            this.MakeRowRed(shape, 2);
+            this.MakeRowRed(shape, 3);
+            this.MakeRowRed(shape, 4);
+
+            // Set first and last columns of row
+            for (int row = 1; row < 5; row++)
+            {
+                shape.GetRow(row).ToList()[0].Color = Color.Black;
+                shape.GetRow(row).ToList()[4].Color = Color.Black;
+            }
+
+            // Act
+            shape.CropImage();
+
+            // Assert
+            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color == Color.Red);
+            Assert.AreEqual(9, numberOfRedBlocks);
+        }
+
+        /// <summary>
         /// move up test.
         /// </summary>
         [TestMethod]

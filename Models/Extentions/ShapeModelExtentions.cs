@@ -148,8 +148,7 @@ namespace Round42.Models.Extentions
         /// <param name="shapeModel">The shape model.</param>
         public static void RemoveColumnLeft(this ShapeModel shapeModel)
         {
-            shapeModel.Blocks.RemoveAll(b => b.Column == shapeModel.FirstColumn());
-            shapeModel.Blocks.ForEach(b => b.Column = b.Column - 1);
+            shapeModel.RemoveColumn(shapeModel.FirstColumn());
         }
 
         /// <summary>
@@ -158,7 +157,7 @@ namespace Round42.Models.Extentions
         /// <param name="shapeModel">The shape model.</param>
         public static void RemoveColumnRight(this ShapeModel shapeModel)
         {
-            shapeModel.Blocks.RemoveAll(b => b.Column == shapeModel.LastColumn());
+            shapeModel.RemoveColumn(shapeModel.LastColumn());
         }
 
         /// <summary>
@@ -167,8 +166,7 @@ namespace Round42.Models.Extentions
         /// <param name="shapeModel">The shape model.</param>
         public static void RemoveRowTop(this ShapeModel shapeModel)
         {
-            shapeModel.Blocks.RemoveAll(b => b.Row == shapeModel.FirstRow());
-            shapeModel.Blocks.ForEach(b => b.Row = b.Row - 1);
+            shapeModel.RemoveRow(shapeModel.FirstRow());
         }
 
         /// <summary>
@@ -177,7 +175,7 @@ namespace Round42.Models.Extentions
         /// <param name="shapeModel">The shape model.</param>
         public static void RemoveRowBottom(this ShapeModel shapeModel)
         {
-            shapeModel.Blocks.RemoveAll(b => b.Row == shapeModel.LastRow());
+            shapeModel.RemoveRow(shapeModel.LastRow());
         }
 
         /// <summary>
@@ -230,6 +228,51 @@ namespace Round42.Models.Extentions
         {
             shapeModel.RemoveColumnLeft();
             shapeModel.AddColumnRight();
+        }
+
+        /// <summary>
+        /// Removes the row.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        /// <param name="row">The row.</param>
+        public static void RemoveRow(this ShapeModel shapeModel, int row)
+        {
+            shapeModel.Blocks.RemoveAll(b => b.Row == row);
+            shapeModel.Blocks.Where(b => b.Row > row).ToList().ForEach(b => b.Row = b.Row - 1);
+        }
+
+        /// <summary>
+        /// Removes the column.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        /// <param name="column">The column.</param>
+        public static void RemoveColumn(this ShapeModel shapeModel, int column)
+        {
+             shapeModel.Blocks.RemoveAll(b => b.Column == column);
+             shapeModel.Blocks.Where(b => b.Column > column).ToList().ForEach(b => b.Column = b.Column - 1);
+        }
+
+        /// <summary>
+        /// Crops the image.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        public static void CropImage(this ShapeModel shapeModel)
+        {
+            for (int row = shapeModel.LastRow(); row >= 1; row--)
+            {
+                if (shapeModel.GetRow(row).All(b => b.Color == Color.Black))
+                {
+                    shapeModel.RemoveRow(row);
+                }
+            }
+
+            for (int col = shapeModel.LastColumn(); col >= 1; col--)
+            {
+                if (shapeModel.GetColumn(col).All(b => b.Color == Color.Black))
+                {
+                    shapeModel.RemoveColumn(col);
+                }
+            }
         }
     }
 }

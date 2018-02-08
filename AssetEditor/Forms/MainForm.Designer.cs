@@ -65,6 +65,8 @@
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SelectFrameCombobox = new System.Windows.Forms.ComboBox();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cropShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ListPanel.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.AnimatorTab.SuspendLayout();
@@ -123,7 +125,9 @@
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AddAsset,
-            this.removeAssetToolStripMenuItem});
+            this.removeAssetToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.cropShapesToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -131,14 +135,14 @@
             // AddAsset
             // 
             this.AddAsset.Name = "AddAsset";
-            this.AddAsset.Size = new System.Drawing.Size(148, 22);
+            this.AddAsset.Size = new System.Drawing.Size(152, 22);
             this.AddAsset.Text = "Add Asset";
             this.AddAsset.Click += new System.EventHandler(this.AddAsset_Click);
             // 
             // removeAssetToolStripMenuItem
             // 
             this.removeAssetToolStripMenuItem.Name = "removeAssetToolStripMenuItem";
-            this.removeAssetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.removeAssetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.removeAssetToolStripMenuItem.Text = "Remove Asset";
             this.removeAssetToolStripMenuItem.Click += new System.EventHandler(this.RemoveAsset_Click);
             // 
@@ -230,7 +234,7 @@
             // 
             // Render
             // 
-            this.Render.Location = new System.Drawing.Point(6, 328);
+            this.Render.Location = new System.Drawing.Point(6, 312);
             this.Render.Name = "Render";
             this.Render.Size = new System.Drawing.Size(75, 23);
             this.Render.TabIndex = 21;
@@ -456,6 +460,18 @@
             this.SelectFrameCombobox.TabIndex = 0;
             this.SelectFrameCombobox.SelectedIndexChanged += new System.EventHandler(this.SelectFrameCombobox_SelectedIndexChanged);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // cropShapesToolStripMenuItem
+            // 
+            this.cropShapesToolStripMenuItem.Name = "cropShapesToolStripMenuItem";
+            this.cropShapesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cropShapesToolStripMenuItem.Text = "Crop Shapes";
+            this.cropShapesToolStripMenuItem.Click += new System.EventHandler(this.CropShapesToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -520,6 +536,8 @@
         private System.Windows.Forms.ToolStripMenuItem removeAssetToolStripMenuItem;
         private System.Windows.Forms.TrackBar ButtonSize;
         private System.Windows.Forms.Button Render;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cropShapesToolStripMenuItem;
     }
 }
 

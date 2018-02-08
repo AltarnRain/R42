@@ -150,21 +150,25 @@ namespace Round42.Tests
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.LoadByName("Test");
 
-            assetManager.AddShapeToAsset("Test");
+            var numberOfColumns = 0;
+            var numberOfRows = 0;
 
-            assetManager.OnAssetsLoaded += (IEnumerable<AssetModel> assets) =>
+            assetManager.OnCurrentAssetChanged += (AssetModel assets) =>
             {
                 // Assert
-                Assert.AreEqual(11, assets.First().Shapes.Count());
+                Assert.AreEqual(11, assets.Shapes.Count());
 
-                var addedShape = assets.First().Shapes.Last();
-                Assert.AreEqual(15, addedShape.LastColumn());
-                Assert.AreEqual(2, addedShape.LastRow());
+                var addedShape = assets.Shapes.Last();
+                numberOfColumns = addedShape.LastColumn();
+                numberOfRows = addedShape.LastRow();
             };
 
             // Act
             assetManager.AddShapeToAsset();
+            Assert.AreEqual(15, numberOfColumns);
+            Assert.AreEqual(2, numberOfRows);
         }
 
         /// <summary>
@@ -179,14 +183,16 @@ namespace Round42.Tests
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
             assetManager.LoadByName("Test");
 
+            var numberOfShapes = 0;
             assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
             {
                 // Assert
-                Assert.AreEqual(9, asset.Shapes.Count());
+                numberOfShapes = asset.Shapes.Count();
             };
 
             // Act
             assetManager.RemoveShapeFromAsset(0);
+            Assert.AreEqual(9, numberOfShapes);
         }
 
         /// <summary>
@@ -200,14 +206,17 @@ namespace Round42.Tests
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
             assetManager.LoadByName("Test");
-            assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
+
+            var numberOfColumns = 0;
+            assetManager.OnFrameSelected += (ShapeModel shapeModel) =>
             {
                 // Assert
-                Assert.AreEqual(16, asset.Columns);
+                numberOfColumns = shapeModel.LastColumn();
             };
 
             // Act
             assetManager.AddColumnLeft();
+            Assert.AreEqual(16, numberOfColumns);
         }
 
         /// <summary>
@@ -222,13 +231,14 @@ namespace Round42.Tests
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
             assetManager.LoadByName("Test");
 
-            assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
+            var lastColumn = 0;
+            assetManager.OnFrameSelected += (ShapeModel shape) =>
             {
-                Assert.AreEqual(14, asset.Columns);
-                Assert.AreEqual(14, asset.Shapes.First().Blocks.Count(b => b.Row == 1));
+                lastColumn = shape.LastColumn();
             };
 
             assetManager.RemoveColumnLeft();
+            Assert.AreEqual(14, lastColumn);
         }
 
         /// <summary>
@@ -243,13 +253,14 @@ namespace Round42.Tests
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
             assetManager.LoadByName("Test");
 
-            assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
+            var lastRow = 0;
+            assetManager.OnFrameSelected += (ShapeModel shape) =>
             {
-                Assert.AreEqual(1, asset.Rows);
-                Assert.AreEqual(1, asset.Shapes.First().Blocks.Count(b => b.Column == 1));
+                lastRow = shape.LastRow();
             };
 
             assetManager.RemoveRowBottom();
+            Assert.AreEqual(1, lastRow);
         }
 
         /// <summary>

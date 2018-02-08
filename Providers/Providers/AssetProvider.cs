@@ -40,9 +40,7 @@ namespace Round42.Providers
             var returnValue = new AssetModel
             {
                 AssetType = assetType,
-                Name = name,
-                Columns = columns,
-                Rows = rows
+                Name = name
             };
 
             returnValue.Shapes = new List<ShapeModel>();

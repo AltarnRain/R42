@@ -163,10 +163,10 @@ namespace Round42.AssetEditor.Forms
         private void UpdateAssetList(IEnumerable<AssetModel> assets)
         {
             var assetNames = assets.Select(a => a.Name).ToArray();
+            this.AssetListBox.Items.Clear();
 
             if (assetNames.Length > 0)
             {
-                this.AssetListBox.Items.Clear();
                 this.AssetListBox.Items.AddRange(assetNames);
                 this.AssetListBox.SelectedIndex = 0;
             }
@@ -235,6 +235,7 @@ namespace Round42.AssetEditor.Forms
         private void AddFrameButton_Click(object sender, EventArgs e)
         {
             this.assetManager.AddShapeToAsset();
+            this.SelectFrameCombobox.SelectedIndex = this.SelectFrameCombobox.Items.Count - 1;
         }
 
         /// <summary>
@@ -245,6 +246,7 @@ namespace Round42.AssetEditor.Forms
         private void RemoveFrameButton_Click(object sender, EventArgs e)
         {
             this.assetManager.RemoveShapeFromAsset(this.SelectFrameCombobox.SelectedIndex);
+            this.SelectFrameCombobox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -448,6 +450,16 @@ namespace Round42.AssetEditor.Forms
             // Bind event after form is shown so it is only triggered after initual values are set.
             this.Resize += this.MainForm_ShapeOrPositionChanged;
             this.Move += this.MainForm_ShapeOrPositionChanged;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the CropShapesToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void CropShapesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.assetManager.CropImages();
         }
     }
 }
