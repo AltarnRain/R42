@@ -47,20 +47,28 @@ namespace Round42.Models
         }
 
         /// <summary>
-        /// Gets or sets the x.
+        /// Gets or sets the column.
         /// </summary>
         /// <value>
-        /// The x.
+        /// The column.
         /// </value>
         public int Column { get; set; }
 
         /// <summary>
-        /// Gets or sets the y.
+        /// Gets or sets the row.
         /// </summary>
         /// <value>
-        /// The y.
+        /// The row.
         /// </value>
         public int Row { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="BlockModel"/> an anchor.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if anchor; otherwise, <c>false</c>.
+        /// </value>
+        public bool Anchor { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the color.

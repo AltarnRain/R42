@@ -272,21 +272,12 @@ namespace Round242.Tests.Extentions
         public void ShapeModelExtentionsCropImage()
         {
             // Arrange
-            const int columns = 5;
-            const int rows = 10;
+            const int columns = 6;
+            const int rows = 6;
             var shapeProvider = this.Get<ShapeProvider>();
             var shape = shapeProvider.Create(columns, rows);
 
-            this.MakeRowRed(shape, 2);
-            this.MakeRowRed(shape, 3);
-            this.MakeRowRed(shape, 4);
-
-            // Set first and last columns of row
-            for (int row = 1; row < 5; row++)
-            {
-                shape.GetRow(row).ToList()[0].Color = Color.Black;
-                shape.GetRow(row).ToList()[4].Color = Color.Black;
-            }
+            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b => b.Color = Color.Red);
 
             // Act
             shape.CropImage();
@@ -294,6 +285,7 @@ namespace Round242.Tests.Extentions
             // Assert
             var numberOfRedBlocks = shape.Blocks.Count(b => b.Color == Color.Red);
             Assert.AreEqual(9, numberOfRedBlocks);
+            Assert.AreEqual(9, shape.Blocks.Count());
         }
 
         /// <summary>

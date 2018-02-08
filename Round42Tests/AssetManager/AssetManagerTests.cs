@@ -204,7 +204,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", AssetTypes.Enemy, 1, 15, 2);
             assetManager.LoadByName("Test");
 
             var numberOfColumns = 0;
@@ -220,15 +220,39 @@ namespace Round42.Tests
         }
 
         /// <summary>
-        /// Tests the add column.
+        /// Assets the manager add column right.
         /// </summary>
         [TestMethod]
-        public void AssetManagerRemoveLastColumn()
+        public void AssetManagerAddColumnRight()
         {
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", AssetTypes.Enemy, 1, 15, 2);
+            assetManager.LoadByName("Test");
+
+            var numberOfColumns = 0;
+            assetManager.OnFrameSelected += (ShapeModel shapeModel) =>
+            {
+                // Assert
+                numberOfColumns = shapeModel.LastColumn();
+            };
+
+            // Act
+            assetManager.AddColumnLeft();
+            Assert.AreEqual(16, numberOfColumns);
+        }
+
+        /// <summary>
+        /// Assets the manager remove column left.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerRemoveColumnLeft()
+        {
+            // Arrange
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", AssetTypes.Enemy, 1, 2, 2);
             assetManager.LoadByName("Test");
 
             var lastColumn = 0;
@@ -238,14 +262,40 @@ namespace Round42.Tests
             };
 
             assetManager.RemoveColumnLeft();
-            Assert.AreEqual(14, lastColumn);
+            Assert.AreEqual(1, lastColumn);
+            assetManager.RemoveColumnLeft();
+            Assert.AreEqual(1, lastColumn);
         }
 
         /// <summary>
         /// Tests the add column.
         /// </summary>
         [TestMethod]
-        public void AssetManagerRemoveLastRow()
+        public void AssetManagerRemoveColumnRight()
+        {
+            // Arrange
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 2, 2);
+            assetManager.LoadByName("Test");
+
+            var lastColumn = 0;
+            assetManager.OnFrameSelected += (ShapeModel shape) =>
+            {
+                lastColumn = shape.LastColumn();
+            };
+
+            assetManager.RemoveColumnLeft();
+            Assert.AreEqual(1, lastColumn);
+            assetManager.RemoveColumnLeft();
+            Assert.AreEqual(1, lastColumn);
+        }
+
+        /// <summary>
+        /// Tests the add column.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerRemoveTopRow()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -259,6 +309,32 @@ namespace Round42.Tests
                 lastRow = shape.LastRow();
             };
 
+            assetManager.RemoveRowBottom();
+            Assert.AreEqual(1, lastRow);
+            assetManager.RemoveRowBottom();
+            Assert.AreEqual(1, lastRow);
+        }
+
+        /// <summary>
+        /// Assets the manager remove bottom row.
+        /// </summary>
+        [TestMethod]
+        public void AssetManagerRemoveBottomRow()
+        {
+            // Arrange
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.LoadByName("Test");
+
+            var lastRow = 0;
+            assetManager.OnFrameSelected += (ShapeModel shape) =>
+            {
+                lastRow = shape.LastRow();
+            };
+
+            assetManager.RemoveRowBottom();
+            Assert.AreEqual(1, lastRow);
             assetManager.RemoveRowBottom();
             Assert.AreEqual(1, lastRow);
         }
