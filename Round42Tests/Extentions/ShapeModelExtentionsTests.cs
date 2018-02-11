@@ -26,7 +26,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddRow extention method
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsAddRowTop()
+        public void AddRowTop()
         {
             // Arrange
             const int columns = 5;
@@ -60,7 +60,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddRow extention method
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsAddRowBottom()
+        public void AddRowBottom()
         {
             // Arrange
             const int columns = 5;
@@ -97,7 +97,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddRow extention method
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsRemoveRowTop()
+        public void RemoveRowTop()
         {
             // Arrange
             const int columns = 5;
@@ -123,7 +123,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddRow extention method
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsRemoveRowBottom()
+        public void RemoveRowBottom()
         {
             // Arrange
             const int columns = 5;
@@ -149,7 +149,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddColumn extention method.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsAddColumnLeft()
+        public void AddColumnLeft()
         {
             // Arrange
             const int columns = 5;
@@ -183,7 +183,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddColumn extention method.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsAddColumnRight()
+        public void AddColumnRight()
         {
             // Arrange
             const int columns = 5;
@@ -217,7 +217,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddColumn extention method.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsRemoveColumnLeft()
+        public void RemoveColumnLeft()
         {
             // Arrange
             const int columns = 5;
@@ -243,7 +243,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddColumn extention method.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsRemoveColumnRight()
+        public void RemoveColumnRight()
         {
             // Arrange
             const int columns = 5;
@@ -269,7 +269,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddColumn extention method.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsCropImage()
+        public void CropImage()
         {
             // Arrange
             const int columns = 6;
@@ -292,7 +292,7 @@ namespace Round242.Tests.Extentions
         /// Tests the AddColumn extention method.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsCropImageWithInnerBlackSpace()
+        public void CropImageWithInnerBlackSpace()
         {
             // Arrange
             const int columns = 6;
@@ -319,7 +319,7 @@ namespace Round242.Tests.Extentions
         /// move up test.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsMoveUp()
+        public void MoveUp()
         {
             // Arrange
             const int columns = 5;
@@ -347,7 +347,7 @@ namespace Round242.Tests.Extentions
         /// move down test.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsMoveDown()
+        public void MoveDown()
         {
             // Arrange
             const int columns = 5;
@@ -375,7 +375,7 @@ namespace Round242.Tests.Extentions
         /// move down test.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsMoveRight()
+        public void MoveRight()
         {
             // Arrange
             const int columns = 5;
@@ -403,7 +403,7 @@ namespace Round242.Tests.Extentions
         /// move left test.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsMoveLeft()
+        public void MoveLeft()
         {
             // Arrange
             const int columns = 5;
@@ -431,7 +431,7 @@ namespace Round242.Tests.Extentions
         /// Tests if the anchor is removed from a block.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsSetAnchors()
+        public void SetAnchors()
         {
             // Arrange
             const int columns = 5;
@@ -454,7 +454,7 @@ namespace Round242.Tests.Extentions
         /// Tests if the anchor is removed from a block.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsRetrieveAcnhor()
+        public void RetrieveAcnhor()
         {
             // Arrange
             const int columns = 5;
@@ -475,7 +475,7 @@ namespace Round242.Tests.Extentions
         /// Tests if the anchor is removed from a block.
         /// </summary>
         [TestMethod]
-        public void ShapeModelExtentionsRemoveAnchors()
+        public void RemoveAnchors()
         {
             // Arrange
             const int columns = 5;

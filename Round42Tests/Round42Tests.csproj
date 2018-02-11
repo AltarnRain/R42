@@ -51,6 +51,7 @@
     <Compile Include="Providers\AssetProviderTests.cs" />
     <Compile Include="Providers\ShapeProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Render\RenderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

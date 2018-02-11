@@ -23,7 +23,7 @@ namespace Round42.Tests
         /// Tests the creation of the drawer component.
         /// </summary>
         [TestMethod]
-        public void DrawerCreateTest()
+        public void CreateTest()
         {
             // Arrange
             var shapeModel = this.Get<ShapeProvider>().Create(3, 5);

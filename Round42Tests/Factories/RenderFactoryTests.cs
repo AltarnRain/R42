@@ -31,7 +31,7 @@ namespace Round42.Tests
         /// Creates the asset manager.
         /// </summary>
         [TestMethod]
-        public void CreateAssetManager()
+        public void CreateRender()
         {
             var factory = this.Get<RenderFactory>();
 

@@ -18,7 +18,7 @@ namespace Round42.Tests
         /// Gets the block.
         /// </summary>
         [TestMethod]
-        public void ShapeProviderCreate()
+        public void CreateTest()
         {
             // Arrange
             var x = 10;
@@ -39,7 +39,7 @@ namespace Round42.Tests
         /// Checks the shape dimensions.
         /// </summary>
         [TestMethod]
-        public void ShapeProviderCheckShapeDimensions()
+        public void CheckShapeDimensions()
         {
             // Arrange
             var x = 10;

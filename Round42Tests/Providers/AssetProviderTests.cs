@@ -19,7 +19,7 @@ namespace Round42.Tests
         /// Assets the model create test.
         /// </summary>
         [TestMethod]
-        public void AssetModelCreateTest()
+        public void CreateTest()
         {
             var model = this.Get<AssetProvider>().Create("PlayerShip", AssetTypes.Player, 3, 5, 6);
 

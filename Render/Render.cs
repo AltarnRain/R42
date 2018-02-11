@@ -36,10 +36,13 @@ namespace Render
         /// <returns>A filename</returns>
         public string RenderShapeToBitmap(ShapeModel shapeModel, string name, int count)
         {
-            var b = new Bitmap(120, 80, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+            var width = 20 * shapeModel.LastColumn();
+            var height = 20 * shapeModel.LastRow();
+
+            var b = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
             var g = Graphics.FromImage(b);
 
-            var size = 120 / shapeModel.LastColumn();
+            var size = 20;
             foreach (var block in shapeModel.Blocks)
             {
                 var x = (block.Column - 1) * size;

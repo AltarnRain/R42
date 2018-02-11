@@ -19,7 +19,7 @@ namespace Round42.Tests
         /// Tests the creation of a block button.
         /// </summary>
         [TestMethod]
-        public void BlockButtonCreateTest()
+        public void CreateTest()
         {
             var block = BlockModel.Create(0, 0);
 

@@ -23,7 +23,7 @@ namespace Round42.Tests
         /// Assets the manager create test.
         /// </summary>
         [TestMethod]
-        public void AssetManagerCreateTest()
+        public void CreateTest()
         {
             // Arrange / Act
             this.DeleteAssetFile();
@@ -37,7 +37,7 @@ namespace Round42.Tests
         /// Assets the manager add.
         /// </summary>
         [TestMethod]
-        public void AssetManagerAdd()
+        public void Add()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -55,7 +55,7 @@ namespace Round42.Tests
         /// Duplicate assets are not allowed
         /// </summary>
         [TestMethod]
-        public void AssetManagerAddDuplicate()
+        public void AddDuplicate()
         {
             // Act
             this.DeleteAssetFile();
@@ -76,7 +76,7 @@ namespace Round42.Tests
         /// Check if exception is only thrown when duplicates are added not multiple assets
         /// </summary>
         [TestMethod]
-        public void AssetManagerAddTwoAssets()
+        public void AddTwoAssets()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -98,7 +98,7 @@ namespace Round42.Tests
         /// Assets the manager on new test event.
         /// </summary>
         [TestMethod]
-        public void AssetManagerOnNewTest()
+        public void OnNewTest()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -118,7 +118,7 @@ namespace Round42.Tests
         /// Tests saving and loading.
         /// </summary>
         [TestMethod]
-        public void AssetManagerSaveAndLoad()
+        public void SaveAndLoad()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -144,7 +144,7 @@ namespace Round42.Tests
         /// Tests adding a shape
         /// </summary>
         [TestMethod]
-        public void AssetManagerAddShape()
+        public void AddShape()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -175,7 +175,7 @@ namespace Round42.Tests
         /// Tests removing a shape.
         /// </summary>
         [TestMethod]
-        public void AssetManagerRemoveShape()
+        public void RemoveShape()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -199,7 +199,7 @@ namespace Round42.Tests
         /// Tests the add column.
         /// </summary>
         [TestMethod]
-        public void AssetManagerAddColumnLeft()
+        public void AddColumnLeft()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -223,7 +223,7 @@ namespace Round42.Tests
         /// Assets the manager add column right.
         /// </summary>
         [TestMethod]
-        public void AssetManagerAddColumnRight()
+        public void AddColumnRight()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -247,7 +247,7 @@ namespace Round42.Tests
         /// Assets the manager remove column left.
         /// </summary>
         [TestMethod]
-        public void AssetManagerRemoveColumnLeft()
+        public void RemoveColumnLeft()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -271,7 +271,7 @@ namespace Round42.Tests
         /// Tests the add column.
         /// </summary>
         [TestMethod]
-        public void AssetManagerRemoveColumnRight()
+        public void RemoveColumnRight()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -295,7 +295,7 @@ namespace Round42.Tests
         /// Tests the add column.
         /// </summary>
         [TestMethod]
-        public void AssetManagerRemoveTopRow()
+        public void RemoveTopRow()
         {
             // Arrange
             this.DeleteAssetFile();
@@ -319,7 +319,7 @@ namespace Round42.Tests
         /// Assets the manager remove bottom row.
         /// </summary>
         [TestMethod]
-        public void AssetManagerRemoveBottomRow()
+        public void RemoveBottomRow()
         {
             // Arrange
             this.DeleteAssetFile();
