@@ -10,6 +10,7 @@ namespace Render
     using System.Linq;
     using Round42.Models;
     using Round42.Models.Extentions;
+    using Round42.Models.Models;
 
     /// <summary>
     /// Render class
@@ -66,7 +67,7 @@ namespace Render
         /// </summary>
         /// <param name="assetModel">The shape models.</param>
         /// <returns>File names</returns>
-        public IEnumerable<string> RenderAsset(AssetModel assetModel)
+        public AssetBitmapModel RenderAsset(AssetModel assetModel)
         {
             var files = new List<string>();
             for (int i = 0; i < assetModel.Shapes.Count(); i++)
@@ -74,7 +75,7 @@ namespace Render
                 files.Add(this.RenderShapeToBitmap(assetModel.Shapes[i], assetModel.Name, i + 1));
             }
 
-            return files;
+            return new AssetBitmapModel { Name = assetModel.Name, Bitmaps = files };
         }
 
         /// <summary>
@@ -82,13 +83,13 @@ namespace Render
         /// </summary>
         /// <param name="assets">The assets.</param>
         /// <returns>List of generated files</returns>
-        public IEnumerable<string> RenderAssets(IEnumerable<AssetModel> assets)
+        public IEnumerable<AssetBitmapModel> RenderAssets(IEnumerable<AssetModel> assets)
         {
-            var allFiles = new List<string>();
+            var allFiles = new List<AssetBitmapModel>();
             foreach (var asset in assets)
             {
-                var files = this.RenderAsset(asset);
-                allFiles.AddRange(files);
+                var assetBitmaps = this.RenderAsset(asset);
+                allFiles.Add(assetBitmaps);
             }
 
             return allFiles;

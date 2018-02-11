@@ -13,6 +13,7 @@ namespace Round42.Managers
     using Providers;
     using Round42.Models;
     using Round42.Models.Extentions;
+    using Round42.Models.Models;
 
     /// <summary>
     /// Manages assets
@@ -397,6 +398,28 @@ namespace Round42.Managers
         {
             this.CurrentFrame.MoveDown();
             this.OnLoadFrame.Invoke(this.CurrentFrame);
+        }
+
+        /// <summary>
+        /// Sets the bitmap for the asset named in the AssetBitmapModel
+        /// </summary>
+        /// <param name="assetBitmapModel">The asset bitmap model.</param>
+        public void SetBitmap(AssetBitmapModel assetBitmapModel)
+        {
+            var asset = this.Assets.Where(a => a.Name == assetBitmapModel.Name).Single();
+            asset.Bitmaps = assetBitmapModel.Bitmaps;
+        }
+
+        /// <summary>
+        /// Sets the bitmaps for all the Assets in the list.
+        /// </summary>
+        /// <param name="assetBitmapModels">The asset bitmap models.</param>
+        public void SetBitmaps(IEnumerable<AssetBitmapModel> assetBitmapModels)
+        {
+            foreach (var assetBitmapModel in assetBitmapModels)
+            {
+                this.SetBitmap(assetBitmapModel);
+            }
         }
 
         /// <summary>

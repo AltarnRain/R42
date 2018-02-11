@@ -490,7 +490,8 @@ namespace Round42.AssetEditor.Forms
         private void Render_Click(object sender, EventArgs e)
         {
             var render = this.renderFactory.Get(Settings.Default.RenderOutput);
-            render.RenderAsset(this.assetManager.CurrentAsset);
+            var assetBitmaps = render.RenderAsset(this.assetManager.CurrentAsset);
+            this.assetManager.SetBitmap(assetBitmaps);
             Process.Start(Settings.Default.RenderOutput);
         }
 
@@ -502,8 +503,8 @@ namespace Round42.AssetEditor.Forms
         private void RenderAllAssetsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var render = this.renderFactory.Get(Settings.Default.RenderOutput);
-            render.RenderAssets(this.assetManager.GetAssets());
-
+            var assetBitmaps = render.RenderAssets(this.assetManager.GetAssets());
+            this.assetManager.SetBitmaps(assetBitmaps);
             Process.Start(Settings.Default.RenderOutput);
         }
     }
