@@ -275,7 +275,7 @@ namespace Round42.Managers
         {
             if (this.currentFrame.LastRow() > 1)
             {
-                this.currentFrame.RemoveRowTop();
+                this.currentFrame.RemoveRowBottom();
             }
 
             this.OnLoadFrame.Invoke(this.currentFrame);
