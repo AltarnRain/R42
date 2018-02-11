@@ -30,6 +30,7 @@ namespace Render
 
         private void RenderShape(ShapeModel shapeModel)
         {
+
         }
     }
 }

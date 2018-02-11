@@ -310,7 +310,7 @@ namespace Round42.Managers
         /// <summary>
         /// Crops the images for the shapes in the current asset.
         /// </summary>
-        public void CropAndAlightAnchors()
+        public void CropAndAlignAnchors()
         {
             if (this.currentAsset != null)
             {
@@ -325,23 +325,12 @@ namespace Round42.Managers
                 var anchorBlocks = this.currentAsset.Shapes.SelectMany(s => s.Blocks).Where(b => b.Anchor);
                 var maxColumn = anchorBlocks.Max(b => b.Column);
                 var maxRow = anchorBlocks.Max(b => b.Row);
+                this.AlignAnchors(maxColumn, maxRow);
 
-                foreach (var shape in this.currentAsset.Shapes)
-                {
-                    var anchorBlock = shape.GetAnchorBlock();
-                    var colDiff = maxColumn - anchorBlock.Column;
-                    var rowDiff = maxRow - anchorBlock.Row;
-
-                    for (int col = 0; col < colDiff; col++)
-                    {
-                        shape.AddRowTop();
-                    }
-
-                    for (int row = 0; row < rowDiff; row++)
-                    {
-                        shape.AddRowTop();
-                    }
-                }
+                // Make images same size
+                maxColumn = this.currentAsset.Shapes.Max(s => s.LastColumn());
+                maxRow = this.currentAsset.Shapes.Max(s => s.LastRow());
+                this.MakeShapesSameSize(maxColumn, maxRow);
             }
 
             this.TriggerOnCurrentAssetChanged();
@@ -442,6 +431,55 @@ namespace Round42.Managers
             var asset = this.Assets.Single(a => a.Name == assetName);
             this.currentAsset = asset;
             this.currentFrame = asset.Shapes.First();
+        }
+
+        /// <summary>
+        /// Makes the size of the shapes same.
+        /// </summary>
+        /// <param name="maxColumn">The maximum column.</param>
+        /// <param name="maxRow">The maximum row.</param>
+        private void MakeShapesSameSize(int maxColumn, int maxRow)
+        {
+            foreach (var shape in this.currentAsset.Shapes)
+            {
+                var colDiff = maxColumn - shape.LastColumn();
+                var rowDiff = maxRow - shape.LastRow();
+
+                for (int col = 0; col < colDiff; col++)
+                {
+                    shape.AddColumnRight();
+                }
+
+                for (int row = 0; row < rowDiff; row++)
+                {
+                    shape.AddRowBottom();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Aligns the anchors.
+        /// </summary>
+        /// <param name="maxColumn">The maximum column.</param>
+        /// <param name="maxRow">The maximum row.</param>
+        private void AlignAnchors(int maxColumn, int maxRow)
+        {
+            foreach (var shape in this.currentAsset.Shapes)
+            {
+                var anchorBlock = shape.GetAnchorBlock();
+                var colDiff = maxColumn - anchorBlock.Column;
+                var rowDiff = maxRow - anchorBlock.Row;
+
+                for (int col = 0; col < colDiff; col++)
+                {
+                    shape.AddColumnLeft();
+                }
+
+                for (int row = 0; row < rowDiff; row++)
+                {
+                    shape.AddRowTop();
+                }
+            }
         }
     }
 }

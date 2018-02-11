@@ -459,7 +459,7 @@ namespace Round42.AssetEditor.Forms
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void CropShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.assetManager.CropAndAlightAnchors();
+            this.assetManager.CropAndAlignAnchors();
         }
 
         /// <summary>
