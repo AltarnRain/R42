@@ -67,6 +67,7 @@
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SelectFrameCombobox = new System.Windows.Forms.ComboBox();
+            this.Render = new System.Windows.Forms.Button();
             this.ListPanel.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.AnimatorTab.SuspendLayout();
@@ -135,21 +136,21 @@
             // AddAsset
             // 
             this.AddAsset.Name = "AddAsset";
-            this.AddAsset.Size = new System.Drawing.Size(148, 22);
+            this.AddAsset.Size = new System.Drawing.Size(201, 22);
             this.AddAsset.Text = "Add Asset";
             this.AddAsset.Click += new System.EventHandler(this.AddAsset_Click);
             // 
             // removeAssetToolStripMenuItem
             // 
             this.removeAssetToolStripMenuItem.Name = "removeAssetToolStripMenuItem";
-            this.removeAssetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.removeAssetToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.removeAssetToolStripMenuItem.Text = "Remove Asset";
             this.removeAssetToolStripMenuItem.Click += new System.EventHandler(this.RemoveAsset_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(198, 6);
             // 
             // cropShapesToolStripMenuItem
             // 
@@ -216,6 +217,7 @@
             // Tools
             // 
             this.Tools.BackColor = System.Drawing.Color.Silver;
+            this.Tools.Controls.Add(this.Render);
             this.Tools.Controls.Add(this.SetAnchorButton);
             this.Tools.Controls.Add(this.ButtonSize);
             this.Tools.Controls.Add(this.RemoveTopRowButton);
@@ -474,6 +476,16 @@
             this.SelectFrameCombobox.TabIndex = 0;
             this.SelectFrameCombobox.SelectedIndexChanged += new System.EventHandler(this.SelectFrameCombobox_SelectedIndexChanged);
             // 
+            // Render
+            // 
+            this.Render.Location = new System.Drawing.Point(6, 341);
+            this.Render.Name = "Render";
+            this.Render.Size = new System.Drawing.Size(75, 23);
+            this.Render.TabIndex = 22;
+            this.Render.Text = "Render";
+            this.Render.UseVisualStyleBackColor = true;
+            this.Render.Click += new System.EventHandler(this.Render_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -540,6 +552,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem cropShapesToolStripMenuItem;
         private System.Windows.Forms.Button SetAnchorButton;
+        private System.Windows.Forms.Button Render;
     }
 }
 

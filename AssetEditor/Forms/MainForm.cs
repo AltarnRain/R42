@@ -13,6 +13,7 @@ namespace Round42.AssetEditor.Forms
     using System.Windows.Forms;
     using Extentions;
     using Providers;
+    using Render;
     using Round42.AssetEditor.Properties;
     using Round42.CustomComponents;
     using Round42.Factories;
@@ -470,6 +471,15 @@ namespace Round42.AssetEditor.Forms
         private void SetAnchorButton_Click(object sender, EventArgs e)
         {
             this.drawer.SetAchor();
+        }
+
+        private void Render_Click(object sender, EventArgs e)
+        {
+            var renderExample = this.viewFactory.Get<RenderExample>();
+            var render = new Render(renderExample.Render);
+            renderExample.Show();
+
+            render.AnimateShapes(this.assetManager.CurrentAsset.Shapes);
         }
     }
 }

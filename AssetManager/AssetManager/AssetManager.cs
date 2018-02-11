@@ -38,12 +38,12 @@ namespace Round42.Managers
         /// <summary>
         /// The current asset
         /// </summary>
-        private AssetModel currentAsset;
+        public AssetModel CurrentAsset { get; private set; }
 
         /// <summary>
         /// The current frame
         /// </summary>
-        private ShapeModel currentFrame;
+        public ShapeModel CurrentFrame { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssetManager" /> class.
@@ -130,8 +130,8 @@ namespace Round42.Managers
         /// <param name="index">The frame.</param>
         public void LoadFrameByIndex(int index)
         {
-            this.currentFrame = this.currentAsset.Shapes[index];
-            this.OnLoadFrame?.Invoke(this.currentFrame);
+            this.CurrentFrame = this.CurrentAsset.Shapes[index];
+            this.OnLoadFrame?.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace Round42.Managers
         /// </summary>
         public void AddShapeToAsset()
         {
-            var newShape = this.shapeProvider.Create(this.currentAsset.Shapes.First().LastColumn(), this.currentAsset.Shapes.First().LastRow());
-            this.currentAsset.Shapes.Add(newShape);
+            var newShape = this.shapeProvider.Create(this.CurrentAsset.Shapes.First().LastColumn(), this.CurrentAsset.Shapes.First().LastRow());
+            this.CurrentAsset.Shapes.Add(newShape);
             this.TriggerOnCurrentAssetChanged();
         }
 
@@ -189,9 +189,9 @@ namespace Round42.Managers
         /// </summary>
         public void Remove()
         {
-            if (this.currentAsset != null)
+            if (this.CurrentAsset != null)
             {
-                this.Assets.Remove(this.currentAsset);
+                this.Assets.Remove(this.CurrentAsset);
                 this.OnAssetsLoaded?.Invoke(this.Assets);
             }
         }
@@ -202,10 +202,10 @@ namespace Round42.Managers
         /// <param name="shapeIndex">Index of the shape.</param>
         public void RemoveShapeFromAsset(int shapeIndex)
         {
-            if (this.currentAsset.Shapes.Count() > 1)
+            if (this.CurrentAsset.Shapes.Count() > 1)
             {
-                this.currentAsset.Shapes.RemoveAt(shapeIndex);
-                this.OnCurrentAssetChanged?.Invoke(this.currentAsset);
+                this.CurrentAsset.Shapes.RemoveAt(shapeIndex);
+                this.OnCurrentAssetChanged?.Invoke(this.CurrentAsset);
             }
         }
 
@@ -224,8 +224,8 @@ namespace Round42.Managers
         /// </summary>
         public void AddColumnLeft()
         {
-            this.currentFrame.AddColumnLeft();
-            this.OnLoadFrame?.Invoke(this.currentFrame);
+            this.CurrentFrame.AddColumnLeft();
+            this.OnLoadFrame?.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -233,8 +233,8 @@ namespace Round42.Managers
         /// </summary>
         public void AddColumnRight()
         {
-            this.currentFrame.AddColumnRight();
-            this.OnLoadFrame?.Invoke(this.currentFrame);
+            this.CurrentFrame.AddColumnRight();
+            this.OnLoadFrame?.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -242,8 +242,8 @@ namespace Round42.Managers
         /// </summary>
         public void AddRowTop()
         {
-            this.currentFrame.AddRowTop();
-            this.OnLoadFrame?.Invoke(this.currentFrame);
+            this.CurrentFrame.AddRowTop();
+            this.OnLoadFrame?.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -251,8 +251,8 @@ namespace Round42.Managers
         /// </summary>
         public void AddRowBottom()
         {
-            this.currentFrame.AddRowBottom();
-            this.OnLoadFrame.Invoke(this.currentFrame);
+            this.CurrentFrame.AddRowBottom();
+            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -260,12 +260,12 @@ namespace Round42.Managers
         /// </summary>
         public void RemoveRowTop()
         {
-            if (this.currentFrame.LastRow() > 1)
+            if (this.CurrentFrame.LastRow() > 1)
             {
-                this.currentFrame.RemoveRowTop();
+                this.CurrentFrame.RemoveRowTop();
             }
 
-            this.OnLoadFrame.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -273,12 +273,12 @@ namespace Round42.Managers
         /// </summary>
         public void RemoveRowBottom()
         {
-            if (this.currentFrame.LastRow() > 1)
+            if (this.CurrentFrame.LastRow() > 1)
             {
-                this.currentFrame.RemoveRowBottom();
+                this.CurrentFrame.RemoveRowBottom();
             }
 
-            this.OnLoadFrame.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -286,12 +286,12 @@ namespace Round42.Managers
         /// </summary>
         public void RemoveColumnLeft()
         {
-            if (this.currentFrame.LastColumn() > 1)
+            if (this.CurrentFrame.LastColumn() > 1)
             {
-                this.currentFrame.RemoveColumnLeft();
+                this.CurrentFrame.RemoveColumnLeft();
             }
 
-            this.OnLoadFrame.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -299,12 +299,12 @@ namespace Round42.Managers
         /// </summary>
         public void RemoveColumnRight()
         {
-            if (this.currentFrame.LastColumn() > 1)
+            if (this.CurrentFrame.LastColumn() > 1)
             {
-                this.currentFrame.RemoveColumnRight();
+                this.CurrentFrame.RemoveColumnRight();
             }
 
-            this.OnLoadFrame.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -312,9 +312,9 @@ namespace Round42.Managers
         /// </summary>
         public void CropAndAlignAnchors()
         {
-            if (this.currentAsset != null)
+            if (this.CurrentAsset != null)
             {
-                foreach (var shape in this.currentAsset.Shapes)
+                foreach (var shape in this.CurrentAsset.Shapes)
                 {
                     if (shape.Blocks.All(b => b.Color == Color.Black) == false)
                     {
@@ -322,14 +322,14 @@ namespace Round42.Managers
                     }
                 }
 
-                var anchorBlocks = this.currentAsset.Shapes.SelectMany(s => s.Blocks).Where(b => b.Anchor);
+                var anchorBlocks = this.CurrentAsset.Shapes.SelectMany(s => s.Blocks).Where(b => b.Anchor);
                 var maxColumn = anchorBlocks.Max(b => b.Column);
                 var maxRow = anchorBlocks.Max(b => b.Row);
                 this.AlignAnchors(maxColumn, maxRow);
 
                 // Make images same size
-                maxColumn = this.currentAsset.Shapes.Max(s => s.LastColumn());
-                maxRow = this.currentAsset.Shapes.Max(s => s.LastRow());
+                maxColumn = this.CurrentAsset.Shapes.Max(s => s.LastColumn());
+                maxRow = this.CurrentAsset.Shapes.Max(s => s.LastRow());
                 this.MakeShapesSameSize(maxColumn, maxRow);
             }
 
@@ -343,7 +343,7 @@ namespace Round42.Managers
         public void LoadByName(string assetName)
         {
             this.SetByName(assetName);
-            this.OnCurrentAssetChanged?.Invoke(this.currentAsset);
+            this.OnCurrentAssetChanged?.Invoke(this.CurrentAsset);
         }
 
         /// <summary>
@@ -359,8 +359,8 @@ namespace Round42.Managers
         /// </summary>
         public void MoveLeft()
         {
-            this.currentFrame.MoveLeft();
-            this.OnLoadFrame.Invoke(this.currentFrame);
+            this.CurrentFrame.MoveLeft();
+            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -368,8 +368,8 @@ namespace Round42.Managers
         /// </summary>
         public void MoveUp()
         {
-            this.currentFrame.MoveUp();
-            this.OnLoadFrame.Invoke(this.currentFrame);
+            this.CurrentFrame.MoveUp();
+            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -377,8 +377,8 @@ namespace Round42.Managers
         /// </summary>
         public void MoveRight()
         {
-            this.currentFrame.MoveRight();
-            this.OnLoadFrame.Invoke(this.currentFrame);
+            this.CurrentFrame.MoveRight();
+            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -386,8 +386,8 @@ namespace Round42.Managers
         /// </summary>
         public void MoveDown()
         {
-            this.currentFrame.MoveDown();
-            this.OnLoadFrame.Invoke(this.currentFrame);
+            this.CurrentFrame.MoveDown();
+            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -414,7 +414,7 @@ namespace Round42.Managers
         /// </summary>
         private void TriggerOnCurrentAssetChanged()
         {
-            this.OnCurrentAssetChanged?.Invoke(this.currentAsset);
+            this.OnCurrentAssetChanged?.Invoke(this.CurrentAsset);
         }
 
         /// <summary>
@@ -429,8 +429,8 @@ namespace Round42.Managers
             }
 
             var asset = this.Assets.Single(a => a.Name == assetName);
-            this.currentAsset = asset;
-            this.currentFrame = asset.Shapes.First();
+            this.CurrentAsset = asset;
+            this.CurrentFrame = asset.Shapes.First();
         }
 
         /// <summary>
@@ -440,7 +440,7 @@ namespace Round42.Managers
         /// <param name="maxRow">The maximum row.</param>
         private void MakeShapesSameSize(int maxColumn, int maxRow)
         {
-            foreach (var shape in this.currentAsset.Shapes)
+            foreach (var shape in this.CurrentAsset.Shapes)
             {
                 var colDiff = maxColumn - shape.LastColumn();
                 var rowDiff = maxRow - shape.LastRow();
@@ -464,7 +464,7 @@ namespace Round42.Managers
         /// <param name="maxRow">The maximum row.</param>
         private void AlignAnchors(int maxColumn, int maxRow)
         {
-            foreach (var shape in this.currentAsset.Shapes)
+            foreach (var shape in this.CurrentAsset.Shapes)
             {
                 var anchorBlock = shape.GetAnchorBlock();
                 var colDiff = maxColumn - anchorBlock.Column;
