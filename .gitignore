@@ -5,3 +5,4 @@ bin
 TestResults
 /UpgradeLog.htm
 /Libraries/Extentions/*.tmp
+*.bmp

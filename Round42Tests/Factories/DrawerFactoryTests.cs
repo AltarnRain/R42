@@ -1,19 +1,21 @@
-﻿// <copyright file="AssetManagerFactoryTests.cs" company="OI">
+﻿// <copyright file="DrawerFactoryTests.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
 namespace Round42.Tests
 {
     using System;
+    using System.Windows.Forms;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories;
+    using Round42.Factories.Factories;
 
     /// <summary>
     /// Tests fo the <see cref="AssetManagerFactory"/>
     /// </summary>
     /// <seealso cref="Round42.Tests.TestBase" />
     [TestClass]
-    public class AssetManagerFactoryTests : TestBase
+    public class DrawerFactoryTests : TestBase
     {
         /// <summary>
         /// Creates the factory.
@@ -21,7 +23,7 @@ namespace Round42.Tests
         [TestMethod]
         public void CreateFactory()
         {
-            var factory = this.Get<AssetManagerFactory>();
+            var factory = this.Get<DrawerFactory>();
             Assert.IsNotNull(factory);
         }
 
@@ -31,11 +33,10 @@ namespace Round42.Tests
         [TestMethod]
         public void CreateAssetManager()
         {
-            var factory = this.Get<AssetManagerFactory>();
+            var factory = this.Get<DrawerFactory>();
 
-            var assetManager = factory.Get(string.Empty);
-
-            Assert.IsNotNull(assetManager);
+            var drawer = factory.Get(new Panel());
+            Assert.IsNotNull(drawer);
         }
     }
 }

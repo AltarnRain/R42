@@ -4,7 +4,6 @@
 
 namespace Round42.Managers
 {
-    using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
@@ -36,23 +35,17 @@ namespace Round42.Managers
         private string assetFile;
 
         /// <summary>
-        /// The current asset
-        /// </summary>
-        public AssetModel CurrentAsset { get; private set; }
-
-        /// <summary>
-        /// The current frame
-        /// </summary>
-        public ShapeModel CurrentFrame { get; private set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AssetManager" /> class.
         /// </summary>
         /// <param name="assetFile">The asset file.</param>
         /// <param name="assetProvider">The asset provider.</param>
         /// <param name="shapeProvider">The shape provider.</param>
         /// <param name="loadOnCreate">if set to <c>true</c> [load on create].</param>
-        public AssetManager(string assetFile, AssetProvider assetProvider, ShapeProvider shapeProvider, bool loadOnCreate = false)
+        public AssetManager(
+            string assetFile,
+            AssetProvider assetProvider,
+            ShapeProvider shapeProvider,
+            bool loadOnCreate = false)
         {
             this.assetProvider = assetProvider;
             this.shapeProvider = shapeProvider;
@@ -104,6 +97,22 @@ namespace Round42.Managers
         /// Occurs when [on load frame].
         /// </summary>
         public event LoadFrame OnLoadFrame;
+
+        /// <summary>
+        /// Gets the current asset.
+        /// </summary>
+        /// <value>
+        /// The current asset.
+        /// </value>
+        public AssetModel CurrentAsset { get; private set; }
+
+        /// <summary>
+        /// Gets the current frame.
+        /// </summary>
+        /// <value>
+        /// The current frame.
+        /// </value>
+        public ShapeModel CurrentFrame { get; private set; }
 
         /// <summary>
         /// Gets or sets the assets.

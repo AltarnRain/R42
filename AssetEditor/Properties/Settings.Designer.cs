@@ -94,5 +94,17 @@ namespace Round42.AssetEditor.Properties {
                 this["Height"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\Reps\\R42\\Images\\")]
+        public string RenderOutput {
+            get {
+                return ((string)(this["RenderOutput"]));
+            }
+            set {
+                this["RenderOutput"] = value;
+            }
+        }
     }
 }

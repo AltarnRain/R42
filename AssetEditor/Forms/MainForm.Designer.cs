@@ -45,6 +45,7 @@
             this.DrawerPanel = new System.Windows.Forms.Panel();
             this.PaletPanel = new System.Windows.Forms.Panel();
             this.Tools = new System.Windows.Forms.Panel();
+            this.Render = new System.Windows.Forms.Button();
             this.SetAnchorButton = new System.Windows.Forms.Button();
             this.ButtonSize = new System.Windows.Forms.TrackBar();
             this.RemoveTopRowButton = new System.Windows.Forms.Button();
@@ -67,7 +68,8 @@
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SelectFrameCombobox = new System.Windows.Forms.ComboBox();
-            this.Render = new System.Windows.Forms.Button();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.renderAllAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ListPanel.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.AnimatorTab.SuspendLayout();
@@ -128,7 +130,9 @@
             this.AddAsset,
             this.removeAssetToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.cropShapesToolStripMenuItem});
+            this.cropShapesToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.renderAllAssetsToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
@@ -245,6 +249,16 @@
             this.Tools.Name = "Tools";
             this.Tools.Size = new System.Drawing.Size(128, 375);
             this.Tools.TabIndex = 0;
+            // 
+            // Render
+            // 
+            this.Render.Location = new System.Drawing.Point(6, 341);
+            this.Render.Name = "Render";
+            this.Render.Size = new System.Drawing.Size(75, 23);
+            this.Render.TabIndex = 22;
+            this.Render.Text = "Render";
+            this.Render.UseVisualStyleBackColor = true;
+            this.Render.Click += new System.EventHandler(this.Render_Click);
             // 
             // SetAnchorButton
             // 
@@ -476,15 +490,17 @@
             this.SelectFrameCombobox.TabIndex = 0;
             this.SelectFrameCombobox.SelectedIndexChanged += new System.EventHandler(this.SelectFrameCombobox_SelectedIndexChanged);
             // 
-            // Render
+            // toolStripMenuItem2
             // 
-            this.Render.Location = new System.Drawing.Point(6, 341);
-            this.Render.Name = "Render";
-            this.Render.Size = new System.Drawing.Size(75, 23);
-            this.Render.TabIndex = 22;
-            this.Render.Text = "Render";
-            this.Render.UseVisualStyleBackColor = true;
-            this.Render.Click += new System.EventHandler(this.Render_Click);
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(198, 6);
+            // 
+            // renderAllAssetsToolStripMenuItem
+            // 
+            this.renderAllAssetsToolStripMenuItem.Name = "renderAllAssetsToolStripMenuItem";
+            this.renderAllAssetsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.renderAllAssetsToolStripMenuItem.Text = "Render all assets";
+            this.renderAllAssetsToolStripMenuItem.Click += new System.EventHandler(this.RenderAllAssetsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -553,6 +569,8 @@
         private System.Windows.Forms.ToolStripMenuItem cropShapesToolStripMenuItem;
         private System.Windows.Forms.Button SetAnchorButton;
         private System.Windows.Forms.Button Render;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem renderAllAssetsToolStripMenuItem;
     }
 }
 

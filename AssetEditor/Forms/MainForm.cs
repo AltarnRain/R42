@@ -6,6 +6,7 @@ namespace Round42.AssetEditor.Forms
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Threading;
@@ -53,6 +54,11 @@ namespace Round42.AssetEditor.Forms
         private readonly PaletFactory paletFactory;
 
         /// <summary>
+        /// The render factory
+        /// </summary>
+        private readonly RenderFactory renderFactory;
+
+        /// <summary>
         /// Gets the asset provider.
         /// </summary>
         /// <value>
@@ -81,13 +87,21 @@ namespace Round42.AssetEditor.Forms
         /// <param name="viewFactory">The view factory.</param>
         /// <param name="drawerFactory">The drawer factory.</param>
         /// <param name="paletFactory">The palet factory.</param>
-        public MainForm(AssetManagerFactory assetManagerFactory, AssetProvider assetProvider, ViewFactory viewFactory, DrawerFactory drawerFactory, PaletFactory paletFactory)
+        /// <param name="renderFactory">The render factory.</param>
+        public MainForm(
+            AssetManagerFactory assetManagerFactory,
+            AssetProvider assetProvider,
+            ViewFactory viewFactory,
+            DrawerFactory drawerFactory,
+            PaletFactory paletFactory,
+            RenderFactory renderFactory)
         {
             this.InitializeComponent();
             this.assetProvider = assetProvider;
             this.viewFactory = viewFactory;
             this.drawerFactory = drawerFactory;
             this.paletFactory = paletFactory;
+            this.renderFactory = renderFactory;
 
             var mainAssetFile = Path.Combine(Directory.GetCurrentDirectory(), AssetFile);
             this.assetManager = assetManagerFactory.Get(mainAssetFile, false);
@@ -475,11 +489,22 @@ namespace Round42.AssetEditor.Forms
 
         private void Render_Click(object sender, EventArgs e)
         {
-            var renderExample = this.viewFactory.Get<RenderExample>();
-            var render = new Render(renderExample.Render);
-            renderExample.Show();
+            var render = this.renderFactory.Get(Settings.Default.RenderOutput);
+            render.RenderAsset(this.assetManager.CurrentAsset);
+            Process.Start(Settings.Default.RenderOutput);
+        }
 
-            render.AnimateShapes(this.assetManager.CurrentAsset.Shapes);
+        /// <summary>
+        /// Handles the Click event of the renderAllAssetsToolStripMenuItem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void RenderAllAssetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var render = this.renderFactory.Get(Settings.Default.RenderOutput);
+            render.RenderAssets(this.assetManager.GetAssets());
+
+            Process.Start(Settings.Default.RenderOutput);
         }
     }
 }
