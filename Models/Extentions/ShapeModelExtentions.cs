@@ -258,21 +258,123 @@ namespace Round42.Models.Extentions
         /// <param name="shapeModel">The shape model.</param>
         public static void CropImage(this ShapeModel shapeModel)
         {
-            for (int row = shapeModel.LastRow(); row >= 1; row--)
+            var rowsToRemove = shapeModel.GetRowsToRemove();
+            var columnsToRemove = shapeModel.GetColumnsToRemove();
+
+            foreach (var row in rowsToRemove)
             {
-                if (shapeModel.GetRow(row).All(b => b.Color == Color.Black))
-                {
-                    shapeModel.RemoveRow(row);
-                }
+                shapeModel.RemoveRow(row);
             }
 
+            foreach (var column in columnsToRemove)
+            {
+                shapeModel.RemoveColumn(column);
+            }
+        }
+
+        /// <summary>
+        /// Sets the BlockModel's Anrchor contained by the ShapeModel to false.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        public static void ResetAnchor(this ShapeModel shapeModel)
+        {
+            shapeModel.Blocks.ForEach(b => b.Anchor = false);
+        }
+
+        /// <summary>
+        /// Sets the anchor.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="row">The row.</param>
+        public static void SetAnchor(this ShapeModel shapeModel, int column, int row)
+        {
+            shapeModel.GetBlock(column, row).Anchor = true;
+        }
+
+        /// <summary>
+        /// Gets the anchor block.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        /// <returns>Block Model</returns>
+        public static BlockModel GetAnchorBlock(this ShapeModel shapeModel)
+        {
+            return shapeModel.Blocks.Single(b => b.Anchor == true);
+        }
+
+        /// <summary>
+        /// Gets the columns to remove.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        /// <returns>A list of column indexes</returns>
+        private static List<int> GetColumnsToRemove(this ShapeModel shapeModel)
+        {
+            var columnsToRemove = new List<int>();
             for (int col = shapeModel.LastColumn(); col >= 1; col--)
             {
                 if (shapeModel.GetColumn(col).All(b => b.Color == Color.Black))
                 {
-                    shapeModel.RemoveColumn(col);
+                    columnsToRemove.Add(col);
+                }
+                else
+                {
+                    break;
                 }
             }
+
+            for (int col = 1; col <= shapeModel.LastColumn(); col++)
+            {
+                if (shapeModel.GetColumn(col).All(b => b.Color == Color.Black))
+                {
+                    columnsToRemove.Add(col);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            columnsToRemove.Sort();
+            columnsToRemove.Reverse();
+
+            return columnsToRemove;
+        }
+
+        /// <summary>
+        /// Gets the rows to remove.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        /// <returns>A list of row indexes</returns>
+        private static List<int> GetRowsToRemove(this ShapeModel shapeModel)
+        {
+            var rowsToRemove = new List<int>();
+            for (int row = shapeModel.LastRow(); row >= 1; row--)
+            {
+                if (shapeModel.GetRow(row).All(b => b.Color == Color.Black))
+                {
+                    rowsToRemove.Add(row);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            for (int row = 1; row <= shapeModel.LastRow(); row++)
+            {
+                if (shapeModel.GetRow(row).All(b => b.Color == Color.Black))
+                {
+                    rowsToRemove.Add(row);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            rowsToRemove.Sort();
+            rowsToRemove.Reverse();
+            return rowsToRemove;
         }
     }
 }

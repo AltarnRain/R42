@@ -47,7 +47,7 @@ namespace Round42.Tests
             assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
 
             // Assert
-            var asset = assetManager.Assets.SingleOrDefault(a => a.Name == "Test");
+            var asset = assetManager.GetAssets().SingleOrDefault(a => a.Name == "Test");
             Assert.IsNotNull(asset);
         }
 
@@ -135,9 +135,9 @@ namespace Round42.Tests
             var assetManager2 = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Assert
-            Assert.AreEqual(1, assetManager2.Assets.Count());
-            Assert.AreEqual(10, assetManager2.Assets.First().Shapes.Count());
-            Assert.AreEqual(30, assetManager2.Assets.First().Shapes.First().Blocks.Count());
+            Assert.AreEqual(1, assetManager2.GetAssets().Count());
+            Assert.AreEqual(10, assetManager2.GetAssets().First().Shapes.Count());
+            Assert.AreEqual(30, assetManager2.GetAssets().First().Shapes.First().Blocks.Count());
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace Round42.Tests
             assetManager.LoadByName("Test");
 
             var numberOfColumns = 0;
-            assetManager.OnFrameSelected += (ShapeModel shapeModel) =>
+            assetManager.OnLoadFrame += (ShapeModel shapeModel) =>
             {
                 // Assert
                 numberOfColumns = shapeModel.LastColumn();
@@ -232,7 +232,7 @@ namespace Round42.Tests
             assetManager.LoadByName("Test");
 
             var numberOfColumns = 0;
-            assetManager.OnFrameSelected += (ShapeModel shapeModel) =>
+            assetManager.OnLoadFrame += (ShapeModel shapeModel) =>
             {
                 // Assert
                 numberOfColumns = shapeModel.LastColumn();
@@ -256,7 +256,7 @@ namespace Round42.Tests
             assetManager.LoadByName("Test");
 
             var lastColumn = 0;
-            assetManager.OnFrameSelected += (ShapeModel shape) =>
+            assetManager.OnLoadFrame += (ShapeModel shape) =>
             {
                 lastColumn = shape.LastColumn();
             };
@@ -280,7 +280,7 @@ namespace Round42.Tests
             assetManager.LoadByName("Test");
 
             var lastColumn = 0;
-            assetManager.OnFrameSelected += (ShapeModel shape) =>
+            assetManager.OnLoadFrame += (ShapeModel shape) =>
             {
                 lastColumn = shape.LastColumn();
             };
@@ -304,7 +304,7 @@ namespace Round42.Tests
             assetManager.LoadByName("Test");
 
             var lastRow = 0;
-            assetManager.OnFrameSelected += (ShapeModel shape) =>
+            assetManager.OnLoadFrame += (ShapeModel shape) =>
             {
                 lastRow = shape.LastRow();
             };
@@ -328,7 +328,7 @@ namespace Round42.Tests
             assetManager.LoadByName("Test");
 
             var lastRow = 0;
-            assetManager.OnFrameSelected += (ShapeModel shape) =>
+            assetManager.OnLoadFrame += (ShapeModel shape) =>
             {
                 lastRow = shape.LastRow();
             };

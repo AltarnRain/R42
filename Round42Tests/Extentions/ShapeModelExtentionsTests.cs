@@ -289,6 +289,33 @@ namespace Round242.Tests.Extentions
         }
 
         /// <summary>
+        /// Tests the AddColumn extention method.
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsCropImageWithInnerBlackSpace()
+        {
+            // Arrange
+            const int columns = 6;
+            const int rows = 6;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            // Create a red square
+            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b => b.Color = Color.Red);
+
+            // Create black line, this means there's two red lines split by a black line.
+            shape.Blocks.Where(b => b.Row == 5 && b.Column > 3).ToList().ForEach(b => b.Color = Color.Black);
+
+            // Act
+            shape.CropImage();
+
+            // Assert
+            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color == Color.Red);
+            Assert.AreEqual(6, numberOfRedBlocks);
+            Assert.AreEqual(9, shape.Blocks.Count());
+        }
+
+        /// <summary>
         /// move up test.
         /// </summary>
         [TestMethod]
@@ -398,6 +425,71 @@ namespace Round242.Tests.Extentions
             // Assert
             var isRed = shape.GetColumn(1).All(b => b.Color == Color.Red);
             Assert.IsTrue(isRed);
+        }
+
+        /// <summary>
+        /// Tests if the anchor is removed from a block.
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsSetAnchors()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            shape.GetBlock(4, 4).Anchor = true;
+            shape.ResetAnchor();
+
+            // Act
+            shape.SetAnchor(5, 5);
+
+            // Assert.
+            Assert.IsFalse(shape.GetBlock(4, 4).Anchor);
+            Assert.IsTrue(shape.GetBlock(5, 5).Anchor);
+        }
+
+        /// <summary>
+        /// Tests if the anchor is removed from a block.
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsRetrieveAcnhor()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+            shape.SetAnchor(5, 6);
+
+            // Act
+            var block = shape.GetAnchorBlock();
+
+            // Assert.
+            Assert.AreEqual(block.Column, 5);
+            Assert.AreEqual(block.Row, 6);
+        }
+
+        /// <summary>
+        /// Tests if the anchor is removed from a block.
+        /// </summary>
+        [TestMethod]
+        public void ShapeModelExtentionsRemoveAnchors()
+        {
+            // Arrange
+            const int columns = 5;
+            const int rows = 10;
+            var shapeProvider = this.Get<ShapeProvider>();
+            var shape = shapeProvider.Create(columns, rows);
+
+            shape.GetBlock(5, 5).Anchor = true;
+
+            // Act
+            shape.ResetAnchor();
+
+            // Assert.
+            Assert.IsFalse(shape.GetBlock(5, 5).Anchor);
         }
 
         /// <summary>

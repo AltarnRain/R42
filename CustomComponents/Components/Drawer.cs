@@ -4,7 +4,6 @@
 
 namespace Round42.CustomComponents
 {
-    using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
@@ -60,7 +59,20 @@ namespace Round42.CustomComponents
         {
             foreach (BlockButton b in this.panel.Controls)
             {
-                b.SetActiveColor(color);
+                b.ActiveColor = color;
+            }
+        }
+
+        /// <summary>
+        /// Sets the achor.
+        /// </summary>
+        public void SetAchor()
+        {
+            this.currentShape.ResetAnchor();
+            foreach (BlockButton b in this.panel.Controls)
+            {
+                b.BecomeAnchorOnClick = true;
+                b.Text = "Click to set Anchor";
             }
         }
 
@@ -83,6 +95,7 @@ namespace Round42.CustomComponents
                     Top = (block.Row - 1) * buttonSize,
                     Width = buttonSize,
                     Height = buttonSize,
+                    OnBecomeAnchor = this.SetAnchor
                 };
 
                 bbList.Add(blockButton);
@@ -101,6 +114,22 @@ namespace Round42.CustomComponents
             {
                 this.DrawButtons(this.currentShape, buttonSize);
             }
+        }
+
+        /// <summary>
+        /// Sets the anchor.
+        /// </summary>
+        /// <param name="column">The column.</param>
+        /// <param name="row">The row.</param>
+        private void SetAnchor(int column, int row)
+        {
+            foreach (BlockButton b in this.panel.Controls)
+            {
+                b.BecomeAnchorOnClick = false;
+                b.Text = string.Empty;
+            }
+
+            this.currentShape.SetAnchor(column, row);
         }
     }
 }

@@ -123,7 +123,7 @@ namespace Round42.AssetEditor.Forms
                 this.UpdateFrameComboBox(asset);
             };
 
-            this.assetManager.OnFrameSelected += (ShapeModel shapeModel) =>
+            this.assetManager.OnLoadFrame += (ShapeModel shapeModel) =>
             {
                 this.drawer.DrawButtons(shapeModel, this.ButtonSize.Value);
             };
@@ -153,7 +153,7 @@ namespace Round42.AssetEditor.Forms
         /// <param name="frame">The frame.</param>
         private void LoadFrame(int frame)
         {
-            this.assetManager.SelectFrame(frame);
+            this.assetManager.LoadFrameByIndex(frame);
         }
 
         /// <summary>
@@ -459,7 +459,17 @@ namespace Round42.AssetEditor.Forms
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void CropShapesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.assetManager.CropImages();
+            this.assetManager.CropAndAlightAnchors();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the SetAnchorButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void SetAnchorButton_Click(object sender, EventArgs e)
+        {
+            this.drawer.SetAchor();
         }
     }
 }

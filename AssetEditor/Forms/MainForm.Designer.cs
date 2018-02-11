@@ -36,6 +36,8 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddAsset = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAssetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cropShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.About = new System.Windows.Forms.ToolStripMenuItem();
             this.AnimatorTab = new System.Windows.Forms.TabControl();
@@ -43,7 +45,7 @@
             this.DrawerPanel = new System.Windows.Forms.Panel();
             this.PaletPanel = new System.Windows.Forms.Panel();
             this.Tools = new System.Windows.Forms.Panel();
-            this.Render = new System.Windows.Forms.Button();
+            this.SetAnchorButton = new System.Windows.Forms.Button();
             this.ButtonSize = new System.Windows.Forms.TrackBar();
             this.RemoveTopRowButton = new System.Windows.Forms.Button();
             this.AddRowTopButton = new System.Windows.Forms.Button();
@@ -65,8 +67,6 @@
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SelectFrameCombobox = new System.Windows.Forms.ComboBox();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.cropShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ListPanel.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.AnimatorTab.SuspendLayout();
@@ -135,16 +135,28 @@
             // AddAsset
             // 
             this.AddAsset.Name = "AddAsset";
-            this.AddAsset.Size = new System.Drawing.Size(152, 22);
+            this.AddAsset.Size = new System.Drawing.Size(148, 22);
             this.AddAsset.Text = "Add Asset";
             this.AddAsset.Click += new System.EventHandler(this.AddAsset_Click);
             // 
             // removeAssetToolStripMenuItem
             // 
             this.removeAssetToolStripMenuItem.Name = "removeAssetToolStripMenuItem";
-            this.removeAssetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.removeAssetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.removeAssetToolStripMenuItem.Text = "Remove Asset";
             this.removeAssetToolStripMenuItem.Click += new System.EventHandler(this.RemoveAsset_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(145, 6);
+            // 
+            // cropShapesToolStripMenuItem
+            // 
+            this.cropShapesToolStripMenuItem.Name = "cropShapesToolStripMenuItem";
+            this.cropShapesToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.cropShapesToolStripMenuItem.Text = "Crop and Align Anchors";
+            this.cropShapesToolStripMenuItem.Click += new System.EventHandler(this.CropShapesToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -204,7 +216,7 @@
             // Tools
             // 
             this.Tools.BackColor = System.Drawing.Color.Silver;
-            this.Tools.Controls.Add(this.Render);
+            this.Tools.Controls.Add(this.SetAnchorButton);
             this.Tools.Controls.Add(this.ButtonSize);
             this.Tools.Controls.Add(this.RemoveTopRowButton);
             this.Tools.Controls.Add(this.AddRowTopButton);
@@ -232,22 +244,24 @@
             this.Tools.Size = new System.Drawing.Size(128, 375);
             this.Tools.TabIndex = 0;
             // 
-            // Render
+            // SetAnchorButton
             // 
-            this.Render.Location = new System.Drawing.Point(6, 312);
-            this.Render.Name = "Render";
-            this.Render.Size = new System.Drawing.Size(75, 23);
-            this.Render.TabIndex = 21;
-            this.Render.Text = "Render";
-            this.Render.UseVisualStyleBackColor = true;
+            this.SetAnchorButton.Location = new System.Drawing.Point(6, 312);
+            this.SetAnchorButton.Name = "SetAnchorButton";
+            this.SetAnchorButton.Size = new System.Drawing.Size(75, 23);
+            this.SetAnchorButton.TabIndex = 21;
+            this.SetAnchorButton.Text = "Anchor";
+            this.SetAnchorButton.UseVisualStyleBackColor = true;
+            this.SetAnchorButton.Click += new System.EventHandler(this.SetAnchorButton_Click);
             // 
             // ButtonSize
             // 
-            this.ButtonSize.Location = new System.Drawing.Point(86, 26);
+            this.ButtonSize.Dock = System.Windows.Forms.DockStyle.Right;
+            this.ButtonSize.Location = new System.Drawing.Point(83, 0);
             this.ButtonSize.Maximum = 100;
             this.ButtonSize.Name = "ButtonSize";
             this.ButtonSize.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.ButtonSize.Size = new System.Drawing.Size(45, 311);
+            this.ButtonSize.Size = new System.Drawing.Size(45, 375);
             this.ButtonSize.TabIndex = 20;
             this.ButtonSize.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.ButtonSize.Value = 20;
@@ -460,18 +474,6 @@
             this.SelectFrameCombobox.TabIndex = 0;
             this.SelectFrameCombobox.SelectedIndexChanged += new System.EventHandler(this.SelectFrameCombobox_SelectedIndexChanged);
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // cropShapesToolStripMenuItem
-            // 
-            this.cropShapesToolStripMenuItem.Name = "cropShapesToolStripMenuItem";
-            this.cropShapesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cropShapesToolStripMenuItem.Text = "Crop Shapes";
-            this.cropShapesToolStripMenuItem.Click += new System.EventHandler(this.CropShapesToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -535,9 +537,9 @@
         private System.Windows.Forms.Button AddColumnLeftButton;
         private System.Windows.Forms.ToolStripMenuItem removeAssetToolStripMenuItem;
         private System.Windows.Forms.TrackBar ButtonSize;
-        private System.Windows.Forms.Button Render;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem cropShapesToolStripMenuItem;
+        private System.Windows.Forms.Button SetAnchorButton;
     }
 }
 

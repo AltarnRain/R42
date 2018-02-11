@@ -16,9 +16,12 @@ namespace Round42.CustomComponents
     public partial class BlockButton : Control
     {
         /// <summary>
-        /// The active color
+        /// Gets the block model
         /// </summary>
-        private Color activeColor;
+        /// <value>
+        /// The block model.
+        /// </value>
+        private BlockModel blockModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlockButton" /> class.
@@ -28,27 +31,8 @@ namespace Round42.CustomComponents
         public BlockButton(BlockModel blockModel, Color activeColor)
             : base()
         {
-            this.BlockModel = blockModel;
-            this.activeColor = activeColor;
-        }
-
-        /// <summary>
-        /// Gets the block model
-        /// </summary>
-        /// <value>
-        /// The block model.
-        /// </value>
-        public BlockModel BlockModel { get; private set; }
-
-        /// <summary>
-        /// Gets the color of the active.
-        /// </summary>
-        /// <value>
-        /// The color of the active.
-        /// </value>
-        public Color ActiveColor
-        {
-            get { return this.activeColor; }
+            this.blockModel = blockModel;
+            this.ActiveColor = activeColor;
         }
 
         /// <summary>
@@ -63,7 +47,7 @@ namespace Round42.CustomComponents
 
             set
             {
-                if (value != this.Text)
+                if (value != base.Text)
                 {
                     base.Text = value;
                     this.Invalidate();
@@ -72,13 +56,28 @@ namespace Round42.CustomComponents
         }
 
         /// <summary>
-        /// Sets the color of the active.
+        /// Gets or sets the color of the active.
         /// </summary>
-        /// <param name="color">The color.</param>
-        public void SetActiveColor(Color color)
-        {
-            this.activeColor = color;
-        }
+        /// <value>
+        /// The color of the active.
+        /// </value>
+        public Color ActiveColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [become anchor on click].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [become anchor on click]; otherwise, <c>false</c>.
+        /// </value>
+        public bool BecomeAnchorOnClick { get; set; }
+
+        /// <summary>
+        /// Gets or sets the on become anchor action
+        /// </summary>
+        /// <value>
+        /// The on become anchor.
+        /// </value>
+        public Action<int, int> OnBecomeAnchor { get; set; }
 
         /// <summary>
         /// Raises the <see cref="E:Paint" /> event.
@@ -90,7 +89,7 @@ namespace Round42.CustomComponents
 
             var gfx = e.Graphics;
             var rc = this.ClientRectangle;
-            var setColor = this.BlockModel.Color;
+            var setColor = this.blockModel.Color;
 
             var tonAndBottomBorder = rc.Height * 0.10f;
             var leftAndRightBorder = rc.Width * 0.10f;
@@ -110,6 +109,19 @@ namespace Round42.CustomComponents
             {
                 gfx.FillRectangle(new SolidBrush(setColor), rc);
             }
+
+            if (this.blockModel.Anchor)
+            {
+                this.Text = "Anchor";
+            }
+
+            var sf = new StringFormat
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            gfx.DrawString(this.Text, this.Font, new SolidBrush(Color.Black), new RectangleF((float)rc.Left, (float)rc.Top, (float)rc.Height, (float)rc.Width), sf);
         }
 
         /// <summary>
@@ -119,7 +131,17 @@ namespace Round42.CustomComponents
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            this.BlockModel.Color = this.activeColor;
+
+            if (this.BecomeAnchorOnClick)
+            {
+                this.blockModel.Anchor = this.BecomeAnchorOnClick;
+                this.OnBecomeAnchor?.Invoke(this.blockModel.Column, this.blockModel.Row);
+            }
+            else
+            {
+                this.blockModel.Color = this.ActiveColor;
+            }
+
             this.Invalidate();
         }
     }

@@ -6,6 +6,7 @@ namespace Round42.Managers
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.IO;
     using System.Linq;
     using Exceptions;
@@ -82,7 +83,7 @@ namespace Round42.Managers
         /// Raised when a frame is selected.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
-        public delegate void FrameSelected(ShapeModel shapeModel);
+        public delegate void LoadFrame(ShapeModel shapeModel);
 
         /// <summary>
         /// Occurs when [on new asset].
@@ -100,17 +101,17 @@ namespace Round42.Managers
         public event CurrentAssetChanged OnCurrentAssetChanged;
 
         /// <summary>
-        /// Occurs when [on frame selected].
+        /// Occurs when [on load frame].
         /// </summary>
-        public event FrameSelected OnFrameSelected;
+        public event LoadFrame OnLoadFrame;
 
         /// <summary>
-        /// Gets the assets.
+        /// Gets or sets the assets.
         /// </summary>
         /// <value>
         /// The assets.
         /// </value>
-        public List<AssetModel> Assets { get; private set; }
+        private List<AssetModel> Assets { get; set; }
 
         /// <summary>
         /// Gets the assets.
@@ -126,11 +127,11 @@ namespace Round42.Managers
         /// <summary>
         /// Gets the frame.
         /// </summary>
-        /// <param name="frame">The frame.</param>
-        public void SelectFrame(int frame)
+        /// <param name="index">The frame.</param>
+        public void LoadFrameByIndex(int index)
         {
-            this.currentFrame = this.currentAsset.Shapes[frame];
-            this.OnFrameSelected?.Invoke(this.currentFrame);
+            this.currentFrame = this.currentAsset.Shapes[index];
+            this.OnLoadFrame?.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -224,7 +225,7 @@ namespace Round42.Managers
         public void AddColumnLeft()
         {
             this.currentFrame.AddColumnLeft();
-            this.OnFrameSelected?.Invoke(this.currentFrame);
+            this.OnLoadFrame?.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -233,7 +234,7 @@ namespace Round42.Managers
         public void AddColumnRight()
         {
             this.currentFrame.AddColumnRight();
-            this.OnFrameSelected?.Invoke(this.currentFrame);
+            this.OnLoadFrame?.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -242,7 +243,7 @@ namespace Round42.Managers
         public void AddRowTop()
         {
             this.currentFrame.AddRowTop();
-            this.OnFrameSelected?.Invoke(this.currentFrame);
+            this.OnLoadFrame?.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -251,7 +252,7 @@ namespace Round42.Managers
         public void AddRowBottom()
         {
             this.currentFrame.AddRowBottom();
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -264,7 +265,7 @@ namespace Round42.Managers
                 this.currentFrame.RemoveRowTop();
             }
 
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -277,7 +278,7 @@ namespace Round42.Managers
                 this.currentFrame.RemoveRowTop();
             }
 
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -290,7 +291,7 @@ namespace Round42.Managers
                 this.currentFrame.RemoveColumnLeft();
             }
 
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -303,19 +304,43 @@ namespace Round42.Managers
                 this.currentFrame.RemoveColumnRight();
             }
 
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.currentFrame);
         }
 
         /// <summary>
         /// Crops the images for the shapes in the current asset.
         /// </summary>
-        public void CropImages()
+        public void CropAndAlightAnchors()
         {
             if (this.currentAsset != null)
             {
                 foreach (var shape in this.currentAsset.Shapes)
                 {
-                    shape.CropImage();
+                    if (shape.Blocks.All(b => b.Color == Color.Black) == false)
+                    {
+                        shape.CropImage();
+                    }
+                }
+
+                var anchorBlocks = this.currentAsset.Shapes.SelectMany(s => s.Blocks).Where(b => b.Anchor);
+                var maxColumn = anchorBlocks.Max(b => b.Column);
+                var maxRow = anchorBlocks.Max(b => b.Row);
+
+                foreach (var shape in this.currentAsset.Shapes)
+                {
+                    var anchorBlock = shape.GetAnchorBlock();
+                    var colDiff = maxColumn - anchorBlock.Column;
+                    var rowDiff = maxRow - anchorBlock.Row;
+
+                    for (int col = 0; col < colDiff; col++)
+                    {
+                        shape.AddRowTop();
+                    }
+
+                    for (int row = 0; row < rowDiff; row++)
+                    {
+                        shape.AddRowTop();
+                    }
                 }
             }
 
@@ -346,7 +371,7 @@ namespace Round42.Managers
         public void MoveLeft()
         {
             this.currentFrame.MoveLeft();
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -355,7 +380,7 @@ namespace Round42.Managers
         public void MoveUp()
         {
             this.currentFrame.MoveUp();
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -364,7 +389,7 @@ namespace Round42.Managers
         public void MoveRight()
         {
             this.currentFrame.MoveRight();
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.currentFrame);
         }
 
         /// <summary>
@@ -373,7 +398,7 @@ namespace Round42.Managers
         public void MoveDown()
         {
             this.currentFrame.MoveDown();
-            this.OnFrameSelected.Invoke(this.currentFrame);
+            this.OnLoadFrame.Invoke(this.currentFrame);
         }
 
         /// <summary>

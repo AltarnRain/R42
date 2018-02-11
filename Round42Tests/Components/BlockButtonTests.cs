@@ -41,7 +41,7 @@ namespace Round42.Tests
             var button = new BlockButton(block, Color.Black);
 
             // Act
-            button.SetActiveColor(Color.Red);
+            button.ActiveColor = Color.Red;
 
             // Assert
             Assert.AreEqual(button.ActiveColor, Color.Red);
