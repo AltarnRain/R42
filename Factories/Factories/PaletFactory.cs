@@ -4,7 +4,7 @@
 
 namespace Round42.Factories.Factories
 {
-    using System.Windows.Forms;
+    using System.Windows.Controls;
     using Ninject;
     using Ninject.Parameters;
     using Round42.CustomComponents;

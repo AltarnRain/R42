@@ -5,7 +5,7 @@
 namespace Round42.Tests
 {
     using System;
-    using System.Windows.Forms;
+    using System.Windows.Controls;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories;
     using Round42.Factories.Factories;
@@ -35,7 +35,7 @@ namespace Round42.Tests
         {
             var factory = this.Get<PaletFactory>();
 
-            var palet = factory.Get(new Panel(), 20);
+            var palet = factory.Get(new StackPanel(), 20);
             Assert.IsNotNull(palet);
         }
     }

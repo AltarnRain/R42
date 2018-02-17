@@ -1,4 +1,6 @@
-﻿using Round42.Factories;
+﻿using AssetEditor2.Properties;
+using Round42.CustomComponents;
+using Round42.Factories;
 using Round42.Factories.Factories;
 using Round42.Managers;
 using Round42.Providers;
@@ -36,9 +38,9 @@ namespace AssetEditor2
         private readonly PaletFactory paletFactory;
         private readonly RenderFactory renderFactory;
 
-        StackPanel palet;
+        Palet palet;
         AssetManager assetManager;
-        Grid drawer;
+        Drawer drawer;
 
         public MainWindow(AssetManagerFactory assetManagerFactory,
             AssetProvider assetProvider,
@@ -59,9 +61,9 @@ namespace AssetEditor2
             var mainAssetFile = System.IO.Path.Combine(Directory.GetCurrentDirectory(), AssetFile);
             this.assetManager = assetManagerFactory.Get(mainAssetFile, false);
             this.palet = this.paletFactory.Get(this.Palet);
-            this.drawer = this.drawerFactory.Get(this.DrawerGrid);
+            // this.drawer = this.drawerFactory.Get(this.DrawerGrid);
 
-            this.ButtonSize.Value = Settings.Default.ZoomLevel;
+            this.ZoomLevel.Value = Settings.Default.ZoomLevel;
 
             // Event handler setup must precede loading assets but happen after the asset manager is created
             this.SetupEventHandlers();
@@ -70,12 +72,17 @@ namespace AssetEditor2
             this.assetManager.LoadAssets();
         }
 
+        private void SetupEventHandlers()
+        {
+            throw new NotImplementedException();
+        }
+
         private void AddFrame(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void ZoomLevel(object sender, ManipulationCompletedEventArgs e)
+        private void ZoomLevelChanged(object sender, ManipulationCompletedEventArgs e)
         {
 
         }
@@ -141,6 +148,26 @@ namespace AssetEditor2
         }
 
         private void RemoveFrame(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CropAndAlign(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RenderAll(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveAsset(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddAsset(object sender, RoutedEventArgs e)
         {
 
         }

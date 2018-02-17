@@ -105,7 +105,7 @@ namespace Round42.AssetEditor.Forms
 
             var mainAssetFile = Path.Combine(Directory.GetCurrentDirectory(), AssetFile);
             this.assetManager = assetManagerFactory.Get(mainAssetFile, false);
-            this.palet = this.paletFactory.Get(this.PaletPanel);
+            //this.palet = this.paletFactory.Get(this.PaletPanel);
             this.drawer = this.drawerFactory.Get(this.DrawerPanel);
 
             this.ButtonSize.Value = Settings.Default.ZoomLevel;

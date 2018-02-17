@@ -18,12 +18,12 @@
                     <MenuItem Header ="_Exit" x:Name="Exit"/>
                 </MenuItem>
                 <MenuItem Header="Edit" DockPanel.Dock="Top">
-                    <MenuItem x:Name="AddAsset" Header="Add asset"/>
-                    <MenuItem x:Name="RemoveAsset" Header="Remove asset" />
+                    <MenuItem Click="AddAsset" Header="Add asset"/>
+                    <MenuItem Click="RemoveAsset" Header="Remove asset" />
                     <Separator/>
-                    <MenuItem x:Name="CropAndAlign" Header="Crop and Alight anchors" />
+                    <MenuItem Click="CropAndAlign" Header="Crop and Alight anchors" />
                     <Separator/>
-                    <MenuItem x:Name="RenderAll" Header="Render all Assets"/>
+                    <MenuItem Click="RenderAll" Header="Render all Assets"/>
                 </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Header="About"/>
@@ -135,7 +135,7 @@
                         </Grid>
 
                         <!--Zoom slider-->
-                        <Slider Orientation="Vertical" Grid.Column="2" ManipulationCompleted="ZoomLevel"></Slider>
+                        <Slider x:Name="ZoomLevel"  Orientation="Vertical" Grid.Column="2" ManipulationCompleted="ZoomLevelChanged"></Slider>
                     </Grid>
                 </DockPanel>
             </Grid>

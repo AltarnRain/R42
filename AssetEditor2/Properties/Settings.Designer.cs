@@ -34,5 +34,17 @@ namespace AssetEditor2.Properties {
                 this["AssetFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ZoomLevel {
+            get {
+                return ((int)(this["ZoomLevel"]));
+            }
+            set {
+                this["ZoomLevel"] = value;
+            }
+        }
     }
 }

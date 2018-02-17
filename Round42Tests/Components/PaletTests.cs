@@ -5,9 +5,10 @@
 namespace Round42.Tests
 {
     using System.Linq;
-    using System.Windows.Forms;
+    using System.Windows.Controls;
     using Extentions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Round42.CustomComponents;
     using Round42.Factories.Factories;
     using Round42.Providers;
 
@@ -25,7 +26,7 @@ namespace Round42.Tests
         {
             // Arrange
             var colors = this.Get<ColorProvider>().GetColors();
-            var panel = new Panel();
+            var panel = new StackPanel();
 
             // Act
             var palet = this.Get<PaletFactory>().Get(panel);
@@ -44,18 +45,18 @@ namespace Round42.Tests
         {
             // Arrange
             var colors = this.Get<ColorProvider>().GetColors();
-            var panel = new Panel();
+            var panel = new StackPanel();
 
             // Act
             var palet = this.Get<PaletFactory>().Get(panel);
 
             // Act
-            foreach (var c in palet.Controls)
+            foreach (var c in palet.ColorButtons)
             {
                 if (c is Button)
                 {
                     var b = c as Button;
-                    if (colors.Any(color => color == c.As<Button>().ForeColor) == false)
+                    if (colors.Any(color => color.Equals(c.Foreground)) == false)
                     {
                         Assert.Fail();
                     }

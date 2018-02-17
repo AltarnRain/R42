@@ -56,7 +56,7 @@ namespace Round42.TestAppPaletAndDrawer
             this.colorProvider = colorProvider;
             this.paletFactory = paletFactory;
             this.drawerFactory = drawerFactory;
-            var palet = this.paletFactory.Get(this.PaletPanel);
+            //var palet = this.paletFactory.Get(this.PaletPanel);
 
             this.shapeModel = this.kernel.Get<ShapeProvider>().Create(25, 15);
 
