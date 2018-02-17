@@ -499,17 +499,20 @@ namespace Round42.Managers
             foreach (var shape in this.CurrentAsset.Shapes)
             {
                 var anchorBlock = shape.GetAnchorBlock();
-                var colDiff = maxColumn - anchorBlock.Column;
-                var rowDiff = maxRow - anchorBlock.Row;
-
-                for (int col = 0; col < colDiff; col++)
+                if (anchorBlock != null)
                 {
-                    shape.AddColumnLeft();
-                }
+                    var colDiff = maxColumn - anchorBlock.Column;
+                    var rowDiff = maxRow - anchorBlock.Row;
 
-                for (int row = 0; row < rowDiff; row++)
-                {
-                    shape.AddRowTop();
+                    for (int col = 0; col < colDiff; col++)
+                    {
+                        shape.AddColumnLeft();
+                    }
+
+                    for (int row = 0; row < rowDiff; row++)
+                    {
+                        shape.AddRowTop();
+                    }
                 }
             }
         }

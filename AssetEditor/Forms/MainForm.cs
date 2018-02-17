@@ -9,12 +9,9 @@ namespace Round42.AssetEditor.Forms
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
     using Extentions;
     using Providers;
-    using Render;
     using Round42.AssetEditor.Properties;
     using Round42.CustomComponents;
     using Round42.Factories;

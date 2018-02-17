@@ -299,7 +299,7 @@ namespace Round42.Models.Extentions
         /// <returns>Block Model</returns>
         public static BlockModel GetAnchorBlock(this ShapeModel shapeModel)
         {
-            return shapeModel.Blocks.Single(b => b.Anchor == true);
+            return shapeModel.Blocks.SingleOrDefault(b => b.Anchor == true);
         }
 
         /// <summary>
