@@ -24,20 +24,5 @@ namespace RenderSurface
         {
             InitializeComponent();
         }
-
-        private void DrawLine(object sender, RoutedEventArgs e)
-        {
-            // Add a Line Element
-            var myLine = new Line();
-            myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
-            myLine.X1 = 1;
-            myLine.X2 = 50;
-            myLine.Y1 = 1;
-            myLine.Y2 = 50;
-            myLine.HorizontalAlignment = HorizontalAlignment.Left;
-            myLine.VerticalAlignment = VerticalAlignment.Center;
-            myLine.StrokeThickness = 2;
-            myGrid.Children.Add(myLine);
-        }
     }
 }

@@ -61,6 +61,10 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Extentions\Extentions\Extentions.csproj">
+      <Project>{6DC160D3-241B-475B-9991-8BAF5198D654}</Project>
+      <Name>Extentions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
       <Name>Models</Name>

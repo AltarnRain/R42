@@ -51,7 +51,7 @@ namespace Render
 
                 var rect = new Rectangle(x, y, size, size);
 
-                g.FillRectangle(new SolidBrush(block.Color), rect);
+                //g.FillRectangle(new SolidBrush(block.Color), rect);
             }
 
             var paddedCount = count.ToString().PadLeft(2, '0');

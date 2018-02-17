@@ -5,15 +5,15 @@
 namespace Round42.CustomComponents
 {
     using System;
-    using System.Drawing;
-    using System.Windows.Forms;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+    using Extentions;
     using Round42.Models;
 
     /// <summary>
     /// The block button,
     /// </summary>
-    /// <seealso cref="System.Windows.Forms.Control" />
-    public partial class BlockButton : Control
+    public partial class BlockButton : Button
     {
         /// <summary>
         /// Gets the block model
@@ -27,33 +27,32 @@ namespace Round42.CustomComponents
         /// Initializes a new instance of the <see cref="BlockButton" /> class.
         /// </summary>
         /// <param name="blockModel">The block model.</param>
-        /// <param name="activeColor">Color of the active.</param>
-        public BlockButton(BlockModel blockModel, Color activeColor)
+        public BlockButton(BlockModel blockModel)
             : base()
         {
             this.blockModel = blockModel;
-            this.ActiveColor = activeColor;
+            this.ActiveColor = Brushes.Black;
         }
 
-        /// <summary>
-        /// Gets or sets the text associated with this control.
-        /// </summary>
-        public new string Text
-        {
-            get
-            {
-                return base.Text;
-            }
+        ///// <summary>
+        ///// Gets or sets the text associated with this control.
+        ///// </summary>
+        //public new string Text
+        //{
+        //    get
+        //    {
+        //        return base.Text;
+        //    }
 
-            set
-            {
-                if (value != base.Text)
-                {
-                    base.Text = value;
-                    this.Invalidate();
-                }
-            }
-        }
+        //    set
+        //    {
+        //        if (value != base.Text)
+        //        {
+        //            base.Text = value;
+        //            this.Invalidate();
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Gets or sets the color of the active.
@@ -61,7 +60,7 @@ namespace Round42.CustomComponents
         /// <value>
         /// The color of the active.
         /// </value>
-        public Color ActiveColor { get; set; }
+        public Brush ActiveColor { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether [become anchor on click].
@@ -83,54 +82,54 @@ namespace Round42.CustomComponents
         /// Raises the <see cref="E:Paint" /> event.
         /// </summary>
         /// <param name="e">The <see cref="PaintEventArgs" /> instance containing the event data.</param>
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
+        //protected override void OnPaint()
+        //{
+        //    base.OnPaint();
 
-            var gfx = e.Graphics;
-            var rc = this.ClientRectangle;
-            var setColor = this.blockModel.Color;
+        //    var gfx = e.Graphics;
+        //    var rc = this.ClientRectangle;
+        //    var setColor = this.blockModel.Color;
 
-            var tonAndBottomBorder = rc.Height * 0.10f;
-            var leftAndRightBorder = rc.Width * 0.10f;
+        //    var tonAndBottomBorder = rc.Height * 0.10f;
+        //    var leftAndRightBorder = rc.Width * 0.10f;
 
-            var innerRectangle = new RectangleF(
-                rc.Left + leftAndRightBorder,
-                rc.Top + tonAndBottomBorder,
-                rc.Width - (leftAndRightBorder * 2),
-                rc.Height - (tonAndBottomBorder * 2));
+        //    var innerRectangle = new RectangleF(
+        //        rc.Left + leftAndRightBorder,
+        //        rc.Top + tonAndBottomBorder,
+        //        rc.Width - (leftAndRightBorder * 2),
+        //        rc.Height - (tonAndBottomBorder * 2));
 
-            if (setColor == Color.Black)
-            {
-                gfx.FillRectangle(new SolidBrush(this.Parent.BackColor), rc);
-                gfx.FillRectangle(new SolidBrush(setColor), innerRectangle);
-            }
-            else
-            {
-                gfx.FillRectangle(new SolidBrush(setColor), rc);
-            }
+        //    if (setColor == Color.Black)
+        //    {
+        //        gfx.FillRectangle(new SolidBrush(this.Parent.BackColor), rc);
+        //        gfx.FillRectangle(new SolidBrush(setColor), innerRectangle);
+        //    }
+        //    else
+        //    {
+        //        gfx.FillRectangle(new SolidBrush(setColor), rc);
+        //    }
 
-            if (this.blockModel.Anchor)
-            {
-                this.Text = "Anchor";
-            }
+        //    if (this.blockModel.Anchor)
+        //    {
+        //        this.Text = "Anchor";
+        //    }
 
-            var sf = new StringFormat
-            {
-                Alignment = StringAlignment.Center,
-                LineAlignment = StringAlignment.Center
-            };
+        //    var sf = new StringFormat
+        //    {
+        //        Alignment = StringAlignment.Center,
+        //        LineAlignment = StringAlignment.Center
+        //    };
 
-            gfx.DrawString(this.Text, this.Font, new SolidBrush(Color.Black), new RectangleF((float)rc.Left, (float)rc.Top, (float)rc.Height, (float)rc.Width), sf);
-        }
+        //    gfx.DrawString(this.Text, this.Font, new SolidBrush(Color.Black), new RectangleF((float)rc.Left, (float)rc.Top, (float)rc.Height, (float)rc.Width), sf);
+        //}
 
         /// <summary>
         /// Click event that updates the accociated block.
         /// </summary>
         /// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
-        protected override void OnClick(EventArgs e)
+        protected override void OnClick()
         {
-            base.OnClick(e);
+            base.OnClick();
 
             if (this.BecomeAnchorOnClick)
             {
@@ -139,10 +138,8 @@ namespace Round42.CustomComponents
             }
             else
             {
-                this.blockModel.Color = this.ActiveColor;
+                this.blockModel.Color = this.ActiveColor.As<SolidColorBrush>().Color;
             }
-
-            this.Invalidate();
         }
     }
 }

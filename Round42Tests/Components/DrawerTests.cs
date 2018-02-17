@@ -4,9 +4,9 @@
 
 namespace Round42.Tests
 {
-    using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
+    using System.Windows.Media;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Providers;
     using Round42.CustomComponents;
@@ -53,9 +53,9 @@ namespace Round42.Tests
             // Act
             var drawer = this.Get<DrawerFactory>().Get(panel);
 
-            drawer.SetAciveColor(Color.BlueViolet);
+            drawer.SetAciveColor(Brushes.BlueViolet);
 
-            var allButtonsSet = drawer.BlockButtons.All(b => b.ActiveColor == Color.BlueViolet);
+            var allButtonsSet = drawer.BlockButtons.All(b => b.ActiveColor.Equals(Brushes.BlueViolet));
 
             Assert.IsTrue(allButtonsSet);
         }

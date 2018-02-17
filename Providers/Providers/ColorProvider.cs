@@ -4,7 +4,11 @@
 
 namespace Round42.Providers
 {
-    using System.Drawing;
+    using System;
+    using System.Collections.Generic;
+    using System.Windows.Media;
+    using Round42.Models.Models;
+    using Round42.Models.Extentions;
 
     /// <summary>
     /// Providers Color
@@ -12,30 +16,31 @@ namespace Round42.Providers
     public class ColorProvider
     {
         /// <summary>
+        /// The colors
+        /// </summary>
+        private static IEnumerable<Color> colors = null;
+
+        /// <summary>
         /// Gets the colors of the CGA 16 palet.
         /// </summary>
         /// <returns>An array of colors</returns>
-        public Brush[] GetColors()
+        public IEnumerable<Color> GetColors()
         {
-            //return new Color[]
-            //{
-            //    Color.Gray, Color.Brown, Color.Magenta,
-            //    Color.Red, Color.Cyan, Color.Green,
-            //    Color.Blue, Color.Black,
-            //    Color.White, Color.Yellow, Color.LightPink,
-            //    Color.PaleVioletRed, Color.LightCyan, Color.LightGreen,
-            //    Color.LightBlue, Color.DarkGray
-            //};
+            if (ColorProvider.colors == null)
+            {
+                var colorIndexes = Enum.GetValues(typeof(CGA16Colors));
 
-            return new Brush[]
-{
-                Brushes.Gray, Brushes.Brown, Brushes.Magenta,
-                Brushes.Red, Brushes.Cyan, Brushes.Green,
-                Brushes.Blue, Brushes.Black,
-                Brushes.White, Brushes.Yellow, Brushes.LightPink,
-                Brushes.PaleVioletRed, Brushes.LightCyan, Brushes.LightGreen,
-                Brushes.LightBlue, Brushes.DarkGray
-};
+                var colors = new List<Color>();
+                foreach (var index in colorIndexes)
+                {
+                    var cgaColor = (CGA16Colors)index;
+                    colors.Add(cgaColor.GetColor());
+                }
+
+                ColorProvider.colors = colors;
+            }
+
+            return ColorProvider.colors;
         }
     }
 }

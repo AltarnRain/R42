@@ -7,6 +7,7 @@ namespace Round42.Models.Extentions
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
+    using System.Windows.Media;
 
     /// <summary>
     /// Extention class
@@ -248,8 +249,8 @@ namespace Round42.Models.Extentions
         /// <param name="column">The column.</param>
         public static void RemoveColumn(this ShapeModel shapeModel, int column)
         {
-             shapeModel.Blocks.RemoveAll(b => b.Column == column);
-             shapeModel.Blocks.Where(b => b.Column > column).ToList().ForEach(b => b.Column = b.Column - 1);
+            shapeModel.Blocks.RemoveAll(b => b.Column == column);
+            shapeModel.Blocks.Where(b => b.Column > column).ToList().ForEach(b => b.Column = b.Column - 1);
         }
 
         /// <summary>
@@ -312,7 +313,7 @@ namespace Round42.Models.Extentions
             var columnsToRemove = new List<int>();
             for (int col = shapeModel.LastColumn(); col >= 1; col--)
             {
-                if (shapeModel.GetColumn(col).All(b => b.Color == Color.Black))
+                if (shapeModel.GetColumn(col).All(b => b.Color.Equals(Color.FromRgb(0, 0, 0))))
                 {
                     columnsToRemove.Add(col);
                 }
@@ -324,7 +325,7 @@ namespace Round42.Models.Extentions
 
             for (int col = 1; col <= shapeModel.LastColumn(); col++)
             {
-                if (shapeModel.GetColumn(col).All(b => b.Color == Color.Black))
+                if (shapeModel.GetColumn(col).All(b => b.Color.Equals(Color.FromRgb(0, 0, 0))))
                 {
                     columnsToRemove.Add(col);
                 }
@@ -350,7 +351,7 @@ namespace Round42.Models.Extentions
             var rowsToRemove = new List<int>();
             for (int row = shapeModel.LastRow(); row >= 1; row--)
             {
-                if (shapeModel.GetRow(row).All(b => b.Color == Color.Black))
+                if (shapeModel.GetRow(row).All(b => b.Color.Equals(Color.FromRgb(0, 0, 0))))
                 {
                     rowsToRemove.Add(row);
                 }
@@ -362,7 +363,7 @@ namespace Round42.Models.Extentions
 
             for (int row = 1; row <= shapeModel.LastRow(); row++)
             {
-                if (shapeModel.GetRow(row).All(b => b.Color == Color.Black))
+                if (shapeModel.GetRow(row).All(b => b.Color.Equals(Color.FromRgb(0, 0, 0))))
                 {
                     rowsToRemove.Add(row);
                 }

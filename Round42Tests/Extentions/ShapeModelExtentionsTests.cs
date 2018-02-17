@@ -4,12 +4,8 @@
 
 namespace Round242.Tests.Extentions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Drawing;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using System.Windows.Media;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Models;
     using Round42.Models.Extentions;
@@ -52,7 +48,7 @@ namespace Round242.Tests.Extentions
                 Assert.IsTrue(foundBlock);
             }
 
-            var expectedRowIsRed = shape.GetRow(11).All(b => b.Color == Color.Red);
+            var expectedRowIsRed = shape.GetRow(11).All(b => b.Color.Equals(Color.FromRgb(0, 0, 0)));
             Assert.IsTrue(expectedRowIsRed);
         }
 
@@ -86,10 +82,10 @@ namespace Round242.Tests.Extentions
                 Assert.IsTrue(foundBlock);
             }
 
-            var expectedRowIsRed = shape.GetRow(10).All(b => b.Color == Color.Red);
+            var expectedRowIsRed = shape.GetRow(10).All(b => b.Color.R == 255);
             Assert.IsTrue(expectedRowIsRed);
 
-            var bottomRowIsBlack = shape.GetRow(11).All(b => b.Color == Color.Black);
+            var bottomRowIsBlack = shape.GetRow(11).All(b => b.Color.R == 0);
             Assert.IsTrue(bottomRowIsBlack);
         }
 
@@ -114,7 +110,7 @@ namespace Round242.Tests.Extentions
             var numberOfBlocks = shape.Blocks.Count();
             Assert.AreEqual(45, numberOfBlocks);
 
-            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color == Color.Red);
+            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color.R == 255);
             Assert.IsTrue(expectedRowIsRed);
             Assert.AreEqual(9, shape.LastRow());
         }
@@ -140,7 +136,7 @@ namespace Round242.Tests.Extentions
             var numberOfBlocks = shape.Blocks.Count();
             Assert.AreEqual(45, numberOfBlocks);
 
-            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color == Color.Red);
+            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color.R == 255);
             Assert.IsTrue(expectedRowIsRed);
             Assert.AreEqual(9, shape.LastRow());
         }
@@ -175,7 +171,7 @@ namespace Round242.Tests.Extentions
                 Assert.IsTrue(foundBlock);
             }
 
-            var expectedColumnIsRed = shape.GetColumn(6).All(b => b.Color == Color.Red);
+            var expectedColumnIsRed = shape.GetColumn(6).All(b => b.Color.R == 255);
             Assert.IsTrue(expectedColumnIsRed);
         }
 
@@ -209,7 +205,7 @@ namespace Round242.Tests.Extentions
                 Assert.IsTrue(foundBlock);
             }
 
-            var expectedColumnIsRed = shape.GetColumn(5).All(b => b.Color == Color.Red);
+            var expectedColumnIsRed = shape.GetColumn(5).All(b => b.Color.R == 255);
             Assert.IsTrue(expectedColumnIsRed);
         }
 
@@ -234,7 +230,7 @@ namespace Round242.Tests.Extentions
             var numberOfBlocks = shape.Blocks.Count();
             Assert.AreEqual(40, numberOfBlocks);
 
-            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color == Color.Red);
+            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color.R == 255);
             Assert.IsTrue(expectedColumnIsRed);
             Assert.AreEqual(4, shape.LastColumn());
         }
@@ -260,7 +256,7 @@ namespace Round242.Tests.Extentions
             var numberOfBlocks = shape.Blocks.Count();
             Assert.AreEqual(40, numberOfBlocks);
 
-            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color == Color.Red);
+            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color.R == 255);
             Assert.IsTrue(expectedColumnIsRed);
             Assert.AreEqual(4, shape.LastColumn());
         }
@@ -277,13 +273,18 @@ namespace Round242.Tests.Extentions
             var shapeProvider = this.Get<ShapeProvider>();
             var shape = shapeProvider.Create(columns, rows);
 
-            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b => b.Color = Color.Red);
+            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b =>
+            {
+                b.R = 255;
+                b.G = 0;
+                b.B = 0;
+            });
 
             // Act
             shape.CropImage();
 
             // Assert
-            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color == Color.Red);
+            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color.R == 255);
             Assert.AreEqual(9, numberOfRedBlocks);
             Assert.AreEqual(9, shape.Blocks.Count());
         }
@@ -301,16 +302,16 @@ namespace Round242.Tests.Extentions
             var shape = shapeProvider.Create(columns, rows);
 
             // Create a red square
-            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b => b.Color = Color.Red);
+            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b => b.SetColor(255, 0, 0));
 
             // Create black line, this means there's two red lines split by a black line.
-            shape.Blocks.Where(b => b.Row == 5 && b.Column > 3).ToList().ForEach(b => b.Color = Color.Black);
+            shape.Blocks.Where(b => b.Row == 5 && b.Column > 3).ToList().ForEach(b => b.SetColor(0, 0, 0));
 
             // Act
             shape.CropImage();
 
             // Assert
-            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color == Color.Red);
+            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color.R == 255);
             Assert.AreEqual(6, numberOfRedBlocks);
             Assert.AreEqual(9, shape.Blocks.Count());
         }
@@ -331,7 +332,7 @@ namespace Round242.Tests.Extentions
             {
                 if (b.Row == 2)
                 {
-                    b.Color = Color.Red;
+                    b.SetColor(255, 0, 0);
                 }
             });
 
@@ -339,7 +340,7 @@ namespace Round242.Tests.Extentions
             shape.MoveUp();
 
             // Assert
-            var firstRowIsRed = shape.GetRow(1).All(b => b.Color == Color.Red);
+            var firstRowIsRed = shape.GetRow(1).All(b => b.Color.R == 255);
             Assert.IsTrue(firstRowIsRed);
         }
 
@@ -359,7 +360,7 @@ namespace Round242.Tests.Extentions
             {
                 if (b.Row == 2)
                 {
-                    b.Color = Color.Red;
+                    b.SetColor(255, 0, 0);
                 }
             });
 
@@ -367,7 +368,7 @@ namespace Round242.Tests.Extentions
             shape.MoveDown();
 
             // Assert
-            var thirdRowIsRed = shape.GetRow(3).All(b => b.Color == Color.Red);
+            var thirdRowIsRed = shape.GetRow(3).All(b => b.Color.R == 255);
             Assert.IsTrue(thirdRowIsRed);
         }
 
@@ -387,7 +388,7 @@ namespace Round242.Tests.Extentions
             {
                 if (b.Column == 2)
                 {
-                    b.Color = Color.Red;
+                    b.SetColor(255, 0, 0);
                 }
             });
 
@@ -395,7 +396,7 @@ namespace Round242.Tests.Extentions
             shape.MoveRight();
 
             // Assert
-            var isRed = shape.GetColumn(3).All(b => b.Color == Color.Red);
+            var isRed = shape.GetColumn(3).All(b => b.Color.R == 255);
             Assert.IsTrue(isRed);
         }
 
@@ -415,7 +416,7 @@ namespace Round242.Tests.Extentions
             {
                 if (b.Column == 2)
                 {
-                    b.Color = Color.Red;
+                    b.SetColor(255, 0, 0);
                 }
             });
 
@@ -423,7 +424,7 @@ namespace Round242.Tests.Extentions
             shape.MoveLeft();
 
             // Assert
-            var isRed = shape.GetColumn(1).All(b => b.Color == Color.Red);
+            var isRed = shape.GetColumn(1).All(b => b.Color.R == 255);
             Assert.IsTrue(isRed);
         }
 
@@ -499,7 +500,7 @@ namespace Round242.Tests.Extentions
         /// <param name="column">The column.</param>
         private void MakeColumnRed(ShapeModel shapeModel, int column)
         {
-            shapeModel.Blocks.Where(b => b.Column == column).ToList().ForEach(b => b.Color = Color.Red);
+            shapeModel.Blocks.Where(b => b.Column == column).ToList().ForEach(b => b.SetColor(255, 0, 0));
         }
 
         /// <summary>
@@ -509,7 +510,7 @@ namespace Round242.Tests.Extentions
         /// <param name="row">The row.</param>
         private void MakeRowRed(ShapeModel shapeModel, int row)
         {
-            shapeModel.Blocks.Where(b => b.Row == row).ToList().ForEach(b => b.Color = Color.Red);
+            shapeModel.Blocks.Where(b => b.Row == row).ToList().ForEach(b => b.SetColor(255, 0, 0));
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Round42.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.CustomComponents;
     using Round42.Factories.Factories;
+    using Round42.Models.Extentions;
+    using Round42.Models.Models;
     using Round42.Providers;
 
     /// <summary>
@@ -34,7 +36,7 @@ namespace Round42.Tests
             // Assert
             var numberOfControls = palet.ColorButtons.Count();
 
-            Assert.AreEqual(colors.Length, numberOfControls);
+            Assert.AreEqual(colors.Count(), numberOfControls);
         }
 
         /// <summary>
@@ -56,7 +58,8 @@ namespace Round42.Tests
                 if (c is Button)
                 {
                     var b = c as Button;
-                    if (colors.Any(color => color.Equals(c.Foreground)) == false)
+
+                    if (colors.Any(color => color))
                     {
                         Assert.Fail();
                     }

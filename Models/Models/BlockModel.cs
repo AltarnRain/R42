@@ -4,7 +4,7 @@
 
 namespace Round42.Models
 {
-    using System.Drawing;
+    using System.Windows.Media;
     using System.Xml.Serialization;
 
     /// <summary>
@@ -18,33 +18,50 @@ namespace Round42.Models
         private Color color;
 
         /// <summary>
-        /// The color name
-        /// </summary>
-        private string colorName;
-
-        /// <summary>
         /// Gets or sets the color.
         /// </summary>
         /// <value>
         /// The color.
         /// </value>
-        [XmlIgnore]
         public Color Color
         {
             get
             {
-                return this.color;
+                return Color.FromRgb(this.R, this.G, this.B);
             }
 
             set
             {
-                if (this.Color != value)
-                {
-                    this.color = value;
-                    this.ColorName = value.Name;
-                }
+                this.color = value;
+                this.R = value.R;
+                this.G = value.G;
+                this.B = value.B;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the r.
+        /// </summary>
+        /// <value>
+        /// The r.
+        /// </value>
+        public byte R { get; set; }
+
+        /// <summary>
+        /// Gets or sets the g.
+        /// </summary>
+        /// <value>
+        /// The g.
+        /// </value>
+        public byte G { get; set; }
+
+        /// <summary>
+        /// Gets or sets the b.
+        /// </summary>
+        /// <value>
+        /// The b.
+        /// </value>
+        public byte B { get; set; }
 
         /// <summary>
         /// Gets or sets the column.
@@ -71,29 +88,6 @@ namespace Round42.Models
         public bool Anchor { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the color.
-        /// </summary>
-        /// <value>
-        /// The name of the color.
-        /// </value>
-        public string ColorName
-        {
-            get
-            {
-                return this.colorName;
-            }
-
-            set
-            {
-                if (this.colorName != value)
-                {
-                    this.color = Color.FromName(value);
-                    this.colorName = value;
-                }
-            }
-        }
-
-        /// <summary>
         /// Creates a block model
         /// </summary>
         /// <param name="column">The column.</param>
@@ -103,10 +97,23 @@ namespace Round42.Models
         {
             return new BlockModel
             {
-                Color = Color.Black,
+                Color = Color.FromRgb(0, 0, 0),
                 Column = column,
                 Row = row
             };
+        }
+
+        /// <summary>
+        /// Sets the color.
+        /// </summary>
+        /// <param name="r">The r.</param>
+        /// <param name="g">The g.</param>
+        /// <param name="b">The b.</param>
+        public void SetColor(byte r, byte g, byte b)
+        {
+            this.R = r;
+            this.G = g;
+            this.B = b;
         }
     }
 }

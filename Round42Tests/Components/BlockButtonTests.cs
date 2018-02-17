@@ -4,10 +4,10 @@
 
 namespace Round42.Tests
 {
-    using System.Drawing;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.CustomComponents;
     using Round42.Models;
+    using System.Windows.Media;
 
     /// <summary>
     /// Tests the block button.
@@ -24,10 +24,10 @@ namespace Round42.Tests
             var block = BlockModel.Create(0, 0);
 
             // Act
-            var button = new BlockButton(block, Color.Black);
+            var button = new BlockButton(block);
 
             // Assert
-            Assert.AreEqual(Color.Black, button.ActiveColor);
+            Assert.AreEqual(Brushes.Black, button.ActiveColor);
         }
 
         /// <summary>
@@ -37,14 +37,13 @@ namespace Round42.Tests
         public void SetActiveColor()
         {
             var block = BlockModel.Create(0, 0);
-            block.ColorName = Color.Red.Name;
-            var button = new BlockButton(block, Color.Black);
+            var button = new BlockButton(block);
 
             // Act
-            button.ActiveColor = Color.Red;
+            button.ActiveColor = Brushes.Red;
 
             // Assert
-            Assert.AreEqual(button.ActiveColor, Color.Red);
+            Assert.AreEqual(button.ActiveColor, Brushes.Red);
         }
     }
 }

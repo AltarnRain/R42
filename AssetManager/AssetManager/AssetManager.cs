@@ -326,7 +326,7 @@ namespace Round42.Managers
             {
                 foreach (var shape in this.CurrentAsset.Shapes)
                 {
-                    if (shape.Blocks.All(b => b.Color == Color.Black) == false)
+                    if (shape.Blocks.All(b => b.Color.R == 0 && b.Color.G == 0 && b.Color.B == 0) == false)
                     {
                         shape.CropImage();
                     }

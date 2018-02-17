@@ -5,9 +5,9 @@
 namespace Round42.CustomComponents
 {
     using System.Collections.Generic;
-    using System.Drawing;
     using System.Linq;
-    using System.Windows.Forms;
+    using System.Windows.Controls;
+    using System.Windows.Media;
     using Round42.Models;
     using Round42.Models.Extentions;
 
@@ -19,7 +19,7 @@ namespace Round42.CustomComponents
         /// <summary>
         /// The panel
         /// </summary>
-        private readonly Panel panel;
+        private readonly Canvas panel;
 
         /// <summary>
         /// The current shape
@@ -31,7 +31,7 @@ namespace Round42.CustomComponents
         /// </summary>
         /// <param name="panel">The panel.</param>
         /// <exception cref="System.ArgumentNullException">shapeModel</exception>
-        public Drawer(Panel panel)
+        public Drawer(Canvas panel)
             : base()
         {
             this.panel = panel;
@@ -47,7 +47,7 @@ namespace Round42.CustomComponents
         {
             get
             {
-                return this.panel.Controls.Cast<BlockButton>();
+                return this.panel.Children.Cast<BlockButton>();
             }
         }
 
@@ -55,9 +55,9 @@ namespace Round42.CustomComponents
         /// Passed down the active color to all the BlockButtons contained in the Drawer
         /// </summary>
         /// <param name="color">The color.</param>
-        public void SetAciveColor(Color color)
+        public void SetAciveColor(Brush color)
         {
-            foreach (BlockButton b in this.panel.Controls)
+            foreach (BlockButton b in this.panel.Children)
             {
                 b.ActiveColor = color;
             }
@@ -69,10 +69,10 @@ namespace Round42.CustomComponents
         public void SetAchor()
         {
             this.currentShape.ResetAnchor();
-            foreach (BlockButton b in this.panel.Controls)
+            foreach (BlockButton b in this.panel.Children)
             {
                 b.BecomeAnchorOnClick = true;
-                b.Text = "Click to set Anchor";
+                //b.Text = "Click to set Anchor";
             }
         }
 
@@ -84,24 +84,23 @@ namespace Round42.CustomComponents
         public void DrawButtons(ShapeModel shapeModel, int buttonSize)
         {
             this.currentShape = shapeModel;
-            this.panel.Controls.Clear();
+            this.panel.Children.Clear();
 
-            var bbList = new List<BlockButton>();
             foreach (var block in shapeModel.Blocks)
             {
-                var blockButton = new BlockButton(block, Color.Black)
+                var blockButton = new BlockButton(block)
                 {
-                    Left = (block.Column - 1) * buttonSize,
-                    Top = (block.Row - 1) * buttonSize,
                     Width = buttonSize,
                     Height = buttonSize,
                     OnBecomeAnchor = this.SetAnchor
                 };
 
-                bbList.Add(blockButton);
+                Canvas.SetLeft(blockButton, (block.Column - 1) * buttonSize);
+                Canvas.SetTop(blockButton, (block.Row - 1) * buttonSize);
+
+            this.panel.Children.Add(blockButton);
             }
 
-            this.panel.Controls.AddRange(bbList.ToArray());
         }
 
         /// <summary>
@@ -123,10 +122,10 @@ namespace Round42.CustomComponents
         /// <param name="row">The row.</param>
         private void SetAnchor(int column, int row)
         {
-            foreach (BlockButton b in this.panel.Controls)
+            foreach (BlockButton b in this.panel.Children)
             {
                 b.BecomeAnchorOnClick = false;
-                b.Text = string.Empty;
+                //b.Text = string.Empty;
             }
 
             this.currentShape.SetAnchor(column, row);

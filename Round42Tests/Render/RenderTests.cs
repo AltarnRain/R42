@@ -4,9 +4,9 @@
 
 namespace Round242.Tests.Render
 {
-    using System.Drawing;
     using System.IO;
     using System.Linq;
+    using System.Windows.Media;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories.Factories;
     using Round42.Providers;
@@ -31,8 +31,8 @@ namespace Round242.Tests.Render
 
             var shape = shapeProvider.Create(5, 5);
 
-            shape.Blocks.Where(b => b.Column == 3).ToList().ForEach(b => b.Color = Color.Red);
-            shape.Blocks.Where(b => b.Row == 3).ToList().ForEach(b => b.Color = Color.Red);
+            shape.Blocks.Where(b => b.Column == 3).ToList().ForEach(b => b.Color.Equals(Color.FromRgb(255, 0, 0)));
+            shape.Blocks.Where(b => b.Row == 3).ToList().ForEach(b => b.Color.Equals(Color.FromRgb(255, 0, 0)));
 
             // Act
             var fileName = render.RenderShapeToBitmap(shape, "TestBitmap", 1);

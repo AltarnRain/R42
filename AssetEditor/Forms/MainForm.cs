@@ -10,6 +10,7 @@ namespace Round42.AssetEditor.Forms
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
+    using System.Windows.Media;
     using Extentions;
     using Providers;
     using Round42.AssetEditor.Properties;
@@ -140,7 +141,7 @@ namespace Round42.AssetEditor.Forms
                 this.drawer.DrawButtons(shapeModel, this.ButtonSize.Value);
             };
 
-            this.palet.OnColorSelected += (System.Drawing.Color color) =>
+            this.palet.OnColorSelected += (Brush color) =>
             {
                 this.drawer.SetAciveColor(color);
             };
