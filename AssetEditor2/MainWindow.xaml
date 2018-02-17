@@ -7,9 +7,12 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="AssetEditor2.MainWindow"
         mc:Ignorable="d"
         Title="Asset Editor" Height="525.829" Width="783.768">
+
     <Grid>
 
         <DockPanel>
+
+            <!--Menu-->
             <Menu DockPanel.Dock="Top" x:Name="MainMenu" Height="30">
                 <MenuItem Header="_File">
                     <MenuItem Header ="_Exit" x:Name="Exit"/>
@@ -26,6 +29,8 @@
                     <MenuItem Header="About"/>
                 </MenuItem>
             </Menu>
+
+            <!--Main Grid-->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition MaxWidth="100"/>
@@ -34,84 +39,103 @@
                 <ListBox x:Name="AssetsList" HorizontalAlignment="Stretch">
                     <ListBoxItem>test</ListBoxItem>
                 </ListBox>
+
+                <!--Draw area-->
                 <DockPanel Grid.Column="1">
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="30"/>
+                    <!--Palet-->
+
+                    <!--Draw controls-->
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="110"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="20"/>
                         </Grid.ColumnDefinitions>
-                        <DockPanel HorizontalAlignment="Left" Grid.Column="0" LastChildFill="False">
-                            <StackPanel DockPanel.Dock="Left">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <ComboBox Grid.Column="0"/>
-                                    <Button Grid.Column="1">+</Button>
-                                    <Button Grid.Column="2">-</Button>
-                                </Grid>
-                                <Label>Add column</Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0" >Left</Button>
-                                    <Button Grid.Column="1" >Right</Button>
-                                </Grid>
-                                <Label>Remove column</Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0">Left</Button>
-                                    <Button Grid.Column="1">Right</Button>
-                                </Grid>
-                                <Label>Add Row</Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0" >Top</Button>
-                                    <Button Grid.Column="1" >Bottom</Button>
-                                </Grid>
-                                <Label>Remove Row</Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0" >Top</Button>
-                                    <Button Grid.Column="1" >Bottom</Button>
-                                </Grid>
-                                <Label>Move</Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Button Grid.Column="1">Up</Button>
-                                    <Button Grid.Column="0" Grid.Row="1">Left</Button>
-                                    <Button Grid.Column="2" Grid.Row="1">Right</Button>
-                                    <Button Grid.Column="1" Grid.Row="2" >Down</Button>
 
-                                </Grid>
-                            </StackPanel>
-                        </DockPanel>
-                        <DockPanel HorizontalAlignment="Center" Grid.Column="1"/>
-                        <Slider Orientation="Vertical" Grid.Column="2"></Slider>
+                        <StackPanel DockPanel.Dock="Left">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="SelectFrame" Grid.Column="0"/>
+                                <Button Click="AddFrame" Grid.Column="1">+</Button>
+                                <Button Click="RemoveFrame" Grid.Column="2">-</Button>
+                            </Grid>
+                            <Label>Add column</Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Click="AddColumnLeft" Grid.Column="0" >Left</Button>
+                                <Button Click="AddColumnRight" Grid.Column="1" >Right</Button>
+                            </Grid>
+                            <Label>Remove column</Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Click="RemoveColumnLeft" Grid.Column="0" Height="20" VerticalAlignment="Top">Left</Button>
+                                <Button Click="RemoveColumnRight" Grid.Column="1">Right</Button>
+                            </Grid>
+                            <Label>Add Row</Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Click="AddRowTop" Grid.Column="0" Height="20" VerticalAlignment="Top" >Top</Button>
+                                <Button Click="AddRowBottom" Grid.Column="1" >Bottom</Button>
+                            </Grid>
+                            <Label>Remove Row</Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Click="RemoveRowTop" Grid.Column="0" >Top</Button>
+                                <Button Click="RemoveRowBottom" Grid.Column="1" >Bottom</Button>
+                            </Grid>
+                            <Label>Move</Label>
+
+                            <!--Movement buttoms-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Button Click="MoveUp" Grid.Column="1" Grid.Row="0">Up</Button>
+                                <Button Click="MoveLeft" Grid.Column="0" Grid.Row="1">Left</Button>
+                                <Button Click="MoveRight" Grid.Column="2" Grid.Row="1" Height="20" VerticalAlignment="Top">Right</Button>
+                                <Button Click="MoveDown" Grid.Column="1" Grid.Row="2" >Down</Button>
+                            </Grid>
+                        </StackPanel>
+
+                        <!--Palet and Draw area-->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="239*"/>
+                                <RowDefinition Height="201*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel x:Name="Palet" Orientation="Horizontal" Height="30" Margin="0,0,0,234" Grid.RowSpan="3"/>
+                            <Grid x:Name="DrawerGrid" Margin="0,0,0,238" Grid.RowSpan="3"/>
+                        </Grid>
+
+                        <!--Zoom slider-->
+                        <Slider Orientation="Vertical" Grid.Column="2" ManipulationCompleted="ZoomLevel"></Slider>
                     </Grid>
                 </DockPanel>
             </Grid>
