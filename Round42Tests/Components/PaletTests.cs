@@ -59,7 +59,7 @@ namespace Round42.Tests
                 {
                     var b = c as Button;
 
-                    if (colors.Any(color => color))
+                    if (colors.Any(color => color.Equals(c.Foreground)))
                     {
                         Assert.Fail();
                     }

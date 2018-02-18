@@ -4,10 +4,10 @@
 
 namespace Round42.Factories.Factories
 {
-    using System.Windows.Forms;
     using Ninject;
     using Ninject.Parameters;
     using Round42.CustomComponents;
+    using System.Windows.Controls;
 
     /// <summary>
     /// Creates a drawer.
@@ -33,7 +33,7 @@ namespace Round42.Factories.Factories
         /// </summary>
         /// <param name="panel">The panel.</param>
         /// <returns>A drawer.</returns>
-        public Drawer Get(Panel panel)
+        public Drawer Get(Canvas panel)
         {
             return this.kernel.Get<Drawer>(new ConstructorArgument("panel", panel));
         }

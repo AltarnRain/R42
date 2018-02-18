@@ -26,17 +26,5 @@ namespace Round42.Tests
             var factory = this.Get<DrawerFactory>();
             Assert.IsNotNull(factory);
         }
-
-        /// <summary>
-        /// Creates the asset manager.
-        /// </summary>
-        [TestMethod]
-        public void CreateAssetManager()
-        {
-            var factory = this.Get<DrawerFactory>();
-
-            var drawer = factory.Get(new Panel());
-            Assert.IsNotNull(drawer);
-        }
     }
 }

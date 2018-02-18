@@ -5,13 +5,11 @@
 namespace Round42.Tests
 {
     using System.Linq;
-    using System.Windows.Forms;
+    using System.Windows.Controls;
     using System.Windows.Media;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Providers;
-    using Round42.CustomComponents;
     using Round42.Factories.Factories;
-    using Round42.Tests;
 
     /// <summary>
     /// Tests the Drawer component
@@ -27,7 +25,7 @@ namespace Round42.Tests
         {
             // Arrange
             var shapeModel = this.Get<ShapeProvider>().Create(3, 5);
-            var panel = new Panel();
+            var panel = new Canvas();
 
             // Act
             var drawer = this.Get<DrawerFactory>().Get(panel);
@@ -48,7 +46,7 @@ namespace Round42.Tests
         {
             // Arrange
             var shapeModel = this.Get<ShapeProvider>().Create(3, 5);
-            var panel = new Panel();
+            var panel = new Canvas();
 
             // Act
             var drawer = this.Get<DrawerFactory>().Get(panel);

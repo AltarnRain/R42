@@ -66,7 +66,7 @@ namespace Round42.Models.Extentions
 
             Color TranslateColor(string colorHex)
             {
-                return (Color)ColorConverter.ConvertFromString(ColorHexadecimals.Black);
+                return (Color)ColorConverter.ConvertFromString(colorHex);
             }
         }
     }

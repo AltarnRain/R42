@@ -6,9 +6,11 @@ namespace Round242.Tests.Extentions
 {
     using System.Linq;
     using System.Windows.Media;
+    using global::Extentions.Colors;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Models;
     using Round42.Models.Extentions;
+    using Round42.Models.Models;
     using Round42.Providers;
     using Round42.Tests;
 
@@ -48,7 +50,7 @@ namespace Round242.Tests.Extentions
                 Assert.IsTrue(foundBlock);
             }
 
-            var expectedRowIsRed = shape.GetRow(11).All(b => b.Color.Equals(Color.FromRgb(0, 0, 0)));
+            var expectedRowIsRed = shape.GetRow(11).All(b => b.Color.Equals(ColorProvider.GetColor(CGA16Colors.Red)));
             Assert.IsTrue(expectedRowIsRed);
         }
 
@@ -500,7 +502,8 @@ namespace Round242.Tests.Extentions
         /// <param name="column">The column.</param>
         private void MakeColumnRed(ShapeModel shapeModel, int column)
         {
-            shapeModel.Blocks.Where(b => b.Column == column).ToList().ForEach(b => b.SetColor(255, 0, 0));
+            var red = ColorProvider.GetColor(CGA16Colors.Red);
+            shapeModel.Blocks.Where(b => b.Column == column).ToList().ForEach(b => b.SetColor(red.R, red.G, red.B));
         }
 
         /// <summary>
@@ -510,7 +513,20 @@ namespace Round242.Tests.Extentions
         /// <param name="row">The row.</param>
         private void MakeRowRed(ShapeModel shapeModel, int row)
         {
-            shapeModel.Blocks.Where(b => b.Row == row).ToList().ForEach(b => b.SetColor(255, 0, 0));
+            var red = ColorProvider.GetColor(CGA16Colors.Red);
+            shapeModel.Blocks.Where(b => b.Row == row).ToList().ForEach(b => b.SetColor(red.R, red.G, red.B));
+        }
+
+        [TestMethod]
+        [Ignore]
+        public void MyTestMethod()
+        {
+            var c1 = ColorProvider.GetColor(CGA16Colors.Black);
+            var c2 = ColorProvider.GetColor(CGA16Colors.Black);
+
+            // Assert.IsTrue(c1.RgbEqual(c2));
+
+            Assert.IsTrue(c1.Equals(c2));
         }
     }
 }
