@@ -5,8 +5,6 @@
 namespace Round242.Tests.Extentions
 {
     using System.Linq;
-    using System.Windows.Media;
-    using global::Extentions.Colors;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Models;
     using Round42.Models.Extentions;

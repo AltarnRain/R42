@@ -31,11 +31,11 @@ namespace Round42.Factories.Factories
         /// <summary>
         /// Gets the specified panel.
         /// </summary>
-        /// <param name="panel">The panel.</param>
+        /// <param name="canvas">The panel.</param>
         /// <returns>A drawer.</returns>
-        public Drawer Get(Canvas panel)
+        public Drawer Get(Canvas canvas)
         {
-            return this.kernel.Get<Drawer>(new ConstructorArgument("panel", panel));
+            return this.kernel.Get<Drawer>(new ConstructorArgument("panel", canvas));
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Round42.CustomComponents
         /// <summary>
         /// The panel
         /// </summary>
-        private readonly Canvas panel;
+        private readonly Canvas canvas;
 
         /// <summary>
         /// The current shape
@@ -29,12 +29,12 @@ namespace Round42.CustomComponents
         /// <summary>
         /// Initializes a new instance of the <see cref="Drawer" /> class.
         /// </summary>
-        /// <param name="panel">The panel.</param>
+        /// <param name="canvas">The panel.</param>
         /// <exception cref="System.ArgumentNullException">shapeModel</exception>
-        public Drawer(Canvas panel)
+        public Drawer(Canvas canvas)
             : base()
         {
-            this.panel = panel;
+            this.canvas = canvas;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Round42.CustomComponents
         {
             get
             {
-                return this.panel.Children.Cast<BlockButton>();
+                return this.canvas.Children.Cast<BlockButton>();
             }
         }
 
@@ -57,7 +57,7 @@ namespace Round42.CustomComponents
         /// <param name="color">The color.</param>
         public void SetAciveColor(Brush color)
         {
-            foreach (BlockButton b in this.panel.Children)
+            foreach (BlockButton b in this.canvas.Children)
             {
                 b.ActiveColor = color;
             }
@@ -69,7 +69,7 @@ namespace Round42.CustomComponents
         public void SetAchor()
         {
             this.currentShape.ResetAnchor();
-            foreach (BlockButton b in this.panel.Children)
+            foreach (BlockButton b in this.canvas.Children)
             {
                 b.BecomeAnchorOnClick = true;
                 //b.Text = "Click to set Anchor";
@@ -84,7 +84,7 @@ namespace Round42.CustomComponents
         public void DrawButtons(ShapeModel shapeModel, int buttonSize)
         {
             this.currentShape = shapeModel;
-            this.panel.Children.Clear();
+            this.canvas.Children.Clear();
 
             foreach (var block in shapeModel.Blocks)
             {
@@ -98,7 +98,7 @@ namespace Round42.CustomComponents
                 Canvas.SetLeft(blockButton, (block.Column - 1) * buttonSize);
                 Canvas.SetTop(blockButton, (block.Row - 1) * buttonSize);
 
-            this.panel.Children.Add(blockButton);
+            this.canvas.Children.Add(blockButton);
             }
 
         }
@@ -122,7 +122,7 @@ namespace Round42.CustomComponents
         /// <param name="row">The row.</param>
         private void SetAnchor(int column, int row)
         {
-            foreach (BlockButton b in this.panel.Children)
+            foreach (BlockButton b in this.canvas.Children)
             {
                 b.BecomeAnchorOnClick = false;
                 //b.Text = string.Empty;
