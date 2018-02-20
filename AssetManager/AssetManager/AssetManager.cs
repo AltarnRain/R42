@@ -37,66 +37,27 @@ namespace Round42.Managers
         /// <summary>
         /// Initializes a new instance of the <see cref="AssetManager" /> class.
         /// </summary>
-        /// <param name="assetFile">The asset file.</param>
         /// <param name="assetProvider">The asset provider.</param>
         /// <param name="shapeProvider">The shape provider.</param>
-        /// <param name="loadOnCreate">if set to <c>true</c> [load on create].</param>
         public AssetManager(
-            string assetFile,
             AssetProvider assetProvider,
-            ShapeProvider shapeProvider,
-            bool loadOnCreate = false)
+            ShapeProvider shapeProvider)
         {
             this.assetProvider = assetProvider;
             this.shapeProvider = shapeProvider;
-            this.assetFile = assetFile;
-            this.SetupAssets(this.assetFile);
+            this.assetFile = Path.Combine(Directory.GetCurrentDirectory(), "Assets.json");
+
+            this.SetupAssets();
         }
 
         /// <summary>
-        /// Raised when the asset collection changes
+        /// Initializes a new instance of the <see cref="AssetManager"/> class.
         /// </summary>
-        /// <param name="assets">The assets.</param>
-        /// <param name="asset">The asset.</param>
-        public delegate void NewAsset(IEnumerable<AssetModel> assets, AssetModel asset);
-
-        /// <summary>
-        /// Raised when the current asset changes
-        /// </summary>
-        /// <param name="asset">The asset.</param>
-        public delegate void CurrentAssetChanged(AssetModel asset);
-
-        /// <summary>
-        /// Raised when the current asset changes
-        /// </summary>
-        /// <param name="assets">The assets.</param>
-        public delegate void AssetsLoaded(IEnumerable<AssetModel> assets);
-
-        /// <summary>
-        /// Raised when a frame is selected.
-        /// </summary>
-        /// <param name="shapeModel">The shape model.</param>
-        public delegate void LoadFrame(ShapeModel shapeModel);
-
-        /// <summary>
-        /// Occurs when [on new asset].
-        /// </summary>
-        public event NewAsset OnNewAsset;
-
-        /// <summary>
-        /// Occurs when [on loaded asset].
-        /// </summary>
-        public event AssetsLoaded OnAssetsLoaded;
-
-        /// <summary>
-        /// Occurs when [on loaded asset].
-        /// </summary>
-        public event CurrentAssetChanged OnCurrentAssetChanged;
-
-        /// <summary>
-        /// Occurs when [on load frame].
-        /// </summary>
-        public event LoadFrame OnLoadFrame;
+        /// <exception cref="System.Exception">Not implemented</exception>
+        public AssetManager()
+        {
+            throw new System.Exception("Not implemented");
+        }
 
         /// <summary>
         /// Gets the current asset.
@@ -140,7 +101,6 @@ namespace Round42.Managers
         public void LoadFrameByIndex(int index)
         {
             this.CurrentFrame = this.CurrentAsset.Shapes[index];
-            this.OnLoadFrame?.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -171,7 +131,6 @@ namespace Round42.Managers
         {
             var newShape = this.shapeProvider.Create(this.CurrentAsset.Shapes.First().LastColumn(), this.CurrentAsset.Shapes.First().LastRow());
             this.CurrentAsset.Shapes.Add(newShape);
-            this.TriggerOnCurrentAssetChanged();
         }
 
         /// <summary>
@@ -190,7 +149,6 @@ namespace Round42.Managers
         public void Add(AssetModel newAsset)
         {
             this.Assets.Add(newAsset);
-            this.OnNewAsset?.Invoke(this.Assets, newAsset);
         }
 
         /// <summary>
@@ -201,7 +159,6 @@ namespace Round42.Managers
             if (this.CurrentAsset != null)
             {
                 this.Assets.Remove(this.CurrentAsset);
-                this.OnAssetsLoaded?.Invoke(this.Assets);
             }
         }
 
@@ -214,7 +171,7 @@ namespace Round42.Managers
             if (this.CurrentAsset.Shapes.Count() > 1)
             {
                 this.CurrentAsset.Shapes.RemoveAt(shapeIndex);
-                this.OnCurrentAssetChanged?.Invoke(this.CurrentAsset);
+                
             }
         }
 
@@ -234,7 +191,7 @@ namespace Round42.Managers
         public void AddColumnLeft()
         {
             this.CurrentFrame.AddColumnLeft();
-            this.OnLoadFrame?.Invoke(this.CurrentFrame);
+            
         }
 
         /// <summary>
@@ -243,7 +200,6 @@ namespace Round42.Managers
         public void AddColumnRight()
         {
             this.CurrentFrame.AddColumnRight();
-            this.OnLoadFrame?.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -252,7 +208,6 @@ namespace Round42.Managers
         public void AddRowTop()
         {
             this.CurrentFrame.AddRowTop();
-            this.OnLoadFrame?.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -261,7 +216,6 @@ namespace Round42.Managers
         public void AddRowBottom()
         {
             this.CurrentFrame.AddRowBottom();
-            this.OnLoadFrame.Invoke(this.CurrentFrame);
         }
 
         /// <summary>
@@ -274,7 +228,7 @@ namespace Round42.Managers
                 this.CurrentFrame.RemoveRowTop();
             }
 
-            this.OnLoadFrame.Invoke(this.CurrentFrame);
+            
         }
 
         /// <summary>
@@ -287,7 +241,7 @@ namespace Round42.Managers
                 this.CurrentFrame.RemoveRowBottom();
             }
 
-            this.OnLoadFrame.Invoke(this.CurrentFrame);
+            
         }
 
         /// <summary>
@@ -300,7 +254,7 @@ namespace Round42.Managers
                 this.CurrentFrame.RemoveColumnLeft();
             }
 
-            this.OnLoadFrame.Invoke(this.CurrentFrame);
+            
         }
 
         /// <summary>
@@ -313,7 +267,7 @@ namespace Round42.Managers
                 this.CurrentFrame.RemoveColumnRight();
             }
 
-            this.OnLoadFrame.Invoke(this.CurrentFrame);
+            
         }
 
         /// <summary>
@@ -341,8 +295,6 @@ namespace Round42.Managers
                 maxRow = this.CurrentAsset.Shapes.Max(s => s.LastRow());
                 this.MakeShapesSameSize(maxColumn, maxRow);
             }
-
-            this.TriggerOnCurrentAssetChanged();
         }
 
         /// <summary>
@@ -352,7 +304,7 @@ namespace Round42.Managers
         public void LoadByName(string assetName)
         {
             this.SetByName(assetName);
-            this.OnCurrentAssetChanged?.Invoke(this.CurrentAsset);
+            
         }
 
         /// <summary>
@@ -360,7 +312,7 @@ namespace Round42.Managers
         /// </summary>
         public void LoadAssets()
         {
-            this.SetupAssets(this.assetFile);
+            this.SetupAssets();
         }
 
         /// <summary>
@@ -369,7 +321,7 @@ namespace Round42.Managers
         public void MoveLeft()
         {
             this.CurrentFrame.MoveLeft();
-            this.OnLoadFrame.Invoke(this.CurrentFrame);
+            
         }
 
         /// <summary>
@@ -378,7 +330,7 @@ namespace Round42.Managers
         public void MoveUp()
         {
             this.CurrentFrame.MoveUp();
-            this.OnLoadFrame.Invoke(this.CurrentFrame);
+            
         }
 
         /// <summary>
@@ -387,7 +339,7 @@ namespace Round42.Managers
         public void MoveRight()
         {
             this.CurrentFrame.MoveRight();
-            this.OnLoadFrame.Invoke(this.CurrentFrame);
+            
         }
 
         /// <summary>
@@ -396,7 +348,7 @@ namespace Round42.Managers
         public void MoveDown()
         {
             this.CurrentFrame.MoveDown();
-            this.OnLoadFrame.Invoke(this.CurrentFrame);
+            
         }
 
         /// <summary>
@@ -425,27 +377,17 @@ namespace Round42.Managers
         /// Sets up assets. If there are none, we'll create a new list we can add too.
         /// </summary>
         /// <param name="assetFile">The asset file.</param>
-        private void SetupAssets(string assetFile)
+        private void SetupAssets()
         {
-            if (File.Exists(assetFile))
+            if (File.Exists(this.assetFile))
             {
-                var fileContent = File.ReadAllText(assetFile);
+                var fileContent = File.ReadAllText(this.assetFile);
                 this.Assets = Newtonsoft.Json.JsonConvert.DeserializeObject<List<AssetModel>>(fileContent);
             }
             else
             {
                 this.Assets = new List<AssetModel>();
             }
-
-            this.OnAssetsLoaded?.Invoke(this.Assets);
-        }
-
-        /// <summary>
-        /// Triggers the change event.
-        /// </summary>
-        private void TriggerOnCurrentAssetChanged()
-        {
-            this.OnCurrentAssetChanged?.Invoke(this.CurrentAsset);
         }
 
         /// <summary>
