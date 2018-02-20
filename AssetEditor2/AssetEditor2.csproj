@@ -103,12 +103,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AssetEditor\AssetEditor.csproj">
-      <Project>{A1093F38-2F54-44EF-AB57-807F4C00424E}</Project>
-      <Name>AssetEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AssetManager\AssetManager.csproj">
-      <Project>{15C8A6DD-991E-4642-8247-93B7C1C60A77}</Project>
+      <Project>{15c8a6dd-991e-4642-8247-93b7c1c60a77}</Project>
       <Name>AssetManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomComponents\CustomComponents.csproj">

@@ -8,7 +8,6 @@ namespace Round242.Tests.Extentions
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Models;
     using Round42.Models.Extentions;
-    using Round42.Models.Models;
     using Round42.Providers;
     using Round42.Tests;
 

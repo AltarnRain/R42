@@ -5,7 +5,6 @@
 namespace Round42.Managers
 {
     using System.Collections.Generic;
-    using System.Drawing;
     using System.IO;
     using System.Linq;
     using Exceptions;

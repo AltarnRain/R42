@@ -7,7 +7,7 @@ namespace Round42.Providers
     using System;
     using System.Collections.Generic;
     using System.Windows.Media;
-    using Round42.Models.Models;
+    using Round42.Models;
     using Round42.Models.Extentions;
 
     /// <summary>

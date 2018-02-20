@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Models.Models
+namespace Round42.Models
 {
     /// <summary>
     /// CGA 16 color palet

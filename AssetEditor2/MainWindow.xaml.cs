@@ -1,26 +1,16 @@
 ﻿using AssetEditor2.Properties;
-using Round42.AssetEditor.Forms;
 using Round42.CustomComponents;
 using Round42.Factories;
 using Round42.Factories.Factories;
 using Round42.Managers;
 using Round42.Models;
 using Round42.Providers;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AssetEditor2
 {
@@ -53,8 +43,11 @@ namespace AssetEditor2
 
         {
             InitializeComponent();
+            this.DataContext = assetManager;
             this.assetManagerFactory = assetManagerFactory;
-            this.assetProvider = assetProvider;
+
+
+            
             this.viewFactory = viewFactory;
             this.drawerFactory = drawerFactory;
             this.paletFactory = paletFactory;
@@ -80,7 +73,7 @@ namespace AssetEditor2
             this.assetManager.OnNewAsset += (IEnumerable<AssetModel> assets, AssetModel asset) =>
             {
                 this.UpdateAssetList(assets);
-                this.AssetsList.SelectedIndex = this.AssetsList.Items.IndexOf(asset.Name);    
+                this.AssetsList.SelectedIndex = this.AssetsList.Items.IndexOf(asset.Name);
             };
 
             this.assetManager.OnAssetsLoaded += (IEnumerable<AssetModel> assets) =>
@@ -217,7 +210,7 @@ namespace AssetEditor2
 
         private void RenderAll(object sender, RoutedEventArgs e)
         {
-                }
+        }
 
         private void RemoveAsset(object sender, RoutedEventArgs e)
         {
@@ -226,11 +219,11 @@ namespace AssetEditor2
 
         private void AddAsset(object sender, RoutedEventArgs e)
         {
-            var newAsset = this.viewFactory.Get<NewAssetForm>();
-            if (newAsset.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                this.assetManager.Add(newAsset.AssetName, newAsset.AssetType, newAsset.Frames, newAsset.XBlocks, newAsset.YBlocks);
-            }
+            //var newAsset = this.viewFactory.Get<NewAssetForm>();
+            //if (newAsset.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            //{
+            //    this.assetManager.Add(newAsset.AssetName, newAsset.AssetType, newAsset.Frames, newAsset.XBlocks, newAsset.YBlocks);
+            //}
         }
     }
 }
