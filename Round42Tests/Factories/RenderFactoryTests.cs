@@ -1,4 +1,4 @@
-﻿// <copyright file="AssetManagerFactoryTests.cs" company="OI">
+﻿// <copyright file="RenderFactoryTests.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 

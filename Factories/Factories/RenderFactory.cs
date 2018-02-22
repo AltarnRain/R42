@@ -37,9 +37,9 @@ namespace Round42.Factories.Factories
         /// <returns>
         /// A palet control
         /// </returns>
-        public Render Get(string folder)
+        public ImageGenerator Get(string folder)
         {
-            return this.Kernel.Get<Render>(new ConstructorArgument("folder", folder));
+            return this.Kernel.Get<ImageGenerator>(new ConstructorArgument("folder", folder));
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Round242.Tests.Render
     /// </summary>
     /// <seealso cref="Round42.Tests.TestBase" />
     [TestClass]
-    public class RenderTests :TestBase
+    public class RenderTests : TestBase
     {
         /// <summary>
         /// Tests the render.
