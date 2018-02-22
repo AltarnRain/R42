@@ -11,7 +11,7 @@ namespace Round42.Tests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories;
     using Round42.Models;
-    using Round42.Models.Extentions;
+    using Round42.R42Extentions;
 
     /// <summary>
     /// Tests for the asset manager

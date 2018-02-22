@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Render", "Render\Render.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderSurface", "RenderSurface\RenderSurface.csproj", "{136CF668-FAC2-47A6-A0AC-99BA0391F79F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R$2Extentions", "R$2Extentions\R$2Extentions.csproj", "{DA95E975-927D-4A87-A01E-1316BA95F4F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +96,10 @@ Global
 		{136CF668-FAC2-47A6-A0AC-99BA0391F79F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{136CF668-FAC2-47A6-A0AC-99BA0391F79F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{136CF668-FAC2-47A6-A0AC-99BA0391F79F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA95E975-927D-4A87-A01E-1316BA95F4F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA95E975-927D-4A87-A01E-1316BA95F4F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA95E975-927D-4A87-A01E-1316BA95F4F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA95E975-927D-4A87-A01E-1316BA95F4F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

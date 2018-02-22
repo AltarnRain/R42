@@ -33,7 +33,7 @@ namespace Round42.Tests
             // Assert
             var numberOfControls = palet.ColorButtons.Count();
 
-            Assert.AreEqual(colors.Length, numberOfControls);
+            Assert.AreEqual(colors.Count(), numberOfControls);
         }
 
         /// <summary>

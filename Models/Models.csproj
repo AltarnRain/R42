@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="enum\AssetTypes.cs" />
-    <Compile Include="Extentions\ShapeModelExtentions.cs" />
+    <Compile Include="enum\Colors.cs" />
     <Compile Include="Models\AssetModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\BlockModel.cs" />

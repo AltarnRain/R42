@@ -37,7 +37,6 @@ namespace Round42.Tests
         public void SetActiveColor()
         {
             var block = BlockModel.Create(0, 0);
-            block.ColorName = Color.Red.Name;
             var button = new BlockButton(block, Color.Black);
 
             // Act

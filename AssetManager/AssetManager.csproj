@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Extentions\Extentions\Extentions.csproj">
-      <Project>{6dc160d3-241b-475b-9991-8baf5198d654}</Project>
+      <Project>{6DC160D3-241B-475B-9991-8BAF5198D654}</Project>
       <Name>Extentions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Exceptions\Exceptions.csproj">
@@ -77,6 +77,10 @@
     <ProjectReference Include="..\Providers\Providers.csproj">
       <Project>{32BC0D8A-D607-43BE-B6CF-01798B93DBDB}</Project>
       <Name>Providers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\R%242Extentions\R%242Extentions.csproj">
+      <Project>{DA95E975-927D-4A87-A01E-1316BA95F4F7}</Project>
+      <Name>R%242Extentions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

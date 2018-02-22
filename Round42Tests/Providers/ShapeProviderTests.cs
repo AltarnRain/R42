@@ -32,7 +32,9 @@ namespace Round42.Tests
 
             Assert.AreEqual(x, block.Column);
             Assert.AreEqual(y, block.Row);
-            Assert.AreEqual("Black", block.ColorName);
+            Assert.AreEqual(block.R, 0);
+            Assert.AreEqual(block.G, 0);
+            Assert.AreEqual(block.B, 0);
         }
 
         /// <summary>

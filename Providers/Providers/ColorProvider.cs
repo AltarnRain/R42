@@ -4,7 +4,11 @@
 
 namespace Round42.Providers
 {
+    using System;
+    using System.Collections.Generic;
     using System.Drawing;
+    using Round42.Models;
+    using Round42.R42Extentions;
 
     /// <summary>
     /// Providers Color
@@ -12,20 +16,41 @@ namespace Round42.Providers
     public class ColorProvider
     {
         /// <summary>
+        /// The colors
+        /// </summary>
+        private static IEnumerable<Color> colors = null;
+
+        /// <summary>
+        /// Gets the color.
+        /// </summary>
+        /// <param name="color">The color.</param>
+        /// <returns>Returns a color</returns>
+        public static Color GetColor(CGA16Colors color)
+        {
+            return color.GetColor();
+        }
+
+        /// <summary>
         /// Gets the colors of the CGA 16 palet.
         /// </summary>
         /// <returns>An array of colors</returns>
-        public Color[] GetColors()
+        public IEnumerable<Color> GetColors()
         {
-            return new Color[]
+            if (ColorProvider.colors == null)
             {
-                Color.Gray, Color.Brown, Color.Magenta,
-                Color.Red, Color.Cyan, Color.Green,
-                Color.Blue, Color.Black,
-                Color.White, Color.Yellow, Color.LightPink,
-                Color.PaleVioletRed, Color.LightCyan, Color.LightGreen,
-                Color.LightBlue, Color.DarkGray
-            };
+                var colorIndexes = Enum.GetValues(typeof(CGA16Colors));
+
+                var colors = new List<Color>();
+                foreach (var index in colorIndexes)
+                {
+                    var cgaColor = (CGA16Colors)index;
+                    colors.Add(cgaColor.GetColor());
+                }
+
+                ColorProvider.colors = colors;
+            }
+
+            return ColorProvider.colors;
         }
     }
 }

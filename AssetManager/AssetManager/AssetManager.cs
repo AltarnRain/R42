@@ -11,8 +11,8 @@ namespace Round42.Managers
     using Exceptions;
     using Extentions;
     using Providers;
+    using R42Extentions;
     using Round42.Models;
-    using Round42.Models.Extentions;
 
     /// <summary>
     /// Manages assets
@@ -325,7 +325,7 @@ namespace Round42.Managers
             {
                 foreach (var shape in this.CurrentAsset.Shapes)
                 {
-                    if (shape.Blocks.All(b => b.Color == Color.Black) == false)
+                    if (shape.Blocks.All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Black)) == false)
                     {
                         shape.CropImage();
                     }

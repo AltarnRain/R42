@@ -90,6 +90,10 @@
       <Project>{32BC0D8A-D607-43BE-B6CF-01798B93DBDB}</Project>
       <Name>Providers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\R%242Extentions\R%242Extentions.csproj">
+      <Project>{da95e975-927d-4a87-a01e-1316ba95f4f7}</Project>
+      <Name>R%242Extentions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Render\Render.csproj">
       <Project>{4A8C7890-CD7F-4B22-80AD-C13E57943024}</Project>
       <Name>Render</Name>

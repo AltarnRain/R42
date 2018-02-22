@@ -6,7 +6,7 @@ namespace Render
 {
     using System.Drawing;
     using Round42.Models;
-    using Round42.Models.Extentions;
+    using Round42.R42Extentions;
 
     /// <summary>
     /// Render class

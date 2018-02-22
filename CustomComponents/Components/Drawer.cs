@@ -9,7 +9,7 @@ namespace Round42.CustomComponents
     using System.Linq;
     using System.Windows.Forms;
     using Round42.Models;
-    using Round42.Models.Extentions;
+    using Round42.R42Extentions;
 
     /// <summary>
     /// Daws buttons on a panel to set the color.
