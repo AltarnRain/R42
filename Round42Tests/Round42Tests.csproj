@@ -66,9 +66,9 @@
       <Project>{6DC160D3-241B-475B-9991-8BAF5198D654}</Project>
       <Name>Extentions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AssetManager\AssetManager.csproj">
+    <ProjectReference Include="..\AssetManager\Managers.csproj">
       <Project>{15C8A6DD-991E-4642-8247-93B7C1C60A77}</Project>
-      <Name>AssetManager</Name>
+      <Name>Managers</Name>
     </ProjectReference>
     <ProjectReference Include="..\CustomComponents\CustomComponents.csproj">
       <Project>{47EFD6A0-35D4-44FE-BDD0-7789CEA56CB1}</Project>

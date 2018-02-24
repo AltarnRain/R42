@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Factories.Factories
+namespace Round42.Factories
 {
     using Ninject;
     using Ninject.Parameters;

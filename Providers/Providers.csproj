@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumHandler.cs" />
+    <Compile Include="Providers\FileLocationProvider.cs" />
     <Compile Include="Providers\AssetProvider.cs" />
     <Compile Include="Providers\ColorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

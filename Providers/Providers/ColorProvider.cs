@@ -7,7 +7,7 @@ namespace Round42.Providers
     using System;
     using System.Collections.Generic;
     using System.Drawing;
-    using Round42.Models;
+    using Round42.Models.Enumerators;
     using Round42.R42Extentions;
 
     /// <summary>

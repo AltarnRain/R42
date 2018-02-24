@@ -1,6 +1,6 @@
 ﻿namespace Round42.AssetEditor.Forms
 {
-    partial class MainForm
+    partial class AssetEditor
     {
         /// <summary>
         /// Required designer variable.

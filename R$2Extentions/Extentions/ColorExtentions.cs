@@ -6,7 +6,7 @@ namespace Round42.R42Extentions
 {
     using System.Drawing;
     using System.IO;
-    using Round42.Models;
+    using Round42.Models.Enumerators;
     using Round42.R42Extentions.Constants;
 
     /// <summary>

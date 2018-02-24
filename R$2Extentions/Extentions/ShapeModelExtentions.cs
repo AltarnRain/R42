@@ -5,9 +5,9 @@
 namespace Round42.R42Extentions
 {
     using System.Collections.Generic;
-    using System.Drawing;
     using System.Linq;
-    using Round42.Models;
+    using Round42.Models.Drawing;
+    using Round42.Models.Enumerators;
 
     /// <summary>
     /// Extention class

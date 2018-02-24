@@ -2,11 +2,9 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Managers
+namespace Round42.Managers.AssetManager
 {
-    using System;
     using System.Collections.Generic;
-    using System.Drawing;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
@@ -14,13 +12,16 @@ namespace Round42.Managers
     using Extentions;
     using Providers;
     using R42Extentions;
-    using Round42.Models;
+    using Round42.Models.Drawing;
+    using Round42.Models.Enumerators;
 
     /// <summary>
     /// Manages assets
     /// </summary>
     public class AssetManager
     {
+        private readonly FileLocationProvider fileLocationProvider;
+
         /// <summary>
         /// The asset provider
         /// </summary>
@@ -39,19 +40,22 @@ namespace Round42.Managers
         /// <summary>
         /// Initializes a new instance of the <see cref="AssetManager" /> class.
         /// </summary>
-        /// <param name="assetFile">The asset file.</param>
+        /// <param name="fileLocationProvider">The file location provider.</param>
         /// <param name="assetProvider">The asset provider.</param>
         /// <param name="shapeProvider">The shape provider.</param>
         /// <param name="loadOnCreate">if set to <c>true</c> [load on create].</param>
         public AssetManager(
-            string assetFile,
+            FileLocationProvider fileLocationProvider,
             AssetProvider assetProvider,
             ShapeProvider shapeProvider,
             bool loadOnCreate = false)
         {
+            this.fileLocationProvider = fileLocationProvider;
             this.assetProvider = assetProvider;
             this.shapeProvider = shapeProvider;
-            this.assetFile = assetFile;
+
+            this.assetFile = this.fileLocationProvider.AssetFile();
+
             this.SetupAssets(this.assetFile);
         }
 

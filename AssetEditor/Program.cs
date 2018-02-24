@@ -27,7 +27,7 @@ namespace AssetEditor
 
             using (var kernel = new StandardKernel())
             {
-                var form = kernel.Get<ViewFactory>().Get<MainForm>();
+                var form = kernel.Get<ViewFactory>().Get<AssetEditor>();
 
                 Application.Run(form);
             }

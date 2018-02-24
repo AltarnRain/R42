@@ -9,8 +9,8 @@ namespace Round42.CustomComponents.Components
     using System.Linq;
     using System.Windows.Forms;
     using Render;
-    using Round42.Models;
-    using Round42.Providers;
+    using Round42.Models.Drawing;
+    using Round42.Models.Enumerators;
     using Round42.R42Extentions;
 
     /// <summary>

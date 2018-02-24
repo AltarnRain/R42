@@ -5,7 +5,8 @@
 namespace Round42.Providers
 {
     using System.Collections.Generic;
-    using Round42.Models;
+    using Round42.Models.Drawing;
+    using Round42.Models.Enumerators;
 
     /// <summary>
     /// Provides an Asset.

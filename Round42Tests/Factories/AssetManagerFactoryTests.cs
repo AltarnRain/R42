@@ -4,7 +4,6 @@
 
 namespace Round42.Tests
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories;
 

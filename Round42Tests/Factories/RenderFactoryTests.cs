@@ -4,11 +4,8 @@
 
 namespace Round42.Tests
 {
-    using System;
-    using System.Windows.Forms;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories;
-    using Round42.Factories.Factories;
 
     /// <summary>
     /// Tests fo the <see cref="AssetManagerFactory"/>

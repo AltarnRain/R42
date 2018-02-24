@@ -9,9 +9,7 @@ namespace Round42.Tests
     using System.Windows.Forms;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Providers;
-    using Round42.CustomComponents;
-    using Round42.Factories.Factories;
-    using Round42.Tests;
+    using Round42.Factories;
 
     /// <summary>
     /// Tests the Drawer component

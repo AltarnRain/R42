@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Models
+namespace Round42.Models.Drawing
 {
     /// <summary>
     /// Base model for all models

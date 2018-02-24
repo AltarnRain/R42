@@ -5,6 +5,7 @@
 namespace Round42.Models.GameModels
 {
     using System.Collections.Generic;
+    using Round42.Models.Drawing;
 
     /// <summary>
     /// Base class for all actors.

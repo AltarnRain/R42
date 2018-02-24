@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A1093F38-2F54-44EF-AB57-807F4C00424E}</ProjectGuid>
+    <ProjectGuid>{56427E2B-87A5-465E-8669-ECEF2EEED45F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Round42.AssetEditor</RootNamespace>
-    <AssemblyName>AssetEditor</AssemblyName>
+    <RootNamespace>LevelEditor</RootNamespace>
+    <AssemblyName>LevelEditor</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\AssetEditor.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,13 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>AssetEditor.Program</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,25 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AssetEditor.cs">
+    <Compile Include="Forms\LevelEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AssetEditor.Designer.cs">
-      <DependentUpon>AssetEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\NewAssetForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\NewAssetForm.Designer.cs">
-      <DependentUpon>NewAssetForm.cs</DependentUpon>
+    <Compile Include="Forms\LevelEditor.Designer.cs">
+      <DependentUpon>LevelEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\AssetEditor.resx">
-      <DependentUpon>AssetEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NewAssetForm.resx">
-      <DependentUpon>NewAssetForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\LevelEditor.resx">
+      <DependentUpon>LevelEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -80,9 +64,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -96,42 +78,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <AdditionalFiles Include="..\stylecop.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Extentions\Extentions\Extentions.csproj">
-      <Project>{6DC160D3-241B-475B-9991-8BAF5198D654}</Project>
-      <Name>Extentions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AssetManager\Managers.csproj">
-      <Project>{15C8A6DD-991E-4642-8247-93B7C1C60A77}</Project>
-      <Name>Managers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CustomComponents\CustomComponents.csproj">
-      <Project>{47EFD6A0-35D4-44FE-BDD0-7789CEA56CB1}</Project>
-      <Name>CustomComponents</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Factories\Factories.csproj">
-      <Project>{E949ED38-310C-47F8-8A60-63A08B24F3EF}</Project>
-      <Name>Factories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Providers\Providers.csproj">
-      <Project>{32BC0D8A-D607-43BE-B6CF-01798B93DBDB}</Project>
-      <Name>Providers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Render\Render.csproj">
-      <Project>{4A8C7890-CD7F-4B22-80AD-C13E57943024}</Project>
-      <Name>Render</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

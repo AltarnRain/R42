@@ -1,32 +1,32 @@
-﻿// <copyright file="AssetTypes.cs" company="OI">
+﻿// <copyright file="LevelType.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
 namespace Round42.Models.Enumerators
 {
     /// <summary>
-    /// Types of assets
+    /// The type of level
     /// </summary>
-    public enum AssetTypes
+    public enum LevelTypes
     {
         /// <summary>
-        /// The player
+        /// The ships
         /// </summary>
-        Player,
+        Ships,
 
         /// <summary>
-        /// The enemy
+        /// The warp tunnel
         /// </summary>
-        Enemy,
+        WarpTunnel,
 
         /// <summary>
-        /// The wall
+        /// The asteroid field
         /// </summary>
-        Wall,
+        AsteroidField,
 
         /// <summary>
-        /// The text
+        /// The falling ships
         /// </summary>
-        Text
+        FallingShips,
     }
 }

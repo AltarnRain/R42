@@ -4,13 +4,12 @@
 
 namespace Round42.TestAppPaletAndDrawer
 {
-    using System.Drawing;
     using System.Windows.Forms;
     using Ninject;
     using Providers;
     using Round42.CustomComponents;
-    using Round42.Factories.Factories;
-    using Round42.Models;
+    using Round42.Factories;
+    using Round42.Models.Drawing;
     using Round42.TestAppPaletAndDrawer.Properties;
 
     /// <summary>
@@ -33,7 +32,9 @@ namespace Round42.TestAppPaletAndDrawer
         /// The color provider
         /// </summary>
         private readonly ColorProvider colorProvider;
+
         private readonly PaletFactory paletFactory;
+
         private readonly DrawerFactory drawerFactory;
 
         /// <summary>

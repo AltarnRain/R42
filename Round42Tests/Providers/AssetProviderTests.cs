@@ -6,7 +6,7 @@ namespace Round42.Tests
 {
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Round42.Models;
+    using Round42.Models.Enumerators;
     using Round42.Providers;
 
     /// <summary>

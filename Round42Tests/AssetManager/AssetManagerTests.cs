@@ -10,7 +10,8 @@ namespace Round42.Tests
     using Exceptions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories;
-    using Round42.Models;
+    using Round42.Models.Drawing;
+    using Round42.Models.Enumerators;
     using Round42.R42Extentions;
 
     /// <summary>

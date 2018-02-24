@@ -8,7 +8,7 @@ namespace Round242.Tests.Render
     using System.IO;
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Round42.Factories.Factories;
+    using Round42.Factories;
     using Round42.Providers;
     using Round42.Tests;
 

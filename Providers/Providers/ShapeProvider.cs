@@ -5,8 +5,7 @@
 namespace Round42.Providers
 {
     using System.Collections.Generic;
-    using System.Drawing;
-    using Round42.Models;
+    using Round42.Models.Drawing;
 
     /// <summary>
     /// The ShapeProvider. A shape is a collection of blocks.

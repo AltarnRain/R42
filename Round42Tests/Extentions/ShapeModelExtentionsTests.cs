@@ -4,10 +4,10 @@
 
 namespace Round242.Tests.Extentions
 {
-    using System.Drawing;
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Round42.Models;
+    using Round42.Models.Drawing;
+    using Round42.Models.Enumerators;
     using Round42.Providers;
     using Round42.R42Extentions;
     using Round42.Tests;
