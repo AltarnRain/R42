@@ -97,7 +97,7 @@ namespace Round42.Models
         {
             return new BlockModel
             {
-                Color = Color.Black,
+                Color = Color.FromArgb(0, 0, 0),
                 Column = column,
                 Row = row
             };

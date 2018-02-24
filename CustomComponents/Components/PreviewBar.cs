@@ -37,6 +37,8 @@ namespace Round42.CustomComponents.Components
         {
             this.imageGenerator = imageGenerator;
             this.panel = panel;
+
+            this.panel.AutoScroll = true;
         }
 
         /// <summary>
@@ -73,6 +75,8 @@ namespace Round42.CustomComponents.Components
             this.panel.SuspendLayout();
 
             var index = shapes.Count() - 1;
+
+            this.panel.Height = 20 + (shapes.Max(s => s.LastRow()) * 20);
 
             foreach (var shape in shapes.Reverse())
             {

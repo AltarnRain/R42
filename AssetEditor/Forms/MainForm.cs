@@ -162,6 +162,8 @@ namespace Round42.AssetEditor.Forms
             this.assetManager.OnLoadFrame += (ShapeModel shapeModel) =>
             {
                 this.drawer.DrawButtons(shapeModel, this.ButtonSize.Value);
+
+                this.previewBar.Draw(this.assetManager.CurrentAsset.Shapes);
             };
 
             this.palet.OnColorSelected += (System.Drawing.Color color) =>

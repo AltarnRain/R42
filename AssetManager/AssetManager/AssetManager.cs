@@ -9,6 +9,7 @@ namespace Round42.Managers
     using System.Drawing;
     using System.IO;
     using System.Linq;
+    using System.Windows.Forms;
     using Exceptions;
     using Extentions;
     using Providers;
@@ -365,9 +366,17 @@ namespace Round42.Managers
         {
             if (this.CurrentAsset != null)
             {
+                var allHaveAnchor = this.CurrentAsset.Shapes.All(s => s.Blocks.Any(b => b.Anchor));
+
+                if (!allHaveAnchor)
+                {
+                    MessageBox.Show("Not every shape has an anchor");
+                    return;
+                }
+
                 foreach (var shape in this.CurrentAsset.Shapes)
                 {
-                    if (shape.Blocks.All(b => b.Color == CGA16Colors.Black.GetColor() == false))
+                    if (shape.Blocks.All(b => b.Color == CGA16Colors.Black.GetColor()) == false)
                     {
                         shape.CropImage();
                     }

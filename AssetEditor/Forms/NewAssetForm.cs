@@ -19,7 +19,7 @@ namespace Round42.AssetEditor.Forms
         /// </summary>
         public NewAssetForm()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
         }
 
         /// <summary>

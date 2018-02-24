@@ -41,10 +41,8 @@ namespace Round42.AssetEditor.Forms
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.AssetTypeCombobox = new System.Windows.Forms.ComboBox();
             this.XBlocksTextBox = new System.Windows.Forms.TextBox();
             this.YBlocksTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -59,7 +57,7 @@ namespace Round42.AssetEditor.Forms
             // 
             // FramesTextBox
             // 
-            this.FramesTextBox.Location = new System.Drawing.Point(63, 64);
+            this.FramesTextBox.Location = new System.Drawing.Point(63, 36);
             this.FramesTextBox.Name = "FramesTextBox";
             this.FramesTextBox.Size = new System.Drawing.Size(57, 20);
             this.FramesTextBox.TabIndex = 30;
@@ -95,20 +93,10 @@ namespace Round42.AssetEditor.Forms
             this.label1.Text = "Name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Type";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 67);
+            this.label3.Location = new System.Drawing.Point(22, 39);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 9;
@@ -118,32 +106,23 @@ namespace Round42.AssetEditor.Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 90);
+            this.label4.Location = new System.Drawing.Point(12, 62);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "X blocks";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // AssetTypeCombobox
-            // 
-            this.AssetTypeCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AssetTypeCombobox.FormattingEnabled = true;
-            this.AssetTypeCombobox.Location = new System.Drawing.Point(63, 37);
-            this.AssetTypeCombobox.Name = "AssetTypeCombobox";
-            this.AssetTypeCombobox.Size = new System.Drawing.Size(235, 21);
-            this.AssetTypeCombobox.TabIndex = 20;
-            // 
             // XBlocksTextBox
             // 
-            this.XBlocksTextBox.Location = new System.Drawing.Point(63, 90);
+            this.XBlocksTextBox.Location = new System.Drawing.Point(63, 62);
             this.XBlocksTextBox.Name = "XBlocksTextBox";
             this.XBlocksTextBox.Size = new System.Drawing.Size(57, 20);
             this.XBlocksTextBox.TabIndex = 40;
             // 
             // YBlocksTextBox
             // 
-            this.YBlocksTextBox.Location = new System.Drawing.Point(63, 116);
+            this.YBlocksTextBox.Location = new System.Drawing.Point(63, 88);
             this.YBlocksTextBox.Name = "YBlocksTextBox";
             this.YBlocksTextBox.Size = new System.Drawing.Size(57, 20);
             this.YBlocksTextBox.TabIndex = 50;
@@ -151,7 +130,7 @@ namespace Round42.AssetEditor.Forms
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 119);
+            this.label5.Location = new System.Drawing.Point(14, 91);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 13;
@@ -169,10 +148,8 @@ namespace Round42.AssetEditor.Forms
             this.Controls.Add(this.YBlocksTextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.XBlocksTextBox);
-            this.Controls.Add(this.AssetTypeCombobox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.OK);
@@ -193,10 +170,8 @@ namespace Round42.AssetEditor.Forms
         private System.Windows.Forms.Button OK;
         private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox AssetTypeCombobox;
         private System.Windows.Forms.TextBox XBlocksTextBox;
         private System.Windows.Forms.TextBox YBlocksTextBox;
         private System.Windows.Forms.Label label5;

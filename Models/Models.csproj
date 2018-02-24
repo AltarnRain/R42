@@ -44,6 +44,12 @@
     <Compile Include="enum\AnimationPlayback.cs" />
     <Compile Include="enum\AssetTypes.cs" />
     <Compile Include="enum\Colors.cs" />
+    <Compile Include="GameModels\BaseGameObject.cs" />
+    <Compile Include="GameModels\BaseLevel.cs" />
+    <Compile Include="GameModels\Enemies\Bird.cs" />
+    <Compile Include="GameModels\IMoves.cs" />
+    <Compile Include="GameModels\IShoots.cs" />
+    <Compile Include="GameModels\IShootsHighLevel.cs" />
     <Compile Include="Models\AssetModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\BlockModel.cs" />

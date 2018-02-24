@@ -62,7 +62,7 @@ namespace Round42.R42Extentions
 
             Color TranslateColor(string colorHex)
             {
-                return System.Drawing.ColorTranslator.FromHtml(colorHex);
+                return ColorTranslator.FromHtml(colorHex);
             }
         }
     }
