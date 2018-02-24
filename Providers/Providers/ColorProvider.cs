@@ -21,16 +21,6 @@ namespace Round42.Providers
         private static IEnumerable<Color> colors = null;
 
         /// <summary>
-        /// Gets the color.
-        /// </summary>
-        /// <param name="color">The color.</param>
-        /// <returns>Returns a color</returns>
-        public static Color GetColor(CGA16Colors color)
-        {
-            return color.GetColor();
-        }
-
-        /// <summary>
         /// Gets the colors of the CGA 16 palet.
         /// </summary>
         /// <returns>An array of colors</returns>

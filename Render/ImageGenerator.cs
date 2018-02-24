@@ -59,7 +59,7 @@ namespace Render
                 g.FillRectangle(new SolidBrush(block.Color), rect);
             }
 
-            bitmap.MakeTransparent(ColorProvider.GetColor(CGA16Colors.Black));
+            bitmap.MakeTransparent(CGA16Colors.Black.GetColor());
 
             return bitmap;
         }

@@ -9,6 +9,7 @@ namespace Round42.CustomComponents
     using System.Windows.Forms;
     using Round42.Models;
     using Round42.Providers;
+    using Round42.R42Extentions;
 
     /// <summary>
     /// The block button,
@@ -109,7 +110,7 @@ namespace Round42.CustomComponents
                 rc.Width - (leftAndRightBorder * 2),
                 rc.Height - (tonAndBottomBorder * 2));
 
-            if (setColor == ColorProvider.GetColor(CGA16Colors.Black))
+            if (setColor == CGA16Colors.Black.GetColor())
             {
                 gfx.FillRectangle(new SolidBrush(this.Parent.BackColor), rc);
                 gfx.FillRectangle(new SolidBrush(setColor), innerRectangle);

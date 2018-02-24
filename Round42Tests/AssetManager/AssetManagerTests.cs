@@ -44,7 +44,7 @@ namespace Round42.Tests
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", 10, 15, 2);
 
             // Assert
             var asset = assetManager.GetAssets().SingleOrDefault(a => a.Name == "Test");
@@ -60,11 +60,11 @@ namespace Round42.Tests
             // Act
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", 10, 15, 2);
 
             try
             {
-                assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+                assetManager.Add("Test", 10, 15, 2);
             }
             catch (DuplicateEntryException ex)
             {
@@ -85,8 +85,8 @@ namespace Round42.Tests
             // Act
             try
             {
-                assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
-                assetManager.Add("Test2", AssetTypes.Enemy, 10, 15, 2);
+                assetManager.Add("Test", 10, 15, 2);
+                assetManager.Add("Test2", 10, 15, 2);
             }
             catch (DuplicateEntryException ex)
             {
@@ -105,7 +105,7 @@ namespace Round42.Tests
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
 
             // Act
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", 10, 15, 2);
 
             assetManager.OnNewAsset += (IEnumerable<AssetModel> assets, AssetModel assetModel) =>
             {
@@ -123,7 +123,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", 10, 15, 2);
 
             // Act
             assetManager.Save();
@@ -149,7 +149,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", 10, 15, 2);
             assetManager.LoadByName("Test");
 
             var numberOfColumns = 0;
@@ -180,7 +180,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", 10, 15, 2);
             assetManager.LoadByName("Test");
 
             var numberOfShapes = 0;
@@ -204,7 +204,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 1, 15, 2);
+            assetManager.Add("Test", 1, 15, 2);
             assetManager.LoadByName("Test");
 
             var numberOfColumns = 0;
@@ -228,7 +228,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 1, 15, 2);
+            assetManager.Add("Test", 1, 15, 2);
             assetManager.LoadByName("Test");
 
             var numberOfColumns = 0;
@@ -252,7 +252,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 1, 2, 2);
+            assetManager.Add("Test", 1, 2, 2);
             assetManager.LoadByName("Test");
 
             var lastColumn = 0;
@@ -276,7 +276,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 2, 2);
+            assetManager.Add("Test", 10, 2, 2);
             assetManager.LoadByName("Test");
 
             var lastColumn = 0;
@@ -300,7 +300,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", 10, 15, 2);
             assetManager.LoadByName("Test");
 
             var lastRow = 0;
@@ -324,7 +324,7 @@ namespace Round42.Tests
             // Arrange
             this.DeleteAssetFile();
             var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
-            assetManager.Add("Test", AssetTypes.Enemy, 10, 15, 2);
+            assetManager.Add("Test", 10, 15, 2);
             assetManager.LoadByName("Test");
 
             var lastRow = 0;
@@ -337,6 +337,72 @@ namespace Round42.Tests
             Assert.AreEqual(1, lastRow);
             assetManager.RemoveRowBottom();
             Assert.AreEqual(1, lastRow);
+        }
+
+        /// <summary>
+        /// Moves the shape left.
+        /// </summary>
+        [TestMethod]
+        public void MoveShapeLeft()
+        {
+            // Arrange
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", 3, 1, 1);
+            assetManager.LoadByName("Test");
+
+            assetManager.CurrentAsset.Shapes[0].Blocks[0].Color = CGA16Colors.Green.GetColor();
+            assetManager.CurrentAsset.Shapes[1].Blocks[0].Color = CGA16Colors.Red.GetColor();
+            assetManager.CurrentAsset.Shapes[2].Blocks[0].Color = CGA16Colors.Blue.GetColor();
+
+            // Act
+            assetManager.MoveShapeLeft(1);
+
+            // Assert
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[0].Blocks[0].Color, CGA16Colors.Red.GetColor());
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[1].Blocks[0].Color, CGA16Colors.Green.GetColor());
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[2].Blocks[0].Color, CGA16Colors.Blue.GetColor());
+
+            // Act
+            assetManager.MoveShapeLeft(0);
+
+            // Assert
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[0].Blocks[0].Color, CGA16Colors.Red.GetColor());
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[1].Blocks[0].Color, CGA16Colors.Green.GetColor());
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[2].Blocks[0].Color, CGA16Colors.Blue.GetColor());
+        }
+
+        /// <summary>
+        /// Moves the shape right.
+        /// </summary>
+        [TestMethod]
+        public void MoveShapeRight()
+        {
+            // Arrange
+            this.DeleteAssetFile();
+            var assetManager = this.Get<AssetManagerFactory>().Get(this.GetAssetFile());
+            assetManager.Add("Test", 3, 1, 1);
+            assetManager.LoadByName("Test");
+
+            assetManager.CurrentAsset.Shapes[0].Blocks[0].Color = CGA16Colors.Green.GetColor();
+            assetManager.CurrentAsset.Shapes[1].Blocks[0].Color = CGA16Colors.Red.GetColor();
+            assetManager.CurrentAsset.Shapes[2].Blocks[0].Color = CGA16Colors.Blue.GetColor();
+
+            // Act
+            assetManager.MoveShapeRight(1);
+
+            // Assert
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[0].Blocks[0].Color, CGA16Colors.Green.GetColor());
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[1].Blocks[0].Color, CGA16Colors.Blue.GetColor());
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[2].Blocks[0].Color, CGA16Colors.Red.GetColor());
+
+            // Act 2
+            assetManager.MoveShapeRight(2);
+
+            // Assert 2
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[0].Blocks[0].Color, CGA16Colors.Green.GetColor());
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[1].Blocks[0].Color, CGA16Colors.Blue.GetColor());
+            Assert.AreEqual(assetManager.CurrentAsset.Shapes[2].Blocks[0].Color, CGA16Colors.Red.GetColor());
         }
 
         /// <summary>

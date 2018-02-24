@@ -313,7 +313,7 @@ namespace Round42.R42Extentions
             var columnsToRemove = new List<int>();
             for (int col = shapeModel.LastColumn(); col >= 1; col--)
             {
-                if (shapeModel.GetColumn(col).All(b => b.Color == Color.FromArgb(0, 0, 0)))
+                if (shapeModel.GetColumn(col).All(b => b.Color == CGA16Colors.Black.GetColor()))
                 {
                     columnsToRemove.Add(col);
                 }
@@ -325,7 +325,7 @@ namespace Round42.R42Extentions
 
             for (int col = 1; col <= shapeModel.LastColumn(); col++)
             {
-                if (shapeModel.GetColumn(col).All(b => b.Color == Color.FromArgb(0, 0, 0)))
+                if (shapeModel.GetColumn(col).All(b => b.Color == CGA16Colors.Black.GetColor()))
                 {
                     columnsToRemove.Add(col);
                 }
@@ -351,7 +351,7 @@ namespace Round42.R42Extentions
             var rowsToRemove = new List<int>();
             for (int row = shapeModel.LastRow(); row >= 1; row--)
             {
-                if (shapeModel.GetRow(row).All(b => b.Color == Color.FromArgb(0, 0, 0)))
+                if (shapeModel.GetRow(row).All(b => b.Color == CGA16Colors.Black.GetColor()))
                 {
                     rowsToRemove.Add(row);
                 }
@@ -363,7 +363,7 @@ namespace Round42.R42Extentions
 
             for (int row = 1; row <= shapeModel.LastRow(); row++)
             {
-                if (shapeModel.GetRow(row).All(b => b.Color == Color.FromArgb(0, 0, 0)))
+                if (shapeModel.GetRow(row).All(b => b.Color == CGA16Colors.Black.GetColor()))
                 {
                     rowsToRemove.Add(row);
                 }

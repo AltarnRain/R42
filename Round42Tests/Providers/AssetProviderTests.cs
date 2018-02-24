@@ -21,12 +21,12 @@ namespace Round42.Tests
         [TestMethod]
         public void CreateTest()
         {
-            var model = this.Get<AssetProvider>().Create("PlayerShip", AssetTypes.Player, 3, 5, 6);
+            var model = this.Get<AssetProvider>().Create("PlayerShip", 3, 5, 6);
 
             Assert.AreEqual(5 * 6, model.Shapes.First().Blocks.Count());
             Assert.AreEqual(3, model.Shapes.Count());
             Assert.AreEqual("PlayerShip", model.Name);
-            Assert.AreEqual(AssetTypes.Player, model.AssetType);
+            Assert.AreEqual(AssetTypes.Enemy, model.AssetType);
         }
     }
 }

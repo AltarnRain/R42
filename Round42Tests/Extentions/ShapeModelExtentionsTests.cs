@@ -48,7 +48,7 @@ namespace Round242.Tests.Extentions
                 Assert.IsTrue(foundBlock);
             }
 
-            var expectedRowIsRed = shape.GetRow(11).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var expectedRowIsRed = shape.GetRow(11).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(expectedRowIsRed);
         }
 
@@ -82,10 +82,10 @@ namespace Round242.Tests.Extentions
                 Assert.IsTrue(foundBlock);
             }
 
-            var expectedRowIsRed = shape.GetRow(10).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var expectedRowIsRed = shape.GetRow(10).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(expectedRowIsRed);
 
-            var bottomRowIsBlack = shape.GetRow(11).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Black));
+            var bottomRowIsBlack = shape.GetRow(11).All(b => b.Color == CGA16Colors.Black.GetColor());
             Assert.IsTrue(bottomRowIsBlack);
         }
 
@@ -110,7 +110,7 @@ namespace Round242.Tests.Extentions
             var numberOfBlocks = shape.Blocks.Count();
             Assert.AreEqual(45, numberOfBlocks);
 
-            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(expectedRowIsRed);
             Assert.AreEqual(9, shape.LastRow());
         }
@@ -136,7 +136,7 @@ namespace Round242.Tests.Extentions
             var numberOfBlocks = shape.Blocks.Count();
             Assert.AreEqual(45, numberOfBlocks);
 
-            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var expectedRowIsRed = shape.GetRow(9).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(expectedRowIsRed);
             Assert.AreEqual(9, shape.LastRow());
         }
@@ -171,7 +171,7 @@ namespace Round242.Tests.Extentions
                 Assert.IsTrue(foundBlock);
             }
 
-            var expectedColumnIsRed = shape.GetColumn(6).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var expectedColumnIsRed = shape.GetColumn(6).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(expectedColumnIsRed);
         }
 
@@ -205,7 +205,7 @@ namespace Round242.Tests.Extentions
                 Assert.IsTrue(foundBlock);
             }
 
-            var expectedColumnIsRed = shape.GetColumn(5).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var expectedColumnIsRed = shape.GetColumn(5).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(expectedColumnIsRed);
         }
 
@@ -230,7 +230,7 @@ namespace Round242.Tests.Extentions
             var numberOfBlocks = shape.Blocks.Count();
             Assert.AreEqual(40, numberOfBlocks);
 
-            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(expectedColumnIsRed);
             Assert.AreEqual(4, shape.LastColumn());
         }
@@ -256,7 +256,7 @@ namespace Round242.Tests.Extentions
             var numberOfBlocks = shape.Blocks.Count();
             Assert.AreEqual(40, numberOfBlocks);
 
-            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var expectedColumnIsRed = shape.GetColumn(4).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(expectedColumnIsRed);
             Assert.AreEqual(4, shape.LastColumn());
         }
@@ -273,13 +273,13 @@ namespace Round242.Tests.Extentions
             var shapeProvider = this.Get<ShapeProvider>();
             var shape = shapeProvider.Create(columns, rows);
 
-            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b => b.Color = ColorProvider.GetColor(CGA16Colors.Red));
+            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b => b.Color = CGA16Colors.Red.GetColor());
 
             // Act
             shape.CropImage();
 
             // Assert
-            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.AreEqual(9, numberOfRedBlocks);
             Assert.AreEqual(9, shape.Blocks.Count());
         }
@@ -297,16 +297,16 @@ namespace Round242.Tests.Extentions
             var shape = shapeProvider.Create(columns, rows);
 
             // Create a red square
-            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b => b.Color = Color.Red);
+            shape.Blocks.Where(b => b.Row > 3 && b.Column > 3).ToList().ForEach(b => b.Color = CGA16Colors.Red.GetColor());
 
             // Create black line, this means there's two red lines split by a black line.
-            shape.Blocks.Where(b => b.Row == 5 && b.Column > 3).ToList().ForEach(b => b.Color = Color.Black);
+            shape.Blocks.Where(b => b.Row == 5 && b.Column > 3).ToList().ForEach(b => b.Color = CGA16Colors.Black.GetColor());
 
             // Act
             shape.CropImage();
 
             // Assert
-            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var numberOfRedBlocks = shape.Blocks.Count(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.AreEqual(6, numberOfRedBlocks);
             Assert.AreEqual(9, shape.Blocks.Count());
         }
@@ -327,7 +327,7 @@ namespace Round242.Tests.Extentions
             {
                 if (b.Row == 2)
                 {
-                    b.Color = Color.Red;
+                    b.Color = CGA16Colors.Red.GetColor();
                 }
             });
 
@@ -335,7 +335,7 @@ namespace Round242.Tests.Extentions
             shape.MoveUp();
 
             // Assert
-            var firstRowIsRed = shape.GetRow(1).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var firstRowIsRed = shape.GetRow(1).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(firstRowIsRed);
         }
 
@@ -355,7 +355,7 @@ namespace Round242.Tests.Extentions
             {
                 if (b.Row == 2)
                 {
-                    b.Color = Color.Red;
+                    b.Color = CGA16Colors.Red.GetColor();
                 }
             });
 
@@ -363,7 +363,7 @@ namespace Round242.Tests.Extentions
             shape.MoveDown();
 
             // Assert
-            var thirdRowIsRed = shape.GetRow(3).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var thirdRowIsRed = shape.GetRow(3).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(thirdRowIsRed);
         }
 
@@ -383,7 +383,7 @@ namespace Round242.Tests.Extentions
             {
                 if (b.Column == 2)
                 {
-                    b.Color = Color.Red;
+                    b.Color = CGA16Colors.Red.GetColor();
                 }
             });
 
@@ -391,7 +391,7 @@ namespace Round242.Tests.Extentions
             shape.MoveRight();
 
             // Assert
-            var isRed = shape.GetColumn(3).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var isRed = shape.GetColumn(3).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(isRed);
         }
 
@@ -411,7 +411,7 @@ namespace Round242.Tests.Extentions
             {
                 if (b.Column == 2)
                 {
-                    b.Color = Color.Red;
+                    b.Color = CGA16Colors.Red.GetColor();
                 }
             });
 
@@ -419,7 +419,7 @@ namespace Round242.Tests.Extentions
             shape.MoveLeft();
 
             // Assert
-            var isRed = shape.GetColumn(1).All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Red));
+            var isRed = shape.GetColumn(1).All(b => b.Color == CGA16Colors.Red.GetColor());
             Assert.IsTrue(isRed);
         }
 
@@ -495,7 +495,7 @@ namespace Round242.Tests.Extentions
         /// <param name="column">The column.</param>
         private void MakeColumnRed(ShapeModel shapeModel, int column)
         {
-            shapeModel.Blocks.Where(b => b.Column == column).ToList().ForEach(b => b.Color = ColorProvider.GetColor(CGA16Colors.Red));
+            shapeModel.Blocks.Where(b => b.Column == column).ToList().ForEach(b => b.Color = CGA16Colors.Red.GetColor());
         }
 
         /// <summary>
@@ -505,7 +505,7 @@ namespace Round242.Tests.Extentions
         /// <param name="row">The row.</param>
         private void MakeRowRed(ShapeModel shapeModel, int row)
         {
-            shapeModel.Blocks.Where(b => b.Row == row).ToList().ForEach(b => b.Color = ColorProvider.GetColor(CGA16Colors.Red));
+            shapeModel.Blocks.Where(b => b.Row == row).ToList().ForEach(b => b.Color = CGA16Colors.Red.GetColor());
         }
     }
 }

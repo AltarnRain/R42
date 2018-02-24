@@ -148,19 +148,18 @@ namespace Round42.Managers
         /// Adds the specified width.
         /// </summary>
         /// <param name="assetName">Name of the asset.</param>
-        /// <param name="assetType">Type of the asset.</param>
         /// <param name="frames">The number of shapes.</param>
         /// <param name="columns">The width.</param>
         /// <param name="rows">The height.</param>
         /// <exception cref="DuplicateEntryException">Asset {0} already exists".FormatString(assetName)</exception>
-        public void Add(string assetName, AssetTypes assetType, int frames, int columns, int rows)
+        public void Add(string assetName, int frames, int columns, int rows)
         {
             if (this.Assets.Any(a => a.Name == assetName))
             {
                 throw new DuplicateEntryException("Asset {0} already exists".FormatString(assetName));
             }
 
-            var newAsset = this.assetProvider.Create(assetName, assetType, frames, columns, rows);
+            var newAsset = this.assetProvider.Create(assetName, frames, columns, rows);
             this.Add(newAsset);
             this.Save();
         }
@@ -368,7 +367,7 @@ namespace Round42.Managers
             {
                 foreach (var shape in this.CurrentAsset.Shapes)
                 {
-                    if (shape.Blocks.All(b => b.Color == ColorProvider.GetColor(CGA16Colors.Black)) == false)
+                    if (shape.Blocks.All(b => b.Color == CGA16Colors.Black.GetColor() == false))
                     {
                         shape.CropImage();
                     }

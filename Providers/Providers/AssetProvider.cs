@@ -30,16 +30,18 @@ namespace Round42.Providers
         /// Creates an AssetModel.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <param name="assetType">Type of the asset.</param>
         /// <param name="numberOfShapes">The number of shapes.</param>
         /// <param name="columns">The number of blocks on x axis.</param>
         /// <param name="rows">The number of blocks on y axis.</param>
-        /// <returns>An AssetModel</returns>
-        public AssetModel Create(string name, AssetTypes assetType, int numberOfShapes, int columns, int rows)
+        /// <returns>
+        /// An AssetModel
+        /// </returns>
+        public AssetModel Create(string name, int numberOfShapes, int columns, int rows)
         {
             var returnValue = new AssetModel
             {
-                AssetType = assetType,
+                AssetType = AssetTypes.Enemy,
+                AnimationPlayback = AnimationPlayback.BackAndForth,
                 Name = name
             };
 

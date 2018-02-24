@@ -11,6 +11,7 @@ namespace Round42.CustomComponents.Components
     using Render;
     using Round42.Models;
     using Round42.Providers;
+    using Round42.R42Extentions;
 
     /// <summary>
     /// Shows a preview of each image.
@@ -87,7 +88,7 @@ namespace Round42.CustomComponents.Components
                 image.Tag = index;
                 image.Click += this.OnDrawSurfaceClick;
                 image.BackgroundImage = bitmap;
-                image.BackColor = ColorProvider.GetColor(CGA16Colors.Black);
+                image.BackColor = CGA16Colors.Black.GetColor();
 
                 var moveLeftButton = this.CreateMovebutton("<", this.MoveLeft);
                 var moveRightButton = this.CreateMovebutton(">", this.MoveRight);

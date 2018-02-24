@@ -228,7 +228,7 @@ namespace Round42.AssetEditor.Forms
             var newAsset = this.viewFactory.Get<NewAssetForm>();
             if (newAsset.ShowDialog() == DialogResult.OK)
             {
-                this.assetManager.Add(newAsset.AssetName, newAsset.AssetType, newAsset.Frames, newAsset.XBlocks, newAsset.YBlocks);
+                this.assetManager.Add(newAsset.AssetName, newAsset.Frames, newAsset.XBlocks, newAsset.YBlocks);
             }
         }
 

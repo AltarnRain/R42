@@ -28,6 +28,14 @@ namespace Round42.Models
         public AssetTypes AssetType { get; set; }
 
         /// <summary>
+        /// Gets or sets the animation playback.
+        /// </summary>
+        /// <value>
+        /// The animation playback.
+        /// </value>
+        public AnimationPlayback AnimationPlayback { get; set; }
+
+        /// <summary>
         /// Gets or sets the name.
         /// </summary>
         /// <value>
