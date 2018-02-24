@@ -38,7 +38,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderSurface", "RenderSurf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R$2Extentions", "R$2Extentions\R$2Extentions.csproj", "{DA95E975-927D-4A87-A01E-1316BA95F4F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelEditor", "LevelEditor\LevelEditor.csproj", "{56427E2B-87A5-465E-8669-ECEF2EEED45F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoundEditor", "LevelEditor\RoundEditor.csproj", "{56427E2B-87A5-465E-8669-ECEF2EEED45F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

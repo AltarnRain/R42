@@ -60,6 +60,7 @@ namespace Round42.AssetEditor.Forms
         /// The preview bar factory
         /// </summary>
         private readonly PreviewBarFactory previewBarFactory;
+        private readonly FileLocationProvider fileLocationProvider;
 
         /// <summary>
         /// Gets the asset provider.
@@ -97,6 +98,7 @@ namespace Round42.AssetEditor.Forms
         /// <param name="paletFactory">The palet factory.</param>
         /// <param name="renderFactory">The render factory.</param>
         /// <param name="previewBarFactory">The preview bar factory.</param>
+        /// <param name="fileLocationProvider">The file location provider.</param>
         public AssetEditor(
             AssetManagerFactory assetManagerFactory,
             AssetProvider assetProvider,
@@ -104,7 +106,8 @@ namespace Round42.AssetEditor.Forms
             DrawerFactory drawerFactory,
             PaletFactory paletFactory,
             RenderFactory renderFactory,
-            PreviewBarFactory previewBarFactory)
+            PreviewBarFactory previewBarFactory,
+            FileLocationProvider fileLocationProvider)
         {
             this.InitializeComponent();
             this.assetProvider = assetProvider;
@@ -113,9 +116,9 @@ namespace Round42.AssetEditor.Forms
             this.paletFactory = paletFactory;
             this.renderFactory = renderFactory;
             this.previewBarFactory = previewBarFactory;
-
+            this.fileLocationProvider = fileLocationProvider;
             var mainAssetFile = Path.Combine(Directory.GetCurrentDirectory(), AssetFile);
-            this.assetManager = assetManagerFactory.Get(false);
+            this.assetManager = assetManagerFactory.Get(this.fileLocationProvider.AssetFile, false);
             this.palet = this.paletFactory.Get(this.PaletPanel);
             this.drawer = this.drawerFactory.Get(this.DrawerPanel);
             this.previewBar = this.previewBarFactory.Get(this.PreviewBar);

@@ -41,10 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="enum\AnimationPlayback.cs" />
-    <Compile Include="enum\AssetTypes.cs" />
-    <Compile Include="enum\Colors.cs" />
-    <Compile Include="enum\LevelType.cs" />
+    <Compile Include="Enumerators\AnimationPlayback.cs" />
+    <Compile Include="Enumerators\AssetTypes.cs" />
+    <Compile Include="Enumerators\Colors.cs" />
+    <Compile Include="Enumerators\LevelType.cs" />
     <Compile Include="GameModels\BaseGameObject.cs" />
     <Compile Include="DrawingModels\AssetModel.cs" />
     <Compile Include="DrawingModels\BaseModel.cs" />
@@ -63,8 +63,6 @@
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="LevelModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

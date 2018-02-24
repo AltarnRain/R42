@@ -10,21 +10,31 @@ namespace Round42.Providers
     public class FileLocationProvider
     {
         /// <summary>
-        /// Assets the file.
+        /// Gets the asset file.
         /// </summary>
-        /// <returns>Location of the asset file</returns>
-        public string AssetFile()
+        /// <value>
+        /// The asset file.
+        /// </value>
+        public string AssetFile
         {
-            return @"E:\Reps\R42\Data\Assets.json";
+            get
+            {
+                return @"E:\Reps\R42\Data\Assets.json";
+            }
         }
 
         /// <summary>
-        /// Levels the file.
+        /// Gets the level file.
         /// </summary>
-        /// <returns>Location of the level file</returns>
-        public string LevelFile()
+        /// <value>
+        /// The level file.
+        /// </value>
+        public string RoundFile
         {
-            return @"E:\Reps\R42\Data\Levels.json";
+            get
+            {
+                return @"E:\Reps\R42\Data\Rounds.json";
+            }
         }
     }
 }

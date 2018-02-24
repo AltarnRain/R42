@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Models.Levels
+namespace Round42.Models.Rounds
 {
     using Round42.Models.Drawing;
     using Round42.Models.Enumerators;
@@ -35,5 +35,13 @@ namespace Round42.Models.Levels
         /// The asset count.
         /// </value>
         public int AssetCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; set; }
     }
 }

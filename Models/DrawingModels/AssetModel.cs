@@ -43,13 +43,5 @@ namespace Round42.Models.Drawing
         /// The name.
         /// </value>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the bitmaps.
-        /// </summary>
-        /// <value>
-        /// The bitmaps.
-        /// </value>
-        public List<string> Bitmaps { get; set; }
     }
 }

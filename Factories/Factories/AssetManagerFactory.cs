@@ -6,7 +6,7 @@ namespace Round42.Factories
 {
     using Ninject;
     using Ninject.Parameters;
-    using Round42.Managers.AssetManager;
+    using Round42.Managers;
 
     /// <summary>
     /// Created an asset manager.
@@ -33,13 +33,14 @@ namespace Round42.Factories
         /// <summary>
         /// Gets the specified asset file.
         /// </summary>
+        /// <param name="assetFile">The asset file.</param>
         /// <param name="loadOnCreate">if set to <c>true</c> [load on create].</param>
         /// <returns>
         /// An asset manager
         /// </returns>
-        public AssetManager Get(bool loadOnCreate = true)
+        public AssetManager Get(string assetFile, bool loadOnCreate = true)
         {
-            return this.Kernel.Get<AssetManager>(new ConstructorArgument("loadOnCreate", loadOnCreate));
+            return this.Kernel.Get<AssetManager>(new ConstructorArgument("assetFile", assetFile), new ConstructorArgument("loadOnCreate", loadOnCreate));
         }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="Factories\PreviewBarFactory.cs" />
     <Compile Include="Factories\RenderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Factories\RoundManagerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AssetManager\Managers.csproj">
