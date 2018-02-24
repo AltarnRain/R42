@@ -72,6 +72,7 @@ namespace Round42.CustomComponents.Components
             this.panel.SuspendLayout();
 
             var index = shapes.Count() - 1;
+
             foreach (var shape in shapes.Reverse())
             {
                 var mainPanel = new Panel();
