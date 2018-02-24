@@ -81,6 +81,14 @@ namespace Round42.CustomComponents
         public Action<int, int> OnBecomeAnchor { get; set; }
 
         /// <summary>
+        /// Gets or sets the color of the on change.
+        /// </summary>
+        /// <value>
+        /// The color of the on change.
+        /// </value>
+        public Action OnChangeColor { get; set; }
+
+        /// <summary>
         /// Raises the <see cref="E:Paint" /> event.
         /// </summary>
         /// <param name="e">The <see cref="PaintEventArgs" /> instance containing the event data.</param>
@@ -141,6 +149,7 @@ namespace Round42.CustomComponents
             else
             {
                 this.blockModel.Color = this.ActiveColor;
+                this.OnChangeColor?.Invoke();
             }
 
             this.Invalidate();

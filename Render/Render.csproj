@@ -61,6 +61,10 @@
       <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
       <Name>Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Providers\Providers.csproj">
+      <Project>{32BC0D8A-D607-43BE-B6CF-01798B93DBDB}</Project>
+      <Name>Providers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\R%242Extentions\R%242Extentions.csproj">
       <Project>{DA95E975-927D-4A87-A01E-1316BA95F4F7}</Project>
       <Name>R%242Extentions</Name>

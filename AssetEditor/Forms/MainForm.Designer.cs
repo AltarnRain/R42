@@ -38,6 +38,8 @@
             this.removeAssetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.cropShapesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.renderAllAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.About = new System.Windows.Forms.ToolStripMenuItem();
             this.AnimatorTab = new System.Windows.Forms.TabControl();
@@ -52,10 +54,8 @@
             this.AddRowTopButton = new System.Windows.Forms.Button();
             this.RemoveLeftColumnButton = new System.Windows.Forms.Button();
             this.AddColumnLeftButton = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.MoveDownButton = new System.Windows.Forms.Button();
             this.MoveRightButton = new System.Windows.Forms.Button();
             this.MoveLeftButton = new System.Windows.Forms.Button();
@@ -68,8 +68,7 @@
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SelectFrameCombobox = new System.Windows.Forms.ComboBox();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.renderAllAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PreviewBar = new System.Windows.Forms.Panel();
             this.ListPanel.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.AnimatorTab.SuspendLayout();
@@ -84,7 +83,7 @@
             this.ListPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.ListPanel.Location = new System.Drawing.Point(0, 24);
             this.ListPanel.Name = "ListPanel";
-            this.ListPanel.Size = new System.Drawing.Size(200, 407);
+            this.ListPanel.Size = new System.Drawing.Size(200, 519);
             this.ListPanel.TabIndex = 0;
             // 
             // AssetListBox
@@ -93,7 +92,7 @@
             this.AssetListBox.FormattingEnabled = true;
             this.AssetListBox.Location = new System.Drawing.Point(0, 0);
             this.AssetListBox.Name = "AssetListBox";
-            this.AssetListBox.Size = new System.Drawing.Size(200, 407);
+            this.AssetListBox.Size = new System.Drawing.Size(200, 519);
             this.AssetListBox.TabIndex = 0;
             this.AssetListBox.SelectedIndexChanged += new System.EventHandler(this.AssetListBox_SelectedIndexChanged);
             // 
@@ -105,7 +104,7 @@
             this.helpToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(901, 24);
+            this.MainMenu.Size = new System.Drawing.Size(1018, 24);
             this.MainMenu.TabIndex = 2;
             this.MainMenu.Text = "menuStrip1";
             // 
@@ -163,6 +162,18 @@
             this.cropShapesToolStripMenuItem.Text = "Crop and Align Anchors";
             this.cropShapesToolStripMenuItem.Click += new System.EventHandler(this.CropShapesToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(198, 6);
+            // 
+            // renderAllAssetsToolStripMenuItem
+            // 
+            this.renderAllAssetsToolStripMenuItem.Name = "renderAllAssetsToolStripMenuItem";
+            this.renderAllAssetsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.renderAllAssetsToolStripMenuItem.Text = "Render all assets";
+            this.renderAllAssetsToolStripMenuItem.Click += new System.EventHandler(this.RenderAllAssetsToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -184,18 +195,19 @@
             this.AnimatorTab.Location = new System.Drawing.Point(200, 24);
             this.AnimatorTab.Name = "AnimatorTab";
             this.AnimatorTab.SelectedIndex = 0;
-            this.AnimatorTab.Size = new System.Drawing.Size(701, 407);
+            this.AnimatorTab.Size = new System.Drawing.Size(818, 519);
             this.AnimatorTab.TabIndex = 3;
             // 
             // AnimationTab
             // 
             this.AnimationTab.Controls.Add(this.DrawerPanel);
+            this.AnimationTab.Controls.Add(this.PreviewBar);
             this.AnimationTab.Controls.Add(this.PaletPanel);
             this.AnimationTab.Controls.Add(this.Tools);
             this.AnimationTab.Location = new System.Drawing.Point(4, 22);
             this.AnimationTab.Name = "AnimationTab";
             this.AnimationTab.Padding = new System.Windows.Forms.Padding(3);
-            this.AnimationTab.Size = new System.Drawing.Size(693, 381);
+            this.AnimationTab.Size = new System.Drawing.Size(810, 493);
             this.AnimationTab.TabIndex = 1;
             this.AnimationTab.Text = "Animation";
             this.AnimationTab.UseVisualStyleBackColor = true;
@@ -206,7 +218,7 @@
             this.DrawerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DrawerPanel.Location = new System.Drawing.Point(131, 31);
             this.DrawerPanel.Name = "DrawerPanel";
-            this.DrawerPanel.Size = new System.Drawing.Size(559, 347);
+            this.DrawerPanel.Size = new System.Drawing.Size(676, 374);
             this.DrawerPanel.TabIndex = 1;
             // 
             // PaletPanel
@@ -215,7 +227,7 @@
             this.PaletPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.PaletPanel.Location = new System.Drawing.Point(131, 3);
             this.PaletPanel.Name = "PaletPanel";
-            this.PaletPanel.Size = new System.Drawing.Size(559, 28);
+            this.PaletPanel.Size = new System.Drawing.Size(676, 28);
             this.PaletPanel.TabIndex = 0;
             // 
             // Tools
@@ -228,10 +240,8 @@
             this.Tools.Controls.Add(this.AddRowTopButton);
             this.Tools.Controls.Add(this.RemoveLeftColumnButton);
             this.Tools.Controls.Add(this.AddColumnLeftButton);
-            this.Tools.Controls.Add(this.label5);
             this.Tools.Controls.Add(this.label4);
             this.Tools.Controls.Add(this.label3);
-            this.Tools.Controls.Add(this.label2);
             this.Tools.Controls.Add(this.MoveDownButton);
             this.Tools.Controls.Add(this.MoveRightButton);
             this.Tools.Controls.Add(this.MoveLeftButton);
@@ -247,12 +257,12 @@
             this.Tools.Dock = System.Windows.Forms.DockStyle.Left;
             this.Tools.Location = new System.Drawing.Point(3, 3);
             this.Tools.Name = "Tools";
-            this.Tools.Size = new System.Drawing.Size(128, 375);
+            this.Tools.Size = new System.Drawing.Size(128, 487);
             this.Tools.TabIndex = 0;
             // 
             // Render
             // 
-            this.Render.Location = new System.Drawing.Point(6, 341);
+            this.Render.Location = new System.Drawing.Point(8, 309);
             this.Render.Name = "Render";
             this.Render.Size = new System.Drawing.Size(75, 23);
             this.Render.TabIndex = 22;
@@ -262,7 +272,7 @@
             // 
             // SetAnchorButton
             // 
-            this.SetAnchorButton.Location = new System.Drawing.Point(6, 312);
+            this.SetAnchorButton.Location = new System.Drawing.Point(8, 280);
             this.SetAnchorButton.Name = "SetAnchorButton";
             this.SetAnchorButton.Size = new System.Drawing.Size(75, 23);
             this.SetAnchorButton.TabIndex = 21;
@@ -277,7 +287,7 @@
             this.ButtonSize.Maximum = 100;
             this.ButtonSize.Name = "ButtonSize";
             this.ButtonSize.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.ButtonSize.Size = new System.Drawing.Size(45, 375);
+            this.ButtonSize.Size = new System.Drawing.Size(45, 487);
             this.ButtonSize.TabIndex = 20;
             this.ButtonSize.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.ButtonSize.Value = 20;
@@ -286,7 +296,7 @@
             // RemoveTopRowButton
             // 
             this.RemoveTopRowButton.BackColor = System.Drawing.Color.Red;
-            this.RemoveTopRowButton.Location = new System.Drawing.Point(11, 203);
+            this.RemoveTopRowButton.Location = new System.Drawing.Point(29, 127);
             this.RemoveTopRowButton.Name = "RemoveTopRowButton";
             this.RemoveTopRowButton.Size = new System.Drawing.Size(31, 23);
             this.RemoveTopRowButton.TabIndex = 19;
@@ -297,7 +307,7 @@
             // AddRowTopButton
             // 
             this.AddRowTopButton.BackColor = System.Drawing.Color.LightGreen;
-            this.AddRowTopButton.Location = new System.Drawing.Point(11, 161);
+            this.AddRowTopButton.Location = new System.Drawing.Point(29, 53);
             this.AddRowTopButton.Name = "AddRowTopButton";
             this.AddRowTopButton.Size = new System.Drawing.Size(31, 23);
             this.AddRowTopButton.TabIndex = 18;
@@ -308,7 +318,7 @@
             // RemoveLeftColumnButton
             // 
             this.RemoveLeftColumnButton.BackColor = System.Drawing.Color.Red;
-            this.RemoveLeftColumnButton.Location = new System.Drawing.Point(11, 119);
+            this.RemoveLeftColumnButton.Location = new System.Drawing.Point(3, 150);
             this.RemoveLeftColumnButton.Name = "RemoveLeftColumnButton";
             this.RemoveLeftColumnButton.Size = new System.Drawing.Size(31, 23);
             this.RemoveLeftColumnButton.TabIndex = 17;
@@ -319,7 +329,7 @@
             // AddColumnLeftButton
             // 
             this.AddColumnLeftButton.BackColor = System.Drawing.Color.LightGreen;
-            this.AddColumnLeftButton.Location = new System.Drawing.Point(11, 77);
+            this.AddColumnLeftButton.Location = new System.Drawing.Point(5, 75);
             this.AddColumnLeftButton.Name = "AddColumnLeftButton";
             this.AddColumnLeftButton.Size = new System.Drawing.Size(31, 23);
             this.AddColumnLeftButton.TabIndex = 16;
@@ -327,49 +337,29 @@
             this.AddColumnLeftButton.UseVisualStyleBackColor = false;
             this.AddColumnLeftButton.Click += new System.EventHandler(this.AddColumnLeftButton_Click);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 103);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(84, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Remove column";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 61);
+            this.label4.Location = new System.Drawing.Point(38, 80);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 13);
+            this.label4.Size = new System.Drawing.Size(13, 13);
             this.label4.TabIndex = 14;
-            this.label4.Text = "Add column";
+            this.label4.Text = "+";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 187);
+            this.label3.Location = new System.Drawing.Point(40, 154);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.Size = new System.Drawing.Size(10, 13);
             this.label3.TabIndex = 13;
-            this.label3.Text = "Remove row";
+            this.label3.Text = "-";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 145);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Add row";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MoveDownButton
             // 
-            this.MoveDownButton.Location = new System.Drawing.Point(34, 280);
+            this.MoveDownButton.Location = new System.Drawing.Point(34, 248);
             this.MoveDownButton.Name = "MoveDownButton";
             this.MoveDownButton.Size = new System.Drawing.Size(26, 26);
             this.MoveDownButton.TabIndex = 11;
@@ -379,7 +369,7 @@
             // 
             // MoveRightButton
             // 
-            this.MoveRightButton.Location = new System.Drawing.Point(57, 256);
+            this.MoveRightButton.Location = new System.Drawing.Point(57, 224);
             this.MoveRightButton.Name = "MoveRightButton";
             this.MoveRightButton.Size = new System.Drawing.Size(26, 26);
             this.MoveRightButton.TabIndex = 10;
@@ -389,7 +379,7 @@
             // 
             // MoveLeftButton
             // 
-            this.MoveLeftButton.Location = new System.Drawing.Point(11, 257);
+            this.MoveLeftButton.Location = new System.Drawing.Point(11, 225);
             this.MoveLeftButton.Name = "MoveLeftButton";
             this.MoveLeftButton.Size = new System.Drawing.Size(26, 26);
             this.MoveLeftButton.TabIndex = 9;
@@ -399,7 +389,7 @@
             // 
             // MoveUpButton
             // 
-            this.MoveUpButton.Location = new System.Drawing.Point(34, 233);
+            this.MoveUpButton.Location = new System.Drawing.Point(34, 201);
             this.MoveUpButton.Name = "MoveUpButton";
             this.MoveUpButton.Size = new System.Drawing.Size(26, 26);
             this.MoveUpButton.TabIndex = 8;
@@ -410,9 +400,9 @@
             // RemoveBottomRowButton
             // 
             this.RemoveBottomRowButton.BackColor = System.Drawing.Color.Red;
-            this.RemoveBottomRowButton.Location = new System.Drawing.Point(43, 203);
+            this.RemoveBottomRowButton.Location = new System.Drawing.Point(32, 171);
             this.RemoveBottomRowButton.Name = "RemoveBottomRowButton";
-            this.RemoveBottomRowButton.Size = new System.Drawing.Size(31, 23);
+            this.RemoveBottomRowButton.Size = new System.Drawing.Size(28, 24);
             this.RemoveBottomRowButton.TabIndex = 7;
             this.RemoveBottomRowButton.Text = "\\/";
             this.RemoveBottomRowButton.UseVisualStyleBackColor = false;
@@ -421,7 +411,7 @@
             // RemoveRightColumnButton
             // 
             this.RemoveRightColumnButton.BackColor = System.Drawing.Color.Red;
-            this.RemoveRightColumnButton.Location = new System.Drawing.Point(43, 119);
+            this.RemoveRightColumnButton.Location = new System.Drawing.Point(57, 150);
             this.RemoveRightColumnButton.Name = "RemoveRightColumnButton";
             this.RemoveRightColumnButton.Size = new System.Drawing.Size(31, 23);
             this.RemoveRightColumnButton.TabIndex = 6;
@@ -432,7 +422,7 @@
             // AddRowBottomButton
             // 
             this.AddRowBottomButton.BackColor = System.Drawing.Color.LightGreen;
-            this.AddRowBottomButton.Location = new System.Drawing.Point(43, 161);
+            this.AddRowBottomButton.Location = new System.Drawing.Point(29, 98);
             this.AddRowBottomButton.Name = "AddRowBottomButton";
             this.AddRowBottomButton.Size = new System.Drawing.Size(31, 23);
             this.AddRowBottomButton.TabIndex = 5;
@@ -443,7 +433,7 @@
             // AddColumnRightButton
             // 
             this.AddColumnRightButton.BackColor = System.Drawing.Color.LightGreen;
-            this.AddColumnRightButton.Location = new System.Drawing.Point(43, 77);
+            this.AddColumnRightButton.Location = new System.Drawing.Point(57, 76);
             this.AddColumnRightButton.Name = "AddColumnRightButton";
             this.AddColumnRightButton.Size = new System.Drawing.Size(31, 23);
             this.AddColumnRightButton.TabIndex = 4;
@@ -490,23 +480,20 @@
             this.SelectFrameCombobox.TabIndex = 0;
             this.SelectFrameCombobox.SelectedIndexChanged += new System.EventHandler(this.SelectFrameCombobox_SelectedIndexChanged);
             // 
-            // toolStripMenuItem2
+            // PreviewBar
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(198, 6);
-            // 
-            // renderAllAssetsToolStripMenuItem
-            // 
-            this.renderAllAssetsToolStripMenuItem.Name = "renderAllAssetsToolStripMenuItem";
-            this.renderAllAssetsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.renderAllAssetsToolStripMenuItem.Text = "Render all assets";
-            this.renderAllAssetsToolStripMenuItem.Click += new System.EventHandler(this.RenderAllAssetsToolStripMenuItem_Click);
+            this.PreviewBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PreviewBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PreviewBar.Location = new System.Drawing.Point(131, 405);
+            this.PreviewBar.Name = "PreviewBar";
+            this.PreviewBar.Size = new System.Drawing.Size(676, 85);
+            this.PreviewBar.TabIndex = 2;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(901, 431);
+            this.ClientSize = new System.Drawing.Size(1018, 543);
             this.Controls.Add(this.AnimatorTab);
             this.Controls.Add(this.ListPanel);
             this.Controls.Add(this.MainMenu);
@@ -555,10 +542,8 @@
         private System.Windows.Forms.Button MoveRightButton;
         private System.Windows.Forms.Button MoveLeftButton;
         private System.Windows.Forms.Button MoveUpButton;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button RemoveTopRowButton;
         private System.Windows.Forms.Button AddRowTopButton;
         private System.Windows.Forms.Button RemoveLeftColumnButton;
@@ -571,6 +556,7 @@
         private System.Windows.Forms.Button Render;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem renderAllAssetsToolStripMenuItem;
+        private System.Windows.Forms.Panel PreviewBar;
     }
 }
 

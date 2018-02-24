@@ -6,6 +6,7 @@ namespace Render
 {
     using System.Drawing;
     using Round42.Models;
+    using Round42.Providers;
     using Round42.R42Extentions;
 
     /// <summary>
@@ -13,31 +14,39 @@ namespace Render
     /// </summary>
     public class ImageGenerator
     {
-        private readonly string folder;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ImageGenerator"/> class.
-        /// </summary>
-        /// <param name="folder">The folder.</param>
-        public ImageGenerator(string folder)
-        {
-            this.folder = folder;
-        }
-
         /// <summary>
         /// Renders the shape.
         /// </summary>
         /// <param name="shapeModel">The shape model.</param>
+        /// <param name="folder">The folder.</param>
         /// <param name="name">The name.</param>
         /// <param name="count">The count.</param>
-        /// <returns>A filename</returns>
-        public string RenderShapeToBitmap(ShapeModel shapeModel, string name, int count)
+        /// <returns>
+        /// A filename
+        /// </returns>
+        public string RenderShapeToBitmapFile(ShapeModel shapeModel, string folder, string name, int count)
+        {
+            var b = this.RenderShapeToBitmap(shapeModel);
+
+            var paddedCount = count.ToString().PadLeft(2, '0');
+            var fileName = folder + $"{name}_{paddedCount}.bmp";
+
+            b.Save(fileName);
+            return fileName;
+        }
+
+        /// <summary>
+        /// Renders the shape to bitmap.
+        /// </summary>
+        /// <param name="shapeModel">The shape model.</param>
+        /// <returns>A bitmap</returns>
+        public Bitmap RenderShapeToBitmap(ShapeModel shapeModel)
         {
             var width = 20 * shapeModel.LastColumn();
             var height = 20 * shapeModel.LastRow();
 
-            var b = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
-            var g = Graphics.FromImage(b);
+            var bitmap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+            var g = Graphics.FromImage(bitmap);
 
             var size = 20;
             foreach (var block in shapeModel.Blocks)
@@ -50,12 +59,9 @@ namespace Render
                 g.FillRectangle(new SolidBrush(block.Color), rect);
             }
 
-            var paddedCount = count.ToString().PadLeft(2, '0');
-            var fileName = this.folder + $"{name}_{paddedCount}.bmp";
+            bitmap.MakeTransparent(ColorProvider.GetColor(CGA16Colors.Black));
 
-            b.MakeTransparent(Color.Black);
-            b.Save(fileName);
-            return fileName;
+            return bitmap;
         }
     }
 }

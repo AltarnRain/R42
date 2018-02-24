@@ -35,7 +35,7 @@ namespace Round242.Tests.Render
             shape.Blocks.Where(b => b.Row == 3).ToList().ForEach(b => b.Color = Color.Red);
 
             // Act
-            var fileName = render.RenderShapeToBitmap(shape, "TestBitmap", 1);
+            var fileName = render.RenderShapeToBitmapFile(shape, this.GetOutFolder(), "TestBitmap", 1);
 
             // Assert.
             var fileExists = File.Exists(this.GetOutFolder() + "TestBitmap_01.bmp");

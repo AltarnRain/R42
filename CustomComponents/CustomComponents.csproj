@@ -48,6 +48,7 @@
     </Compile>
     <Compile Include="Components\Drawer.cs" />
     <Compile Include="Components\Palet.cs" />
+    <Compile Include="Components\PreviewBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +71,10 @@
     <ProjectReference Include="..\R%242Extentions\R%242Extentions.csproj">
       <Project>{DA95E975-927D-4A87-A01E-1316BA95F4F7}</Project>
       <Name>R%242Extentions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Render\Render.csproj">
+      <Project>{4A8C7890-CD7F-4B22-80AD-C13E57943024}</Project>
+      <Name>Render</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

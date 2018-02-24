@@ -4,6 +4,7 @@
 
 namespace Round42.CustomComponents
 {
+    using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
@@ -36,6 +37,14 @@ namespace Round42.CustomComponents
         {
             this.panel = panel;
         }
+
+        /// <summary>
+        /// Gets or sets the on image change.
+        /// </summary>
+        /// <value>
+        /// The on image change.
+        /// </value>
+        public Action OnImageChange { get; set; }
 
         /// <summary>
         /// Gets the block buttons.
@@ -95,7 +104,8 @@ namespace Round42.CustomComponents
                     Top = (block.Row - 1) * buttonSize,
                     Width = buttonSize,
                     Height = buttonSize,
-                    OnBecomeAnchor = this.SetAnchor
+                    OnBecomeAnchor = this.SetAnchor,
+                    OnChangeColor = this.OnImageChange
                 };
 
                 bbList.Add(blockButton);

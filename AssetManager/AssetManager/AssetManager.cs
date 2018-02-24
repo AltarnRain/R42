@@ -4,6 +4,7 @@
 
 namespace Round42.Managers
 {
+    using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
@@ -171,6 +172,48 @@ namespace Round42.Managers
         {
             var newShape = this.shapeProvider.Create(this.CurrentAsset.Shapes.First().LastColumn(), this.CurrentAsset.Shapes.First().LastRow());
             this.CurrentAsset.Shapes.Add(newShape);
+            this.TriggerOnCurrentAssetChanged();
+        }
+
+        /// <summary>
+        /// Moves the shape right.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        public void MoveShapeRight(int index)
+        {
+            if (index == this.CurrentAsset.Shapes.Count() - 1)
+            {
+                return;
+            }
+
+            // Swap shape with the one on the right.
+            var shape1 = this.CurrentAsset.Shapes[index];
+            var shape2 = this.CurrentAsset.Shapes[index + 1];
+
+            this.CurrentAsset.Shapes[index] = shape2;
+            this.CurrentAsset.Shapes[index + 1] = shape1;
+
+            this.TriggerOnCurrentAssetChanged();
+        }
+
+        /// <summary>
+        /// Moves the shape left.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        public void MoveShapeLeft(int index)
+        {
+            if (index == 0)
+            {
+                return;
+            }
+
+            // Swap shape with the one on the right.
+            var shape1 = this.CurrentAsset.Shapes[index];
+            var shape2 = this.CurrentAsset.Shapes[index - 1];
+
+            this.CurrentAsset.Shapes[index] = shape2;
+            this.CurrentAsset.Shapes[index - 1] = shape1;
+
             this.TriggerOnCurrentAssetChanged();
         }
 

@@ -14,6 +14,7 @@ namespace Round42.AssetEditor.Forms
     using Providers;
     using Round42.AssetEditor.Properties;
     using Round42.CustomComponents;
+    using Round42.CustomComponents.Components;
     using Round42.Factories;
     using Round42.Factories.Factories;
     using Round42.Managers;
@@ -54,6 +55,7 @@ namespace Round42.AssetEditor.Forms
         /// The render factory
         /// </summary>
         private readonly RenderFactory renderFactory;
+        private readonly PreviewBarFactory previewBarFactory;
 
         /// <summary>
         /// Gets the asset provider.
@@ -72,6 +74,11 @@ namespace Round42.AssetEditor.Forms
         private readonly Drawer drawer;
 
         /// <summary>
+        /// The preview bar
+        /// </summary>
+        private readonly PreviewBar previewBar;
+
+        /// <summary>
         /// The palet
         /// </summary>
         private readonly Palet palet;
@@ -85,13 +92,15 @@ namespace Round42.AssetEditor.Forms
         /// <param name="drawerFactory">The drawer factory.</param>
         /// <param name="paletFactory">The palet factory.</param>
         /// <param name="renderFactory">The render factory.</param>
+        /// <param name="previewBarFactory">The preview bar factory.</param>
         public MainForm(
             AssetManagerFactory assetManagerFactory,
             AssetProvider assetProvider,
             ViewFactory viewFactory,
             DrawerFactory drawerFactory,
             PaletFactory paletFactory,
-            RenderFactory renderFactory)
+            RenderFactory renderFactory,
+            PreviewBarFactory previewBarFactory)
         {
             this.InitializeComponent();
             this.assetProvider = assetProvider;
@@ -99,11 +108,13 @@ namespace Round42.AssetEditor.Forms
             this.drawerFactory = drawerFactory;
             this.paletFactory = paletFactory;
             this.renderFactory = renderFactory;
+            this.previewBarFactory = previewBarFactory;
 
             var mainAssetFile = Path.Combine(Directory.GetCurrentDirectory(), AssetFile);
             this.assetManager = assetManagerFactory.Get(mainAssetFile, false);
             this.palet = this.paletFactory.Get(this.PaletPanel);
             this.drawer = this.drawerFactory.Get(this.DrawerPanel);
+            this.previewBar = this.previewBarFactory.Get(this.PreviewBar);
 
             this.ButtonSize.Value = Settings.Default.ZoomLevel;
 
@@ -112,6 +123,8 @@ namespace Round42.AssetEditor.Forms
 
             // Load assets and trigger events.
             this.assetManager.LoadAssets();
+
+            this.previewBar.Draw(this.assetManager.CurrentAsset.Shapes);
         }
 
         /// <summary>
@@ -133,6 +146,7 @@ namespace Round42.AssetEditor.Forms
             this.assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
             {
                 this.UpdateFrameComboBox(asset);
+                this.previewBar.Draw(asset.Shapes);
             };
 
             this.assetManager.OnLoadFrame += (ShapeModel shapeModel) =>
@@ -143,6 +157,26 @@ namespace Round42.AssetEditor.Forms
             this.palet.OnColorSelected += (System.Drawing.Color color) =>
             {
                 this.drawer.SetAciveColor(color);
+            };
+
+            this.drawer.OnImageChange = () =>
+            {
+                this.previewBar.Draw(this.assetManager.CurrentAsset.Shapes);
+            };
+
+            this.previewBar.OnSelectImage = (int index) =>
+            {
+                this.SelectFrameCombobox.SelectedIndex = index;
+            };
+
+            this.previewBar.OnMoveImageLeft = (int index) =>
+            {
+                this.assetManager.MoveShapeLeft(index);
+            };
+
+            this.previewBar.OnMoveImageRight = (int index) =>
+            {
+                this.assetManager.MoveShapeRight(index);
             };
         }
 
@@ -487,7 +521,7 @@ namespace Round42.AssetEditor.Forms
         private void Render_Click(object sender, EventArgs e)
         {
             var render = this.renderFactory.Get(Settings.Default.RenderOutput);
-            render.RenderShapeToBitmap(this.assetManager.CurrentFrame, this.assetManager.CurrentAsset.Name, 1);
+            render.RenderShapeToBitmapFile(this.assetManager.CurrentFrame, Directory.GetCurrentDirectory(),  this.assetManager.CurrentAsset.Name, 1);
             Process.Start(Settings.Default.RenderOutput);
         }
 
@@ -503,7 +537,7 @@ namespace Round42.AssetEditor.Forms
             var cnt = 1;
             foreach (var frame in this.assetManager.CurrentAsset.Shapes)
             {
-                render.RenderShapeToBitmap(frame, this.assetManager.CurrentAsset.Name, cnt);
+                render.RenderShapeToBitmapFile(frame, Directory.GetCurrentDirectory(), this.assetManager.CurrentAsset.Name, cnt);
                 cnt++;
             }
 
