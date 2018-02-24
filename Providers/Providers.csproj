@@ -45,8 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumHandler.cs" />
     <Compile Include="Providers\AssetProvider.cs" />
-    <Compile Include="Providers\AssetTypeNameProvider.cs" />
     <Compile Include="Providers\ColorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ShapeProvider.cs" />

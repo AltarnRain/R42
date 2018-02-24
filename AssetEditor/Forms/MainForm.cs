@@ -55,6 +55,10 @@ namespace Round42.AssetEditor.Forms
         /// The render factory
         /// </summary>
         private readonly RenderFactory renderFactory;
+
+        /// <summary>
+        /// The preview bar factory
+        /// </summary>
         private readonly PreviewBarFactory previewBarFactory;
 
         /// <summary>
@@ -118,6 +122,9 @@ namespace Round42.AssetEditor.Forms
 
             this.ButtonSize.Value = Settings.Default.ZoomLevel;
 
+            this.AnimationStyle.Items.AddRange(EnumHandler.GetNamesAsList(typeof(AnimationPlayback)));
+            this.AssetType.Items.AddRange(EnumHandler.GetNamesAsList(typeof(AssetTypes)));
+
             // Event handler setup must precede loading assets but happen after the asset manager is created
             this.SetupEventHandlers();
 
@@ -146,6 +153,9 @@ namespace Round42.AssetEditor.Forms
             this.assetManager.OnCurrentAssetChanged += (AssetModel asset) =>
             {
                 this.UpdateFrameComboBox(asset);
+                this.SetAnimationPlaybackComboboxValue(asset);
+                this.SetAssetTypeComboboxValue(asset);
+
                 this.previewBar.Draw(asset.Shapes);
             };
 
@@ -191,6 +201,24 @@ namespace Round42.AssetEditor.Forms
             this.SelectFrameCombobox.Items.Clear();
             this.SelectFrameCombobox.Items.AddRange(frames);
             this.SelectFrameCombobox.SelectedIndex = selectIndex;
+        }
+
+        /// <summary>
+        /// Sets the animation playback combobox value.
+        /// </summary>
+        /// <param name="asset">The asset.</param>
+        private void SetAnimationPlaybackComboboxValue(AssetModel asset)
+        {
+            this.AnimationStyle.SelectedIndex = (int)asset.AnimationPlayback;
+        }
+
+        /// <summary>
+        /// Sets the asset type combobox value.
+        /// </summary>
+        /// <param name="asset">The asset.</param>
+        private void SetAssetTypeComboboxValue(AssetModel asset)
+        {
+            this.AssetType.SelectedIndex = (int)asset.AssetType;
         }
 
         /// <summary>
@@ -518,13 +546,6 @@ namespace Round42.AssetEditor.Forms
             this.drawer.SetAchor();
         }
 
-        private void Render_Click(object sender, EventArgs e)
-        {
-            var render = this.renderFactory.Get(Settings.Default.RenderOutput);
-            render.RenderShapeToBitmapFile(this.assetManager.CurrentFrame, Directory.GetCurrentDirectory(),  this.assetManager.CurrentAsset.Name, 1);
-            Process.Start(Settings.Default.RenderOutput);
-        }
-
         /// <summary>
         /// Handles the Click event of the renderAllAssetsToolStripMenuItem control.
         /// </summary>
@@ -542,6 +563,18 @@ namespace Round42.AssetEditor.Forms
             }
 
             Process.Start(Settings.Default.RenderOutput);
+        }
+
+        private void AnimationStyle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var combobox = sender as ComboBox;
+            this.assetManager.SetAnimationPlayback((AnimationPlayback)combobox.SelectedIndex);
+        }
+
+        private void AssetType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var combobox = sender as ComboBox;
+            this.assetManager.SetAssetType((AssetTypes)combobox.SelectedIndex);
         }
     }
 }

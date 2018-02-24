@@ -45,9 +45,11 @@
             this.AnimatorTab = new System.Windows.Forms.TabControl();
             this.AnimationTab = new System.Windows.Forms.TabPage();
             this.DrawerPanel = new System.Windows.Forms.Panel();
+            this.PreviewBar = new System.Windows.Forms.Panel();
             this.PaletPanel = new System.Windows.Forms.Panel();
             this.Tools = new System.Windows.Forms.Panel();
-            this.Render = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.AnimationStyle = new System.Windows.Forms.ComboBox();
             this.SetAnchorButton = new System.Windows.Forms.Button();
             this.ButtonSize = new System.Windows.Forms.TrackBar();
             this.RemoveTopRowButton = new System.Windows.Forms.Button();
@@ -68,7 +70,8 @@
             this.AddFrameButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SelectFrameCombobox = new System.Windows.Forms.ComboBox();
-            this.PreviewBar = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.AssetType = new System.Windows.Forms.ComboBox();
             this.ListPanel.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.AnimatorTab.SuspendLayout();
@@ -221,6 +224,15 @@
             this.DrawerPanel.Size = new System.Drawing.Size(676, 374);
             this.DrawerPanel.TabIndex = 1;
             // 
+            // PreviewBar
+            // 
+            this.PreviewBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PreviewBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PreviewBar.Location = new System.Drawing.Point(131, 405);
+            this.PreviewBar.Name = "PreviewBar";
+            this.PreviewBar.Size = new System.Drawing.Size(676, 85);
+            this.PreviewBar.TabIndex = 2;
+            // 
             // PaletPanel
             // 
             this.PaletPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -233,7 +245,10 @@
             // Tools
             // 
             this.Tools.BackColor = System.Drawing.Color.Silver;
-            this.Tools.Controls.Add(this.Render);
+            this.Tools.Controls.Add(this.AssetType);
+            this.Tools.Controls.Add(this.label5);
+            this.Tools.Controls.Add(this.label2);
+            this.Tools.Controls.Add(this.AnimationStyle);
             this.Tools.Controls.Add(this.SetAnchorButton);
             this.Tools.Controls.Add(this.ButtonSize);
             this.Tools.Controls.Add(this.RemoveTopRowButton);
@@ -260,15 +275,25 @@
             this.Tools.Size = new System.Drawing.Size(128, 487);
             this.Tools.TabIndex = 0;
             // 
-            // Render
+            // label2
             // 
-            this.Render.Location = new System.Drawing.Point(8, 309);
-            this.Render.Name = "Render";
-            this.Render.Size = new System.Drawing.Size(75, 23);
-            this.Render.TabIndex = 22;
-            this.Render.Text = "Render";
-            this.Render.UseVisualStyleBackColor = true;
-            this.Render.Click += new System.EventHandler(this.Render_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 316);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Animation";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // AnimationStyle
+            // 
+            this.AnimationStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AnimationStyle.FormattingEnabled = true;
+            this.AnimationStyle.Location = new System.Drawing.Point(8, 332);
+            this.AnimationStyle.Name = "AnimationStyle";
+            this.AnimationStyle.Size = new System.Drawing.Size(80, 21);
+            this.AnimationStyle.TabIndex = 22;
+            this.AnimationStyle.SelectedIndexChanged += new System.EventHandler(this.AnimationStyle_SelectedIndexChanged);
             // 
             // SetAnchorButton
             // 
@@ -480,14 +505,24 @@
             this.SelectFrameCombobox.TabIndex = 0;
             this.SelectFrameCombobox.SelectedIndexChanged += new System.EventHandler(this.SelectFrameCombobox_SelectedIndexChanged);
             // 
-            // PreviewBar
+            // label5
             // 
-            this.PreviewBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PreviewBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PreviewBar.Location = new System.Drawing.Point(131, 405);
-            this.PreviewBar.Name = "PreviewBar";
-            this.PreviewBar.Size = new System.Drawing.Size(676, 85);
-            this.PreviewBar.TabIndex = 2;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(8, 356);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Type";
+            // 
+            // AssetType
+            // 
+            this.AssetType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AssetType.FormattingEnabled = true;
+            this.AssetType.Location = new System.Drawing.Point(8, 372);
+            this.AssetType.Name = "AssetType";
+            this.AssetType.Size = new System.Drawing.Size(80, 21);
+            this.AssetType.TabIndex = 25;
+            this.AssetType.SelectedIndexChanged += new System.EventHandler(this.AssetType_SelectedIndexChanged);
             // 
             // MainForm
             // 
@@ -553,10 +588,13 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem cropShapesToolStripMenuItem;
         private System.Windows.Forms.Button SetAnchorButton;
-        private System.Windows.Forms.Button Render;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem renderAllAssetsToolStripMenuItem;
         private System.Windows.Forms.Panel PreviewBar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox AnimationStyle;
+        private System.Windows.Forms.ComboBox AssetType;
+        private System.Windows.Forms.Label label5;
     }
 }
 

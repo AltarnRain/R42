@@ -442,6 +442,24 @@ namespace Round42.Managers
         }
 
         /// <summary>
+        /// Sets the animation playback.
+        /// </summary>
+        /// <param name="animationPlayback">The animation playback.</param>
+        public void SetAnimationPlayback(AnimationPlayback animationPlayback)
+        {
+            this.CurrentAsset.AnimationPlayback = animationPlayback;
+        }
+
+        /// <summary>
+        /// Sets the type of the asset.
+        /// </summary>
+        /// <param name="assetType">Type of the asset.</param>
+        public void SetAssetType(AssetTypes assetType)
+        {
+            this.CurrentAsset.AssetType = assetType;
+        }
+
+        /// <summary>
         /// Sets up assets. If there are none, we'll create a new list we can add too.
         /// </summary>
         /// <param name="assetFile">The asset file.</param>

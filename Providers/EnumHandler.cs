@@ -1,4 +1,4 @@
-﻿// <copyright file="AssetTypeNameProvider.cs" company="OI">
+﻿// <copyright file="EnumHandler.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
@@ -11,22 +11,25 @@ namespace Round42.Providers
     /// <summary>
     /// Provides the names of the AssetType enum
     /// </summary>
-    public class AssetTypeNameProvider
+    public static class EnumHandler
     {
         /// <summary>
         /// Gets the asset type list.
         /// </summary>
-        /// <returns>List of AssetType Names</returns>
-        public List<string> GetNames()
+        /// <param name="anEnum">An enum.</param>
+        /// <returns>
+        /// List of AssetType Names
+        /// </returns>
+        public static string[] GetNamesAsList(Type anEnum)
         {
             var returnValue = new List<string>();
 
-            foreach (var name in Enum.GetNames(typeof(AssetTypes)))
+            foreach (var name in Enum.GetNames(anEnum))
             {
                 returnValue.Add(name);
             }
 
-            return returnValue;
+            return returnValue.ToArray();
         }
     }
 }

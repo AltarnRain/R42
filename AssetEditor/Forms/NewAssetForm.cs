@@ -15,20 +15,11 @@ namespace Round42.AssetEditor.Forms
     public partial class NewAssetForm : Form
     {
         /// <summary>
-        /// The asset type name provider
-        /// </summary>
-        private readonly AssetTypeNameProvider assetTypeNameProvider;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="NewAssetForm" /> class.
         /// </summary>
-        /// <param name="assetTypeNameProvider">The asset type name provider.</param>
-        public NewAssetForm(AssetTypeNameProvider assetTypeNameProvider)
+        public NewAssetForm()
         {
-            this.InitializeComponent();
-            this.assetTypeNameProvider = assetTypeNameProvider;
-
-            this.AssetTypeCombobox.Items.AddRange(this.assetTypeNameProvider.GetNames().ToArray());
+            this.InitializeComponent();            
         }
 
         /// <summary>
@@ -42,20 +33,6 @@ namespace Round42.AssetEditor.Forms
             get
             {
                 return this.AssetNameTextBox.Text;
-            }
-        }
-
-        /// <summary>
-        /// Gets the type of the asset.
-        /// </summary>
-        /// <value>
-        /// The type of the asset.
-        /// </value>
-        public AssetTypes AssetType
-        {
-            get
-            {
-                return (AssetTypes)this.AssetTypeCombobox.SelectedIndex;
             }
         }
 
