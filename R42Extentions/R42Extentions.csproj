@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{47EFD6A0-35D4-44FE-BDD0-7789CEA56CB1}</ProjectGuid>
+    <ProjectGuid>{DA95E975-927D-4A87-A01E-1316BA95F4F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Round42.CustomComponents</RootNamespace>
-    <AssemblyName>CustomComponents</AssemblyName>
+    <RootNamespace>Round42.Extentions</RootNamespace>
+    <AssemblyName>R%242Extentions</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\CustomComponents.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\R%242Extentions.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,7 +34,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,34 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\BlockButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Drawer.cs" />
-    <Compile Include="Components\Palet.cs" />
-    <Compile Include="Components\PreviewBar.cs" />
+    <Compile Include="Constants\ColorHexadecimals.cs" />
+    <Compile Include="Extentions\ColorExtentions.cs" />
+    <Compile Include="Extentions\ShapeModelExtentions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <AdditionalFiles Include="..\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+    <AdditionalFiles Include="..\stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
       <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Providers\Providers.csproj">
-      <Project>{32BC0D8A-D607-43BE-B6CF-01798B93DBDB}</Project>
-      <Name>Providers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Render\Render.csproj">
-      <Project>{4A8C7890-CD7F-4B22-80AD-C13E57943024}</Project>
-      <Name>Render</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
