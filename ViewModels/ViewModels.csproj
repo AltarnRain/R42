@@ -63,5 +63,9 @@
       <Project>{452FACF3-A324-42FD-8A4C-FA0207CC26BF}</Project>
       <Name>Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Providers\Providers.csproj">
+      <Project>{32BC0D8A-D607-43BE-B6CF-01798B93DBDB}</Project>
+      <Name>Providers</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -6,14 +6,17 @@ namespace Round42.ViewModels
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using Round42.Models.Rounds;
+    using Round42.Providers;
 
     /// <summary>
     /// Level manager
     /// </summary>
-    public class RoundEditorViewModel
+    public class RoundEditorViewModel : INotifyPropertyChanged
     {
         /// <summary>
         /// The round file
@@ -21,18 +24,32 @@ namespace Round42.ViewModels
         private readonly string roundFile;
 
         /// <summary>
-        /// The rounds
+        /// The file location provider
         /// </summary>
-        private List<Round> rounds;
+        private readonly FileLocationProvider fileLocationProvider;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RoundEditorViewModel"/> class.
+        /// Initializes a new instance of the <see cref="RoundEditorViewModel" /> class.
         /// </summary>
-        /// <param name="roundFile">The level file.</param>
-        public RoundEditorViewModel(string roundFile)
+        /// <param name="fileLocationProvider">The file location provider.</param>
+        public RoundEditorViewModel(FileLocationProvider fileLocationProvider)
         {
-            this.roundFile = roundFile;
+            this.fileLocationProvider = fileLocationProvider;
+            this.roundFile = this.fileLocationProvider.RoundFile;
         }
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Gets or sets the rounds.
+        /// </summary>
+        /// <value>
+        /// The rounds.
+        /// </value>
+        public ObservableCollection<Round> Rounds { get; set; }
 
         /// <summary>
         /// Gets the current round.
@@ -41,14 +58,6 @@ namespace Round42.ViewModels
         /// The current round.
         /// </value>
         public Round CurrentRound { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the on rounds loaded action.
-        /// </summary>
-        /// <value>
-        /// The on rounds loaded.
-        /// </value>
-        public Action<IEnumerable<string>> OnRoundsLoaded { get; set; }
 
         /// <summary>
         /// Gets or sets the on round selected.
@@ -65,25 +74,13 @@ namespace Round42.ViewModels
         {
             if (File.Exists(this.roundFile))
             {
-                this.rounds = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Round>>(this.roundFile);
+                this.Rounds = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<Round>>(this.roundFile);
             }
             else
             {
-                this.rounds = new List<Round>();
-                Enumerable.Range(1, 42).ToList().ForEach(i => this.rounds.Add(new Round { Name = $"Round {i.ToString()}" }));
+                this.Rounds = new ObservableCollection<Round>();
+                Enumerable.Range(1, 42).ToList().ForEach(i => this.Rounds.Add(new Round { Name = $"Round {i.ToString()}" }));
             }
-
-            this.OnRoundsLoaded?.Invoke(this.rounds.Select(r => r.Name));
-        }
-
-        /// <summary>
-        /// Loads the name of the by.
-        /// </summary>
-        /// <param name="roundName">Name of the round.</param>
-        public void LoadByName(string roundName)
-        {
-            this.CurrentRound = this.rounds.Single(r => r.Name == roundName);
-            this.OnRoundSelected?.Invoke(this.CurrentRound);
         }
     }
 }

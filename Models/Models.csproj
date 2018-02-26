@@ -44,14 +44,16 @@
     <Compile Include="Enumerators\AnimationPlayback.cs" />
     <Compile Include="Enumerators\AssetTypes.cs" />
     <Compile Include="Enumerators\Colors.cs" />
-    <Compile Include="Enumerators\LevelType.cs" />
+    <Compile Include="Enumerators\Movement.cs" />
+    <Compile Include="Enumerators\RoundTypes.cs" />
     <Compile Include="GameModels\BaseGameObject.cs" />
     <Compile Include="DrawingModels\AssetModel.cs" />
     <Compile Include="DrawingModels\BaseModel.cs" />
     <Compile Include="DrawingModels\BlockModel.cs" />
     <Compile Include="DrawingModels\ShapeModel.cs" />
-    <Compile Include="GameModels\Round.cs" />
+    <Compile Include="Rounds\Round.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rounds\RoundActors.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

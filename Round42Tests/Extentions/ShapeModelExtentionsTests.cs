@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round242.Tests.Extentions
+namespace Round24.Tests.Extentions
 {
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;

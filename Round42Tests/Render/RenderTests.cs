@@ -2,7 +2,7 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round242.Tests.Render
+namespace Round24.Tests.Render
 {
     using System.Drawing;
     using System.IO;

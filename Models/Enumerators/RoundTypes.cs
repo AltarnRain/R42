@@ -7,7 +7,7 @@ namespace Round42.Models.Enumerators
     /// <summary>
     /// The type of level
     /// </summary>
-    public enum LevelTypes
+    public enum RoundTypes
     {
         /// <summary>
         /// The ships
