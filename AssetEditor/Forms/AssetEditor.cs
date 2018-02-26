@@ -16,7 +16,7 @@ namespace Round42.AssetEditor.Forms
     using Round42.CustomComponents;
     using Round42.CustomComponents.Components;
     using Round42.Factories;
-    using Round42.Managers.AssetManager;
+    using Round42.Managers;
     using Round42.Models.Drawing;
     using Round42.Models.Enumerators;
 

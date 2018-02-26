@@ -1,8 +1,8 @@
-﻿// <copyright file="RoundManager.cs" company="OI">
+﻿// <copyright file="RoundEditorViewModel.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.Managers
+namespace Round42.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Round42.Managers
     /// <summary>
     /// Level manager
     /// </summary>
-    public class RoundManager
+    public class RoundEditorViewModel
     {
         /// <summary>
         /// The round file
@@ -26,21 +26,21 @@ namespace Round42.Managers
         private List<Round> rounds;
 
         /// <summary>
-        /// The current round
+        /// Initializes a new instance of the <see cref="RoundEditorViewModel"/> class.
+        /// </summary>
+        /// <param name="roundFile">The level file.</param>
+        public RoundEditorViewModel(string roundFile)
+        {
+            this.roundFile = roundFile;
+        }
+
+        /// <summary>
+        /// Gets the current round.
         /// </summary>
         /// <value>
         /// The current round.
         /// </value>
         public Round CurrentRound { get; private set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RoundManager"/> class.
-        /// </summary>
-        /// <param name="roundFile">The level file.</param>
-        public RoundManager(string roundFile)
-        {
-            this.roundFile = roundFile;
-        }
 
         /// <summary>
         /// Gets or sets the on rounds loaded action.

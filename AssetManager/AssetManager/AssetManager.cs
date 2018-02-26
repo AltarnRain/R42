@@ -11,9 +11,9 @@ namespace Round42.Managers
     using Exceptions;
     using Extentions;
     using Providers;
-    using R42Extentions;
     using Round42.Models.Drawing;
     using Round42.Models.Enumerators;
+    using Round42.R42Extentions;
 
     /// <summary>
     /// Manages assets
