@@ -8,6 +8,8 @@ namespace Round42.ViewModels.Rounds
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
+    using System.Windows.Controls;
+    using Round42.Models.Enumerators;
     using Round42.Models.Rounds;
     using Round42.Providers;
     using Round42.ViewModels.Base;
@@ -35,6 +37,21 @@ namespace Round42.ViewModels.Rounds
         {
             this.fileLocationProvider = fileLocationProvider;
             this.roundFile = this.fileLocationProvider.RoundFile;
+
+            // Initialize rounds.
+            this.Initialize();
+        }
+
+        public void Initialize()
+        {
+            if (File.Exists(this.roundFile))
+            {
+                this.Rounds = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<Round>>(File.ReadAllText(this.roundFile));
+            }
+            else
+            {
+                this.Rounds = new ObservableCollection<Round>(Enumerable.Range(1, 42).Select(n => new Round { LevelType = RoundTypes.Ships, Name = "Round " + n.ToString(), RoundActors = new ObservableCollection<RoundActor>() }));
+            }
         }
 
         /// <summary>
@@ -52,6 +69,15 @@ namespace Round42.ViewModels.Rounds
         /// The current round.
         /// </value>
         public Round CurrentRound { get; private set; }
+
+        /// <summary>
+        /// Adds the round.
+        /// </summary>
+        /// <param name="round">The round.</param>
+        public void AddRound(Round round)
+        {
+            this.Rounds.Add(round);
+        }
 
         /// <summary>
         /// Loads the rounds.

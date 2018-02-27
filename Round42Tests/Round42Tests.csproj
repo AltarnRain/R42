@@ -52,6 +52,7 @@
     <Compile Include="Providers\ShapeProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\RenderTests.cs" />
+    <Compile Include="ViewModels\RoundEditorViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -101,6 +102,10 @@
     <ProjectReference Include="..\TestBase\TestBase.csproj">
       <Project>{BC169972-683C-4C64-B7F0-788769540EA0}</Project>
       <Name>TestBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
+      <Project>{66812CB6-A4DD-4A86-B4EF-20D1F7EEFB18}</Project>
+      <Name>ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 namespace RoundEditor
 {
     using System.Windows;
+    using Round42.ViewModels.Rounds;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -12,11 +13,14 @@ namespace RoundEditor
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// Initializes a new instance of the <see cref="MainWindow" /> class.
         /// </summary>
-        public MainWindow()
+        /// <param name="roundEditorViewModel">The round editor view model.</param>
+        public MainWindow(RoundEditorViewModel roundEditorViewModel)
         {
             this.InitializeComponent();
+            this.DataContext = roundEditorViewModel;
+            // roundEditorViewModel.Initialize();
         }
     }
 }

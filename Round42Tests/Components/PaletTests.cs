@@ -7,6 +7,7 @@ namespace Round42.Tests
     using System.Linq;
     using System.Windows.Forms;
     using Extentions;
+    using global::Extentions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Round42.Factories;
     using Round42.Providers;
