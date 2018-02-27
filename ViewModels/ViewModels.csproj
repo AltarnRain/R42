@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseViewModel.cs" />
-    <Compile Include="Base\GenericCommand.cs" />
+    <Compile Include="Base\SelectListItem.cs" />
     <Compile Include="RoundEditor\RoundEditorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

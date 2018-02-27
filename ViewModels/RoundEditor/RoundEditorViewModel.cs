@@ -9,6 +9,8 @@ namespace Round42.ViewModels.Rounds
     using System.IO;
     using System.Linq;
     using System.Windows.Controls;
+    using System.Windows.Input;
+    using global::ViewModels.Base;
     using Round42.Models.Enumerators;
     using Round42.Models.Rounds;
     using Round42.Providers;
@@ -38,10 +40,33 @@ namespace Round42.ViewModels.Rounds
             this.fileLocationProvider = fileLocationProvider;
             this.roundFile = this.fileLocationProvider.RoundFile;
 
+
             // Initialize rounds.
             this.Initialize();
         }
 
+
+        /// <summary>
+        /// Gets or sets the rounds.
+        /// </summary>
+        /// <value>
+        /// The rounds.
+        /// </value>
+        public ObservableCollection<Round> Rounds { get; set; }
+
+        public int SelectedIndex
+        {
+            set
+            {
+                this.SelectedIndex = value;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
         public void Initialize()
         {
             if (File.Exists(this.roundFile))
@@ -53,22 +78,6 @@ namespace Round42.ViewModels.Rounds
                 this.Rounds = new ObservableCollection<Round>(Enumerable.Range(1, 42).Select(n => new Round { LevelType = RoundTypes.Ships, Name = "Round " + n.ToString(), RoundActors = new ObservableCollection<RoundActor>() }));
             }
         }
-
-        /// <summary>
-        /// Gets or sets the rounds.
-        /// </summary>
-        /// <value>
-        /// The rounds.
-        /// </value>
-        public ObservableCollection<Round> Rounds { get; set; }
-
-        /// <summary>
-        /// Gets the current round.
-        /// </summary>
-        /// <value>
-        /// The current round.
-        /// </value>
-        public Round CurrentRound { get; private set; }
 
         /// <summary>
         /// Adds the round.

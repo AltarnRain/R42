@@ -20,7 +20,6 @@ namespace RoundEditor
         {
             this.InitializeComponent();
             this.DataContext = roundEditorViewModel;
-            // roundEditorViewModel.Initialize();
         }
     }
 }

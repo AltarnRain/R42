@@ -7,7 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ListBox ItemsSource="{Binding Rounds}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox SelectedIndex="{Binding SelectedIndex}" ItemsSource="{Binding Rounds}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

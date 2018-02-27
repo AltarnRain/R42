@@ -1,4 +1,4 @@
-﻿// <copyright file="GenericCommand.cs" company="OI">
+﻿// <copyright file="SelectListItem.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
@@ -11,7 +11,7 @@ namespace ViewModels.Base
     /// A generic command.
     /// </summary>
     /// <seealso cref="ICommand" />
-    public class GenericCommand : ICommand
+    public class SelectListItem : ICommand
     {
         /// <summary>
         /// The action
@@ -19,10 +19,10 @@ namespace ViewModels.Base
         private readonly Action action;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GenericCommand"/> class.
+        /// Initializes a new instance of the <see cref="SelectListItem"/> class.
         /// </summary>
         /// <param name="action">The action.</param>
-        public GenericCommand(Action action)
+        public SelectListItem(Action action)
         {
             this.action = action;
         }
