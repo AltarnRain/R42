@@ -10,28 +10,28 @@ namespace Round42.Models.Enumerators
     public enum Movement
     {
         /// <summary>
-        /// The left to right sinus
+        /// The vertical
         /// </summary>
-        LeftToRightSinus,
+        Vertical,
 
         /// <summary>
-        /// The left and down
+        /// The horizantal
         /// </summary>
-        LeftAndDown,
+        Horizantal,
 
         /// <summary>
-        /// Down
+        /// The teleport
         /// </summary>
-        Down,
+        Teleport,
 
         /// <summary>
-        /// Up
+        /// The rotate
         /// </summary>
-        Up,
+        Rotate,
 
         /// <summary>
-        /// The fade in and out
+        /// The circle
         /// </summary>
-        FadeInAndOut,
+        Circle,
     }
 }

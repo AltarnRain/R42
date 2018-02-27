@@ -4,8 +4,7 @@
 
 namespace Round42.Models.Rounds
 {
-    using System.Collections.Generic;
-    using Round42.Models.Drawing;
+    using System.Collections.ObjectModel;
     using Round42.Models.Enumerators;
 
     /// <summary>
@@ -22,21 +21,19 @@ namespace Round42.Models.Rounds
         public RoundTypes LevelType { get; set; }
 
         /// <summary>
-        /// Gets or sets the LevelAsset. This is the enemy that appears in the level.
+        /// Gets or sets the round actors.
         /// </summary>
         /// <value>
-        /// The game objects.
+        /// The round actors.
         /// </value>
-        public AssetModel LevelAsset { get; set; }
+        public ObservableCollection<RoundActor> RoundActors { get; set; }
 
-        public List<RoundActor> RoundActors { get; set; }
-
-    /// <summary>
-    /// Gets or sets the name.
-    /// </summary>
-    /// <value>
-    /// The name.
-    /// </value>
-    public string Name { get; set; }
-}
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public string Name { get; set; }
+    }
 }

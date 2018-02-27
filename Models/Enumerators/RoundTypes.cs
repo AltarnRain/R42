@@ -1,4 +1,4 @@
-﻿// <copyright file="LevelType.cs" company="OI">
+﻿// <copyright file="RoundTypes.cs" company="OI">
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 

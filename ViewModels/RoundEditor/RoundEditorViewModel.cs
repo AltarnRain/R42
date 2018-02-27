@@ -2,21 +2,20 @@
 // Copyright (c) OI. All rights reserved.
 // </copyright>
 
-namespace Round42.ViewModels
+namespace Round42.ViewModels.Rounds
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using Round42.Models.Rounds;
     using Round42.Providers;
+    using Round42.ViewModels.Base;
 
     /// <summary>
     /// Level manager
     /// </summary>
-    public class RoundEditorViewModel : INotifyPropertyChanged
+    public class RoundEditorViewModel : BaseViewModel
     {
         /// <summary>
         /// The round file
@@ -39,11 +38,6 @@ namespace Round42.ViewModels
         }
 
         /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
         /// Gets or sets the rounds.
         /// </summary>
         /// <value>
@@ -58,14 +52,6 @@ namespace Round42.ViewModels
         /// The current round.
         /// </value>
         public Round CurrentRound { get; private set; }
-
-        /// <summary>
-        /// Gets or sets the on round selected.
-        /// </summary>
-        /// <value>
-        /// The on round selected.
-        /// </value>
-        public Action<Round> OnRoundSelected { get; set; }
 
         /// <summary>
         /// Loads the rounds.
